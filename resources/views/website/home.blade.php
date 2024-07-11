@@ -12,7 +12,7 @@
   
     <style>
         .bg-gif {
-          background: url('images/background_pt2.gif') no-repeat center center;
+          background: url('images/bg_video.gif') no-repeat center center;
           background-size: cover;
           position: relative;
           z-index: 0;
@@ -100,7 +100,7 @@
 
 
 <div class="bg-gif">
-    <div class="content px-2" style="height: 80vh">
+    <div class="content px-2" style="height: 100vh">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">

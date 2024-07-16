@@ -12,14 +12,15 @@
   
     <style>
         .bg-gif {
-          background: url('images/bg_video.gif') no-repeat center center;
+          background: url('images/bg_pt_final.gif') no-repeat center center;
           background-size: cover;
           position: relative;
           z-index: 0;
         }
 
         .bg-gif2 {
-          background: url('images/background_pt4.jpg') no-repeat center center;
+          /* background: url('images/background_pt4.jpg') no-repeat center center; */
+          background-color: #000000;
           background-size: cover;
           position: relative;
           z-index: 0;
@@ -28,13 +29,18 @@
         .content {
           background: linear-gradient(to bottom, 
               rgb(0, 0, 0) 0%, 
-              rgb(0, 0, 0) 10%,   /* Top vignette color */
+              rgb(0, 0, 0) 5%,   /* Top vignette color */
               rgba(0, 0, 0, 0) 25%,    /* Start of transparent area */
               rgba(0, 0, 0, 0) 75%,
-              rgb(0, 0, 0) 90%,     /* End of transparent area */
+              rgb(0, 0, 0) 98%,     /* End of transparent area */
               rgb(0, 0, 0) 100%  /* Bottom vignette color */
               );
         }
+
+        .neon-yellow-border-text {
+                -webkit-text-stroke: 0.5px black; /* Black border around text */
+                }
+
       </style>
 
 <style>
@@ -62,7 +68,7 @@
       position: relative;
       z-index: 2;
       background-color: rgba(0, 0, 0, 0.5);
-      color: white;
+      color: rgb(239, 234, 234);
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -82,7 +88,7 @@
     }
 
     .card:hover .card-img-bg {
-      opacity: 0;
+      opacity: 0.7;
     }
 
     .card:hover .card-title {
@@ -96,7 +102,7 @@
 
 </head>
 
-  <body class="bg-dark">
+  <body class="bg-dark" onload="typeWriter()">
 
 
 <div class="bg-gif">
@@ -166,9 +172,9 @@
       <div class="p-5 bg-body-tertiary">
         <div class="container-fluid py-5">
             <br>
-          <h1 class="fw-bold text-light display-1">Something Title</h1>
-          <p class="col-md-6 fs-4 text-light">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-          <button class="btn btn-outline-light btn-lg" style="width: 260px" type="button">Start Project <i class="material-icons" style="font-size:14px">arrow_forward</i></button>
+          <h1 class="fw-bold text-light display-1 neon-yellow-border-text" id="demo"></h1>
+          <h5 class="col-md-4 text-light neon-yellow-border-text">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</h5>
+          <button class="btn btn-outline-light btn-lg mt-2" style="width: 260px" type="button">Start Project <i class="material-icons" style="font-size:14px">arrow_forward</i></button>
         <br>
         </div>
       </div>  
@@ -203,11 +209,12 @@
 
       <div class="p-5 bg-body-tertiary">
         <div class="container-fluid py-5">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+          <p class="display-3 text-center text-secondary">Offering a diverse range of IT services, tailored to meet the needs of various industries</p>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-4">
                 <!-- Card 1 -->
                 <div class="col">
                   <div class="card">
-                    <div class="card-img-bg" style="background-image: url('https://via.placeholder.com/300');"></div>
+                    <div class="card-img-bg" style="background-image: url('./images/card_pt4.jpg');"></div>
                     <div class="card-body">
                       <h5 class="card-title">Card Title 1</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -217,7 +224,7 @@
                 <!-- Card 2 -->
                 <div class="col">
                   <div class="card">
-                    <div class="card-img-bg" style="background-image: url('https://via.placeholder.com/300');"></div>
+                    <div class="card-img-bg" style="background-image: url('./images/card_pt3.jpg');"></div>
                     <div class="card-body">
                       <h5 class="card-title">Card Title 2</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -227,7 +234,7 @@
                 <!-- Card 3 -->
                 <div class="col">
                   <div class="card">
-                    <div class="card-img-bg" style="background-image: url('https://via.placeholder.com/300');"></div>
+                    <div class="card-img-bg" style="background-image: url('./images/card_pt2.jpg');"></div>
                     <div class="card-body">
                       <h5 class="card-title">Card Title 3</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -237,7 +244,7 @@
                 <!-- Card 4 -->
                 <div class="col">
                   <div class="card">
-                    <div class="card-img-bg" style="background-image: url('https://via.placeholder.com/300');"></div>
+                    <div class="card-img-bg" style="background-image: url('./images/card_pt.jpg');"></div>
                     <div class="card-body">
                       <h5 class="card-title">Card Title 4</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -247,7 +254,7 @@
                 <!-- Card 5 -->
                 <div class="col">
                   <div class="card">
-                    <div class="card-img-bg" style="background-image: url('https://via.placeholder.com/300');"></div>
+                    <div class="card-img-bg" style="background-image: url('./images/card_pt.jpg');"></div>
                     <div class="card-body">
                       <h5 class="card-title">Card Title 5</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -257,7 +264,7 @@
                 <!-- Card 6 -->
                 <div class="col">
                   <div class="card">
-                    <div class="card-img-bg" style="background-image: url('https://via.placeholder.com/300');"></div>
+                    <div class="card-img-bg" style="background-image: url('./images/card_pt2.jpg');"></div>
                     <div class="card-body">
                       <h5 class="card-title">Card Title 6</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -267,7 +274,7 @@
                 <!-- Card 7 -->
                 <div class="col">
                   <div class="card">
-                    <div class="card-img-bg" style="background-image: url('https://via.placeholder.com/300');"></div>
+                    <div class="card-img-bg" style="background-image: url('./images/card_pt3.jpg');"></div>
                     <div class="card-body">
                       <h5 class="card-title">Card Title 7</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -277,7 +284,7 @@
                 <!-- Card 8 -->
                 <div class="col">
                   <div class="card">
-                    <div class="card-img-bg" style="background-image: url('https://via.placeholder.com/300');"></div>
+                    <div class="card-img-bg" style="background-image: url('./images/card_pt4.jpg');"></div>
                     <div class="card-body">
                       <h5 class="card-title">Card Title 8</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -291,6 +298,22 @@
     </div>
 </div>
    
+
+<script>
+    var i = 0;
+    var txt = 'Something Title';
+    var speed = 40;
+    
+    function typeWriter() {
+      if (i < txt.length) {
+        document.getElementById("demo").innerHTML += txt.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+
+    }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   </body>

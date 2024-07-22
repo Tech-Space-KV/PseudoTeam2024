@@ -105,82 +105,6 @@
   <body class="bg-dark" onload="typeWriter()">
 
 
-<div class="bg-gif">
-    <div class="content px-2" style="height: 100vh">
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img src="images/logo_pt3.png" class="rounded-3" style="width: 120px">
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-              </li>
-            </ul>
-            <form class="d-flex">
-                <button class="btn btn-outline-light me-2" style="width: 180px" type="submit">Find Work <i class="material-icons" style="font-size:14px">work</i></button>  
-                <button class="btn btn-light" style="width: 180px" type="submit">Sign In <i class="material-icons" style="font-size:14px">login</i></button>
-            </form>
-          </div>
-        </div>
-      </nav>
-
-
-      {{-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="#">Home</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav> --}}
-
-
-      <div class="p-5 bg-body-tertiary">
-        <div class="container-fluid py-5">
-            <br>
-          <h1 class="fw-bold text-light display-1 neon-yellow-border-text" id="demo"></h1>
-          <h5 class="col-md-4 text-light neon-yellow-border-text">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</h5>
-          <button class="btn btn-outline-light btn-lg mt-2" style="width: 260px" type="button">Start Project <i class="material-icons" style="font-size:14px">arrow_forward</i></button>
-        <br>
-        </div>
-      </div>  
-    </div>
-</div>
-
 <div class="bg-gif2">
     <div class="content px-2 " >
       <nav class="navbar navbar-expand-lg navbar-dark px-5">
@@ -294,7 +218,7 @@
               </div>
 
         <div class="row mx-auto mt-2">
-          <a href="services" class="btn btn-outline-light btn-lg mt-2 mx-auto" style="width: 260px" type="button">View More <i class="material-icons" style="font-size:14px">arrow_forward</i></a>
+          <button class="btn btn-outline-light btn-lg mt-2 mx-auto" style="width: 260px" type="button">View More <i class="material-icons" style="font-size:14px">arrow_forward</i></button>
         </button>
       </div>
 

@@ -40,211 +40,108 @@
         .neon-yellow-border-text {
                 -webkit-text-stroke: 0.5px black; /* Black border around text */
                 }
+ 
 
       </style>
 
-<style>
-    .card {
-      position: relative;
-      overflow: hidden;
-      border: none;
-      height: 450px;
-      width: 300px;
-    }
-
-    .card-img-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      transition: opacity 0.5s ease;
-      z-index: 1;
-    }
-
-    .card-body {
-      position: relative;
-      z-index: 2;
-      background-color: rgba(0, 0, 0, 0.5);
-      color: rgb(239, 234, 234);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .card-title {
-      transition: transform 0.5s ease;
-    }
-
-    .card-text {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .card:hover .card-img-bg {
-      opacity: 0.7;
-    }
-
-    .card:hover .card-title {
-      transform: scale(1.2);
-    }
-
-    .card:hover .card-text {
-      opacity: 1;
-    }
-  </style>
-
 </head>
 
-  <body class="bg-dark" onload="typeWriter()">
+  <body class="bg-light" onload="typeWriter()">
 
 
 <div class="bg-gif2">
     <div class="content px-2 " >
+      
+      @include('website.top_nav')
+
       <nav class="navbar navbar-expand-lg navbar-dark px-5">
         <div class="container-fluid">
           <div class="collapse navbar-collapse" id="">
             <ul class="navbar-nav mx-auto">
               <li class="nav-item">
-                <a class="nav-link">As used by:</a>
+                <a class="nav-link active" aria-current="page" id="ACTIVE_ALL" onclick="select_all_service('AP', 'MARC');">All Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="#">Home</a>
+                <a class="nav-link" aria-current="page" id="ACTIVE_AP" onclick="select_service('AP', 'MARC');">Ative Passive Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Home</a>
+                <a class="nav-link" aria-current="page" id="ACTIVE_MARC" onclick="select_service('MARC', 'AP');">MARC Services</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="#">Home</a>
-              </li>
+              
             </ul>
           </div>
         </div>
       </nav>
 
-      <div class="p-5 bg-body-tertiary">
-        <div class="container-fluid py-5">
-          <p class="display-3 text-center text-secondary">Offering a diverse range of IT services, tailored to meet the needs of various industries</p>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-4">
-                <!-- Card 1 -->
-                <div class="col">
-                  <div class="card">
-                    <div class="card-img-bg" style="background-image: url('./images/card_pt4.jpg');"></div>
-                    <div class="card-body">
-                      <h5 class="card-title">Card Title 1</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="col">
-                  <div class="card">
-                    <div class="card-img-bg" style="background-image: url('./images/card_pt3.jpg');"></div>
-                    <div class="card-body">
-                      <h5 class="card-title">Card Title 2</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="col">
-                  <div class="card">
-                    <div class="card-img-bg" style="background-image: url('./images/card_pt2.jpg');"></div>
-                    <div class="card-body">
-                      <h5 class="card-title">Card Title 3</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 4 -->
-                <div class="col">
-                  <div class="card">
-                    <div class="card-img-bg" style="background-image: url('./images/card_pt.jpg');"></div>
-                    <div class="card-body">
-                      <h5 class="card-title">Card Title 4</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 5 -->
-                <div class="col">
-                  <div class="card">
-                    <div class="card-img-bg" style="background-image: url('./images/card_pt.jpg');"></div>
-                    <div class="card-body">
-                      <h5 class="card-title">Card Title 5</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 6 -->
-                <div class="col">
-                  <div class="card">
-                    <div class="card-img-bg" style="background-image: url('./images/card_pt2.jpg');"></div>
-                    <div class="card-body">
-                      <h5 class="card-title">Card Title 6</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 7 -->
-                <div class="col">
-                  <div class="card">
-                    <div class="card-img-bg" style="background-image: url('./images/card_pt3.jpg');"></div>
-                    <div class="card-body">
-                      <h5 class="card-title">Card Title 7</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 8 -->
-                <div class="col">
-                  <div class="card">
-                    <div class="card-img-bg" style="background-image: url('./images/card_pt4.jpg');"></div>
-                    <div class="card-body">
-                      <h5 class="card-title">Card Title 8</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-        <div class="row mx-auto mt-2">
-          <button class="btn btn-outline-light btn-lg mt-2 mx-auto" style="width: 260px" type="button">View More <i class="material-icons" style="font-size:14px">arrow_forward</i></button>
-        </button>
-      </div>
-
-        </div>
-      </div>   
-
     </div>
+</div>
+
+<div class="mt-3 px-4">
+
+  <div class="card my-3" id="MARC">
+    <div class="card-header m-0">
+      <img src="images/marc.png">
+    </div>
+    <div class="card-body">
+      <h5 class=" card-title text-primary fw-bold">Service No. 5598</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-sm btn-primary">Get Service</a>
+    </div>
+  </div>
+
+
+  <div class="card my-3" id="AP">
+    <div class="card-header m-0">
+      <img src="images/active-passive.png">
+    </div>
+    <div class="card-body">
+      <h5 class=" card-title text-primary fw-bold">Service No. 5532</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-sm btn-primary">Get Service</a>
+    </div>
+  </div>
+
+
 </div>
    
 
-<script>
-    var i = 0;
-    var txt = 'Something Title';
-    var speed = 40;
-    
-    function typeWriter() {
-      if (i < txt.length) {
-        document.getElementById("demo").innerHTML += txt.charAt(i);
-        i++;
-        setTimeout(typeWriter, speed);
-      }
-
-    }
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+    <script>
+      function select_service(service_name1, service_name2) {
+          var service1 = document.getElementById(service_name1);
+          var service2 = document.getElementById(service_name2);
+          var acserv = 'ACTIVE_'+service_name1;
+          var deacserv = 'ACTIVE_'+service_name2;
+          
+          var active_service = document.getElementById(acserv);
+          var deactive_service1 = document.getElementById(deacserv);
+          var deactive_service2 = document.getElementById('ACTIVE_ALL');
+
+          service1.style.display = 'block';
+          service2.style.display = 'none';
+          active_service.classList.add('active');
+          deactive_service1.classList.remove('active');
+          deactive_service2.classList.remove('active');
+      }
+
+      function select_all_service(service_name1, service_name2) {
+          var service1 = document.getElementById(service_name1);
+          var service2 = document.getElementById(service_name2);
+
+          var deacserv1 = 'ACTIVE_'+service_name1;
+          var deacserv2 = 'ACTIVE_'+service_name2;
+          
+          var active_service = document.getElementById('ACTIVE_ALL');
+          var deactive_service1 = document.getElementById(deacserv1);
+          var deactive_service2 = document.getElementById(deacserv2);
+          
+          service1.style.display = 'block';
+          service2.style.display = 'block';
+          active_service.classList.add('active');
+          deactive_service1.classList.remove('active');
+          deactive_service2.classList.remove('active');
+      }
+  </script>
   </body>
 </html>

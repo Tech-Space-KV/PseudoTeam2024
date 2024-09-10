@@ -266,7 +266,7 @@
               </div>
             </div>
 
-      <div class="row mx-auto mt-2">
+      <div class="row mx-auto mt-4">
         <a href="services" class="btn btn-outline-light btn-lg mt-2 mx-auto" style="width: 260px" type="button">View More <i class="material-icons" style="font-size:14px">arrow_forward</i></a>
       </button>
     </div>
@@ -279,9 +279,69 @@
 
 <div class="bg-gif2">
   <div class="content px-2 " >
-    <div class="p-5 bg-body-tertiary">
-      <div class="container-fluid py-3">
-        <p class="display-3 text-center text-secondary">Offering a diverse range of IT services, tailored to meet the needs of various industries</p>
+    <div class="px-5 bg-body-tertiary">
+      <div class="container-fluid py-2">
+        <p class="display-3 text-center text-secondary">PseudoTeam's Essence</p>
+      </br>
+      
+      <div class="container px-4 py-5">
+        <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+          <div class="col d-flex flex-column align-items-start gap-2">
+            <h2 class="fw-bold text-light">PseudoTeam for a Superior Project Experience</h2>
+            <a href="#" class="btn btn-sm btn-outline-light btn-lg">Start Now &gt;&gt;</a>
+          </div>
+    
+          <div class="col">
+            <div class="row row-cols-1 row-cols-sm-2 g-4">
+              <div class="col d-flex flex-column gap-2 m-2" style="width:280px; background-color:#f24f1c; ">
+                <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                </div>
+                <h4 class="fw-bold mb-0 text-light"><i class="material-icons">supervisor_account</i> Dedicated Intermediaries</h4>
+                <p class="text-light">We act as dedicated intermediaries, ensuring that every project is meticulously managed and delivered to perfection.</p>
+              </div>
+    
+              <div class="col d-flex flex-column gap-2 m-2" style="width:280px; background-color:#80bb00;">
+                <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                </div>
+                <h4 class="fw-bold mb-0 text-light"><i class="material-icons">view_module</i> Structured Process</h4>
+                <p class="text-light">We offer a structured and reliable process, overcoming common freelancing issues like communication breakdowns, inconsistent quality, and missed deadlines.</p>
+              </div>
+    
+              <div class="col d-flex flex-column gap-2 m-2" style="width:280px; background-color:#00a5ef;">
+                <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                </div>
+                <h4 class="fw-bold mb-0 text-light"><i class="material-icons">perm_data_setting</i> Comprehensive Services</h4>
+                <p class="text-light">Our services include detailed project scoping, regular progress updates, quality assurance, and timely delivery to ensure project success.</p>
+              </div>
+    
+              <div class="col d-flex flex-column gap-2  m-2" style="width:280px; background-color:#ffba00;">
+                <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                </div>
+                <h4 class="fw-bold mb-0 text-light"><i class="material-icons">star</i> Commitment to Excellence</h4>
+                <p class="text-light">PseudoTeam’s commitment to excellence and customer satisfaction makes us the ideal choice for a hassle-free and professional project management experience.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  </br>    
+        <div class="row align-items-md-stretch">
+          <div class="col-md-6 mt-1">
+            <div class="h-100 p-5 text-dark bg-light border rounded-3">
+              <h2>Project Owners</h2>
+              <p>Elevate your project experience with PseudoTeam. We ensure flawless execution and timely delivery, eliminating common freelancing pitfalls. Trust us to handle your project with precision and professionalism.</p>
+              <button class="btn btn-outline-dark" type="button">Get Onboard <i class="material-icons" style="font-size:14px">login</i></button>
+            </div>
+          </div>
+          <div class="col-md-6 mt-1">
+            <div class="h-100 p-5 text-light bg-secondary border rounded-3">
+              <h2>Service Providers</h2>
+              <p>Boost your freelancing career with Pseudoteam. Focus on what you do best while we handle client interactions and project management. Join us to work efficiently and get paid promptly!</p>
+              <button class="btn btn-outline-light" type="button">Find Work <i class="material-icons" style="font-size:14px">work</i></button>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>   

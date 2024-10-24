@@ -21,3 +21,17 @@ Route::get('/authentication/customer/sign-up', function () {
 Route::get('/authentication/service-partner/sign-in', function () {
     return view('auth/service_sign_in');
 });
+
+Route::get('/authentication/service-partner/sign-up', function () {
+    return view('auth/service_sign_up');
+});
+
+// CUSTOMER LOGIN SESSION ROUTES ARE AS FOLLOWING
+
+Route::get('/customer/session/', function () {
+    return view('customer/dashboard');
+});
+
+Route::get('/customer/session/dashboard', function () {
+    return view('customer/dashboard');
+});

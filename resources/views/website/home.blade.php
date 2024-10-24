@@ -9,104 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('css/web/website_home.css') }}">
     <title>PseudoTeam</title>
   
-    <style>
-        .bg-gif {
-          background: url('images/bg_pt_final.gif') no-repeat center center;
-          background-size: cover;
-          position: relative;
-          z-index: 0;
-        }
-
-        .bg-gif2 {
-          /* background: url('images/background_pt4.jpg') no-repeat center center; */
-          background-color: #000000;
-          background-size: cover;
-          position: relative;
-          z-index: 0;
-        }
-
-        .bg-gif3 {
-           background: url('images/bg_pt4.png') no-repeat center center; 
-          background-size:cover;
-          position: relative;
-          z-index: 0;
-        }
     
-        .content {
-          background: linear-gradient(to bottom, 
-              rgb(0, 0, 0) 0%, 
-              rgb(0, 0, 0) 7%,   /* Top vignette color */
-              rgba(0, 0, 0, 0) 15%,    /* Start of transparent area */
-              rgba(0, 0, 0, 0) 85%,
-              rgb(0, 0, 0) 98%,     /* End of transparent area */
-              rgb(0, 0, 0) 100%  /* Bottom vignette color */
-              );
-        }
-
-        .neon-yellow-border-text {
-                -webkit-text-stroke: 0.5px black; /* Black border around text */
-                }
-
-      </style>
-
-<style>
-    .card {
-      position: relative;
-      overflow: hidden;
-      border: none;
-      height: 450px;
-      width: 300px;
-    }
-
-    .card-img-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      transition: opacity 0.5s ease;
-      z-index: 1;
-    }
-
-    .card-body {
-      position: relative;
-      z-index: 2;
-      background-color: rgba(0, 0, 0, 0.5);
-      color: rgb(239, 234, 234);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .card-title {
-      transition: transform 0.5s ease;
-    }
-
-    .card-text {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .card:hover .card-img-bg {
-      opacity: 0.7;
-    }
-
-    .card:hover .card-title {
-      transform: scale(1.2);
-    }
-
-    .card:hover .card-text {
-      opacity: 1;
-    }
-  </style>
 
 </head>
 

@@ -9,43 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('css/web/customer_auth.css') }}">
     <title>PseudoTeam</title>
 
-    <style>
-      .bg-gif3 {
-          background: url('../../../images/bg_pt4.png') no-repeat center center; 
-          background-size:cover;
-          position: relative;
-          z-index: 0;
-      }
-
-      .content {
-          background: linear-gradient(to bottom, 
-              rgb(0, 0, 0) 0%, 
-              rgb(0, 0, 0) 7%,   /* Top vignette color */
-              rgba(0, 0, 0, 0) 15%,    /* Start of transparent area */
-              rgba(0, 0, 0, 0) 85%,
-              rgb(0, 0, 0) 98%,     /* End of transparent area */
-              rgb(0, 0, 0) 100%  /* Bottom vignette color */
-          );
-      }
-
-      /* Center the link */
-      .center-link {
-          display: flex;
-          justify-content: center; /* Horizontally center */
-      }
-
-      .text-blue{ color:#006EC4;}
-
-      /* Fixed width card */
-      .fixed-width-card {
-          width: 400px;  /* Fixed width for all screen sizes */
-          max-width: 90%; /* Optional: for better responsiveness on very small screens */
-      }
-
-    </style>
-
+  
   </head>
   <body class="align-items-center bg-dark bg-gif3">
 

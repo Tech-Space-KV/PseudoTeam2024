@@ -1,0 +1,32 @@
+
+.bg-gif3 {
+    background: url('../../../images/bg_pt4.png') no-repeat center center; 
+    background-size:cover;
+    position: relative;
+    z-index: 0;
+}
+
+.content {
+    background: linear-gradient(to bottom, 
+        rgb(0, 0, 0) 0%, 
+        rgb(0, 0, 0) 7%,   /* Top vignette color */
+        rgba(0, 0, 0, 0) 15%,    /* Start of transparent area */
+        rgba(0, 0, 0, 0) 85%,
+        rgb(0, 0, 0) 98%,     /* End of transparent area */
+        rgb(0, 0, 0) 100%  /* Bottom vignette color */
+    );
+}
+
+/* Center the link */
+.center-link {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+}
+
+.text-blue{ color:#006EC4;}
+
+/* Fixed width card */
+.fixed-width-card {
+    width: 400px;  /* Fixed width for all screen sizes */
+    max-width: 90%; /* Optional: for better responsiveness on very small screens */
+}

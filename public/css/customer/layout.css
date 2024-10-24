@@ -1,0 +1,176 @@
+.iconix{
+    font-size:20px;
+    color: #19327d;
+}
+.fst{
+    font-size:12px;
+    color: #19327d;
+}
+.cardbg{
+    background-color: #e8edfd;
+    border: solid 0.5px #dbe3fc;
+}
+
+.cardbg:hover {
+    background-color: #155de2; /* Change to a darker color or any other color 659bff */
+    border: solid 0.5px #a1b3e0; /* Change the border color on hover */
+    color: #f1f1f1;
+}
+
+.sitem {
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100px; /* Adjust this based on your needs */
+text-align: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Bahnschrift', sans-serif;
+}
+
+/* Fixed sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: #fafbff; /*21212e, 1f2229*/ 
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  
+}
+
+.sidebar .nav-link {
+  padding: 10px 15px;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 2px;                 /* Width of the scrollbar */
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #fafbff;         /* Background of the scrollbar track */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+        background: #f0f3ff;            /* Color of the scrollbar thumb */
+        border-radius: 10px;         /* Rounded corners for the thumb */
+    }
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+        background: #fafbff;            /* Color when hovering over the thumb */
+    }
+
+/* Main content */
+
+.main-content::-webkit-scrollbar {
+    width: 2px;                 /* Width of the scrollbar */
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: #fafbff;         /* Background of the scrollbar track */
+}
+
+.main-content::-webkit-scrollbar-thumb {
+        background: #f0f3ff;            /* Color of the scrollbar thumb */
+        border-radius: 10px;         /* Rounded corners for the thumb */
+    }
+
+.main-content::-webkit-scrollbar-thumb:hover {
+        background: #fafbff;            /* Color when hovering over the thumb */
+    }
+
+/* ====================================================== */
+
+
+.rightbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 300px;
+    background-color: #fafbff; /*21212e, 1f2229*/ 
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    
+  }
+  
+  .rightbar .nav-link {
+    padding: 10px 15px;
+  }
+  
+  .rightbar::-webkit-scrollbar {
+      width: 2px;                 /* Width of the scrollbar */
+  }
+  
+  .rightbar::-webkit-scrollbar-track {
+      background: #fafbff;         /* Background of the scrollbar track */
+  }
+  
+  .rightbar::-webkit-scrollbar-thumb {
+          background: #f0f3ff;            /* Color of the scrollbar thumb */
+          border-radius: 10px;         /* Rounded corners for the thumb */
+      }
+  
+  .rightbar::-webkit-scrollbar-thumb:hover {
+          background: #fafbff;            /* Color when hovering over the thumb */
+      }
+  
+  
+
+      /* General styling for desktop */
+.main-content {
+    margin-left: 250px; /* Same as sidebar width */
+    margin-right: 300px; /* Same as rightbar width */
+    padding: 20px;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  
+  
+  /* Collapsed sidebars for smaller screens */
+  @media (max-width: 768px) {
+    .sidebar, .rightbar {
+      display: none;  /* Hide both sidebars */
+      width: 0;      /* Ensure width is zero */
+    }
+  
+    .main-content {
+      margin-left: 0;  /* No margin since sidebar is hidden */
+      margin-right: 0; /* No margin since rightbar is hidden */
+      width: 100%;     /* Take up the full width of the screen */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .sidebar, .rightbar {
+      display: none;  /* Hide both sidebars */
+      width: 0;      /* Ensure width is zero */
+    }
+  
+    .main-content {
+      margin-left: 0;  /* No margin since sidebar is hidden */
+      margin-right: 0; /* No margin since rightbar is hidden */
+      width: 100%;     /* Take up the full width of the screen */
+    }
+  }
+  
+
+
+  /* ===================================================   */
+  /* Alterations */
+
+  .scr-card{
+    height: 150px;
+  }

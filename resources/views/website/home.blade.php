@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ asset('css/web/website_home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/web/website_home2.css') }}">
     <title>PseudoTeam</title>
   
     
@@ -19,7 +19,7 @@
   <body class="bg-dark" onload="typeWriter()">
 
 
-<div class="bg-gif">
+<div class="bg-gif section-animate" id="section-animate1">
     <div class="content px-2" style="height: 100vh">
    
 
@@ -61,9 +61,8 @@
 </div>
 
 
-<div class="bg-gif3">
-  <div class="content px-2 " >
-    <nav class="navbar navbar-expand-lg navbar-dark px-5">
+<div class="bg-light section-animate" id="section-animate1">
+    {{-- <nav class="navbar navbar-expand-lg navbar-dark px-5 bg-dark">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="">
           <ul class="navbar-nav mx-auto">
@@ -85,9 +84,9 @@
           </ul>
         </div>
       </div>
-    </nav>
+    </nav> --}}
 
-
+    <div class="px-2" >
 <section id="services"></section>
     <div class="p-5 bg-body-tertiary">
       <div class="container-fluid py-5">
@@ -98,8 +97,8 @@
                 <div class="card">
                   <div class="card-img-bg" style="background-image: url('./images/card_pt4.jpg');"></div>
                   <div class="card-body">
-                    <h5 class="card-title">CAT Cord Installation</h5>
-                    <p class="card-text">Installation, testing and commissioning of CAT mounting cords for data as per given specification etc.</p>
+                    <h5 class="card-title">DevOps & Automation</h5>
+                    <p class="card-text">Streamline your operations with DevOps practices and automation tools that improve development speed and reliability.</p>
                   </div>
                 </div>
               </div>
@@ -108,8 +107,8 @@
                 <div class="card">
                   <div class="card-img-bg" style="background-image: url('./images/card_pt3.jpg');"></div>
                   <div class="card-body">
-                    <h5 class="card-title">SC-LC Fiber Setup</h5>
-                    <p class="card-text">Installation, Testing & Commissioning of SC-LC SM Fiber Patch Cords as per given Specification etc.</p>
+                    <h5 class="card-title">Artificial Intelligence & Machine Learning</h5>
+                    <p class="card-text">Unlock the potential of AI and ML to automate tasks, predict trends, and enhance customer experiences for your business.</p>
                   </div>
                 </div>
               </div>
@@ -118,8 +117,8 @@
                 <div class="card">
                   <div class="card-img-bg" style="background-image: url('./images/card_pt2.jpg');"></div>
                   <div class="card-body">
-                    <h5 class="card-title">Server Installation & Commissioning</h5>
-                    <p class="card-text">Installation, Testing & Commissioning of Mail & Database Server which can support the data and Mail system as per the given Specification etc.</p>
+                    <h5 class="card-title">IT Consulting & Strategy</h5>
+                    <p class="card-text">Our experts provide strategic guidance to align your technology with business objectives, driving digital success.</p>
                   </div>
                 </div>
               </div>
@@ -128,8 +127,8 @@
                 <div class="card">
                   <div class="card-img-bg" style="background-image: url('./images/card_pt.jpg');"></div>
                   <div class="card-body">
-                    <h5 class="card-title">Advanced IP Phone Setup</h5>
-                    <p class="card-text">Installation, Testing & Commissioning of IP PHONE with color Touch LCD screen, built-in graphical user interface (GUI).</p>
+                    <h5 class="card-title">Network Infrastructure Management</h5>
+                    <p class="card-text">We design, implement, and manage secure network infrastructures to keep your business connected and efficient.</p>
                   </div>
                 </div>
               </div>
@@ -138,8 +137,8 @@
                 <div class="card">
                   <div class="card-img-bg" style="background-image: url('./images/card_pt.jpg');"></div>
                   <div class="card-body">
-                    <h5 class="card-title">Comprehensive CCTV Solution</h5>
-                    <p class="card-text">Enterprise storage server for 256 cameras, expandable to 288TB, with dual power supplies, RAID, Gigabit Ethernet, and API integration.</p>
+                    <h5 class="card-title">Digital Transformation Consulting</h5>
+                    <p class="card-text">Optimize your business processes with our digital transformation strategies, tailored to drive innovation and growth.</p>
                   </div>
                 </div>
               </div>
@@ -148,8 +147,8 @@
                 <div class="card">
                   <div class="card-img-bg" style="background-image: url('./images/card_pt2.jpg');"></div>
                   <div class="card-body">
-                    <h5 class="card-title">IP CCTV Outlet Installation</h5>
-                    <p class="card-text">Supply, installation, testing, and commissioning of IP CCTV system, including RJ-45 outlets near cameras.</p>
+                    <h5 class="card-title">Software Development</h5>
+                    <p class="card-text">We develop custom software solutions that address specific business needs, enhancing efficiency and productivity.</p>
                   </div>
                 </div>
               </div>
@@ -158,8 +157,8 @@
                 <div class="card">
                   <div class="card-img-bg" style="background-image: url('./images/card_pt3.jpg');"></div>
                   <div class="card-body">
-                    <h5 class="card-title">Card Title 7</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title">Data Analytics & Business Intelligence</h5>
+                    <p class="card-text">Leverage data insights to make informed business decisions. We provide end-to-end analytics solutions tailored to your needs.</p>
                   </div>
                 </div>
               </div>
@@ -168,15 +167,15 @@
                 <div class="card">
                   <div class="card-img-bg" style="background-image: url('./images/card_pt4.jpg');"></div>
                   <div class="card-body">
-                    <h5 class="card-title">Card Title 8</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title">Cloud Solutions</h5>
+                    <p class="card-text">We offer scalable cloud solutions that enhance accessibility, security, and data management for your business.</p>
                   </div>
                 </div>
               </div>
             </div>
 
       <div class="row mx-auto mt-4">
-        <a href="services" class="btn btn-outline-light btn-lg mt-2 mx-auto" style="width: 260px" type="button">View More <i class="material-icons" style="font-size:14px">arrow_forward</i></a>
+        <a href="services" class="btn btn-sm  btn-outline-primary btn-lg mt-2 mx-auto" style="width: 260px" type="button">View More <i class="material-icons" style="font-size:14px">arrow_forward</i></a>
       </button>
     </div>
 
@@ -187,11 +186,11 @@
 </div>
 
 <section id="about"></section>
-<div class="bg-gif2">
-  <div class="content px-2 " >
+<div class="bg-gif2 section-animate" id="section-animate1">
+  <div class="px-2 py-4" >
     <div class="px-5 bg-body-tertiary">
       <div class="container-fluid py-2">
-        <p class="display-3 text-center text-secondary">PseudoTeam's Essence</p>
+        <p class="display-3 text-center text-light">PseudoTeam's Essence</p>
       </br>
       
       <div class="container px-4 py-5">
@@ -252,7 +251,7 @@
             </div>
           </div>
         </div>
-
+      </br></br>
       </div>
     </div>   
 
@@ -260,9 +259,9 @@
 </div>
 
 <section id="contactus"></section>
-<div class="bg-gif2">
+<div class="section-animate" id="section-animate1">
 </br></br></br>
-  <p class="display-3 text-center text-secondary">We’re Here to Help</p>
+  <p class="display-3 text-center text-light">We’re Here to Help</p>
 </br></br>
   <div class="">
     <div class="col-md-6 col-lg-6 mx-auto text-light rounded-3">
@@ -317,7 +316,7 @@
       <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
         <div class="col mb-3">
           
-          <p class="text-body-secondary"><img src="images/logo_pt.png" class="rounded-3" style="width: 120px"></p>
+          <p class="text-body-secondary"><img src="{{ asset('images/logopt.png') }}" class="rounded-3" style="width: 120px"></p>
           <p class="text-body-secondary">&copy; 2024 PseudoTeam</p>
         </div>
     
@@ -382,6 +381,31 @@
       }
 
     }
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll(".section-animate");
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // When the section enters the viewport, add fade-in class
+        entry.target.classList.add("section-animate-fade-in");
+        entry.target.classList.remove("section-animate-fade-out");
+      } else {
+        // When the section leaves the viewport, add fade-out class
+        entry.target.classList.add("section-animate-fade-out");
+        entry.target.classList.remove("section-animate-fade-in");
+      }
+    });
+  }, { threshold: 0.1 }); // Trigger when 10% of the section is in view
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+});
+
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

@@ -18,11 +18,11 @@
 
     <!-- Home link, centered horizontally -->
     <div class="center-link">
-      <a class="btn btn-sm px-4 mt-4 btn-outline-light" aria-current="page" href="/"><i class="fa fa-home"></i> Home</a>
+      <a class="btn btn-sm px-4 mt-4 btn-outline-primary" aria-current="page" href="/"><i class="fa fa-home"></i> Home</a>
     </div>
 
-    <div class="d-flex justify-content-center align-items-center vh-100">
-      <div class="card fixed-width-card p-4 rounded-3">    
+    <div class="d-flex justify-content-center align-items-center mt-4">
+      <div class="card fixed-width-card p-4 rounded-3 border-primary">    
         <main class="form-signin w-100 m-auto">
           <form>
             <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">

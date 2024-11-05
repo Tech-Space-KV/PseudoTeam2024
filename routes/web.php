@@ -39,3 +39,9 @@ Route::get('/customer/session/', function () {
 Route::get('/customer/session/dashboard', function () {
     return view('customer/dashboard');
 });
+
+//TESTING ROUTE PROJECT UPLOAD
+
+Route::get('/sample', function () {
+    return view('/customer/project_upload_form');
+});

@@ -77,7 +77,9 @@
 </div>
 
 <div class="mt-3 px-4">
+{{-- Show Marc services here --}}
 
+{{-- use block start --}}
   <div class="card my-3" id="MARC">
     <div class="card-header m-0">
       <img src="images/marc.png">
@@ -88,8 +90,12 @@
       <a href="#" class="btn btn-sm btn-primary">Get Service</a>
     </div>
   </div>
+  {{-- use block end --}}
 
 
+{{-- Show active passive services here --}}
+
+{{-- use block start --}}
   <div class="card my-3" id="AP">
     <div class="card-header m-0">
       <img src="images/active-passive.png">
@@ -100,7 +106,7 @@
       <a href="#" class="btn btn-sm btn-primary">Get Service</a>
     </div>
   </div>
-
+{{-- use block end --}}
 
 </div>
    

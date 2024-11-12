@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\QueryController;
 
 Route::get('/', function () {
     return view('website/home');
@@ -10,9 +12,9 @@ Route::get('/home2', function () {
     return view('website/home2');
 });
 
-Route::get('/services', function () {
-    return view('website/services');
-});
+// Route::get('/services', function () {
+//     return view('website/services');
+// });
 
 Route::get('/authentication/customer/sign-in', function () {
     return view('auth/customer_sign_in');
@@ -45,3 +47,11 @@ Route::get('/customer/session/dashboard', function () {
 Route::get('/sample', function () {
     return view('/customer/project_upload_form');
 });
+
+//TESTING ROUTE SERVICES
+
+Route::get('/services', [ServiceController::class, 'showServices']);
+
+//TESTING ROUTE SUBMIT QUERY
+
+Route::post('/submit-query', [QueryController::class, 'submitQuery']);

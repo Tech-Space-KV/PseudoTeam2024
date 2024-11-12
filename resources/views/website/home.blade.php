@@ -267,21 +267,22 @@
     <div class="col-md-6 col-lg-6 mx-auto text-light rounded-3">
     </br>
       <h4 class="mb-3 display-4 fw-bold">Contact Us</h4>
-      <form class="needs-validation p-3" novalidate>
+      <form class="needs-validation p-3" action="submit-query" method="POST" novalidate>
+        @csrf
         <div class="row g-3">
           <div class="col-sm-6">
             <label for="firstName" class="form-label">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="" value="" required>
           </div>
 
           <div class="col-sm-6">
             <label for="lastName" class="form-label">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="" value="" required>
           </div>
 
           <div class="col-12">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+            <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com">
             <div class="invalid-feedback">
               Please enter a valid email address for shipping updates.
             </div>
@@ -289,12 +290,12 @@
 
           <div class="col-12">
             <label for="address" class="form-label">Your query</label>
-            <textarea type="text" class="form-control" id="address" placeholder="Please write your query here." rows="6" required></textarea>
+            <textarea type="text" class="form-control" name="query" id="address" placeholder="Please write your query here." rows="6" required></textarea>
           </div>
 
           <div class="col-12">
             <label for="address2" class="form-label">Contact no.</label>
-            <input type="tel" class="form-control" id="address2" placeholder="Please enter your contact number here.">
+            <input type="tel" class="form-control" name="contact" id="address2" placeholder="Please enter your contact number here.">
           </div>
         </div>
 

@@ -14,34 +14,75 @@
 
 <div class="container px-4">
     <div class="row mx-auto">
+      
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-        <div class="card">
-          <div class="card-body scr-card">
-            <a class="btn btn-sm btn-outline-primary">View &gt;&gt;</a>
+        <div class="card scr-card scr-card1">
+          <div class="card-body">
+            <h4 class="card-title">Total Projects</h4>
           </div>
+          <p class="card-title ms-3">No. of projects added: 117</p>
+          <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
         </div>
       </div>
   
+     
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-        <div class="card">
-          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card Image">
+        <div class="card scr-card scr-card2">
           <div class="card-body">
-            <h5 class="card-title">Card 2</h5>
-            <p class="card-text">This is the second card.</p>
+            <h4 class="card-title">Total Projects</h4>
           </div>
+          <p class="card-title ms-3">No. of projects added: 117</p>
+          <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
         </div>
       </div>
   
+     
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-        <div class="card">
-          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card Image">
+        <div class="card scr-card scr-card3">
           <div class="card-body">
-            <h5 class="card-title">Card 3</h5>
-            <p class="card-text">This is the third card.</p>
+            <h4 class="card-title">Total Projects</h4>
           </div>
+          <p class="card-title ms-3">No. of projects added: 117</p>
+          <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
         </div>
       </div>
+  
     </div>
+  
+</br>
+</br>
+    <p><span class="fs-2 fw-bold mt-4">Latest Projects </span></p>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+
   </div>
   
 

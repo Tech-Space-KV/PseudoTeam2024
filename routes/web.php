@@ -42,6 +42,10 @@ Route::get('/customer/session/dashboard', function () {
 
 //TESTING ROUTE PROJECT UPLOAD
 
-Route::get('/sample', function () {
+Route::get('/customer/session/upload-project', function () {
     return view('/customer/project_upload_form');
+});
+
+Route::get('/customer/session/track-project-report', function () {
+    return view('/customer/track-project-report');
 });

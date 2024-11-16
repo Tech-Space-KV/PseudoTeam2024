@@ -15,7 +15,7 @@
 
     @include('customer.sidebar')
     <!-- Content section where page content will be loaded -->
-<div class="main-content">
+<div class="main-content" id="maincontent">
     <div id="content-section">
         @include('customer.topnav')
         <!-- Initial page content goes here -->
@@ -37,6 +37,35 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        var isleftbaropen='close';
+
+    function showleftbar() {
+            // Check if screen width is 768px or less (mobile/tablet)
+            
+                if (isleftbaropen == 'close') {
+                    // Open the sidebar
+                    document.getElementById('maincontent').style.marginLeft = '250px';
+                    document.getElementById('sidebar').style.display = 'block';  // Show sidebar
+                    document.getElementById('sidebar').style.width = '250px';     // Set sidebar width
+                    isleftbaropen = 'open';  // Update state to 'open'
+                } else if (isleftbaropen == 'open') {
+                    if (window.innerWidth <= 768) {
+                    // Close the sidebar
+                    document.getElementById('maincontent').style.marginLeft = '0%';
+                    document.getElementById('sidebar').style.display = 'none';  // Hide sidebar
+                    document.getElementById('sidebar').style.width = '0%';      // Reset sidebar width
+                    isleftbaropen = 'close';  // Update state to 'close'
+                    }
+                }
+            
+        }
+
+
+       
+       
     </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

@@ -1,8 +1,8 @@
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
     <a class="navbar-brand mx-auto" href="/">
-        <img src="{{ asset('images/logopt.png') }}" class="rounded-3" style="width: 150px; margin-bottom:-30px; margin-top:-20px;">
+        <img src="{{ asset('images/logopt.png') }}" class="rounded-3 mx-auto" style="width: 150px; margin-bottom:-30px; margin-top:-20px;">
     </a>
-    <hr>
+</br>
     <div class="container text-light">
         {{-- <div class="row justify-content-md-center mt-2">
             <div class="col col-lg-5 d-flex flex-column align-items-center mx-2">
@@ -17,14 +17,14 @@
         </div>
 
         <div class="row justify-content-md-center">
-            <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2">
+            <a href="{{ url('customer/session/upload-project') }}" class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2">
                      <i class="fa fa-upload card cardbg p-3 iconix"></i>
                     <span class="fst">Upload Project</span>
-            </div>
-            <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2">
+            </a>
+            <a href="{{ url('customer/session/track-project-report') }}" class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2">
                     <i class="fa fa-line-chart card cardbg p-3 iconix"></i>
                     <span class="fst">Track Project</span>
-            </div>        
+            </a>        
         </div>
 
         <div class="row justify-content-md-center">

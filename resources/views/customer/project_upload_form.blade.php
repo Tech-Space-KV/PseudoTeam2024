@@ -14,7 +14,9 @@
 
     @section('content')
 
-    <div>
+</br>
+<div class="container">
+    <div class="">
         <h2>Upload a project</h2>
     </div>
 
@@ -151,6 +153,7 @@
         <button type="submit" class="btn btn-primary">Upload</button>
 
     </form>
+</div>
 
     @endsection
 

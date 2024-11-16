@@ -1,4 +1,4 @@
-<div class="rightbar">
+<div class="rightbar" id="rightbar">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <div class="mx-auto w-75" id="">
@@ -27,10 +27,11 @@
         </div>
         
         <div class="row justify-content-md-center">
-            <div class="col col-lg-10 sitem  d-flex flex-column align-items-center mx-2">
-                     <i class="fa fa-object-group card cardbg p-3 w-100"></i>
-                    <span class="fst">Dashboard</span>
-            </div>       
+            <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2"> 
+                <div class="card p-3 w-100 cardbgylw">
+                    <i class="fa fa-bullseye"></i> 3 items in your cart
+                </div>
+            </div>          
         </div>
 
         <div class="row justify-content-md-center">

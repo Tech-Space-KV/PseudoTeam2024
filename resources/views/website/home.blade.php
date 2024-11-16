@@ -53,7 +53,7 @@
             <br>
           <h3 class="fw-bold text-light display-1 neon-yellow-border-text"><span id="demo"></span></br><span id="demo2"></span></h3>
           <h5 class="col-md-4 text-light neon-yellow-border-text">Let us handle your projects while you focus on growing your business.</h5>
-          <a class="btn btn-outline-light btn-lg mt-2" href="authentication/customer/sign-in" style="width: 260px" type="button">Start Project <i class="material-icons" style="font-size:14px">arrow_forward</i></a>
+          <a class="btn btn-outline-light btn-lg mt-2" href="{{ url('authentication/customer/sign-in') }}" style="width: 260px" type="button">Start Project <i class="material-icons" style="font-size:14px">arrow_forward</i></a>
         <br>
         </div>
       </div>  
@@ -175,7 +175,7 @@
             </div>
 
       <div class="row mx-auto mt-4">
-        <a href="services" class="btn btn-sm  btn-outline-primary btn-lg mt-2 mx-auto" style="width: 260px" type="button">View More <i class="material-icons" style="font-size:14px">arrow_forward</i></a>
+        <a href="{{ url('services') }}" class="btn btn-sm  btn-outline-primary btn-lg mt-2 mx-auto" style="width: 260px" type="button">View More <i class="material-icons" style="font-size:14px">arrow_forward</i></a>
       </button>
     </div>
 
@@ -240,14 +240,14 @@
             <div class="h-100 p-5 text-dark bg-light">
               <h2>Project Owners</h2>
               <p>Elevate your project experience with PseudoTeam. We ensure flawless execution and timely delivery, eliminating common freelancing pitfalls. Trust us to handle your project with precision and professionalism.</p>
-              <a href="authentication/customer/sign-in" class="btn btn-outline-dark" type="button">Get Onboard <i class="material-icons" style="font-size:14px">login</i></a>
+              <a href="{{ url('authentication/customer/sign-in') }}" class="btn btn-outline-dark" type="button">Get Onboard <i class="material-icons" style="font-size:14px">login</i></a>
             </div>
           </div>
           <div class="col-md-6 mt-1">
             <div class="h-100 p-5 text-light bg-secondary">
               <h2>Service Providers</h2>
               <p>Boost your freelancing career with Pseudoteam. Focus on what you do best while we handle client interactions and project management. Join us to work efficiently and get paid promptly!</p>
-              <a class="btn btn-outline-light" type="button">Find Work <i class="material-icons" style="font-size:14px">work</i></a>
+              <a class="btn btn-outline-light" type="button" href="{{ url('/authentication/service-partner/sign-in') }}">Find Work <i class="material-icons" style="font-size:14px">work</i></a>
             </div>
           </div>
         </div>

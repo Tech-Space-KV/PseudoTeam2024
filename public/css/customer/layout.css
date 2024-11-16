@@ -17,6 +17,18 @@
     color: #f1f1f1;
 }
 
+.cardbgylw{
+  background-color: #ffffff;
+  border: solid 0.5px #c3c3c3;
+  color: #19327d;
+}
+
+.cardbgylw:hover {
+  background-color: #c3c3c3; /* Change to a darker color or any other color 659bff */
+  border: solid 0.5px #c3c3c3; /* Change the border color on hover */
+  color: #19327d;
+}
+
 .sitem {
 display: flex;
 align-items: center;
@@ -165,6 +177,8 @@ body {
       width: 100%;     /* Take up the full width of the screen */
     }
   }
+
+  
   
 
 
@@ -172,5 +186,27 @@ body {
   /* Alterations */
 
   .scr-card{
-    height: 150px;
+    height: 280px;
+    width: 250px;
+    color: #19327d;
+  }
+
+  .scr-card1{
+    /* background-color: #fcc01e; */
+    background-image: url('../../images/yellow.png');  /* Replace with your actual image URL */
+    background-size: cover;                       /* Ensure the image covers the card's area */
+    background-position: center;                  /* Center the image */
+    background-repeat: no-repeat;                 /* Prevent image repetition */
+  }
+  .scr-card2{
+    background-image: url('../../images/red.png');  /* Replace with your actual image URL */
+    background-size: cover;                       /* Ensure the image covers the card's area */
+    background-position: center;                  /* Center the image */
+    background-repeat: no-repeat;
+  }
+  .scr-card3{
+    background-image: url('../../images/green.png');  /* Replace with your actual image URL */
+    background-size: cover;                       /* Ensure the image covers the card's area */
+    background-position: center;                  /* Center the image */
+    background-repeat: no-repeat;
   }

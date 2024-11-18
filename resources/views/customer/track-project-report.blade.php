@@ -41,6 +41,7 @@
       </tr>
       <tr>
         <th scope="row">3</th>
+        <td>Jacob</td>
         <td colspan="2">Larry the Bird</td>
         <td>@twitter</td>
       </tr>

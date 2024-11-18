@@ -9,6 +9,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('css/customer/layout.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/customer/reports.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/customer/project_upload.css') }}">
     
 </head>
 <body>

@@ -5,14 +5,16 @@
 
 </br>
 <div class="container">
-<div class="">
+<div class="mb-4">
     <h2>Track your project</h2>
 </div>
 
-<div class="search-box-container">
-  <input type="text" id="searchCol2" placeholder="Search Column 2">
+<div class="search-box-container mt-2 w-100">
+  <div class = "mx-auto">
+  <input class="rounded-3" type="text" id="searchCol2" placeholder="Search Column 2">
   <input type="text" id="searchCol3" placeholder="Search Column 3">
   <input type="text" id="searchCol4" placeholder="Search Column 4">
+  </div>
 </div>
 
 <table class="table table-hover" id="myTable">
@@ -42,7 +44,7 @@
       <tr>
         <th scope="row">3</th>
         <td>Jacob</td>
-        <td colspan="2">Larry the Bird</td>
+        <td>Larry the Bird</td>
         <td>@twitter</td>
       </tr>
     </tbody>
@@ -83,6 +85,7 @@ for (let i = 1; i <= totalPages; i++) {
   const button = document.createElement("button");
   button.textContent = i;
   button.className = i === currentPage ? "active" : "";
+  button.classList.add("btn btn-sm btn-primary"); 
   button.addEventListener("click", () => {
     currentPage = i;
     renderTable();

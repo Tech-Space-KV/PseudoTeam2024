@@ -12,9 +12,9 @@ Route::get('/home2', function () {
     return view('website/home2');
 });
 
-// Route::get('/services', function () {
-//     return view('website/services');
-// });
+Route::get('/customer/session/complete-profile', function () {
+    return view('customer/complete_profile');
+});
 
 Route::get('/authentication/customer/sign-in', function () {
     return view('auth/customer_sign_in');

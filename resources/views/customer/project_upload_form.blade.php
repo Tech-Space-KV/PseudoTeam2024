@@ -70,7 +70,7 @@
             <div class="d-flex">
                 <div class="me-2" style="flex: 0.3;">
                     <select class="form-select" id="budget">
-                        <option selected>Currency type</option>
+                        <option selected>Currency</option>
                         <option value="t1">t1</option>
                         <option value="t2">t2</option>
                         <option value="t3">t3</option>

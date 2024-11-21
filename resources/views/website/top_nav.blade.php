@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark ">
+<nav class="navbar navbar-expand-lg navbar-dark nav-height">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <img src="{{ asset('images/logo_pt3.png') }}" class="rounded-3" style="width: 120px">

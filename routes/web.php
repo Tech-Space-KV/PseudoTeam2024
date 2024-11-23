@@ -72,3 +72,6 @@ Route::post('/submit-query', [QueryController::class, 'submitQuery']);
 Route::get('/customer/session/track-project-report', function () {
     return view('/customer/track-project-report');
 });
+Route::get('customer/session/marketplace/hardwares', function () {
+    return view('customer/marketplace_hardwares');
+});

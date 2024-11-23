@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\QueryController;
+use App\Http\Controllers\ChartController;
 
 Route::get('/', function () {
     return view('website/home');
@@ -46,6 +47,13 @@ Route::get('/customer/session/reports', function () {
 Route::get('/customer/session/dashboard', function () {
     return view('customer/dashboard');
 });
+
+
+
+Route::get('/customer/session/reports', [ChartController::class, 'index']);
+
+Route::get('/chart-data', [ChartController::class, 'getData']);
+
 
 //TESTING ROUTE PROJECT UPLOAD
 

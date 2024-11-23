@@ -32,7 +32,7 @@
                      <i class="fa fa-object-group card cardbg p-3 iconix"></i>
                     <span class="fst">Reports</span>
             </a>
-            <a href="{{ url('customer/session/track-project-report') }}" class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
+            <a href="{{ url('customer/session/marketplace/hardwares') }}" class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
                     <i class="fa fa-cubes card cardbg p-3 iconix"></i>
                     <span class="fst">Marketplace</span>
             </a>        

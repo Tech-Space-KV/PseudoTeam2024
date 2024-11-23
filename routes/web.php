@@ -38,6 +38,11 @@ Route::get('/customer/session/', function () {
     return view('customer/dashboard');
 });
 
+Route::get('/customer/session/reports', function () {
+    return view('customer/reports');
+});
+
+
 Route::get('/customer/session/dashboard', function () {
     return view('customer/dashboard');
 });

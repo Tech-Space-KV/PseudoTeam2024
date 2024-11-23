@@ -28,7 +28,7 @@
         </div>
 
         <div class="row justify-content-md-center">
-            <a href="{{ url('customer/session/track-project-report') }}" class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
+            <a href="{{ url('customer/session/reports') }}" class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
                      <i class="fa fa-object-group card cardbg p-3 iconix"></i>
                     <span class="fst">Reports</span>
             </a>

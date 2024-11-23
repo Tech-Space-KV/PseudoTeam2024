@@ -56,32 +56,46 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th class="text-pseudo" scope="col">Proj. ID.</th>
+          <th class="text-pseudo" scope="col">Title</th>
+          <th class="text-pseudo" scope="col">Start Date</th>
+          <th class="text-pseudo" scope="col">End Date</th>
+          <th class="text-pseudo" scope="col">Status</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <th scope="row">100134</th>
+          <td>Test Project 1</td>
+          <td>28/11/2023</td>
+          <td>28/11/2024</td>
+          <td>In Progress</td>
+          <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
         </tr>
         <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
+          <th scope="row">100135</th>
+          <td>Test Project 2</td>
+          <td>28/11/2023</td>
+          <td>28/11/2024</td>
+          <td>In Progress</td>
+          <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
         </tr>
         <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
+          <th scope="row">100136</th>
+          <td>Test Project 3</td>
+          <td>28/11/2023</td>
+          <td>28/11/2024</td>
+          <td>In Progress</td>
+          <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
         </tr>
       </tbody>
     </table>
+  
+    <div class="pagination" id="pagination"></div>
+   
+  
+  
 
   </div>
   

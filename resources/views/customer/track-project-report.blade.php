@@ -20,12 +20,12 @@
 </br>
 <table class="table table-hover" id="myTable">
     <thead>
-      <tr>
-        <th class="text-pseudo" scope="col">Proj. ID.</th>
-        <th class="text-pseudo" scope="col">Title</th>
-        <th class="text-pseudo" scope="col">Start Date</th>
-        <th class="text-pseudo" scope="col">End Date</th>
-        <th class="text-pseudo" scope="col">Status</th>
+      <tr class="text-pseudo">
+        <th scope="col">Proj. ID.</th>
+        <th scope="col">Title</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Status</th>
         <th scope="col"></th>
       </tr>
     </thead>

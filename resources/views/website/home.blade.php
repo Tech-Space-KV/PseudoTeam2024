@@ -409,6 +409,24 @@
 
     </script>
 
+    <script>
+      function adjustZoomForScreenScale() {
+    // Calculate the screen's scale factor
+    const devicePixelRatio = window.devicePixelRatio;
+
+    // Check if the scale is approximately 150%
+    if (Math.abs(devicePixelRatio - 1.5) < 0.1) {
+        document.body.style.zoom = "85%"; // Set zoom to 80%
+    } else {
+        document.body.style.zoom = "100%"; // Default zoom
+    }
+}
+
+// Run the function on page load
+window.addEventListener("load", adjustZoomForScreenScale);
+
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   </body>

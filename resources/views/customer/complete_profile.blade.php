@@ -17,14 +17,14 @@
   <!-- Navbar -->
   <div class="header">
     <!-- Left Section - Logo -->
-    <div class="left-section" style="background-color: white;">
+    <div class="left-section border px-4 py-4" style="background-color: white;">
       <a href="/">
         <img src="http://127.0.0.1:8000/images/logopt.png" class="logo" alt="Logo">
       </a>
     </div>
 
     <!-- Right Section - Logout Button -->
-    <a type="button" class="btn btn-outline-danger position-relative ms-2" style="float: right;  border: 1px solid #ccc;">
+    <a type="button" class="btn btn-outline-danger position-relative mx-4 my-4" style="float: right;  border: 1px solid #ccc;">
       Logout <i class="fa fa-sign-out"></i>
     </a>
   </div>
@@ -63,8 +63,8 @@
             <label>Mailing Address</label>
             <textarea class="form-control" id="address" rows="3" placeholder="Your address" required></textarea>
           </div>
-          <div class="btn-group">
-            <button class="btn btn-primary" type="button" onclick="nextStep()">Next</button>
+          <div class="btn-group  w-25 mx-auto">
+            <button class="btn btn-primary fw-bold" type="button" onclick="nextStep()">Next</button>
           </div>
         </fieldset>
       </div>
@@ -83,7 +83,7 @@
         </div>
         <div class="form-group">
           <label for="about">About</label>
-          <textarea class="form-control" id="about" required autocomplete="off" placeholder="Tell us something about you..." name="about" rows="3"></textarea>
+          <textarea class="form-control" id="about" required autocomplete="off" placeholder="Please describe about your work" name="about" rows="3"></textarea>
         </div>
         <div id="organizationFields">
           <div class="form-group">
@@ -102,8 +102,8 @@
           </div>
         </div>
         <div class="btn-group">
-          <button class="btn btn-secondary" type="button" onclick="prevStep()">Prev</button>
-          <button class="btn btn-primary" type="button" onclick="submitForm()">Submit</button>
+          <button class="btn btn-secondary mx-2 fw-bold" type="button" onclick="prevStep()">Prev</button>
+          <button class="btn btn-primary mx-2 fw-bold" type="button" onclick="submitForm()">Submit</button>
         </div>
       </div>
     </div>

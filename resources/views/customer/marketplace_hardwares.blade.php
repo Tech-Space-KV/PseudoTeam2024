@@ -63,16 +63,46 @@
         <td>Delhi</td>
         <td ><a class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
+      <tr>
+        <th scope="row">123</th>
+        <td>aq1</td>
+        <td>zaq1</td>
+        <td>2</td>
+        <td>cde1</td>
+        <td>Delhi</td>
+        <td>Delhi</td>
+        <td ><a class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+      </tr>
+      <tr>
+        <th scope="row">124</th>
+        <td>aq1</td>
+        <td>zaq1</td>
+        <td>2</td>
+        <td>cde1</td>
+        <td>Delhi</td>
+        <td>Delhi</td>
+        <td ><a class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+      </tr>
+      <tr>
+        <th scope="row">127</th>
+        <td>aq1</td>
+        <td>zaq1</td>
+        <td>2</td>
+        <td>cde1</td>
+        <td>Delhi</td>
+        <td>Delhi</td>
+        <td ><a class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+      </tr>
     </tbody>
   </table>
 
-  <div class="pagination" id="pagination"></div>
+  <div class="pagination" style="float:right;" id="pagination"></div>
  
 
 </div>
 
 <script>
-const rowsPerPage = 5; // Number of rows per page
+const rowsPerPage = 10; // Number of rows per page
 let currentPage = 1;
 const table = document.getElementById("myTable");
 const tbody = table.querySelector("tbody");
@@ -91,23 +121,67 @@ const end = start + rowsPerPage;
 filteredRows.slice(start, end).forEach(row => tbody.appendChild(row));
 renderPagination();
 }
-
 // Function to render pagination buttons
 function renderPagination() {
-pagination.innerHTML = "";
-const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+  pagination.innerHTML = ""; // Clear existing pagination
 
-for (let i = 1; i <= totalPages; i++) {
-  const button = document.createElement("button");
-  button.textContent = i;
-  button.className = i === currentPage ? "active" : "";
-  button.classList.add("btn btn-sm btn-primary"); 
-  button.addEventListener("click", () => {
-    currentPage = i;
+  const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+
+  // Create "First" button
+  const firstButton = document.createElement("button");
+  firstButton.textContent = "First";
+  firstButton.className = "btn btn-sm btn-outline-primary mx-1";
+  firstButton.disabled = currentPage === 1; // Disable if already on the first page
+  firstButton.addEventListener("click", () => {
+    currentPage = 1;
     renderTable();
   });
-  pagination.appendChild(button);
-}
+  pagination.appendChild(firstButton);
+
+  // Create "Previous" button
+  const prevButton = document.createElement("button");
+  prevButton.textContent = "Previous";
+  prevButton.className = "btn btn-sm btn-outline-primary mx-1";
+  prevButton.disabled = currentPage === 1; // Disable if already on the first page
+  prevButton.addEventListener("click", () => {
+    currentPage = Math.max(1, currentPage - 1); // Move to the previous page
+    renderTable();
+  });
+  pagination.appendChild(prevButton);
+
+  // Create page number buttons
+  for (let i = 1; i <= totalPages; i++) {
+    const button = document.createElement("button");
+    button.textContent = i;
+    button.className = i === currentPage ? "active btn btn-sm btn-outline-primary mx-1" : "btn btn-sm btn-outline-primary mx-1";
+    button.addEventListener("click", () => {
+      currentPage = i;
+      renderTable();
+    });
+    pagination.appendChild(button);
+  }
+
+  // Create "Next" button
+  const nextButton = document.createElement("button");
+  nextButton.textContent = "Next";
+  nextButton.className = "btn btn-sm btn-outline-primary mx-1";
+  nextButton.disabled = currentPage === totalPages; // Disable if already on the last page
+  nextButton.addEventListener("click", () => {
+    currentPage = Math.min(totalPages, currentPage + 1); // Move to the next page
+    renderTable();
+  });
+  pagination.appendChild(nextButton);
+
+  // Create "Last" button
+  const lastButton = document.createElement("button");
+  lastButton.textContent = "Last";
+  lastButton.className = "btn btn-sm btn-outline-primary mx-1";
+  lastButton.disabled = currentPage === totalPages; // Disable if already on the last page
+  lastButton.addEventListener("click", () => {
+    currentPage = totalPages;
+    renderTable();
+  });
+  pagination.appendChild(lastButton);
 }
 
 // Function to filter the table

@@ -75,3 +75,6 @@ Route::get('/customer/session/track-project-report', function () {
 Route::get('customer/session/marketplace/hardwares', function () {
     return view('customer/marketplace_hardwares');
 });
+Route::get('customer/session/marketplace/hardwares-orders', function () {
+    return view('customer/marketplace_hardwares_orders');
+});

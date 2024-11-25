@@ -14,7 +14,7 @@ Route::get('/home2', function () {
 });
 
 Route::get('/customer/session/complete-profile', function () {
-    return view('customer/complete_profile');
+    return view('/customer/complete_profile');
 });
 
 Route::get('/authentication/customer/sign-in', function () {
@@ -74,9 +74,16 @@ Route::get('/customer/session/track-project-report', function () {
 });
 
 
-Route::get('customer/session/marketplace/hardwares', function () {
-    return view('customer/marketplace_hardwares');
+Route::get('/customer/session/marketplace/hardwares', function () {
+    return view('/customer/marketplace_hardwares');
 });
-Route::get('customer/session/marketplace/hardwares-orders', function () {
-    return view('customer/marketplace_hardwares_orders');
+Route::get('/customer/session/marketplace/hardwares-orders', function () {
+    return view('/customer/marketplace_hardwares_orders');
+});
+
+Route::get('/customer/session/help', function () {
+    return view('/customer/help');
+});
+Route::get('/customer/session/profileoptions', function () {
+    return view('/customer/profileoptions');
 });

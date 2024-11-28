@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <div class="mx-auto w-75" id="">
-                <a type="button" class="btn btn-primary position-relative me-2" style="float: left;">
+                <a  href="{{ url('customer/session/notifications') }}" type="button" class="btn btn-primary position-relative me-2" style="float: left;">
                     <i class="fa fa-bell text-white"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                       99+

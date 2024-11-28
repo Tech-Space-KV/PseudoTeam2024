@@ -9,7 +9,7 @@
   <div class="mb-4 ">
     <h2>Manage Account</h2>
   </div>
-  <div class="row text-pseudo" style="height: 100%;">
+  <div class="row " style="height: 100%;">
 
     <!-- Left Section: Navigation -->
     <div class="col-lg-4 col-md-5 col-sm-12 mb-4" style="background-color: #f8f9fa; border-right: 1px solid #dee2e6; height: 100%; padding: 20px; overflow-y: auto;">
@@ -33,7 +33,7 @@
     <div class="col-lg-8 col-md-7 col-sm-12" style="height: 100%; padding: 20px; overflow-y: auto;">
       <!-- Profile Picture Section -->
       <div id="content-profile" class="content-section">
-        <h4 class="mb-4 fw-bold">Profile Picture</h4>
+        <h4 class="mb-4 fw-bold text-pseudo">Profile Picture</h4>
         <div class="text-center">
           <img id="profilePreview" src="{{ asset('images/logo_icon.png') }}" class="img-thumbnail mb-3" alt="Profile Preview" style="width:20%;height:15%; border: 0;">
           <div class="d-flex justify-content-center align-items-center mb-3">
@@ -47,7 +47,7 @@
 
       <!-- Location Section -->
       <div id="content-location" class="content-section d-none">
-        <h4 class="mb-4 fw-bold">Location</h4>
+        <h4 class="mb-4 fw-bold text-pseudo">Location</h4>
         <form id="locationForm">
           <div class="mb-3">
             <label for="country" class="form-label" style="font-weight: bold;">Country</label>
@@ -80,57 +80,58 @@
 
       <!-- CIN/Government ID Section -->
       <div id="content-id" class="content-section d-none">
-        <h4 class="mb-4 fw-bold">CIN/Government ID</h4>
-        <div class="card-body">
-          <div class="form-group">
-            <label style="font-weight: bold; margin-bottom: 10px;">You are an</label>
-            <div class="switch-field" style="display: flex; justify-content: center; width: 100%; border-radius: 25px; overflow: hidden; position: relative; height: 40px;">
-              <input type="radio" id="radio-one" name="type" value="Organization" checked style="position: absolute; clip: rect(0, 0, 0, 0); height: 1px; width: 1px; border: 0; overflow: hidden;">
-              <label for="radio-one" style="background-color: #007bff; color: white; font-size: 16px; text-align: center; border: 1px solid #007bff; border-radius: 25px 0 0 25px; cursor: pointer; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; transition: background-color 0.3s, color 0.3s;">
-                Organization
-              </label>
-
-              <input type="radio" id="radio-two" name="type" value="Individual" style="position: absolute; clip: rect(0, 0, 0, 0); height: 1px; width: 1px; border: 0; overflow: hidden;">
-              <label for="radio-two" style="background-color: #fff; color: #007bff; font-size: 16px; text-align: center; border: 1px solid #007bff; border-radius: 0 25px 25px 0; cursor: pointer; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; transition: background-color 0.3s, color 0.3s;">
-                Individual
-              </label>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: 20px;">
-            <label for="about" style="font-weight: bold;">About</label>
-            <textarea class="form-control" id="about" required autocomplete="off" placeholder="Please describe about your work" name="about" rows="3" style=" margin-top: 5px;"></textarea>
-          </div>
-
-          <!-- Organization Fields -->
-          <div id="organizationFields" style="margin-top: 20px;">
-            <div class="form-group" style="margin-top: 20px;">
-              <label for="cin" style="font-weight: bold;">CIN</label>
-              <input class="form-control" id="cin" type="text" placeholder="Enter CIN" style="margin-top: 5px;">
-            </div>
-            <div class="form-group" style="margin-top: 20px;">
-              <label for="gst" style="font-weight: bold;">GST Number</label>
-              <input class="form-control" id="gst" type="text" placeholder="Enter GST Number" style="margin-top: 5px;">
-            </div>
-          </div>
-
-          <!-- Individual Fields -->
-          <div id="individualFields" style="display: none; margin-top: 20px;">
+        <h4 class="mb-4 fw-bold text-pseudo">CIN/Government ID</h4>
+        <form id="cinGovIdForm" onsubmit="submitForm(event)">
+          <div class="card-body">
             <div class="form-group">
-              <label style="font-weight: bold;">Any Government ID</label>
-              <input class="form-control" id="govtID" type="file" accept="image/*" style=" margin-top: 5px;">
+              <label style="font-weight: bold; margin-bottom: 10px;">You are an</label>
+              <div class="switch-field" style="display: flex; justify-content: center; width: 100%; border-radius: 25px; overflow: hidden; position: relative; height: 40px;">
+                <input type="radio" id="radio-one" name="type" value="Organization" checked style="position: absolute; clip: rect(0, 0, 0, 0); height: 1px; width: 1px; border: 0; overflow: hidden;">
+                <label for="radio-one" style="background-color: #007bff; color: white; font-size: 16px; text-align: center; border: 1px solid #007bff; border-radius: 25px 0 0 25px; cursor: pointer; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; transition: background-color 0.3s, color 0.3s;">
+                  Organization
+                </label>
+
+                <input type="radio" id="radio-two" name="type" value="Individual" style="position: absolute; clip: rect(0, 0, 0, 0); height: 1px; width: 1px; border: 0; overflow: hidden;">
+                <label for="radio-two" style="background-color: #fff; color: #007bff; font-size: 16px; text-align: center; border: 1px solid #007bff; border-radius: 0 25px 25px 0; cursor: pointer; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; transition: background-color 0.3s, color 0.3s;">
+                  Individual
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px;">
+              <label for="about" style="font-weight: bold;">About</label>
+              <textarea class="form-control" id="about" required autocomplete="off" placeholder="Please describe about your work" name="about" rows="3" style="margin-top: 5px;"></textarea>
+            </div>
+
+            <!-- Organization Fields -->
+            <div id="organizationFields" style="margin-top: 20px;">
+              <div class="form-group" style="margin-top: 20px;">
+                <label for="cin" style="font-weight: bold;">CIN</label>
+                <input class="form-control" id="cin" name="cin" type="text" placeholder="Enter CIN" style="margin-top: 5px;">
+              </div>
+              <div class="form-group" style="margin-top: 20px;">
+                <label for="gst" style="font-weight: bold;">GST Number</label>
+                <input class="form-control" id="gst" name="gst" type="text" placeholder="Enter GST Number" style="margin-top: 5px;">
+              </div>
+            </div>
+
+            <!-- Individual Fields -->
+            <div id="individualFields" style="display: none; margin-top: 20px;">
+              <div class="form-group">
+                <label style="font-weight: bold;">Any Government ID</label>
+                <input class="form-control" id="govtID" name="govtID" type="file" accept="image/*" style="margin-top: 5px;">
+              </div>
             </div>
           </div>
-
-
-        </div>
-        <div class="w-25 mx-auto">
-          <button class="btn btn-primary mx-2 fw-bold" type="button" onclick="submitForm()">Submit</button>
-        </div>
+          <div class="w-25 mx-auto">
+            <button id="submitButton" class="btn btn-primary mx-2 fw-bold" type="submit">Submit</button>
+          </div>
+        </form>
       </div>
+
       <!-- Change Password Section -->
       <div id="content-password" class="content-section d-none">
-        <h4 class="mb-4 fw-bold">Change Password</h4>
+        <h4 class="mb-4 fw-bold text-pseudo">Change Password</h4>
         <form id="changePasswordForm">
           <div class="mb-3">
             <label for="currentPassword" class="form-label" style="font-weight: bold;">Current Password</label>
@@ -178,14 +179,11 @@
   });
 
   document.addEventListener('DOMContentLoaded', function() {
-    // Handle changes to switch-field
     document.querySelectorAll('input[name="type"]').forEach(radio => {
       radio.addEventListener('change', function() {
-        // Show/Hide fields based on selection
         document.getElementById('organizationFields').style.display = this.value === 'Organization' ? 'block' : 'none';
         document.getElementById('individualFields').style.display = this.value === 'Individual' ? 'block' : 'none';
 
-        // Change the label background color when radio button is selected
         const labelOne = document.querySelector('label[for="radio-one"]');
         const labelTwo = document.querySelector('label[for="radio-two"]');
 
@@ -205,6 +203,7 @@
   });
 
   function submitForm() {
+    event.preventDefault();
     const requiredFields = [
       document.getElementById('about'),
     ];
@@ -219,7 +218,6 @@
 
     if (isFormValid) {
       alert('Form submitted successfully!');
-      // Submit form logic here
     } else {
       alert('Please fill all required fields.');
     }
@@ -244,7 +242,6 @@
       return;
     }
 
-    // Add server-side logic here to handle password update
     alert('Password changed successfully!');
   });
 
@@ -253,7 +250,6 @@
   const submitButton = document.getElementById('submitButton');
   let originalImageSrc = profilePreview.src;
 
-  // Event listener for file input change
   profilePictureInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -261,16 +257,12 @@
       reader.onload = (e) => {
         const newImageSrc = e.target.result;
 
-        // Check if the new image is different from the current preview
         if (newImageSrc !== originalImageSrc) {
-          // Prompt user to confirm change
           if (confirm('Are you sure you want to change your profile picture?')) {
-            // Update preview with the new image
             profilePreview.src = newImageSrc;
             originalImageSrc = newImageSrc;
             alert('Profile picture updated successfully.');
           } else {
-            // Reset the file input if user cancels
             profilePictureInput.value = '';
           }
         } else {
@@ -282,7 +274,6 @@
     }
   });
 
-  // Event listener for submit button
   submitButton.addEventListener('click', () => {
     if (profilePreview.src !== originalImageSrc) {
       alert('Please confirm your changes before submitting.');
@@ -291,7 +282,6 @@
     }
   });
   document.addEventListener('DOMContentLoaded', () => {
-    // Store the initial values
     const initialValues = {
       country: document.getElementById('country').value,
       city: document.getElementById('city').value,
@@ -303,7 +293,6 @@
     const updatedValuesContainer = document.getElementById('updatedValues');
 
     submitButton.addEventListener('click', () => {
-      // Get the current values
       const currentValues = {
         country: document.getElementById('country').value,
         city: document.getElementById('city').value,
@@ -311,7 +300,6 @@
         mailingAddress: document.getElementById('mailingAddress').value.trim()
       };
 
-      // Check for changes
       let changes = [];
       for (const key in currentValues) {
         if (currentValues[key] !== initialValues[key]) {
@@ -319,13 +307,9 @@
         }
       }
 
-      // Display changes or alert if no changes
       if (changes.length > 0) {
-        updatedValuesContainer.innerHTML = `
-          <h5>Updated Values:</h5>
-          <ul>${changes.map(change => `<li>${change}</li>`).join('')}</ul>
-        `;
-        Object.assign(initialValues, currentValues); // Update initial values after submit
+        alert('Location updated successfully..');
+        Object.assign(initialValues, currentValues);
       } else {
         alert('No changes detected.');
       }

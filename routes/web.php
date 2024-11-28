@@ -79,21 +79,6 @@ Route::get('/customer/session/marketplace/hardwares', function () {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::get('/customer/session/marketplace/hardwares-orders', function () {
     return view('/customer/marketplace_hardwares_orders');
 });
@@ -113,4 +98,54 @@ Route::get('customer/session/track-project-report-details', function () {
 
 Route::get('customer/session/project-timeline', function () {
     return view('customer/project_timeline');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('customer/session/referandearn', function () {
+    return view('customer/referandearn');
+});
+
+Route::get('customer/session/notifications', function () {
+    return view('customer/notifications');
 });

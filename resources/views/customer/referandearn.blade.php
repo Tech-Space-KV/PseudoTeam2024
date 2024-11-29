@@ -2,7 +2,7 @@
 
 @section('content')
 <br>
-<div class="container" style="height: calc(100vh - 200px); overflow: hidden; max-height: 100%;">
+<div class="container" style="height: calc(100vh - 200px); overflow: scrollable; max-height: 100%;">
   <div class="mb-4">
     <h2>Refer a friend</h2>
   </div>
@@ -21,7 +21,7 @@
 
     <form id="referFriendForm" method="get" style="margin-top: 20px;">
       @csrf
-      <div class="form-group mb-4">
+      <div class="form-group mb-4 mt-2">
         <label for="friendEmail" style="
                 font-weight: 600;
                 font-size: 14px;
@@ -96,6 +96,7 @@
     </div>
     <br>
   </div>
+</br>
 </div>
 <script>
   document.getElementById('referFriendForm').addEventListener('submit', function(event) {

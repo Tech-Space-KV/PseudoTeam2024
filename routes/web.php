@@ -104,3 +104,6 @@ Route::get('customer/session/cart', function () {
     return view('customer/cart');
 });
 
+Route::get('/customer/session/marketplace/hardwares-details', function () {
+    return view('/customer/marketplace_hardwares_details');
+});

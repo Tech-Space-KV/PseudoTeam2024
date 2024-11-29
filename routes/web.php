@@ -114,3 +114,7 @@ Route::get('customer/session/track-project-report-details', function () {
 Route::get('customer/session/project-timeline', function () {
     return view('customer/project_timeline');
 });
+
+Route::get('customer/session/cart', function () {
+    return view('customer/cart');
+});

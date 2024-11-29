@@ -5,14 +5,18 @@
 
 </br>
 <div class="container">
+  
 <div class="mb-4">
     <h2>Track your project</h2>
 </div>
 </br> 
 
-<div class="chart-container" style="width: 40%">
+<div class="chart-container mx-auto" style="width: 35%">
   <canvas id="statusChart"></canvas>
 </div>
+
+</br>
+
 
 </div>
 

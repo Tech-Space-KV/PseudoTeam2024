@@ -28,11 +28,21 @@
         
         <div class="row justify-content-md-center">
             <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2"> 
-                <div class="card p-3 w-100 cardbgylw">
+               <a href="{{ url('customer/session/cart') }}" class="text-decoration-none w-100">  <div class="card p-3 w-100 cardbgylw">
                     <i class="fa fa-bullseye"></i> 3 items in your cart
-                </div>
+                </div></a>
             </div>          
         </div>
+
+
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2"> 
+               <a href="{{ url('customer/session/cart') }}" class="text-decoration-none w-100">  <div class="card p-3 w-100 cardbgylw">
+                    <i class="fa fa-bullseye"></i> Order History
+                </div></a>
+            </div>          
+        </div>
+
 
         <div class="row justify-content-md-center">
             <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2">

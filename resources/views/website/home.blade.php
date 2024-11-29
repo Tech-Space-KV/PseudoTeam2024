@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('css/web/website_home2.css') }}">
+    <script src="{{ asset('js/screen_adjust.js') }}" defer></script>
     <title>PseudoTeam</title>
   
     

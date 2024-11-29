@@ -103,3 +103,4 @@ Route::get('customer/session/project-timeline', function () {
 Route::get('customer/session/cart', function () {
     return view('customer/cart');
 });
+

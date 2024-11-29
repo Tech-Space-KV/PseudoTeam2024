@@ -79,21 +79,6 @@ Route::get('/customer/session/marketplace/hardwares', function () {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::get('/customer/session/marketplace/hardwares-orders', function () {
     return view('/customer/marketplace_hardwares_orders');
 });

@@ -41,7 +41,7 @@
         <td>cde1</td>
         <td>Delhi</td>
         <td>Delhi</td>
-        <td ><a class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
         <th scope="row">124</th>
@@ -51,7 +51,7 @@
         <td>cde1</td>
         <td>Delhi</td>
         <td>Delhi</td>
-        <td ><a class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
         <th scope="row">127</th>
@@ -61,7 +61,7 @@
         <td>cde1</td>
         <td>Delhi</td>
         <td>Delhi</td>
-        <td ><a class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
         <th scope="row">123</th>
@@ -71,7 +71,7 @@
         <td>cde1</td>
         <td>Delhi</td>
         <td>Delhi</td>
-        <td ><a class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
         <th scope="row">124</th>
@@ -81,7 +81,7 @@
         <td>cde1</td>
         <td>Delhi</td>
         <td>Delhi</td>
-        <td ><a class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
         <th scope="row">127</th>
@@ -91,7 +91,7 @@
         <td>cde1</td>
         <td>Delhi</td>
         <td>Delhi</td>
-        <td ><a class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
     </tbody>
   </table>

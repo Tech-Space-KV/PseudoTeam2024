@@ -22,12 +22,12 @@
 
       <div style="margin-bottom: 20px;">
         <label for="modelNumber" style="font-weight: bold; font-size: 16px; color: #555;">Model Number</label><br>
-        <input type="text" id="modelNumber" name="modelNumber" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="zaq1">
+        <input type="text" id="modelNumber" name="modelNumber" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="zaq1">
       </div>
 
       <div style="margin-bottom: 20px;">
         <label for="modelDescription" style="font-weight: bold; font-size: 16px; color: #555;">Model Description</label><br>
-        <textarea id="modelDescription" name="modelDescription" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);">xsw2</textarea>
+        <textarea id="modelDescription" name="modelDescription" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);">xsw2</textarea>
       </div>
 
       <div style="margin-bottom: 20px;">
@@ -40,17 +40,17 @@
 
       <div style="margin-bottom: 20px;">
         <label for="family" style="font-weight: bold; font-size: 16px; color: #555;">Family</label><br>
-        <input type="text" id="family" name="family" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="cde1">
+        <input type="text" id="family" name="family" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="cde1">
       </div>
 
       <div style="margin-bottom: 20px;">
         <label for="city" style="font-weight: bold; font-size: 16px; color: #555;">City</label><br>
-        <input type="text" id="city" name="city" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="delhi">
+        <input type="text" id="city" name="city" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="delhi">
       </div>
 
       <div style="margin-bottom: 20px;">
         <label for="state" style="font-weight: bold; font-size: 16px; color: #555;">State</label><br>
-        <input type="text" id="state" name="state" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="delhi">
+        <input type="text" id="state" name="state" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="delhi">
       </div>
 
       <button type="button" onclick="submitForm()"

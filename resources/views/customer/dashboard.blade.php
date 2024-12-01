@@ -18,10 +18,10 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card scr-card scr-card1">
           <div class="card-body">
-            <h4 class="card-title">Total Projects</h4>
+            <h4 class="card-title">Projects In Progress</h4>
           </div>
-          <p class="card-title ms-3">No. of projects added: 117</p>
-          <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
+          <p class="card-title ms-3">No. of projects: 6</p>
+          <a href="{{ url('customer/session/track-project-report') }}"  class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
         </div>
       </div>
   
@@ -29,10 +29,10 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card scr-card scr-card2">
           <div class="card-body">
-            <h4 class="card-title">Total Projects</h4>
+            <h4 class="card-title">Pending Projects</h4>
           </div>
-          <p class="card-title ms-3">No. of projects added: 117</p>
-          <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
+          <p class="card-title ms-3">No. of projects added: 4</p>
+          <a href="{{ url('customer/session/track-project-pending') }}" class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
         </div>
       </div>
   
@@ -40,10 +40,10 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card scr-card scr-card3">
           <div class="card-body">
-            <h4 class="card-title">Total Projects</h4>
+            <h4 class="card-title">Delivered Projects</h4>
           </div>
-          <p class="card-title ms-3">No. of projects added: 117</p>
-          <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
+          <p class="card-title ms-3">No. of projects added: 10</p>
+          <a href="{{ url('customer/session/track-project-delivered') }}" class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
         </div>
       </div>
   

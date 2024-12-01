@@ -8,7 +8,7 @@
 <div class="container ">
   <div class="mb-4">
     <h2>Support</h2>
-  </div>
+  </div><br>
   <div class="card shadow p-4">
     <div class="form-group mb-3">
       <label for="query" class="form-label  fw-semibold">Your Query</label>

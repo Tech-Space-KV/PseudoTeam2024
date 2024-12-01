@@ -116,3 +116,17 @@ Route::get('/customer/session/referandearn', function () {
 Route::get('/customer/session/notifications', function () {
     return view('/customer/notifications');
 });
+
+
+Route::get('/customer/session/track-project-overdue', function () {
+    return view('/customer/track-project-overdue');
+});
+
+Route::get('/customer/session/track-project-pending', function () {
+    return view('/customer/track-project-pending');
+});
+
+Route::get('/customer/session/track-project-delivered', function () {
+    return view('/customer/track-project-delivered');
+});
+

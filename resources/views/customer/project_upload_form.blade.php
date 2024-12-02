@@ -12,7 +12,7 @@
 
     <form action="#">
 
-        <h5 class="mt-4 mb-4 text-primary">
+        <h5 class="mt-4 mb-4 text-pseudo">
             <span class="fa fa-bars"></span> First details of the project
         </h5>
 
@@ -70,7 +70,7 @@
             <div class="d-flex">
                 <div class="me-2" style="flex: 0.3;">
                     <select class="form-select" id="budget">
-                        <option selected>Currency type</option>
+                        <option selected>Currency</option>
                         <option value="t1">t1</option>
                         <option value="t2">t2</option>
                         <option value="t3">t3</option>
@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <h5 class="mt-4 mb-4 text-primary">
+        <h5 class="mt-4 mb-4 text-pseudo">
             <span class="fa fa-bars"></span> Define interval
         </h5>
 
@@ -100,7 +100,7 @@
         </div>
 
 
-        <h5 class="mt-4 mb-4 text-primary">
+        <h5 class="mt-4 mb-4 text-pseudo">
             <span class="fa fa-bars"></span> Details of the person to be contacted by PseudoTeam
         </h5>
 
@@ -119,7 +119,7 @@
             <input type="text" class="form-control" id="title" placeholder="Contact no. of authorised person">
         </div>
 
-        <h5 class="mt-4 mb-4 text-primary">
+        <h5 class="mt-4 mb-4 text-pseudo">
             <span class="fa fa-bars"></span> Updates on additional/customer email id <sup>(Optional)</sup>
         </h5>
 
@@ -131,7 +131,7 @@
             </div>
         </div>
 
-        <h5 class="mt-4 mb-4 text-primary">
+        <h5 class="mt-4 mb-4 text-pseudo">
             <span class="fa fa-bars"></span> Apply coupons/promo code <sup>(Optional)</sup>
         </h5>
 

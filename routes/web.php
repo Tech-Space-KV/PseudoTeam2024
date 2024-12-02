@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\QueryController;
+use App\Http\Controllers\ChartController;
 
 Route::get('/', function () {
     return view('website/home');
@@ -12,9 +13,9 @@ Route::get('/home2', function () {
     return view('website/home2');
 });
 
-// Route::get('/services', function () {
-//     return view('website/services');
-// });
+Route::get('/customer/session/complete-profile', function () {
+    return view('/customer/complete_profile');
+});
 
 Route::get('/authentication/customer/sign-in', function () {
     return view('auth/customer_sign_in');
@@ -38,9 +39,21 @@ Route::get('/customer/session/', function () {
     return view('customer/dashboard');
 });
 
+Route::get('/customer/session/reports', function () {
+    return view('customer/reports');
+});
+
+
 Route::get('/customer/session/dashboard', function () {
     return view('customer/dashboard');
 });
+
+
+
+Route::get('/customer/session/reports', [ChartController::class, 'index']);
+
+Route::get('/chart-data', [ChartController::class, 'getData']);
+
 
 //TESTING ROUTE PROJECT UPLOAD
 
@@ -59,3 +72,61 @@ Route::post('/submit-query', [QueryController::class, 'submitQuery']);
 Route::get('/customer/session/track-project-report', function () {
     return view('/customer/track-project-report');
 });
+
+
+Route::get('/customer/session/marketplace/hardwares', function () {
+    return view('/customer/marketplace_hardwares');
+});
+
+
+Route::get('/customer/session/marketplace/hardwares-orders', function () {
+    return view('/customer/marketplace_hardwares_orders');
+});
+
+Route::get('/customer/session/help', function () {
+    return view('/customer/help');
+});
+Route::get('/customer/session/profileoptions', function () {
+    return view('/customer/profileoptions');
+});
+
+
+Route::get('customer/session/track-project-report-details', function () {
+    return view('customer/track_project_report_details');
+});
+
+
+Route::get('customer/session/project-timeline', function () {
+    return view('customer/project_timeline');
+});
+
+Route::get('customer/session/cart', function () {
+    return view('customer/cart');
+});
+
+Route::get('/customer/session/marketplace/hardwares-details', function () {
+    return view('/customer/marketplace_hardwares_details');
+});
+
+
+
+Route::get('/customer/session/referandearn', function () {
+    return view('/customer/referandearn');
+});
+Route::get('/customer/session/notifications', function () {
+    return view('/customer/notifications');
+});
+
+
+Route::get('/customer/session/track-project-overdue', function () {
+    return view('/customer/track-project-overdue');
+});
+
+Route::get('/customer/session/track-project-pending', function () {
+    return view('/customer/track-project-pending');
+});
+
+Route::get('/customer/session/track-project-delivered', function () {
+    return view('/customer/track-project-delivered');
+});
+

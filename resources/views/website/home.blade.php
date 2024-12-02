@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('css/web/website_home2.css') }}">
+    <script src="{{ asset('js/screen_adjust.js') }}" defer></script>
     <title>PseudoTeam</title>
   
     
@@ -406,6 +407,24 @@
     observer.observe(section);
   });
 });
+
+    </script>
+
+    <script>
+      function adjustZoomForScreenScale() {
+    // Calculate the screen's scale factor
+    const devicePixelRatio = window.devicePixelRatio;
+
+    // Check if the scale is approximately 150%
+    if (Math.abs(devicePixelRatio - 1.5) < 0.1) {
+        document.body.style.zoom = "85%"; // Set zoom to 80%
+    } else {
+        document.body.style.zoom = "100%"; // Default zoom
+    }
+}
+
+// Run the function on page load
+window.addEventListener("load", adjustZoomForScreenScale);
 
     </script>
 

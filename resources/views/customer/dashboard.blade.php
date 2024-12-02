@@ -18,10 +18,10 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card scr-card scr-card1">
           <div class="card-body">
-            <h4 class="card-title">Total Projects</h4>
+            <h4 class="card-title">Projects In Progress</h4>
           </div>
-          <p class="card-title ms-3">No. of projects added: 117</p>
-          <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
+          <p class="card-title ms-3">No. of projects: 6</p>
+          <a href="{{ url('customer/session/track-project-report') }}"  class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
         </div>
       </div>
   
@@ -29,10 +29,10 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card scr-card scr-card2">
           <div class="card-body">
-            <h4 class="card-title">Total Projects</h4>
+            <h4 class="card-title">Pending Projects</h4>
           </div>
-          <p class="card-title ms-3">No. of projects added: 117</p>
-          <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
+          <p class="card-title ms-3">No. of projects added: 4</p>
+          <a href="{{ url('customer/session/track-project-pending') }}" class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
         </div>
       </div>
   
@@ -40,10 +40,10 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card scr-card scr-card3">
           <div class="card-body">
-            <h4 class="card-title">Total Projects</h4>
+            <h4 class="card-title">Delivered Projects</h4>
           </div>
-          <p class="card-title ms-3">No. of projects added: 117</p>
-          <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
+          <p class="card-title ms-3">No. of projects added: 10</p>
+          <a href="{{ url('customer/session/track-project-delivered') }}" class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
         </div>
       </div>
   
@@ -56,32 +56,46 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th class="text-pseudo" scope="col">Proj. ID.</th>
+          <th class="text-pseudo" scope="col">Title</th>
+          <th class="text-pseudo" scope="col">Start Date</th>
+          <th class="text-pseudo" scope="col">End Date</th>
+          <th class="text-pseudo" scope="col">Status</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <th scope="row">100134</th>
+          <td>Test Project 1</td>
+          <td>28/11/2023</td>
+          <td>28/11/2024</td>
+          <td>In Progress</td>
+          <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
         </tr>
         <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
+          <th scope="row">100135</th>
+          <td>Test Project 2</td>
+          <td>28/11/2023</td>
+          <td>28/11/2024</td>
+          <td>In Progress</td>
+          <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
         </tr>
         <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
+          <th scope="row">100136</th>
+          <td>Test Project 3</td>
+          <td>28/11/2023</td>
+          <td>28/11/2024</td>
+          <td>In Progress</td>
+          <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
         </tr>
       </tbody>
     </table>
+  
+    <div class="pagination" id="pagination"></div>
+   
+  
+  
 
   </div>
   

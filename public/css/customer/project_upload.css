@@ -61,3 +61,8 @@ input:checked+.slider::after {
     left: 10px;
     right: unset;
 }
+
+.text-pseudo
+{
+    color: #006EC4;
+}

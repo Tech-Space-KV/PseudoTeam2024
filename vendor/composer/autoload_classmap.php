@@ -7,6 +7,11 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\QueryController' => $baseDir . '/app/Http/Controllers/QueryController.php',
+    'App\\Http\\Controllers\\ServiceController' => $baseDir . '/app/Http/Controllers/ServiceController.php',
+    'App\\Imports\\ServicesImport' => $baseDir . '/app/Imports/ServicesImport.php',
+    'App\\Mail\\SendQueryMail' => $baseDir . '/app/Mail/SendQueryMail.php',
+    'App\\Mail\\SendQueryMailCopy' => $baseDir . '/app/Mail/SendQueryMailCopy.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

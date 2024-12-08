@@ -18,7 +18,7 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card scr-card scr-card1">
           <div class="card-body">
-            <h4 class="card-title">Total Projects</h4>
+            <h4 class="card-title">Pending Projects</h4>
           </div>
           <p class="card-title ms-3">No. of projects added: 117</p>
           <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
@@ -29,7 +29,7 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card scr-card scr-card2">
           <div class="card-body">
-            <h4 class="card-title">Total Projects</h4>
+            <h4 class="card-title">Overdue Projects</h4>
           </div>
           <p class="card-title ms-3">No. of projects added: 117</p>
           <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
@@ -40,7 +40,7 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card scr-card scr-card3">
           <div class="card-body">
-            <h4 class="card-title">Total Projects</h4>
+            <h4 class="card-title">Delivered Projects</h4>
           </div>
           <p class="card-title ms-3">No. of projects added: 117</p>
           <a class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>

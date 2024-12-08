@@ -6,7 +6,7 @@
 </br>
 <div class="container">
 <div class="mb-4">
-    <h2>Hardware Deals</h2>
+    <h2>Order History</h2>
 </div>
 <div class="search-box-container w-100 mb-4">
   <div class = "mx-auto">

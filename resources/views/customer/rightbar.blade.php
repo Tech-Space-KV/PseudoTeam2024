@@ -37,55 +37,12 @@
 
         <div class="row justify-content-md-center">
             <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2"> 
-               <a href="{{ url('customer/session/cart') }}" class="text-decoration-none w-100">  <div class="card p-3 w-100 cardbgylw">
+               <a href="{{ url('customer/session/marketplace/hardwares-orders') }}" class="text-decoration-none w-100">  <div class="card p-3 w-100 cardbgylw">
                     <i class="fa fa-bullseye"></i> Order History
                 </div></a>
             </div>          
         </div>
 
-
-        <div class="row justify-content-md-center">
-            <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2">
-                     <i class="fa fa-upload card cardbg p-3"></i>
-                    <span class="fst">Upload Project</span>
-            </div>
-            <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2">
-                    <i class="fa fa-line-chart card cardbg p-3"></i>
-                    <span class="fst">Track Project</span>
-            </div>        
-        </div>
-
-        <div class="row justify-content-md-center">
-            <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2">
-                     <i class="fa fa-object-group card cardbg p-3"></i>
-                    <span class="fst">Reports</span>
-            </div>
-            <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2">
-                    <i class="fa fa-cubes card cardbg p-3"></i>
-                    <span class="fst">Marketplace</span>
-            </div>        
-        </div>
-
-        <div class="row justify-content-md-center">
-            <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2">
-                     <i class="fa fa-object-group card cardbg p-3"></i>
-                    <span class="fst">Help</span>
-            </div>
-            <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2">
-                    <i class="fa fa-cubes card cardbg p-3"></i>
-                    <span class="fst">Account</span>
-            </div>        
-        </div>
-
-        <div class="row justify-content-md-center">
-            <div class="col col-lg-10  d-flex flex-column align-items-center mx-2"0>
-                     <div class="card cardbg w-100 p-1">
-                        <img src="{{ asset('images/refer-img.png') }}" class="rounded-3 w-100">
-                     </div>
-                    <span class="fst">Refer a Friend</span>
-            </div>       
-        </div>
-        
         
     </div>
 </div>

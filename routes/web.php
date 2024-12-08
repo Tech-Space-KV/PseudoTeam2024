@@ -107,3 +107,16 @@ Route::get('customer/session/cart', function () {
 Route::get('/customer/session/marketplace/hardwares-details', function () {
     return view('/customer/marketplace_hardwares_details');
 });
+ 
+ 
+ 
+Route::get('/customer/session/referandearn', function () {
+    return view('/customer/referandearn');
+});
+Route::get('/customer/session/notifications', function () {
+    return view('/customer/notifications');
+});
+Route::get('/customer/session/marketplace/hardwares-orders', function () {
+    return view('/customer/marketplace_hardwares_orders');
+});
+ 

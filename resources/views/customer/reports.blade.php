@@ -7,11 +7,11 @@
 <div class="container">
   
 <div class="mb-4">
-    <h2>Track your project</h2>
+    <h2>Reports</h2>
 </div>
 </br> 
 
-<div class="chart-container mx-auto" style="width: 35%">
+<div class="chart-container mx-auto" style="width: 45%">
   <canvas id="statusChart"></canvas>
 </div>
 

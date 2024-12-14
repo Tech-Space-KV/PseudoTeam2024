@@ -11,9 +11,9 @@
 <div class="search-box-container w-100 mb-4">
   <div class = "mx-auto">
   <Label>Search: </Label>
-  <input class="rounded-3" type="text" id="searchCol1" placeholder="Deal ID">
-  <input  class="rounded-3" type="text" id="searchCol2" placeholder="H/W Identifier">
-  <input  class="rounded-3" type="text" id="searchCol6" placeholder="Status">
+  <input class="rounded-3" type="text" id="searchCol1" placeholder="Order No">
+  <input  class="rounded-3" type="text" id="searchCol3" placeholder="Order Date">
+  <input  class="rounded-3" type="text" id="searchCol4" placeholder="Status">
   </div>
 </div>
 </br>
@@ -22,146 +22,62 @@
 <table class="table table-hover" id="myTable">
     <thead>
       <tr class = "text-pseudo">
-        <th scope="col">Deal ID</th>
-        <th scope="col">H/W Identifier</th>
-        <th scope="col">H/W Model</th>
-        <th scope="col">Qty Requested</th>
-        <th scope="col">Qty Ordered</th>
+        <th scope="col">Order No</th>
+        <th scope="col">No. of items</th>
+        <th scope="col">Ordered On</th>
         <th scope="col">Status</th>
-        <th scope="col">Deal Amt</th>
+        <th scope="col">Amount</th>
+        <th scope="col"></th>
+      </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">4</th>
-        <td>abcdef8765</td>
-        <td>Demo-abc-974</td>
-        <td>2</td>
-        <td>1</td>
-        <td>finalised</td>
+        <th scope="row">123</th>
+        <td>3</td>
+        <td>28/11/2023</td>
+        <td>Pending</td>
         <td>20000</td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
-        <th scope="row">31</th>
-        <td>abcdeoi98</td>
-        <td>Demo-abc-498</td>
-        <td>2</td>
-        <td>1</td>
-        <td>pending</td>
-        <td></td>
+        <th scope="row">124</th>
+        <td>5</td>
+        <td>17/12/2023</td>
+        <td>Finalized</td>
+        <td>30000</td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
-        <th scope="row">61</th>
-        <td>aq1</td>
-        <td>Demo-xyz-65</td>
-        <td>2</td>
-        <td>0</td>
-        <td>pending</td>
-        <td></td>
+        <th scope="row">127</th>
+        <td>9</td>
+        <td>07/09/2024</td>
+        <td>Pending</td>
+        <td>15000</td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
-        <th scope="row">4</th>
-        <td>abcdef8765</td>
-        <td>Demo-abc-974</td>
-        <td>2</td>
-        <td>1</td>
-        <td>finalised</td>
-        <td>20000</td>
+        <th scope="row">123</th>
+        <td>10</td>
+        <td>08/10/2024</td>
+        <td>Pending</td>
+        <td>25000</td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
-        <th scope="row">31</th>
-        <td>abcdeoi98</td>
-        <td>Demo-abc-498</td>
-        <td>2</td>
-        <td>1</td>
-        <td>pending</td>
-        <td></td>
+        <th scope="row">124</th>
+        <td>4</td>
+        <td>20/11/2024</td>
+        <td>Finalized</td>
+        <td>18000</td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
-        <th scope="row">61</th>
-        <td>aq1</td>
-        <td>Demo-xyz-65</td>
-        <td>2</td>
-        <td>0</td>
-        <td>pending</td>
-        <td></td>
-      </tr><tr>
-        <th scope="row">4</th>
-        <td>abcdef8765</td>
-        <td>Demo-abc-974</td>
-        <td>2</td>
-        <td>1</td>
-        <td>finalised</td>
-        <td>20000</td>
-      </tr>
-      <tr>
-        <th scope="row">31</th>
-        <td>abcdeoi98</td>
-        <td>Demo-abc-498</td>
-        <td>2</td>
-        <td>1</td>
-        <td>pending</td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">61</th>
-        <td>aq1</td>
-        <td>Demo-xyz-65</td>
-        <td>2</td>
-        <td>0</td>
-        <td>pending</td>
-        <td></td>
-      </tr><tr>
-        <th scope="row">4</th>
-        <td>abcdef8765</td>
-        <td>Demo-abc-974</td>
-        <td>2</td>
-        <td>1</td>
-        <td>finalised</td>
-        <td>20000</td>
-      </tr>
-      <tr>
-        <th scope="row">31</th>
-        <td>abcdeoi98</td>
-        <td>Demo-abc-498</td>
-        <td>2</td>
-        <td>1</td>
-        <td>pending</td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">61</th>
-        <td>aq1</td>
-        <td>Demo-xyz-65</td>
-        <td>2</td>
-        <td>0</td>
-        <td>pending</td>
-        <td></td>
-      </tr><tr>
-        <th scope="row">4</th>
-        <td>abcdef8765</td>
-        <td>Demo-abc-974</td>
-        <td>2</td>
-        <td>1</td>
-        <td>finalised</td>
-        <td>20000</td>
-      </tr>
-      <tr>
-        <th scope="row">31</th>
-        <td>abcdeoi98</td>
-        <td>Demo-abc-498</td>
-        <td>2</td>
-        <td>1</td>
-        <td>pending</td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">61</th>
-        <td>aq1</td>
-        <td>Demo-xyz-65</td>
-        <td>2</td>
-        <td>0</td>
-        <td>pending</td>
-        <td></td>
+        <th scope="row">127</th>
+        <td>6</td>
+        <td>17/12/2024</td>
+        <td>Pending</td>
+        <td>21000</td>
+        <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
     </tbody>
   </table>
@@ -257,17 +173,17 @@ function renderPagination() {
 // Function to filter the table
 function filterTable() {
 const searchCol1 = document.getElementById("searchCol1").value.toLowerCase();
-const searchCol2 = document.getElementById("searchCol2").value.toLowerCase();
-const searchCol6 = document.getElementById("searchCol6").value.toLowerCase();
+const searchCol3 = document.getElementById("searchCol3").value.toLowerCase();
+const searchCol4 = document.getElementById("searchCol4").value.toLowerCase();
 
 filteredRows = allRows.filter(row => {
   const col1 = row.cells[0].textContent.toLowerCase();
-  const col2 = row.cells[1].textContent.toLowerCase();
-  const col6 = row.cells[5].textContent.toLowerCase();
+  const col3 = row.cells[2].textContent.toLowerCase();
+  const col4 = row.cells[3].textContent.toLowerCase();
   return (
     col1.includes(searchCol1) &&
-    col2.includes(searchCol2) &&
-    col6.includes(searchCol6)
+    col3.includes(searchCol3) &&
+    col4.includes(searchCol4)
   );
 });
 
@@ -277,8 +193,8 @@ renderTable();
 
 // Event listeners for search boxes
 document.getElementById("searchCol1").addEventListener("input", filterTable);
-document.getElementById("searchCol2").addEventListener("input", filterTable);
-document.getElementById("searchCol6").addEventListener("input", filterTable);
+document.getElementById("searchCol3").addEventListener("input", filterTable);
+document.getElementById("searchCol4").addEventListener("input", filterTable);
 
 // Initial rendering
 renderTable();

@@ -117,7 +117,7 @@ function applyInitialStyles() {
                     if (this.checked) {
                         unreadCheckbox.checked = false; // Uncheck "Unread"
                         notificationText.style.fontWeight = 'normal'; // Set text to normal
-                        alert('Notification marked as read.');
+                        // alert('Notification marked as read.');
                     }
                 });
             });
@@ -130,7 +130,7 @@ function applyInitialStyles() {
                     if (this.checked) {
                         readCheckbox.checked = false; // Uncheck "Read"
                         notificationText.style.fontWeight = 'bold'; // Set text to bold
-                        alert('Notification marked as unread.');
+                        // alert('Notification marked as unread.');
                     }
                 });
             });
@@ -144,7 +144,7 @@ function applyInitialStyles() {
                     const notificationText = row.querySelector('.notification-text').textContent;
                     if (confirm(`Are you sure you want to delete this notification?\n"${notificationText}"`)) {
                         row.remove();
-                        alert('Notification deleted successfully.');
+                        // alert('Notification deleted successfully.');
                     }
                 });
             });

@@ -11,6 +11,20 @@
 </br> 
 
 <form>
+
+  <div class="mb-2">
+    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+      <option selected>Select delivery address</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+
+  <div class="mb-4">
+    <a class="text-decoration-none" href="">+ add new adress</a>
+  </div>
+
 <div class="order-md-last">
     <ul class="list-group mb-3">
       <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -47,12 +61,12 @@
       </li>
     </ul>
 
-    <div class="card p-2">
+    {{-- <div class="card p-2">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Promo code">
         <button type="submit" class="btn btn-secondary">Redeem</button>
       </div>
-    </div>
+    </div> --}}
 
           <button type="submit" class="btn btn-primary w-100 mt-2">Place order</button>
 

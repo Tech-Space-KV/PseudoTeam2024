@@ -10,6 +10,7 @@
         <h2>Project Timeline: &lt;Project ID&gt;</h2>
     </div>
 </br>
+
     <div class="timeline">
         <div class="timeline-item">
             <div class="timeline-item-content">

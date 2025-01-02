@@ -70,7 +70,7 @@ Route::get('/services', [ServiceController::class, 'showServices']);
 Route::post('/submit-query', [QueryController::class, 'submitQuery']);
 
 Route::get('/customer/session/track-project-report', function () {
-    return view('/customer/track-project-report');
+    return view('/customer/track_project_report');
 });
 
 
@@ -94,7 +94,7 @@ Route::get('/customer/session/profileoptions', function () {
 Route::get('customer/session/track-project-report-details', function () {
     return view('customer/track_project_report_details');
 });
-
+Route::get('customer/session/track-project-report-location', function () {return view('customer/track_project_report_location');});
 
 Route::get('customer/session/project-timeline', function () {
     return view('customer/project_timeline');

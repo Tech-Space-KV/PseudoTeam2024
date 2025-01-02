@@ -5,31 +5,10 @@
 
 </br>
 <div class="container">
-
-
 <div class="mb-4">
-    <h2>Track project: &lt;Project ID&gt;</h2>
+    <h2>Track your project</h2>
 </div>
-</br>
-
-<div>
-  <h5><span class="fw-bold text-pseudo">Title:</span><br> This is the project title</h5>
-  <h5><span class="fw-bold text-pseudo">Description:</span> This is the project Description.</h5>
-  <h5><span class="fw-bold text-pseudo">Start date:</span> 12/12/2024</h5>
-  <h5><span class="fw-bold text-pseudo">End date:</span> 12/12/2024</h5>
-  <h5><span class="fw-bold text-pseudo">Status:</span> In Progress</h5>
-</div>
-
-</br>
-{{-- <hr class="border border-2 border-secondary"> --}}
-
-<div class="progress" style="height:25px;">
-  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25% completed</div>
-</div>
-
-</br>
-</br>
-<div>
+</br> 
 <div class="search-box-container w-100 mb-4">
   <div class = "mx-auto">
   <Label>Search: </Label>
@@ -42,10 +21,8 @@
 <table class="table table-hover" id="myTable">
     <thead>
       <tr class="text-pseudo">
-        {{-- <th scope="col">Proj. ID.</th>
-        <th scope="col">Title</th> --}}
-        <th scope="col">Milestone</th>
-        <th scope="col">Description</th>
+        <th scope="col">Proj. ID.</th>
+        <th scope="col">Title</th>
         <th scope="col">Start Date</th>
         <th scope="col">End Date</th>
         <th scope="col">Status</th>
@@ -54,30 +31,24 @@
     </thead>
     <tbody>
       <tr>
-        {{-- <th scope="row">100134</th>
-        <td>Test Project 1</td> --}}
-        <td>Milestone 1</td>
-        <td>Desription</td>
+        <th scope="row">100134</th>
+        <td>Test Project 1</td>
         <td>28/11/2023</td>
         <td>28/11/2024</td>
         <td>In Progress</td>
-        <td ><a href="{{ url('customer/session/project-timeline') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+        <td ><a href="{{ url('customer/session/track-project-report-location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
       <tr>
-        {{-- <th scope="row">100135</th>
-        <td>Test Project 2</td> --}}
-        <td>Milestone 1</td>
-        <td>Desription</td>
+        <th scope="row">100135</th>
+        <td>Test Project 2</td>
         <td>28/11/2023</td>
         <td>28/11/2024</td>
         <td>In Progress</td>
         <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
       <tr>
-        {{-- <th scope="row">100136</th>
-        <td>Test Project 3</td> --}}
-        <td>Milestone 1</td>
-        <td>Desription</td>
+        <th scope="row">100136</th>
+        <td>Test Project 3</td>
         <td>28/11/2023</td>
         <td>28/11/2024</td>
         <td>In Progress</td>
@@ -87,61 +58,9 @@
   </table>
 
   <div class="pagination" style="float:right;" id="pagination"></div>
-</div>
-</br>
-<hr class="border border-2 border-secondary">
-</br>
-</br>
-
-<p class="text-pseudo fw-bold">Comments :</p>
-<div class="w-100 p-2" style="height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
-  
-  <div class="card p-2 mb-2">
-    <textarea class="p-2" placeholder="Write a comment"></textarea>
-    <button class="btn btn-sm btn-outline-primary mt-1 w-25">Post</button>
-  </div>
-
-  <div class="card p-2 mb-2">
-    <p class="fw-bold">username :</p>
-    <p>Dummy content line 1</p>
-  </div>
-  <div class="card p-2 mb-2">
-    <p class="fw-bold">username :</p>
-    <p>Dummy content line 1</p>
-  </div>
-  <div class="card p-2 mb-2">
-    <p class="fw-bold">username :</p>
-    <p>Dummy content line 1</p>
-  </div>
-  <div class="card p-2 mb-2">
-    <p class="fw-bold">username :</p>
-    <p>Dummy content line 1</p>
-  </div>
-  <div class="card p-2 mb-2">
-    <p class="fw-bold">username :</p>
-    <p>Dummy content line 1</p>
-  </div>
-  <div class="card p-2 mb-2">
-    <p class="fw-bold">username :</p>
-    <p>Dummy content line 1</p>
-  </div>
-  <div class="card p-2 mb-2">
-    <p class="fw-bold">username :</p>
-    <p>Dummy content line 1</p>
-  </div>
-  <div class="card p-2 mb-2">
-    <p class="fw-bold">username :</p>
-    <p>Dummy content line 1</p>
-  </div>
-
-</div>
-</br></br>
  
+
 </div>
-
-
-
-
 
 <script>
 const rowsPerPage = 10; // Number of rows per page

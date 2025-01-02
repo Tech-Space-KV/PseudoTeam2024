@@ -31,7 +31,7 @@
           <div class="card-body">
             <h4 class="card-title">Pending Projects</h4>
           </div>
-          <p class="card-title ms-3">No. of projects added: 4</p>
+          <p class="card-title ms-3">No. of projects: 4</p>
           <a href="{{ url('customer/session/track-project-pending') }}" class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
         </div>
       </div>
@@ -42,7 +42,7 @@
           <div class="card-body">
             <h4 class="card-title">Delivered Projects</h4>
           </div>
-          <p class="card-title ms-3">No. of projects added: 10</p>
+          <p class="card-title ms-3">No. of projects: 10</p>
           <a href="{{ url('customer/session/track-project-delivered') }}" class="btn btn-sm btn-outline-dark m-2">View &gt;&gt;</a>
         </div>
       </div>

@@ -19,43 +19,47 @@
 </div>
 </br>
 <table class="table table-hover" id="myTable">
-    <thead>
-      <tr class="text-pseudo">
-        <th scope="col">Proj. ID.</th>
-        <th scope="col">Title</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-        <th scope="col">Status</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">100134</th>
-        <td>Test Project 1</td>
-        <td>28/11/2023</td>
-        <td>28/11/2024</td>
-        <td>In Progress</td>
-        <td ><a href="{{ url('customer/session/track-project-report-details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-      </tr>
-      <tr>
-        <th scope="row">100135</th>
-        <td>Test Project 2</td>
-        <td>28/11/2023</td>
-        <td>28/11/2024</td>
-        <td>In Progress</td>
-        <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-      </tr>
-      <tr>
-        <th scope="row">100136</th>
-        <td>Test Project 3</td>
-        <td>28/11/2023</td>
-        <td>28/11/2024</td>
-        <td>In Progress</td>
-        <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr class="text-pseudo">
+      {{-- <th scope="col">Proj. ID.</th>
+      <th scope="col">Title</th> --}}
+      <th scope="col">Location</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+      <th scope="col">Status</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {{-- <th scope="row">100134</th>
+      <td>Test Project 1</td> --}}
+      <td>Location: city, state, country, pincode</td>
+      <td>28/11/2023</td>
+      <td>28/11/2024</td>
+      <td>In Progress</td>
+      <td ><a href="{{ url('customer/session/track-project-report-details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+    </tr>
+    <tr>
+      {{-- <th scope="row">100135</th>
+      <td>Test Project 2</td> --}}
+      <td>Location: city, state, country, pincode</td>
+      <td>28/11/2023</td>
+      <td>28/11/2024</td>
+      <td>In Progress</td>
+      <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+    </tr>
+    <tr>
+      {{-- <th scope="row">100136</th>
+      <td>Test Project 3</td> --}}
+      <td>Location: city, state, country, pincode</td>
+      <td>28/11/2023</td>
+      <td>28/11/2024</td>
+      <td>In Progress</td>
+      <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+    </tr>
+  </tbody>
+</table>
 
   <div class="pagination" style="float:right;" id="pagination"></div>
  

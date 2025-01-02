@@ -32,7 +32,8 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::view('/complete-profile', 'customer/complete_profile')->name('customer.complete_profile');
     Route::view('/reports', 'customer/reports');
     Route::view('/upload-project', 'customer/project_upload_form');
-    Route::view('/track-project-report', 'customer/track-project-report');
+    Route::get('customer/session/track-project-report-location', function () {return view('customer/track_project_report_location');});
+    Route::view('/track-project-report', 'customer/track_project_report');
     Route::view('/marketplace/hardwares', 'customer/marketplace_hardwares');
     Route::view('/marketplace/hardwares-orders', 'customer/marketplace_hardwares_orders');
     Route::view('/help', 'customer/help');

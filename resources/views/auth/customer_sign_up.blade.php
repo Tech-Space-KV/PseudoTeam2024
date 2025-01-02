@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('css/web/customer_auth.css') }}">
     <title>PseudoTeam</title>
-
-    
   </head>
   <body class="align-items-center bg-dark bg-gif3">
 
@@ -24,20 +22,21 @@
     <div class="d-flex justify-content-center align-items-center mt-4">
       <div class="card fixed-width-card p-4 rounded-3 border-primary">    
         <main class="form-signin w-100 m-auto">
-          <form>
+          <form action="{{ route('auth.customer.sign_up.post') }}" method="POST">
+            @csrf
             <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
             <h1 class="h5 mb-3 ms-1 text-muted">Customer Sign Up</h1>
             <hr>
             <div class="form-floating mb-3 mt-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-              <label for="floatingInput">Full Name</label>
+              <input type="text" class="form-control" id="floatingName" name="name" placeholder="Full Name" required>
+              <label for="floatingName">Full Name</label>
             </div>
             <div class="form-floating mb-3 mt-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-              <label for="floatingInput">Email address</label>
+              <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="name@example.com" required>
+              <label for="floatingEmail">Email address</label>
             </div>
             <div class="form-floating">
-              <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+              <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
               <label for="floatingPassword">Password</label>
             </div>
             <button class="btn btn-primary mt-3 w-100 py-2" type="submit">Sign Up</button>
@@ -47,6 +46,16 @@
         </main>
       </div>
     </div>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 

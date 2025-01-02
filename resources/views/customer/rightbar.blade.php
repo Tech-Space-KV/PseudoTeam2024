@@ -10,9 +10,15 @@
                     </span>
                 </a>
 
-                <a type="button" class="btn btn-outline-danger position-relative ms-2" style="float: right;">
-                    Logout <i class="fa fa-sign-out"></i>
-                </a>
+                <a type="button" class="btn btn-outline-danger position-relative ms-2" style="float: right;" href="{{ route('customer.logout') }}" 
+    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    Logout <i class="fa fa-sign-out"></i>
+</a>
+
+<form id="logout-form" action="{{ route('customer.logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+
 
             </div>
         </div>

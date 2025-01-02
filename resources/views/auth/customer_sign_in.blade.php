@@ -24,36 +24,47 @@
     <div class="d-flex justify-content-center align-items-center mt-4">
       <div class="card fixed-width-card p-4 rounded-3 border-primary">    
         <main class="form-signin w-100 m-auto">
-          <form>
-            <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
-            <h1 class="h5 mb-3 ms-1 text-muted">Customer Sign In</h1>
-            <hr>
-            <div class="form-floating mb-3 mt-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-              <label for="floatingInput">Email address</label>
-            </div>
-            <div class="form-floating">
-              <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-              <label for="floatingPassword">Password</label>
-            </div>
+        <form action="{{ route('auth.customer.sign_in.post') }}" method="POST">
+    @csrf
+    <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
+    <h1 class="h5 mb-3 ms-1 text-muted">Customer Sign In</h1>
+    <hr>
+    <div class="form-floating mb-3 mt-3">
+        <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" required>
+        <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
+        <label for="floatingPassword">Password</label>
+    </div>
 
-            <div class="d-flex justify-content-between my-3">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                  Remember me
-                </label>
-              </div>
+    <div class="d-flex justify-content-between my-3">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                Remember me
+            </label>
+        </div>
 
-              <a href="#" class="text-decoration-none">Forgot Password?</a>
-            </div>
-            <button class="btn btn-primary w-100 py-2" type="submit">Sign In</button>
-            
-            <p class="mt-3 text-center">New user? <a href="{{ url('/authentication/customer/sign-up') }}" class="text-decoration-none">Sign Up</a></p>
-          </form>
+        <a href="#" class="text-decoration-none">Forgot Password?</a>
+    </div>
+    <button class="btn btn-primary w-100 py-2" type="submit">Sign In</button>
+
+    <p class="mt-3 text-center">New user? <a href="{{ url('/authentication/customer/sign-up') }}" class="text-decoration-none">Sign Up</a></p>
+</form>
+
         </main>
       </div>
+    </div>@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
+@endif
+
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 

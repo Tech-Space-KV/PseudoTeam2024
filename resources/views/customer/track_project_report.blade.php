@@ -5,38 +5,10 @@
 
 </br>
 <div class="container">
-
-  <div class="mb-4">
-      <h2>Track project: &lt;Project ID&gt;</h2>
-  </div>
-  </br>
-
-  <div style="text-align: center; margin-bottom: 20px;">
-    <h5 style="font-weight: bold;" class="text-pseudo">Title:</h5>
-    <p style="font-size: 1.2rem;">This is the project title</p>
-  </div>
-
-  <div style="display: flex; margin-left: 50px; flex-wrap: wrap; gap: 10px;">
-    <div style="flex: 1; min-width: 300px; font-size: 1rem;">
-      <p style="margin: 0;"><strong class="text-pseudo">Description:</strong> This is the project Description.</p>
-      <p style="margin: 0;"><strong class="text-pseudo">Start date:</strong> 12/12/2024</p>
-    </div>
-    <div style="flex: 1; margin-left: 180px; min-width: 300px; font-size: 1rem;">
-      <p style="margin: 0;"><strong class="text-pseudo">End date:</strong> 12/12/2024</p>
-      <p style="margin: 0;"><strong class="text-pseudo">Status:</strong> In Progress</p>
-    </div>
-  </div>
-
-</br>
-{{-- <hr class="border border-2 border-secondary"> --}}
-
-<div class="progress" style="height:25px;">
-  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25% completed</div>
+<div class="mb-4">
+    <h2>Track your project</h2>
 </div>
-
-</br>
-</br>
-<div>
+</br> 
 <div class="search-box-container w-100 mb-4">
   <div class = "mx-auto">
   <Label>Search: </Label>
@@ -49,10 +21,8 @@
 <table class="table table-hover" id="myTable">
     <thead>
       <tr class="text-pseudo">
-        {{-- <th scope="col">Proj. ID.</th>
-        <th scope="col">Title</th> --}}
-        <th scope="col">Milestone</th>
-        <th scope="col">Description</th>
+        <th scope="col">Proj. ID.</th>
+        <th scope="col">Title</th>
         <th scope="col">Start Date</th>
         <th scope="col">End Date</th>
         <th scope="col">Status</th>
@@ -61,30 +31,24 @@
     </thead>
     <tbody>
       <tr>
-        {{-- <th scope="row">100134</th>
-        <td>Test Project 1</td> --}}
-        <td>Milestone 1</td>
-        <td>Desription</td>
+        <th scope="row">100134</th>
+        <td>Test Project 1</td>
         <td>28/11/2023</td>
         <td>28/11/2024</td>
         <td>In Progress</td>
-        <td ><a href="{{ url('customer/session/project-timeline') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+        <td ><a href="{{ url('customer/session/track-project-report-location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
       <tr>
-        {{-- <th scope="row">100135</th>
-        <td>Test Project 2</td> --}}
-        <td>Milestone 1</td>
-        <td>Desription</td>
+        <th scope="row">100135</th>
+        <td>Test Project 2</td>
         <td>28/11/2023</td>
         <td>28/11/2024</td>
         <td>In Progress</td>
         <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
       <tr>
-        {{-- <th scope="row">100136</th>
-        <td>Test Project 3</td> --}}
-        <td>Milestone 1</td>
-        <td>Desription</td>
+        <th scope="row">100136</th>
+        <td>Test Project 3</td>
         <td>28/11/2023</td>
         <td>28/11/2024</td>
         <td>In Progress</td>
@@ -93,62 +57,10 @@
     </tbody>
   </table>
 
-    <div class="pagination" style="float:right;" id="pagination"></div>
-  </div>
-  </br>
-  <hr class="border border-2 border-secondary">
-  </br>
-  
+  <div class="pagination" style="float:right;" id="pagination"></div>
+ 
 
-  <p class="text-pseudo fw-bold">Comments :</p>
-  <div class="w-100 p-2" style="height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
-    
-    <div class="card p-2 mb-2">
-      <textarea class="p-2" placeholder="Write a comment"></textarea>
-      <button class="btn btn-sm btn-outline-primary mt-1 w-25">Post</button>
-    </div>
-
-    <div class="card p-2 mb-2">
-      <p class="fw-bold">username :</p>
-      <p>Dummy content line 1</p>
-    </div>
-    <div class="card p-2 mb-2">
-      <p class="fw-bold">username :</p>
-      <p>Dummy content line 1</p>
-    </div>
-    <div class="card p-2 mb-2">
-      <p class="fw-bold">username :</p>
-      <p>Dummy content line 1</p>
-    </div>
-    <div class="card p-2 mb-2">
-      <p class="fw-bold">username :</p>
-      <p>Dummy content line 1</p>
-    </div>
-    <div class="card p-2 mb-2">
-      <p class="fw-bold">username :</p>
-      <p>Dummy content line 1</p>
-    </div>
-    <div class="card p-2 mb-2">
-      <p class="fw-bold">username :</p>
-      <p>Dummy content line 1</p>
-    </div>
-    <div class="card p-2 mb-2">
-      <p class="fw-bold">username :</p>
-      <p>Dummy content line 1</p>
-    </div>
-    <div class="card p-2 mb-2">
-      <p class="fw-bold">username :</p>
-      <p>Dummy content line 1</p>
-    </div>
-
-  </div>
-  </br></br>
-   
 </div>
-
-
-
-
 
 <script>
 const rowsPerPage = 10; // Number of rows per page

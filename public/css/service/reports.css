@@ -1,0 +1,8 @@
+.search-box-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.search-box-container input {
+  padding: 5px;
+} 

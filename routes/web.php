@@ -56,3 +56,7 @@ Route::post('/submit-query', [QueryController::class, 'submitQuery'])->name('sub
 // Chart Routes
 Route::get('/customer/session/reports', [ChartController::class, 'index'])->name('customer.reports');
 Route::get('/chart-data', [ChartController::class, 'getData'])->name('chart.data');
+
+Route::get('/service-partner/session/dashboard', function () {
+    return view('/service-partner/dashboard');
+});

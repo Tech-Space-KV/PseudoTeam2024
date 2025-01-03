@@ -35,15 +35,24 @@ class AuthController extends Controller
     // Show login page
     public function showLoginPage()
     {
-        return view('auth/customer_sign_in');
-    }
+       
+    $response = response()->view('auth/customer_sign_in');
+    $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+    $response->header('Pragma', 'no-cache');
+    $response->header('Expires', '0');
+    
+    return $response;
+}
+
+    
 
     // Handle login
     public function login(Request $request)
     {
         // Validate the login data
         $credentials = $request->only('email', 'password');
-    
+       
+        
         if (Auth::attempt($credentials)) {
             // Redirect to the customer dashboard after successful login
             $token = bin2hex(random_bytes(16)); // Generates a 32-character hexadecimal token
@@ -58,31 +67,63 @@ class AuthController extends Controller
     }
 
     // Show dashboard
-    public function dashboard()
+    public function dashboard($viewName = 'customer/dashboard')
     {
-        if (!session('user_session_token')) {
-            return redirect()->route('auth.customer.sign_in');
-        }
-        $response = response()->view('customer/dashboard');
-    $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
-    $response->header('Pragma', 'no-cache');
-    $response->header('Expires', '0');
-
-    return $response;
+        // Check if user session token exists, redirect to home if not
+        // Uncomment the following block if this logic is required:
+        // if (!session('user_session_token')) {
+        //     return view('website/home');
+        // }
+    
+        // Generate response for the given view
+        $response = response()->view($viewName);
+    
+        // Add headers to prevent caching
+        $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+        $response->header('Pragma', 'no-cache');
+        $response->header('Expires', '0');
+    
+        return $response;
     }
+    
 
     // Handle logout
     public function logout(Request $request)
     {
-        
+        // Logout the user
         Auth::logout();
+    
+        // Invalidate the session
         $request->session()->invalidate();
+    
+        // Regenerate the session token
         $request->session()->regenerateToken();
-        $request->session()->flush();
-        $response = response()->redirectToRoute('auth.customer.sign_in')->with('status', 'You have been logged out.');
+    
+        // Clear PHP's file status cache
+        clearstatcache();
+    
+        // Clear session variables and destroy the session
+        session_unset();
+        // session_destroy();
+        session_write_close();
+    
+        // Remove the session cookie
+        setcookie(session_name(), '', 0, '/');
+    
+        // Regenerate session ID to prevent session fixation
+        // session_regenerate_id(true);
+    
+        // Redirect with cache headers
+        $response = response()
+            ->redirectToRoute('auth.customer.sign_in')
+            ->with('status', 'You have been logged out.');
+    
         $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
         $response->header('Pragma', 'no-cache');
         $response->header('Expires', '0');
-        return  $response;
+    
+        return $response;
     }
+    
+
 }

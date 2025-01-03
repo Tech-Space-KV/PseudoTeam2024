@@ -24,7 +24,7 @@
     <div class="d-flex justify-content-center align-items-center mt-4">
       <div class="card fixed-width-card p-4 rounded-3 border-primary">    
         <main class="form-signin w-100 m-auto">
-        <form action="{{ route('auth.customer.sign_in.post') }}" method="POST">
+        <form method="POST" action="{{ route('login.post') }}">
     @csrf
     <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
     <h1 class="h5 mb-3 ms-1 text-muted">Customer Sign In</h1>

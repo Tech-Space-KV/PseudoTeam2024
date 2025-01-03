@@ -20,6 +20,7 @@ Route::prefix('authentication/customer')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('customer.logout');
     Route::get('/login', [AuthController::class, 'showLoginPage'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+    
 });
 
 Route::get('/authentication/service-partner/sign-in', fn () => view('auth/service_sign_in'));
@@ -32,7 +33,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::view('/complete-profile', 'customer/complete_profile')->name('customer.complete_profile');
     Route::view('/reports', 'customer/reports');
     Route::view('/upload-project', 'customer/project_upload_form');
-    Route::get('customer/session/track-project-report-location', function () {return view('customer/track_project_report_location');});
+    Route::get('/track-project-report-location', function () {return view('customer/track_project_report_location');});
     Route::view('/track-project-report', 'customer/track_project_report');
     Route::view('/marketplace/hardwares', 'customer/marketplace_hardwares');
     Route::view('/marketplace/hardwares-orders', 'customer/marketplace_hardwares_orders');

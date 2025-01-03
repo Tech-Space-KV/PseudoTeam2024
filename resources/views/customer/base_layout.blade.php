@@ -75,9 +75,9 @@
        
     </script>
     <script>
-    if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
-        window.location.href = "{{ route('login') }}";
-    }
+    // if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
+    //     window.location.href = "{{ route('login') }}";
+    // }
 </script>
 
 

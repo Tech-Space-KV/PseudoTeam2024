@@ -35,8 +35,16 @@ class AuthController extends Controller
     // Show login page
     public function showLoginPage()
     {
-        return view('auth/customer_sign_in');
-    }
+       
+    $response = response()->view('auth/customer_sign_in');
+    $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+    $response->header('Pragma', 'no-cache');
+    $response->header('Expires', '0');
+    
+    return $response;
+}
+
+    
 
     // Handle login
     public function login(Request $request)
@@ -60,29 +68,29 @@ class AuthController extends Controller
     // Show dashboard
     public function dashboard()
     {
-        if (!session('user_session_token')) {
-            return redirect()->route('auth.customer.sign_in');
-        }
+        // if (!session('user_session_token')) {
+        //     return  view('website/home');
+        // }
         $response = response()->view('customer/dashboard');
-    $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
-    $response->header('Pragma', 'no-cache');
-    $response->header('Expires', '0');
+        $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+        $response->header('Pragma', 'no-cache');
+        $response->header('Expires', '0');
 
-    return $response;
+        return $response;
     }
 
     // Handle logout
     public function logout(Request $request)
-    {
-        
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        $request->session()->flush();
-        $response = response()->redirectToRoute('auth.customer.sign_in')->with('status', 'You have been logged out.');
-        $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
-        $response->header('Pragma', 'no-cache');
-        $response->header('Expires', '0');
-        return  $response;
-    }
+{
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken(); // Regenerate session token
+    $request->session()->flush();
+    $response = response()->redirectToRoute('auth.customer.sign_in')->with('status', 'You have been logged out.');
+    $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+    $response->header('Pragma', 'no-cache');
+    $response->header('Expires', '0');
+    return $response;
+}
+
 }

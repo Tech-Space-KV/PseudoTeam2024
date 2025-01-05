@@ -18,8 +18,8 @@
 
         <div class="row justify-content-md-center">
             <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
-                  <a href="{{ url('customer/session/upload-project') }}" class="text-decoration-none">   <i class="fa fa-upload card cardbg p-3 iconix"></i>
-                  </a> <span class="fst">Upload Project</span>
+                  <a href="{{ url('service-partner/session/manage_project') }}" class="text-decoration-none">   <i class="fa fa-upload card cardbg p-3 iconix"></i>
+                  </a> <span class="fst">Manage Project</span>
             </div>
             <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
                    <a href="{{ url('customer/session/track-project-report') }}" class="text-decoration-none"> <i class="fa fa-line-chart card cardbg p-3 iconix"></i>
@@ -34,7 +34,7 @@
             </div>
             <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
                 <a href="{{ url('customer/session/marketplace/hardwares') }}" class="text-decoration-none">    <i class="fa fa-cubes card cardbg p-3 iconix"></i>
-                </a>   <span class="fst">Marketplace</span> 
+                </a>   <span class="fst">Inventory</span> 
             </div>        
         </div>
 

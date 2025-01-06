@@ -1,59 +1,58 @@
-
+<!-- resources/views/customer/page1.blade.php -->
 @extends('service-partner.base_layout')
 
 @section('content')
 
-</br>
+
+{{-- Your code here --}}
 <div class="container">
-<div class="mb-4">
-    <h2>Track your project</h2>
-</div>
-</br> 
-<div class="search-box-container w-100 mb-4">
-  <div class = "mx-auto">
-  <Label>Search: </Label>
-  <input class="rounded-3" type="text" id="searchCol2" placeholder="Proj. ID.">
-  <input class="rounded-3" type="text" id="searchCol3" placeholder="Title">
-  <input class="rounded-3" type="text" id="searchCol4" placeholder="Status">
-  </div>
-</div>
+    <div class="mb-4">
+        <h2>Project Timeline: &lt;Project ID&gt;</h2>
+    </div>
+</br>
+
+
 </br>
 <table class="table table-hover" id="myTable">
     <thead>
       <tr class="text-pseudo">
-        <th scope="col">Proj. ID.</th>
-        <th scope="col">Title</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-        <th scope="col">Status</th>
+        <th scope="col">Description</th>
+        <th scope="col">Country</th>
+        <th scope="col">State</th>
+        <th scope="col">City</th>
+        <th scope="col">Pincode</th>
+        <th scope="col">Type</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">100134</th>
-        <td>Test Project 1</td>
-        <td>28/11/2023</td>
-        <td>28/11/2024</td>
-        <td>In Progress</td>
-        <td ><a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+        <td>Need to rewamp the pseudoteam project</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>On site</td>
+        <td ><a href="{{ url('service-partner/session/manage_project_edit_task') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
       <tr>
-        <th scope="row">100135</th>
-        <td>Test Project 2</td>
-        <td>28/11/2023</td>
-        <td>28/11/2024</td>
-        <td>In Progress</td>
-       <td> <a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+        <td>Customer Dashboard</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>On site</td>
+       <td> <a href="{{ url('service-partner/session/manage_project_edit_task') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
       <tr>
-        <th scope="row">100136</th>
-        <td>Test Project 3</td>
-        <td>28/11/2023</td>
-        <td>28/11/2024</td>
-        <td>In Progress</td>
-        <td> <a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-        </tr>
+        <td>Marketplace Functionality</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>On site</td>
+       <td> <a href="{{ url('service-partner/session/manage_project_edit_task') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+      </tr>
     </tbody>
   </table>
 
@@ -177,3 +176,4 @@ renderTable();
 
 
 @endsection
+

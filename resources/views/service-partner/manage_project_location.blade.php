@@ -1,5 +1,5 @@
 
-@extends('customer.base_layout')
+@extends('service-partner.base_layout')
 
 @section('content')
 
@@ -38,7 +38,7 @@
       <td>28/11/2023</td>
       <td>28/11/2024</td>
       <td>In Progress</td>
-      <td ><a href="{{ url('service-partner/session/manage-project-details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+      <td ><a href="{{ url('service-partner/session/manage_project_details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
     </tr>
     <tr>
       {{-- <th scope="row">100135</th>
@@ -47,7 +47,7 @@
       <td>28/11/2023</td>
       <td>28/11/2024</td>
       <td>In Progress</td>
-      <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+      <td ><a href="{{ url('service-partner/session/manage_project_details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
     </tr>
     <tr>
       {{-- <th scope="row">100136</th>
@@ -56,7 +56,7 @@
       <td>28/11/2023</td>
       <td>28/11/2024</td>
       <td>In Progress</td>
-      <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+      <td ><a href="{{ url('service-partner/session/manage_project_details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
     </tr>
   </tbody>
 </table>

@@ -71,18 +71,26 @@ max-width: 800px;
   gap: 20px;
 }
 
-/* Form Styles */
-.form-group {
+.form-group.d-flex.align-items-center {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
+  align-items: center; /* Vertically center the content */
+  justify-content: flex-start; /* Align items to the left */
+  gap: 0; /* No gap between elements */
+  margin: 0;
+  padding: 0;
 }
 
 .form-group label {
   font-weight: bold;
-  color: #333;
-  margin-bottom: 8px;
-  display: block;
+  margin-bottom: 0;
+  margin-right: 0; /* Remove any margin to the right */
+}
+
+.form-group button {
+  padding: 0; /* Remove padding */
+  border: none;
+  background: transparent;
+  margin: 0; /* Remove any margin */
 }
 
 .form-group input,
@@ -212,4 +220,75 @@ fieldset {
 
 fieldset.active {
   display: block;
+}
+
+
+#orgSuggestions {
+  max-height: 200px; /* Limit the height of the dropdown */
+  overflow-y: auto; /* Add a scrollbar if content overflows */
+  border: 1px solid #ccc; /* Add a border */
+  background-color: white; /* Match the background color */
+  z-index: 1050; /* Ensure it appears above other elements */
+}
+
+
+#orgSuggestions .list-group-item {
+  cursor: pointer;
+}
+
+#orgSuggestions .list-group-item:hover {
+  background-color: #f0f0f0;
+}
+
+#skillsWrapper {
+  margin-top: 10px;
+}
+
+.badge {
+  cursor: pointer;
+}
+
+#skillSuggestions {
+  background-color: #fff;
+  /* Solid white background */
+  border: 1px solid #ccc;
+  /* Add a border for clarity */
+  border-radius: 5px;
+  /* Rounded corners */
+  position: absolute;
+  z-index: 1050;
+  /* Ensure it stays above other elements */
+  max-height: 200px;
+  /* Add a max-height for scrolling */
+  overflow-y: auto;
+  /* Enable vertical scrolling */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for better visibility */
+}
+
+.skill-remove-btn {
+  background-color: transparent;
+  border: none;
+  color: #ff4d4d;
+  font-size: 14px;
+  padding: 0;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.skill-remove-btn:hover {
+  background-color: #ffcccc;
+  color: #ff0000;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }

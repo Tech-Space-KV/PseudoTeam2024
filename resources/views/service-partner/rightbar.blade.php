@@ -45,7 +45,7 @@
                 </a>
             </div>
         </div>
-        
+
         <div id="calendar" style="width: 100%; max-width: 400px; margin: 20px auto; border: 1px solid #ccc; border-radius: 8px; padding: 15px; text-align: center; background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div id="calendar-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                 <button onclick="prevMonth()" style="background-color:  #006EC4; padding: 8px 12px; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">&#9664;</button>
@@ -63,8 +63,8 @@
 <div id="dateModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
     <div style="background: white; width: 300px; padding: 20px; border-radius: 8px; text-align: center; position: relative; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
         <button onclick="closeModal()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 18px; font-weight: bold; cursor: pointer;">&times;</button>
-        <h4 id="modalTitle">Notification</h4>
-        <p id="modalBody">You clicked on a date!</p>
+        <h4 id="modalTitle"></h4>
+        <p id="modalBody"></p>
     </div>
 </div>
 
@@ -75,10 +75,21 @@
     let currentMonth = today.getMonth();
     let currentYear = today.getFullYear();
 
+    // Map to store multiple notifications for specific dates
+    const notifications = {
+        '2025-01-15': ['Team meeting at 10:00 AM', 'Submit timesheet'],
+        '2025-01-20': ['Project submission deadline', 'Client call at 2:00 PM'],
+        '2025-01-25': ['Office holiday'],
+    };
+
     function renderCalendar(month, year) {
         calendarGrid.innerHTML = '';
-        monthYear.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+        monthYear.textContent = new Date(year, month).toLocaleString('default', {
+            month: 'long',
+            year: 'numeric'
+        });
 
+        // Render weekday headers
         const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         weekdays.forEach(day => {
             const cell = document.createElement('div');
@@ -92,13 +103,16 @@
         const firstDay = new Date(year, month, 1).getDay();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
 
+        // Add blank cells for days before the start of the month
         for (let i = 0; i < firstDay; i++) {
             const cell = document.createElement('div');
             calendarGrid.appendChild(cell);
         }
 
+        // Render day cells
         for (let day = 1; day <= daysInMonth; day++) {
             const cell = document.createElement('div');
+            const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
             cell.textContent = day;
             cell.style.padding = '12px 0';
             cell.style.border = '1px solid #ddd';
@@ -107,18 +121,46 @@
             cell.style.fontSize = '0.9em';
             cell.style.transition = '0.2s';
 
-            cell.onmouseover = () => (cell.style.backgroundColor = '#006EC4', cell.style.color = 'white');
-            cell.onmouseout = () => (cell.style.backgroundColor = '', cell.style.color = '');
+            // Highlight dates with notifications
+            if (notifications[dateKey]) {
+                cell.style.backgroundColor = '#006EC4'; // Highlight color
+                cell.style.color = 'white';
+                cell.style.fontWeight = 'bold';
+            }
 
-            cell.onclick = () => showModal(`You clicked on ${day}-${month + 1}-${year}`);
+            // Add hover effect
+            cell.onmouseover = () => (cell.style.backgroundColor = '#006EC4', cell.style.color = 'white');
+            cell.onmouseout = () => {
+                if (notifications[dateKey]) {
+                    cell.style.backgroundColor = '#006EC4';
+                    cell.style.color = 'white';
+                } else {
+                    cell.style.backgroundColor = '';
+                    cell.style.color = '';
+                }
+            };
+
+            // Show modal with notifications when clicked
+            cell.onclick = () => {
+                if (notifications[dateKey]) {
+                    showModal(dateKey, notifications[dateKey]);
+                } else {
+                    showModal(dateKey, ['No notifications for this date.']);
+                }
+            };
+
             calendarGrid.appendChild(cell);
         }
     }
 
-    function showModal(message) {
+    function showModal(date, messages) {
         const modal = document.getElementById('dateModal');
+        const modalTitle = document.getElementById('modalTitle');
         const modalBody = document.getElementById('modalBody');
-        modalBody.textContent = message;
+
+        modalTitle.textContent = `Notifications for ${date}`;
+        modalTitle.style.fontSize = '1.25em'; // Adjust font size here
+        modalBody.innerHTML = messages.map(msg => `<br><p>${msg}</p>`).join('');
         modal.style.display = 'flex';
     }
 

@@ -119,6 +119,10 @@ Route::get('/service-partner/session/', function () {
     return view('/service-partner/dashboard');
 });
 
+Route::get('/service-partner/session/dashboard', function () {
+    return view('/service-partner/dashboard');
+});
+
 Route::get('service-partner/session/manage_project', function () {
     return view('/service-partner/manage_project');
 });

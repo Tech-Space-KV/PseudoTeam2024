@@ -16,12 +16,12 @@
 <table class="table table-hover" id="myTable">
     <thead>
       <tr class="text-pseudo">
+        <th scope="col">Task</th>
         <th scope="col">Description</th>
-        <th scope="col">Country</th>
-        <th scope="col">State</th>
-        <th scope="col">City</th>
-        <th scope="col">Pincode</th>
-        <th scope="col">Type</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Mngr. Status</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -58,6 +58,54 @@
 
   <div class="pagination" style="float:right;" id="pagination"></div>
  
+</br>
+  <hr class="border border-2 border-secondary">
+</br>
+
+
+<p class="text-pseudo fw-bold">Comments :</p>
+<div class="w-100 p-2" style="height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+  
+  <div class="card p-2 mb-2">
+    <textarea class="p-2" placeholder="Write a comment"></textarea>
+    <button class="btn btn-sm btn-outline-primary mt-1 w-25">Post</button>
+  </div>
+
+  <div class="card p-2 mb-2">
+    <p class="fw-bold">username :</p>
+    <p>Dummy content line 1</p>
+  </div>
+  <div class="card p-2 mb-2">
+    <p class="fw-bold">username :</p>
+    <p>Dummy content line 1</p>
+  </div>
+  <div class="card p-2 mb-2">
+    <p class="fw-bold">username :</p>
+    <p>Dummy content line 1</p>
+  </div>
+  <div class="card p-2 mb-2">
+    <p class="fw-bold">username :</p>
+    <p>Dummy content line 1</p>
+  </div>
+  <div class="card p-2 mb-2">
+    <p class="fw-bold">username :</p>
+    <p>Dummy content line 1</p>
+  </div>
+  <div class="card p-2 mb-2">
+    <p class="fw-bold">username :</p>
+    <p>Dummy content line 1</p>
+  </div>
+  <div class="card p-2 mb-2">
+    <p class="fw-bold">username :</p>
+    <p>Dummy content line 1</p>
+  </div>
+  <div class="card p-2 mb-2">
+    <p class="fw-bold">username :</p>
+    <p>Dummy content line 1</p>
+  </div>
+
+</div>
+</br></br>
 
 </div>
 

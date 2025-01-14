@@ -22,7 +22,7 @@
 
         <div class="row justify-content-md-center mt-2">
             <div class="col col-lg-10 d-flex flex-column align-items-center mx-2">
-                <p class="text-dark"><span class="fw-bold fs-3">Your Cart <i class="fa fa-shopping-cart"></i></span></p>
+                <p class="text-dark"><span class="fw-bold fs-4">Your Profile <i class="fa fa-pie-chart"></i></span></p>
             </div>
         </div>
 
@@ -30,7 +30,25 @@
             <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
                 <a href="{{ url('customer/session/cart') }}" class="text-decoration-none w-100">
                     <div class="card p-3 w-100 cardbgylw">
-                        <i class="fa fa-bullseye"></i> 3 items in your cart
+                       Job Success Rate
+                       <div class="progress mt-2">
+                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                      </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
+                <a href="{{ url('customer/session/cart') }}" class="text-decoration-none w-100">
+                    <div class="card p-3 w-100 cardbgylw">
+                       Job Ratings
+                       <span class="mt-2">
+                       <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
+                       <i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                       </span>
                     </div>
                 </a>
             </div>

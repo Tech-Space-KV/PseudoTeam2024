@@ -141,3 +141,20 @@ Route::get('service-partner/session/manage_project_view_tasks', function () {
 Route::get('service-partner/session/manage_project_edit_task', function () {
     return view('/service-partner/manage_project_edit_task');
 });
+Route::get('service-partner/session/hardware', function () {
+    return view('/service-partner/hardware');
+});
+Route::get('service-partner/session/import-hardware', function () {
+    return view('/service-partner/import_hardware');
+});
+Route::get('service-partner/session/add-hardware', function () {
+    return view('/service-partner/add_hardware');
+});
+
+Route::get('service-partner/session/hardware-details', function () {
+    return view('/service-partner/hardware_details');
+});
+
+Route::get('service-partner/session/profileoptions', function () {
+    return view('/service-partner/profileoptions');
+});

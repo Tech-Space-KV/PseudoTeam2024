@@ -89,7 +89,7 @@
             <textarea class="form-control" id="about" name="about" placeholder="Please describe your work" rows="3" required></textarea>
           </div>
           <!-- Skills section -->
-          <div class="form-group d-flex align-items-center" style="gap:10px; margin: 0; padding: 0;">
+          <div class="form-group d-flex align-items-center" style="gap: 10px; margin: 0; padding: 0;">
             <label for="skills" class="mb-0" style="font-weight: bold; margin-right: 0;">Key Skills</label>
             <button type="button" style="padding: 0; border: none; background: transparent; margin: 0;" data-bs-toggle="modal" data-bs-target="#skillsModal">
               <i class="fa fa-pencil" style="font-size: 1.2rem; color: #007bff; cursor: pointer;"></i>
@@ -113,13 +113,12 @@
               <ul class="list-group position-absolute w-100" id="orgSuggestions" style="z-index: 1050;"></ul>
             </div>
 
-
-
+            <br>
 
             <div class="form-group">
               <label for="cin">CIN</label>
               <input class="form-control" id="cin" name="cin" type="text" placeholder="Enter CIN">
-            </div>
+            </div><br>
             <div class="form-group">
               <label for="gst">GST Number</label>
               <input class="form-control" id="gst" name="gst" type="text" placeholder="Enter GST Number">
@@ -139,41 +138,33 @@
       </div>
     </form>
   </div>
-
-  <!-- Modal for Managing Skills -->
-  <div class="modal fade" id="skillsModal" tabindex="-1" aria-labelledby="skillsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="skillsModalLabel">Manage Your Skills</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group mb-3 position-relative">
-            <label for="addSkill">Add Skill</label>
-            <div class="input-group">
-              <input type="text" class="form-control" id="addSkill" placeholder="Enter a skill" oninput="showSkillSuggestions(this.value)">
-              <button class="addskillbtn" type="button" onclick="addSkill()" style="padding: 0 12px;">
-                <i class="fa fa-plus"></i>
-              </button>
-            </div>
-            <div id="skillSuggestions" class="list-group position-absolute w-100 skillSuggestions" style="z-index: 1050;"></div>
+!-- Modal for Managing Skills -->
+<div class="modal fade" id="skillsModal" tabindex="-1" aria-labelledby="skillsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="skillsModalLabel">Manage Your Skills</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Add Skill Section -->
+        <div class="form-group mb-3 d-flex justify-content-between" style="gap: 10px;">
+          <div class="w-50 position-relative">
+            <label for="addSkill" class="mb-0" style="font-weight: bold;">Add Skill</label>
+            <input
+              type="text"
+              class="form-control"
+              id="addSkill"
+              placeholder="Enter a skill"
+              oninput="showSkillSuggestions(this.value)"
+              autocomplete="off" />
+            <ul id="skillSuggestions" class="list-group mt-2" style="max-height: 200px; overflow-y: auto; display: none;"></ul>
           </div>
-          <div class="form-group mb-3">
-            <label for="yearsOfExperience">Years of Experience</label>
+          <div class="w-50">
+            <label for="yearsOfExperience" class="mb-0" style="font-weight: bold;">Years of Experience</label>
             <input type="number" class="form-control" id="yearsOfExperience" placeholder="Enter years of experience" min="0" oninput="validateExperience(this)">
           </div>
-          <h6>Selected Skills:</h6>
-          <ul id="selectedSkills" class="list-group"></ul>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" onclick="saveSkills()">Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script>
     function populateCities() {
       const country = document.getElementById('country').value;
@@ -285,20 +276,31 @@
 
     function showSkillSuggestions(input) {
       const skillSuggestions = document.getElementById('skillSuggestions');
-      skillSuggestions.innerHTML = '';
-      const skills = ['JavaScript', 'Python', 'Java', 'C++', 'HTML', 'CSS', 'React', 'Angular'];
+      skillSuggestions.innerHTML = ''; // Clear previous suggestions
+      skillSuggestions.style.display = 'none'; // Hide dropdown initially
+
+      const skills = ['JavaScript', 'Python', 'Java', 'C++', 'HTML', 'CSS', 'React', 'Angular']; // Example skills
+
       if (input) {
-        const filteredSkills = skills.filter(skill => skill.toLowerCase().includes(input.toLowerCase()));
-        filteredSkills.forEach(skill => {
-          const suggestion = document.createElement('button');
-          suggestion.className = 'list-group-item list-group-item-action';
-          suggestion.textContent = skill;
-          suggestion.onclick = () => {
-            document.getElementById('addSkill').value = skill;
-            skillSuggestions.innerHTML = '';
-          };
-          skillSuggestions.appendChild(suggestion);
-        });
+        // Filter skills that begin with the input (case-insensitive)
+        const filteredSkills = skills.filter(skill => skill.toLowerCase().startsWith(input.toLowerCase()));
+
+        if (filteredSkills.length > 0) {
+          skillSuggestions.style.display = 'block'; // Show dropdown if suggestions exist
+          filteredSkills.forEach(skill => {
+            const suggestion = document.createElement('button');
+            suggestion.className = 'list-group-item list-group-item-action';
+            suggestion.textContent = skill;
+
+            suggestion.onclick = () => {
+              document.getElementById('addSkill').value = skill; // Set selected skill
+              skillSuggestions.innerHTML = ''; // Clear suggestions
+              skillSuggestions.style.display = 'none'; // Hide dropdown
+            };
+
+            skillSuggestions.appendChild(suggestion);
+          });
+        } 
       }
     }
 
@@ -352,19 +354,30 @@
       }
     }
     // Hide organization suggestions when the skills modal is opened
-$('#skillsModal').on('show.bs.modal', function () {
-  document.getElementById('orgSuggestions').innerHTML = ''; // Clear suggestions
-});
+    $('#skillsModal').on('show.bs.modal', function() {
+      document.getElementById('orgSuggestions').innerHTML = ''; // Clear suggestions
+    });
 
-// Hide organization suggestions when clicking outside the input field
-document.addEventListener('click', function (event) {
-  const orgInput = document.getElementById('orgName');
-  const orgSuggestions = document.getElementById('orgSuggestions');
-  if (!orgInput.contains(event.target) && !orgSuggestions.contains(event.target)) {
-    orgSuggestions.innerHTML = ''; // Clear suggestions if clicked outside
-  }
-});
+    document.addEventListener("DOMContentLoaded", function() {
+      const input = document.getElementById("skillsInput");
+      const suggestions = document.getElementById("skillSuggestions");
 
+      // Adjust width dynamically to match the input field
+      input.addEventListener("input", function() {
+        suggestions.style.width = `${input.offsetWidth}px`;
+        suggestions.style.left = `${input.offsetLeft}px`;
+        suggestions.style.top = `${input.offsetTop + input.offsetHeight}px`;
+      });
+    });
+
+    // Hide organization suggestions when clicking outside the input field
+    document.addEventListener('click', function(event) {
+      const orgInput = document.getElementById('orgName');
+      const orgSuggestions = document.getElementById('orgSuggestions');
+      if (!orgInput.contains(event.target) && !orgSuggestions.contains(event.target)) {
+        orgSuggestions.innerHTML = ''; // Clear suggestions if clicked outside
+      }
+    });
   </script>
 </body>
 

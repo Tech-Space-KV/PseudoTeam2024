@@ -93,17 +93,30 @@
           <div id="organizationFields">
             <div class="form-group position-relative">
               <label for="orgName">Organization Name</label>
-              <input class="form-control" id="orgName" name="orgName" type="text" placeholder="Enter Organization Name" oninput="showSuggestions(this.value)">
-              <ul class="list-group position-absolute w-100 mt-1" id="orgSuggestions" style="z-index: 1050; display: none;"></ul>
+              <input
+                class="form-control"
+                id="orgName"
+                name="orgName"
+                type="text"
+                placeholder="Enter Organization Name"
+                oninput="showSuggestions(this.value)"
+                onfocus="showSuggestions(this.value)" />
+
+              <ul class="list-group position-absolute w-100" id="orgSuggestions" style="z-index: 1050;"></ul>
             </div>
+
+
+            <br>
+
             <div class="form-group">
-              <label for="cin">CIN</label>
+              <label for="cin">CIN (Optional)</label>
               <input class="form-control" id="cin" name="cin" type="text" placeholder="Enter CIN">
             </div>
             <div class="form-group">
-              <label for="gst">GST Number</label>
+              <label for="gst">GST Number (Optional)</label>
               <input class="form-control" id="gst" name="gst" type="text" placeholder="Enter GST Number">
             </div>
+
           </div>
           <div id="individualFields" style="display: none;">
             <div class="form-group">
@@ -164,7 +177,7 @@
       if (document.getElementById('radio-two').checked) {
         requiredFields.push(document.getElementById('govtID'));
       } else {
-        requiredFields.push(document.getElementById('orgName'), document.getElementById('cin'), document.getElementById('gst'));
+        requiredFields.push(document.getElementById('orgName')); // CIN and GST are optional
       }
 
       const isFormValid = requiredFields.every(field => field.value.trim() !== '');
@@ -189,33 +202,29 @@
     ];
 
     function showSuggestions(value) {
-      const suggestionsBox = document.getElementById("orgSuggestions");
-      suggestionsBox.innerHTML = "";
+  const suggestionsBox = document.getElementById("orgSuggestions");
+  suggestionsBox.innerHTML = "";
 
-      if (value.trim() === "") {
-        suggestionsBox.style.display = "none";
-        return;
-      }
+  // If input is empty, display all organizations
+  const filtered = value.trim() === "" ? organizations : organizations.filter(org =>
+    org.toLowerCase().startsWith(value.toLowerCase())
+  );
 
-      const filtered = organizations.filter(org =>
-        org.toLowerCase().startsWith(value.toLowerCase())
-      );
+  if (filtered.length === 0) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
 
-      if (filtered.length === 0) {
-        suggestionsBox.style.display = "none";
-        return;
-      }
+  filtered.forEach(org => {
+    const listItem = document.createElement("li");
+    listItem.className = "list-group-item list-group-item-action";
+    listItem.textContent = org;
+    listItem.onclick = () => selectOrganization(org);
+    suggestionsBox.appendChild(listItem);
+  });
 
-      filtered.forEach(org => {
-        const listItem = document.createElement("li");
-        listItem.className = "list-group-item list-group-item-action";
-        listItem.textContent = org;
-        listItem.onclick = () => selectOrganization(org);
-        suggestionsBox.appendChild(listItem);
-      });
-
-      suggestionsBox.style.display = "block";
-    }
+  suggestionsBox.style.display = "block";
+}
 
     function selectOrganization(orgName) {
       document.getElementById("orgName").value = orgName;

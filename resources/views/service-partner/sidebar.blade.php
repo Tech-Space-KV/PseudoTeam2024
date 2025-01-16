@@ -33,7 +33,7 @@
                 </a>  <span class="fst">Reports</span> 
             </div>
             <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
-                <a href="{{ url('customer/session/marketplace/hardwares') }}" class="text-decoration-none">    <i class="fa fa-cubes card cardbg p-3 iconix"></i>
+                <a href="{{ url('service-partner/session/hardware') }}" class="text-decoration-none">    <i class="fa fa-cubes card cardbg p-3 iconix"></i>
                 </a>   <span class="fst">Inventory</span> 
             </div>        
         </div>
@@ -44,7 +44,7 @@
                 </a>   <span class="fst">Help</span> 
             </div>
             <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
-                <a href="{{ url('customer/session/profileoptions') }}" class="text-decoration-none">    <i class="fa fa-id-card-o card cardbg p-3 iconix"></i>
+                <a href="{{ url('service-partner/session/profileoptions') }}" class="text-decoration-none">    <i class="fa fa-id-card-o card cardbg p-3 iconix"></i>
                 </a> <span class="fst">Account</span>
             </div>        
         </div>

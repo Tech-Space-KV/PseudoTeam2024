@@ -221,6 +221,15 @@ fieldset {
 fieldset.active {
   display: block;
 }
+.modal-dialog {
+  width: 80% !important; /* Set the width to 80% of the page */
+  max-width: 100%; /* Ensure it doesn't exceed the page width */
+  height: 90vh; /* Set height to 80% of the viewport height */
+  max-height: 90vh; /* Ensure the modal doesn't exceed 80% of the viewport height */
+  margin: 30px auto; /* Add some space from the top */
+}
+
+
 
 
 #orgSuggestions {
@@ -249,22 +258,16 @@ fieldset.active {
 }
 
 #skillSuggestions {
-  background-color: #fff;
-  /* Solid white background */
-  border: 1px solid #ccc;
-  /* Add a border for clarity */
-  border-radius: 5px;
-  /* Rounded corners */
-  position: absolute;
-  z-index: 1050;
-  /* Ensure it stays above other elements */
-  max-height: 200px;
-  /* Add a max-height for scrolling */
-  overflow-y: auto;
-  /* Enable vertical scrolling */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow for better visibility */
+  max-height: 200px; /* Limit height for scroll */
+  overflow-y: auto; /* Enable scrolling */
+  position: absolute; /* Position relative to the input field */
+  z-index: 1050; /* Ensure it appears above other elements */
+  background-color: white; /* Match the input background */
+  border: 1px solid #ddd; /* Define border for visibility */
+  width: auto; /* Use auto to adjust to content or match input width dynamically */
+  min-width: 100%; /* Ensure it doesn't shrink smaller than the input */
 }
+
 
 .skill-remove-btn {
   background-color: transparent;
@@ -291,4 +294,11 @@ fieldset.active {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+}
+#selectedSkills {
+  max-height: 150px; /* Adjust the height as per your requirement */
+  overflow-y: auto; /* Enables vertical scrolling */
+  border: 1px solid #ccc; /* Optional: Adds a border for better visibility */
+  padding: 8px;
+  border-radius: 4px;
 }

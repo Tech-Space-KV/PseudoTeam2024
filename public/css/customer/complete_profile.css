@@ -213,3 +213,22 @@ fieldset {
 fieldset.active {
   display: block;
 }
+
+#orgSuggestions {
+  max-height: 200px; /* Limit the height of the dropdown */
+  overflow-y: auto; /* Add a scrollbar if content overflows */
+  border: 1px solid #ccc; /* Add a border */
+  background-color: white; /* Match the background color */
+  z-index: 1050; /* Ensure it appears above other elements */
+  position: absolute; /* Absolute positioning */
+  width: 100%; /* Ensure it matches the width of the input field */
+  top: 100%; /* Position it directly below the input field */
+}
+
+#orgSuggestions .list-group-item {
+  cursor: pointer;
+}
+
+#orgSuggestions .list-group-item:hover {
+  background-color: #f0f0f0;
+}

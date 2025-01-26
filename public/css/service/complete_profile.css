@@ -296,9 +296,16 @@ fieldset.active {
   gap: 5px;
 }
 #selectedSkills {
-  max-height: 150px; /* Adjust the height as per your requirement */
+  /* max-height: 150px; Adjust the height as per your requirement */
   overflow-y: auto; /* Enables vertical scrolling */
   border: 1px solid #ccc; /* Optional: Adds a border for better visibility */
   padding: 8px;
+  list-style: none;
   border-radius: 4px;
 }
+/* #selectedSkillsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+ */

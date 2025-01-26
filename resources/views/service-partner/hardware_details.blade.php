@@ -5,7 +5,7 @@
 <div class="container mt-5">
   <!-- Page Title -->
   <div class="mb-4">
-    <h2 class="text-pseudo">Add Hardware Details</h2>
+    <h2 class="text-pseudo">Update Hardware Details</h2>
   </div>
 
   <div class="container w-100 mb-4">

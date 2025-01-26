@@ -45,7 +45,7 @@
       <!-- Step 1 -->
       <div class="card mb-4" id="step1">
         <div class="card-body">
-          <h5 class="card-title">Step 1: Basic Information</h5>
+          <!-- <h5 class="card-title">Step 1: Basic Information</h5> -->
           <div class="form-group">
             <label for="country">Country</label>
             <select class="form-control" id="country" name="country" onchange="populateCities();" required>
@@ -74,7 +74,7 @@
       <!-- Step 2 -->
       <div class="card mb-4" id="step2" style="display: none;">
         <div class="card-body">
-          <h5 class="card-title">Step 2: Profile Details</h5>
+          <!-- <h5 class="card-title">Step 2: Profile Details</h5> -->
           <div class="form-group">
             <label>You are an:</label>
             <div class="switch-field">
@@ -138,15 +138,15 @@
       </div>
     </form>
   </div>
-!-- Modal for Managing Skills -->
+<!-- Modal for Managing Skills -->
 <div class="modal fade" id="skillsModal" tabindex="-1" aria-labelledby="skillsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; height: 80%;">
+    <div class="modal-content" style="height: 100%; width: 100%;">
       <div class="modal-header">
         <h5 class="modal-title" id="skillsModalLabel">Manage Your Skills</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="overflow-y: auto;">
         <!-- Add Skill Section -->
         <div class="form-group mb-3 d-flex justify-content-between" style="gap: 10px;">
           <div class="w-50 position-relative">
@@ -165,6 +165,30 @@
             <input type="number" class="form-control" id="yearsOfExperience" placeholder="Enter years of experience" min="0" oninput="validateExperience(this)">
           </div>
         </div>
+
+        <!-- Add Skill Button -->
+        <div class="text-center mt-3">
+          <button class="btn btn-primary mx-auto btn-lg d-flex justify-content-center align-items-center" type="button" onclick="addSkill()">
+            <i class="fa fa-plus"></i>&nbsp;&nbsp;Add
+          </button>
+        </div>
+
+        <!-- List of Selected Skills -->
+        <h6 class="mt-4">Selected Skills:</h6>
+        <div id="selectedSkillsWrapper" style="max-height: 200px; overflow-y: auto;">
+          <ul id="selectedSkills" class="list-group"></ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" onclick="saveSkills()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
   <script>
     function populateCities() {
       const country = document.getElementById('country').value;

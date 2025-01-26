@@ -141,6 +141,7 @@ Route::get('service-partner/session/manage_project_view_tasks', function () {
 Route::get('service-partner/session/manage_project_edit_task', function () {
     return view('/service-partner/manage_project_edit_task');
 });
+
 Route::get('service-partner/session/hardware', function () {
     return view('/service-partner/hardware');
 });
@@ -157,6 +158,7 @@ Route::get('service-partner/session/hardware-details', function () {
 
 Route::get('service-partner/session/profileoptions', function () {
     return view('/service-partner/profileoptions');
+
 });
 
 Route::get('service-partner/session/find-project', function () {

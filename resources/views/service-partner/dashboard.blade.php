@@ -13,7 +13,7 @@
           <div class="card-body px-4 py-4 mx-3">
             <h4 class="card-title fw-bold mt-2 ms-2">Find projects</h4>
             <p class="card-title ms-2">Explore exciting new projects and showcase your skills, discover the perfect opportunities to grow and succeed right here</p>
-            <a href="{{ url('customer/session/track-project-delivered') }}" class="btn btn-sm btn-outline-light m-2 mx-auto ms-2 w-25">View &gt;&gt;</a>
+            <a href="{{ url('service-partner/session/find-project') }}" class="btn btn-sm btn-outline-light m-2 mx-auto ms-2 w-25">View &gt;&gt;</a>
           </div>
         </div>
       </div>

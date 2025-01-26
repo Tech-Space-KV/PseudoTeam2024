@@ -106,6 +106,15 @@
             <!-- Organization Fields -->
             <div id="organizationFields" style="margin-top: 20px;">
               <div class="form-group" style="margin-top: 20px;">
+                <label for="orgName" style="font-weight: bold;">Organization Name</label>
+                <input
+                  class="form-control"
+                  id="orgName"
+                  name="orgName"
+                  type="text"
+                  placeholder="Enter Organization Name">
+              </div>
+              <div class="form-group" style="margin-top: 20px;">
                 <label for="cin" style="font-weight: bold;">CIN</label>
                 <input class="form-control" id="cin" name="cin" type="text" placeholder="Enter CIN" style="margin-top: 5px;">
               </div>
@@ -211,7 +220,7 @@
     if (document.getElementById('radio-two').checked) {
       requiredFields.push(document.getElementById('govtID'));
     } else {
-      requiredFields.push(document.getElementById('cin'), document.getElementById('gst'));
+      requiredFields.push(document.getElementById('cin'), document.getElementById('gst'), document.getElementById('orgName'));
     }
 
     const isFormValid = requiredFields.every(field => field.value.trim() !== '');

@@ -111,6 +111,10 @@ Route::post('/submit-query', [QueryController::class, 'submitQuery'])->name('sub
 Route::get('/customer/session/reports', [ChartController::class, 'index'])->name('customer.reports');
 Route::get('/chart-data', [ChartController::class, 'getData'])->name('chart.data');
 
+
+Route::get('service-partner/session/complete-profile', function () {
+    return view('/service-partner/complete_profile');
+});
 Route::get('/service-partner/session/', function () {
     return view('/service-partner/dashboard');
 });
@@ -137,6 +141,25 @@ Route::get('service-partner/session/manage_project_view_tasks', function () {
 Route::get('service-partner/session/manage_project_edit_task', function () {
     return view('/service-partner/manage_project_edit_task');
 });
+<<<<<<< HEAD
 Route::get('service-partner/session/find-project', function () {
     return view('/service-partner/find_project');
+=======
+Route::get('service-partner/session/hardware', function () {
+    return view('/service-partner/hardware');
+});
+Route::get('service-partner/session/import-hardware', function () {
+    return view('/service-partner/import_hardware');
+});
+Route::get('service-partner/session/add-hardware', function () {
+    return view('/service-partner/add_hardware');
+});
+
+Route::get('service-partner/session/hardware-details', function () {
+    return view('/service-partner/hardware_details');
+});
+
+Route::get('service-partner/session/profileoptions', function () {
+    return view('/service-partner/profileoptions');
+>>>>>>> 55b965341cc0e724bb9e267335829f7860e4eb63
 });

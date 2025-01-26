@@ -137,3 +137,6 @@ Route::get('service-partner/session/manage_project_view_tasks', function () {
 Route::get('service-partner/session/manage_project_edit_task', function () {
     return view('/service-partner/manage_project_edit_task');
 });
+Route::get('service-partner/session/find-project', function () {
+    return view('/service-partner/find_project');
+});

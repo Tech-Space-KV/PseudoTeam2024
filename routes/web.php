@@ -164,3 +164,9 @@ Route::get('service-partner/session/profileoptions', function () {
 Route::get('service-partner/session/find-project', function () {
     return view('/service-partner/find_project');
 });
+Route::get('service-partner/session/hardware-orders', function () {
+    return view('/service-partner/marketplace_hardwares_orders');
+});
+Route::get('service-partner/session/hardware-details', function () {
+    return view('/service-partner/marketplace_hardwares_details');
+});

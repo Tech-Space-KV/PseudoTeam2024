@@ -165,7 +165,7 @@
                 <input class="form-control" id="govtID" name="govtID" type="file" accept="image/*" style="margin-top: 5px;">
               </div>
             </div>
-         
+         <br>
           <div class="w-25 mx-auto">
             <button id="submitButton" class="btn btn-primary mx-2 fw-bold" type="submit">Submit</button>
           </div>

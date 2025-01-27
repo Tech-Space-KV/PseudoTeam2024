@@ -56,7 +56,7 @@
 
         <div class="row justify-content-md-center">
             <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
-                <a href="{{ url('customer/session/marketplace/hardwares-orders') }}" class="text-decoration-none w-100">
+                <a href="{{ url('service-partner/session/hardware-orders') }}" class="text-decoration-none w-100">
                     <div class="card p-3 w-100 cardbgylw">
                         <i class="fa fa-bullseye"></i> Order History
                     </div>

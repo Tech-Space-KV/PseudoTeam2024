@@ -170,3 +170,27 @@ Route::get('service-partner/session/hardware-orders', function () {
 Route::get('service-partner/session/hardware-details', function () {
     return view('/service-partner/marketplace_hardwares_details');
 });
+Route::get('service-partner/session/reports', function () {
+    return view('/service-partner/reports');
+});
+
+Route::get('service-partner/session/track-project-pending', function () {
+    return view('/service-partner/find_project');
+});
+Route::get('service-partner/session/track-project-delivered', function () {
+    return view('/service-partner/find_project');
+});
+Route::get('service-partner/session/track-project-report', function () {
+    return view('/service-partner/find_project');
+});
+Route::get('service-partner/session/track-project-overdue', function () {
+    return view('/service-partner/find_project');
+});
+
+Route::get('service-partner/session/help', function () {
+    return view('/service-partner/help');
+});
+
+Route::get('service-partner/session/reports', function () {
+    return view('/service-partner/reports');
+});

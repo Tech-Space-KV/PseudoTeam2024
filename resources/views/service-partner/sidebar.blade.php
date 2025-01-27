@@ -29,7 +29,7 @@
 
         <div class="row justify-content-md-center">
             <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
-                <a href="{{ url('customer/session/reports') }}" class="text-decoration-none">     <i class="fa fa-object-group card cardbg p-3 iconix"></i>
+                <a href="{{ url('service-partner/session/reports') }}" class="text-decoration-none">     <i class="fa fa-object-group card cardbg p-3 iconix"></i>
                 </a>  <span class="fst">Reports</span> 
             </div>
             <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
@@ -40,7 +40,7 @@
 
         <div class="row justify-content-md-center">
             <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
-                <a href="{{ url('customer/session/help') }}" class="text-decoration-none">     <i class="fa fa-phone-square card cardbg p-3 iconix"></i>
+                <a href="{{ url('service-partner/session/help') }}" class="text-decoration-none">     <i class="fa fa-phone-square card cardbg p-3 iconix"></i>
                 </a>   <span class="fst">Help</span> 
             </div>
             <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
@@ -51,7 +51,7 @@
 
         <div class="row justify-content-md-center">
             <div class="col col-lg-10  d-flex flex-column align-items-center mx-2 text-decoration-none">
-                <a href="{{ url('customer/session/referandearn') }}"> <div class="card cardbg w-100 p-1">
+                <a href="{{ url('service-partner/session/referandearn') }}"> <div class="card cardbg w-100 p-1">
                         <img src="{{ asset('images/refer-img.png') }}" class="rounded-3 w-100">
                      </div> </a>
                      <span class="fst">Refer a Friend</span> 

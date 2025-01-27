@@ -164,3 +164,24 @@ Route::get('service-partner/session/profileoptions', function () {
 Route::get('service-partner/session/find-project', function () {
     return view('/service-partner/find_project');
 });
+
+Route::get('service-partner/session/reports', function () {
+    return view('/service-partner/reports');
+});
+
+Route::get('service-partner/session/track-project-pending', function () {
+    return view('/service-partner/find_project');
+});
+Route::get('service-partner/session/track-project-delivered', function () {
+    return view('/service-partner/find_project');
+});
+Route::get('service-partner/session/track-project-report', function () {
+    return view('/service-partner/find_project');
+});
+Route::get('service-partner/session/track-project-overdue', function () {
+    return view('/service-partner/find_project');
+});
+
+Route::get('service-partner/session/help', function () {
+    return view('/service-partner/help');
+});

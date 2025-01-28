@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <div class="mx-auto w-75" id="">
-                <a href="{{ url('customer/session/notifications') }}" type="button" class="btn btn-primary position-relative me-2" style="float: left;">
+                <a href="{{ url('service-partner/session/notifications') }}" type="button" class="btn btn-primary position-relative me-2" style="float: left;">
                     <i class="fa fa-bell text-white"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         99+
@@ -28,7 +28,7 @@
 
         <div class="row justify-content-md-center">
             <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
-                <a href="{{ url('customer/session/cart') }}" class="text-decoration-none w-100">
+                <a href="" class="text-decoration-none w-100">
                     <div class="card p-3 w-100 cardbgylw">
                        Job Success Rate
                        <div class="progress mt-2">
@@ -42,7 +42,7 @@
 
         <div class="row justify-content-md-center">
             <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
-                <a href="{{ url('customer/session/cart') }}" class="text-decoration-none w-100">
+                <a href="" class="text-decoration-none w-100">
                     <div class="card p-3 w-100 cardbgylw">
                        Job Ratings
                        <span class="mt-2">

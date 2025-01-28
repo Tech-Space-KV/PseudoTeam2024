@@ -1,5 +1,5 @@
 <!-- resources/views/customer/page1.blade.php -->
-@extends('customer.base_layout')
+@extends('service-partner.base_layout')
 
 @section('content')
 

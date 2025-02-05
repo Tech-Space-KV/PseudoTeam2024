@@ -37,7 +37,11 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/reports', function () {
         return (new AuthController)->dashboard('customer/reports');
     });
-
+    Route::get('/search_project', function () {
+        return view('customer/search_project');
+    });
+    ///customer/session/search_project
+   
     Route::get('/upload-project', function () {
         return (new AuthController)->dashboard('customer/project_upload_form');
     });
@@ -100,6 +104,12 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
     Route::get('/cart', function () {
         return (new AuthController)->dashboard('customer/cart');
+    });
+    Route::get('/trackticket', function () {
+        return (new AuthController)->dashboard('customer/trackticket');
+    });
+    Route::get('/ticket', function () {
+        return (new AuthController)->dashboard('customer/ticket');
     });
 });
 

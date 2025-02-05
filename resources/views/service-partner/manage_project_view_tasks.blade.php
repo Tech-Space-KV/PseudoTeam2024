@@ -7,7 +7,7 @@
 {{-- Your code here --}}
 <div class="container">
     <div class="mb-4">
-        <h2>Project Timeline: &lt;Project ID&gt;</h2>
+        <h2>Project Tasks</h2>
     </div>
 </br>
 

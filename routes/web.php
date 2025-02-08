@@ -5,6 +5,9 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
+
+
 
 // Landing Pages
 Route::get('/', function () {
@@ -174,6 +177,9 @@ Route::get('service-partner/session/profileoptions', function () {
 Route::get('service-partner/session/find-project', function () {
     return view('/service-partner/find_project');
 });
+Route::get('service-partner/session/find-project-details', function () {
+    return view('/service-partner/find_project_details');
+});
 Route::get('service-partner/session/hardware-orders', function () {
     return view('/service-partner/marketplace_hardwares_orders');
 });
@@ -215,3 +221,9 @@ Route::get('service-partner/session/all-projects', function () {
 Route::get('service-partner/session/notifications', function () {
     return view('/service-partner/notifications');
 });
+
+Route::get('service-partner/session/find-project', [ProjectController::class, 'index']);
+
+
+Route::get('service-partner/session/find-project-details', [ProjectController::class, 'showProjectDetails']);
+

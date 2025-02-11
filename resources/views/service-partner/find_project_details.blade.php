@@ -51,7 +51,7 @@
             <div class="mb-4">
                 <h6 class="text-muted mb-1">Why are you interested in this project?</h6>
                 <textarea class="form-control shadow-sm" rows="3" placeholder="Write your reason here..."></textarea>
-            </div>
+            </div> 
 
             <!-- Show Interest Button -->
             <div class="text-end">

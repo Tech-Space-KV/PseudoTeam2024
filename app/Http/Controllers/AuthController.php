@@ -1,10 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\ProjectPlanner;
+use App\Models\ProjectScope;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Project;
 
 class AuthController extends Controller
 {
@@ -67,7 +70,7 @@ class AuthController extends Controller
     }
 
     // Show dashboard
-    public function dashboard($viewName = 'customer/dashboard')
+    public function dashboard($viewName = 'customer/dashboard' , $data = []) 
     {
         // Check if user session token exists, redirect to home if not
         // Uncomment the following block if this logic is required:
@@ -75,8 +78,14 @@ class AuthController extends Controller
         //     return view('website/home');
         // }
     
+        //changes made by sanskar
+        if ($viewName === 'customer/track_project_report') {
+            $projects = Project::all(); 
+            $data['projects'] = $projects;
+        }
+
         // Generate response for the given view
-        $response = response()->view($viewName);
+        $response = response()->view($viewName , $data);
     
         // Add headers to prevent caching
         $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -124,6 +133,72 @@ class AuthController extends Controller
     
         return $response;
     }
-    
+
+    public function trackProjectReportLocation($projectid)
+    {
+        $project_scope = ProjectScope::where('pscope_project_id', $projectid)->first();
+
+        if (!$project_scope) {
+            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
+        }
+ 
+        return view('customer.track_project_report_location', compact('project_scope'));
+    }
+
+
+    public function trackProjectReportDetails($projectid)
+    {
+        $project_planner = ProjectPlanner::where('pplnr_scope_id', $projectid)->first();
+
+        if (!$project_planner) {
+            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
+        }
+ 
+        return view('customer.track_project_report_details', compact('project_planner'));
+    }
+
+    public function trackProjectPending()
+    {
+        $projects = Project::where('plist_status', 'No SP Assigned')->get();
+
+        if ($projects->isEmpty()) {
+            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
+        }
+
+        return view('customer.track_project_report', compact('projects'));
+    }
+
+    public function trackProjectInProgress()
+    {
+        $projects = Project::where('plist_status', 'OnGoing')->get();
+
+        if ($projects->isEmpty()) {
+            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
+        }
+
+        return view('customer.track_project_report', compact('projects'));
+    }
+
+    public function trackProjectDelivered()
+    {
+        $projects = Project::where('plist_status', 'FullFilled')->get();
+
+        if ($projects->isEmpty()) {
+            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
+        }
+
+        return view('customer.track_project_report', compact('projects'));
+    }
+
+    public function trackProjectOverdue()
+    {
+        $projects = Project::where('plist_status', 'Overdue')->get();
+
+        if ($projects->isEmpty()) {
+            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
+        } 
+
+        return view('customer.track_project_report', compact('projects'));
+    }
 
 }

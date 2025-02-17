@@ -30,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <!-- <tr>
         <th scope="row">100134</th>
         <td>Test Project 1</td>
         <td>28/11/2023</td>
@@ -53,7 +53,20 @@
         <td>28/11/2024</td>
         <td>In Progress</td>
         <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-      </tr>
+      </tr> -->
+
+        <!-- changes made by sanskar -->
+
+        @foreach($projects as $project)
+           <tr>
+             <th scope="row">{{ $project->plist_projectid }}</th>
+             <td>{{ $project->plist_title }}</td>
+             <td>{{ $project->plist_startdate }}</td>
+             <td>{{ $project->plist_enddate }}</td>
+             <td>{{ $project->plist_status }}</td>
+            <td><a href="{{ url('customer/session/track-project-report-location/'.$project->plist_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td> 
+         @endforeach
+
     </tbody>
   </table>
 
@@ -63,32 +76,31 @@
 </div>
 
 <script>
-const rowsPerPage = 10; // Number of rows per page
+const rowsPerPage = 10; 
 let currentPage = 1;
 const table = document.getElementById("myTable");
 const tbody = table.querySelector("tbody");
 const pagination = document.getElementById("pagination");
-let allRows = Array.from(tbody.rows); // Store all rows initially
-let filteredRows = [...allRows]; // Start with all rows included
+let allRows = Array.from(tbody.rows); 
+let filteredRows = [...allRows]; 
 
-// Function to render the table with pagination
+
 function renderTable() {
-// Clear table
+
 tbody.innerHTML = "";
-// Calculate start and end index
+
 const start = (currentPage - 1) * rowsPerPage;
 const end = start + rowsPerPage;
-// Add rows to the table for the current page
+
 filteredRows.slice(start, end).forEach(row => tbody.appendChild(row));
 renderPagination();
 }
-// Function to render pagination buttons
+
 function renderPagination() {
-  pagination.innerHTML = ""; // Clear existing pagination
+  pagination.innerHTML = ""; 
 
   const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
 
-  // Create "First" button
   const firstButton = document.createElement("button");
   firstButton.textContent = "First";
   firstButton.className = "btn btn-sm btn-outline-primary mx-1";
@@ -99,7 +111,7 @@ function renderPagination() {
   });
   pagination.appendChild(firstButton);
 
-  // Create "Previous" button
+
   const prevButton = document.createElement("button");
   prevButton.textContent = "Previous";
   prevButton.className = "btn btn-sm btn-outline-primary mx-1";
@@ -110,7 +122,7 @@ function renderPagination() {
   });
   pagination.appendChild(prevButton);
 
-  // Create page number buttons
+
   for (let i = 1; i <= totalPages; i++) {
     const button = document.createElement("button");
     button.textContent = i;
@@ -122,7 +134,7 @@ function renderPagination() {
     pagination.appendChild(button);
   }
 
-  // Create "Next" button
+
   const nextButton = document.createElement("button");
   nextButton.textContent = "Next";
   nextButton.className = "btn btn-sm btn-outline-primary mx-1";
@@ -133,7 +145,7 @@ function renderPagination() {
   });
   pagination.appendChild(nextButton);
 
-  // Create "Last" button
+  
   const lastButton = document.createElement("button");
   lastButton.textContent = "Last";
   lastButton.className = "btn btn-sm btn-outline-primary mx-1";
@@ -145,7 +157,7 @@ function renderPagination() {
   pagination.appendChild(lastButton);
 }
 
-// Function to filter the table
+
 function filterTable() {
 const searchCol2 = document.getElementById("searchCol2").value.toLowerCase();
 const searchCol3 = document.getElementById("searchCol3").value.toLowerCase();
@@ -162,16 +174,15 @@ filteredRows = allRows.filter(row => {
   );
 });
 
-currentPage = 1; // Reset to the first page after filtering
+currentPage = 1; 
 renderTable();
 }
 
-// Event listeners for search boxes
+
 document.getElementById("searchCol2").addEventListener("input", filterTable);
 document.getElementById("searchCol3").addEventListener("input", filterTable);
 document.getElementById("searchCol4").addEventListener("input", filterTable);
 
-// Initial rendering
 renderTable();
 </script>
 

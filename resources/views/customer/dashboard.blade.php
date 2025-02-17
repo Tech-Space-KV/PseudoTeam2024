@@ -93,10 +93,7 @@
     </table>
   
     <div class="pagination" id="pagination"></div>
-   
   
-  
-
   </div>
   
 

@@ -23,7 +23,7 @@
                        height: 80px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #ffcc00;">
                     <a href="{{ url('customer/session/track-project-pending') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">Pending</h5>
+                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">No SP Assigned</h5>
                         <h4 id="pendingCount" style="font-size: 1.5rem; font-weight: normal;">0</h4>
                     </a>
                 </div>
@@ -36,7 +36,7 @@
                        height: 80px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #28a745;">
                     <a href="{{ url('customer/session/track-project-delivered') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">Delivered</h5>
+                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">Full-Filled</h5>
                         <h4 id="deliveredCount" style="font-size: 1.5rem; font-weight: normal;">0</h4>
                     </a>
                 </div>
@@ -48,8 +48,8 @@
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
                        height: 80px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #007bff;">
-                    <a href="{{ url('customer/session/track-project-report') }}"  style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">In Progress</h5>
+                    <a href="{{ url('customer/session/track-project-in-progress') }}"  style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">On-Going</h5>
                         <h4 id="inProgressCount" style="font-size: 1.5rem; font-weight: normal;">0</h4>
                     </a>
                 </div>

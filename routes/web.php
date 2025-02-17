@@ -5,6 +5,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
 
 // Landing Pages
 Route::get('/', function () {
@@ -42,13 +43,30 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->dashboard('customer/project_upload_form');
     });
 
-    Route::get('/track-project-report-location', function () {
-        return (new AuthController)->dashboard('customer/track_project_report_location');
-    });
+    // Route::get('/track-project-report-location', function () {
+    //     return (new AuthController)->dashboard('customer/track_project_report_location');
+    // });
 
     Route::get('/track-project-report', function () {
         return (new AuthController)->dashboard('customer/track_project_report');
     });
+
+    Route::get('/track-project-report-location/{projectid}', function ($projectid) {
+        return (new AuthController)->trackProjectReportLocation($projectid);
+    }); 
+
+    Route::get('/track-project-report-details/{projectid}', function ($projectid) {
+        return (new AuthController)->trackProjectReportDetails($projectid);
+    });
+
+    Route::get('/track-project-pending-location/{projectid}', function ($projectid) {
+        return (new AuthController)->trackProjectReportLocation($projectid);
+    }); 
+
+    Route::get('/track-project-report-details/{projectid}', function ($projectid) {
+        return (new AuthController)->trackProjectReportDetails($projectid);
+    });
+    
 
     Route::get('/marketplace/hardwares', function () {
         return (new AuthController)->dashboard('customer/marketplace_hardwares');
@@ -74,25 +92,41 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->dashboard('customer/notifications');
     });
 
+    // Route::get('/track-project-overdue', function () {
+    //     return (new AuthController)->dashboard('customer/track-project-overdue');
+    // });
+
     Route::get('/track-project-overdue', function () {
-        return (new AuthController)->dashboard('customer/track-project-overdue');
+        return (new AuthController)->trackProjectOverdue();
     });
+
+    // Route::get('/track-project-pending', function () {
+    //     return (new AuthController)->dashboard('customer/track-project-pending');
+    // });
 
     Route::get('/track-project-pending', function () {
-        return (new AuthController)->dashboard('customer/track-project-pending');
+        return (new AuthController)->trackProjectPending();
     });
 
+    Route::get('/track-project-in-progress', function () {
+        return (new AuthController)->trackProjectInProgress();
+    });
+
+    // Route::get('/track-project-delivered', function () {
+    //     return (new AuthController)->dashboard('customer/track-project-delivered');
+    // });
+
     Route::get('/track-project-delivered', function () {
-        return (new AuthController)->dashboard('customer/track-project-delivered');
+        return (new AuthController)->trackProjectDelivered();
     });
 
     Route::get('/marketplace/hardwares-details', function () {
         return (new AuthController)->dashboard('customer/marketplace_hardwares_details');
     });
 
-    Route::get('/track-project-report-details', function () {
-        return (new AuthController)->dashboard('customer/track_project_report_details');
-    });
+    // Route::get('/track-project-report-details', function () {
+    //     return (new AuthController)->dashboard('customer/track_project_report_details');
+    // });
 
     Route::get('/project-timeline', function () {
         return (new AuthController)->dashboard('customer/project_timeline');
@@ -205,3 +239,5 @@ Route::get('service-partner/session/all-projects', function () {
 Route::get('service-partner/session/notifications', function () {
     return view('/service-partner/notifications');
 });
+
+Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store'); 

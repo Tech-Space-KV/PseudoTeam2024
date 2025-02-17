@@ -47,32 +47,79 @@
     </script>
 
     <script>
-        var isleftbaropen='close';
+        // var isleftbaropen='close';
+        var isleftbaropen = false;
 
     function showleftbar() {
             // Check if screen width is 768px or less (mobile/tablet)
             
-                if (isleftbaropen == 'close') {
-                    // Open the sidebar
-                    document.getElementById('maincontent').style.marginLeft = '250px';
-                    document.getElementById('sidebar').style.display = 'block';  // Show sidebar
-                    document.getElementById('sidebar').style.width = '250px';     // Set sidebar width
-                    isleftbaropen = 'open';  // Update state to 'open'
-                } else if (isleftbaropen == 'open') {
-                    if (window.innerWidth <= 768) {
-                    // Close the sidebar
-                    document.getElementById('maincontent').style.marginLeft = '0%';
-                    document.getElementById('sidebar').style.display = 'none';  // Hide sidebar
-                    document.getElementById('sidebar').style.width = '0%';      // Reset sidebar width
-                    isleftbaropen = 'close';  // Update state to 'close'
+                let width = window.innerWidth
+
+                if(width<768)
+                {
+
+                    if(isleftbaropen)
+                    {
+                        document.getElementById('maincontent').style.marginLeft = '0%';
+                        document.getElementById('sidebar').style.display = 'none';  
+                        document.getElementById('sidebar').style.width = '0%';   
+                        isleftbaropen = false;
+                    }else 
+                    {
+                        document.getElementById('maincontent').style.marginLeft = '250px';
+                        document.getElementById('sidebar').style.display = 'flex'; 
+                        document.getElementById('sidebar').style.width = '250px'; 
+                        isleftbaropen = true;
                     }
                 }
+
+                // if (isleftbaropen == 'close') {
+                //     // Open the sidebar
+                //     document.getElementById('maincontent').style.marginLeft = '250px';
+                //     document.getElementById('sidebar').style.display = 'block';  // Show sidebar  //getting alignment issue by using this
+                //     document.getElementById('sidebar').style.width = '250px';     // Set sidebar width
+                //     isleftbaropen = 'open';  // Update state to 'open'
+                // } else if (isleftbaropen == 'open') {
+                //     if (window.innerWidth <= 768) {
+                //     // Close the sidebar
+                //     document.getElementById('maincontent').style.marginLeft = '0%';
+                //     document.getElementById('sidebar').style.display = 'none';  // Hide sidebar
+                //     document.getElementById('sidebar').style.width = '0%';      // Reset sidebar width
+                //     isleftbaropen = 'close';  // Update state to 'close'
+                //     }
+                // }
             
         }
 
+            // Orientation detection and popup
+            function checkOrientation() {
 
-       
-       
+            var popup = document.getElementById('landscape-popup');
+            var mainContent = document.getElementById('maincontent');
+            var leftbar = document.getElementById('sidebar');
+            var rightbar = document.getElementById('rightbar');
+
+            if (window.innerWidth < window.innerHeight) {
+                popup.style.display = 'block';  
+                mainContent.style.display = 'none'; 
+                leftbar.style.display = 'none';  
+                rightbar.style.display = 'none';
+
+            } else {
+                popup.style.display = 'none'; 
+                mainContent.style.display = 'block';  
+                leftbar.style.display = 'block';  
+                rightbar.style.display = 'block'; 
+            }
+        }
+
+        // Listen for orientation change or resize
+        window.addEventListener('resize', checkOrientation);
+        window.addEventListener('orientationchange', checkOrientation);
+
+        // Initial check when the page loads
+        checkOrientation();
+    
     </script>
     <script>
     // if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
@@ -80,6 +127,9 @@
     // }
 </script>
 
+    <div id="landscape-popup" class="landscape-popup" style="display: none;">
+        <p>Please rotate your device to landscape mode for a better experience!</p>
+    </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

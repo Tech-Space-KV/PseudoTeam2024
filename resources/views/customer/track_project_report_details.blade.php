@@ -60,7 +60,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <!-- <tr>
         {{-- <th scope="row">100134</th>
         <td>Test Project 1</td> --}}
         <td>Milestone 1</td>
@@ -89,7 +89,17 @@
         <td>28/11/2024</td>
         <td>In Progress</td>
         <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+      </tr> -->
+
+      <tr>
+        <td>{{ $project_planner->pplnr_milestone }}</td>
+        <td>{{ $project_planner->	pplnr_description }}</td>
+        <td>{{ $project_planner->pplnr_start_date }}</td>
+        <td>{{ $project_planner->pplnr_end_date }}</td>
+        <td>{{ $project_planner->pplnr_status }}</td>
+        <td ><a href="{{ url('customer/session/project-timeline') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
+
     </tbody>
   </table>
 

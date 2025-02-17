@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Mail\SendQueryMail; 
 use Mail;
 
+//Implemented by sanskar
+
 class QueryController extends Controller
 {
     public function submitQuery(Request $request)
@@ -28,10 +30,8 @@ class QueryController extends Controller
             'contact' => $request->address2
         ];
 
-        // Send email to the user
         Mail::to($request->email)->send(new SendQueryMail($data));
 
-        // Send a copy to yourself
         Mail::to('sanskarsharma0119@gmail.com')->send(new SendQueryMailCopy($data));
 
         return redirect()->back()->with('success', 'Your query has been submitted successfully!');

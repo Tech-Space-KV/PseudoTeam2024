@@ -6,6 +6,11 @@ use App\Http\Controllers\QueryController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 486e4ea8f033a5ccfeab218f56c958f2721fedfd
 
 // Landing Pages
 Route::get('/', function () {
@@ -38,7 +43,11 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/reports', function () {
         return (new AuthController)->dashboard('customer/reports');
     });
-
+    Route::get('/search_project', function () {
+        return view('customer/search_project');
+    });
+    ///customer/session/search_project
+   
     Route::get('/upload-project', function () {
         return (new AuthController)->dashboard('customer/project_upload_form');
     });
@@ -135,6 +144,12 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/cart', function () {
         return (new AuthController)->dashboard('customer/cart');
     });
+    Route::get('/trackticket', function () {
+        return (new AuthController)->dashboard('customer/trackticket');
+    });
+    Route::get('/ticket', function () {
+        return (new AuthController)->dashboard('customer/ticket');
+    });
 });
 
 // Services and Queries
@@ -198,6 +213,9 @@ Route::get('service-partner/session/profileoptions', function () {
 Route::get('service-partner/session/find-project', function () {
     return view('/service-partner/find_project');
 });
+Route::get('service-partner/session/find-project-details', function () {
+    return view('/service-partner/find_project_details');
+});
 Route::get('service-partner/session/hardware-orders', function () {
     return view('/service-partner/marketplace_hardwares_orders');
 });
@@ -240,4 +258,12 @@ Route::get('service-partner/session/notifications', function () {
     return view('/service-partner/notifications');
 });
 
+<<<<<<< HEAD
 Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store'); 
+=======
+Route::get('service-partner/session/find-project', [ProjectController::class, 'index']);
+
+
+Route::get('service-partner/session/find-project-details', [ProjectController::class, 'showProjectDetails']);
+
+>>>>>>> 486e4ea8f033a5ccfeab218f56c958f2721fedfd

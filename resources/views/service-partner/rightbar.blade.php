@@ -30,6 +30,17 @@
             <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
                 <a href="" class="text-decoration-none w-100">
                     <div class="card p-3 w-100 cardbgylw">
+                       Visit Customer Zone
+                       
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
+                <a href="" class="text-decoration-none w-100">
+                    <div class="card p-3 w-100 cardbgylw">
                        Job Success Rate
                        <div class="progress mt-2">
                         <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>

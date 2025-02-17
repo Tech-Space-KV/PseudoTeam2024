@@ -9,7 +9,7 @@
 
 <p><span class="fs-1 fw-bold">Hi, </span><span class="fs-3">Kunal</span></p>
 <div class="alert alert-primary" role="alert">
-    Want to get a job done? <a class="btn btn-sm btn-outline-primary">Upload project</a>
+    Want to get a job done? <a href="session/upload-project" class="btn btn-sm btn-outline-primary">Upload project</a>
 </div>
 
 <div class="container px-4">

@@ -46,6 +46,18 @@
             </div>
         </div>
 
+    {{-- <hr class="border border-1 border-primary"> --}}
+
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
+                <a href="" class="text-decoration-none w-100">
+                    <div class="card p-3 w-100 cardbgylw">
+                       Visit Partner Zone
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <div id="calendar" style="width: 100%; max-width: 400px; margin: 20px auto; border: 1px solid #ccc; border-radius: 8px; padding: 15px; text-align: center; background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div id="calendar-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                 <button onclick="prevMonth()" style="background-color:  #006EC4; padding: 8px 12px; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">&#9664;</button>

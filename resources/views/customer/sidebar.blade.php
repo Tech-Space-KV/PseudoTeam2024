@@ -58,6 +58,12 @@
             </div>       
         </div>
         
-        
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-10 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
+                     <a href="{{ url('customer/session/trackticket') }}" class="text-decoration-none"><i class="fa fa-ticket card cardbg p-3 w-100 iconix"></i>
+                    <span class="fst">Tickets</span></a>
+            </div>       
+        </div>
+
     </div>
 </div>

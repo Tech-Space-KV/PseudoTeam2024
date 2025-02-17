@@ -39,3 +39,4 @@ class Project extends Model
         'updated_at',
     ];
 }
+

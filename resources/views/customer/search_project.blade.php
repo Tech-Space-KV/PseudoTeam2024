@@ -6,9 +6,8 @@
 </br>
 <div class="container">
 <div class="mb-4">
-    <h2>Projects Delivered</h2>
+    <h2>Track your project</h2>
 </div>
-
 <div class="d-flex justify-content-end">
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group me-2">
@@ -17,8 +16,6 @@
     </div>
   </div>
 </div>
-
-
 
 </br> 
 <div class="search-box-container w-100 mb-4">
@@ -47,15 +44,15 @@
         <td>Test Project 1</td>
         <td>28/11/2023</td>
         <td>28/11/2024</td>
-        <td>Delivered</td>
-        <td ><a href="{{ url('customer/session/track-project-report-details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+        <td>In Progress</td>
+        <td ><a href="{{ url('customer/session/track-project-report-location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
       <tr>
         <th scope="row">100135</th>
         <td>Test Project 2</td>
         <td>28/11/2023</td>
         <td>28/11/2024</td>
-        <td>Delivered</td>
+        <td>In Progress</td>
         <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
       <tr>
@@ -63,7 +60,7 @@
         <td>Test Project 3</td>
         <td>28/11/2023</td>
         <td>28/11/2024</td>
-        <td>Delivered</td>
+        <td>In Progress</td>
         <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
     </tbody>

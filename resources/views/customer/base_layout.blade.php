@@ -20,6 +20,10 @@
 </head>
 <body>
 
+    <div class="overlay" id="overlay">
+        <p>Turn your screen to landscape mode</p>
+    </div>
+
     @include('customer.sidebar')
     <!-- Content section where page content will be loaded -->
 <div class="main-content" id="maincontent">
@@ -91,34 +95,63 @@
             
         }
 
-            // Orientation detection and popup
-            function checkOrientation() {
 
-            var popup = document.getElementById('landscape-popup');
-            var mainContent = document.getElementById('maincontent');
-            var leftbar = document.getElementById('sidebar');
-            var rightbar = document.getElementById('rightbar');
+        //======================JS
 
-            if (window.innerWidth < window.innerHeight) {
-                popup.style.display = 'block';  
-                mainContent.style.display = 'none'; 
-                leftbar.style.display = 'none';  
-                rightbar.style.display = 'none';
+        //     // Orientation detection and popup
+        //     function checkOrientation() {
 
-            } else {
-                popup.style.display = 'none'; 
-                mainContent.style.display = 'block';  
-                leftbar.style.display = 'block';  
-                rightbar.style.display = 'block'; 
-            }
-        }
+        //     var popup = document.getElementById('landscape-popup');
+        //     var mainContent = document.getElementById('maincontent');
+        //     var leftbar = document.getElementById('sidebar');
+        //     var rightbar = document.getElementById('rightbar');
 
-        // Listen for orientation change or resize
-        window.addEventListener('resize', checkOrientation);
-        window.addEventListener('orientationchange', checkOrientation);
+        //     if (window.innerWidth < window.innerHeight) {
+        //         popup.style.display = 'block';  
+        //         mainContent.style.display = 'none'; 
+        //         leftbar.style.display = 'none';  
+        //         rightbar.style.display = 'none';
 
-        // Initial check when the page loads
-        checkOrientation();
+        //     } else {
+        //         popup.style.display = 'none'; 
+        //         mainContent.style.display = 'block';  
+        //         leftbar.style.display = 'block';  
+        //         rightbar.style.display = 'block'; 
+        //     }
+        // }
+
+        // // Listen for orientation change or resize
+        // window.addEventListener('resize', checkOrientation);
+        // window.addEventListener('orientationchange', checkOrientation);
+
+        // // Initial check when the page loads
+        // checkOrientation();
+
+        //==================JS
+
+
+//     function checkOrientation() {
+//     const overlay = document.getElementById('overlay');
+//     const body = document.body;
+    
+//     if (window.innerHeight > window.innerWidth) {
+//         // Portrait mode
+//         overlay.style.display = 'block'; // Show the overlay
+//         body.classList.add('unclickable'); // Disable interactions
+//     } else {
+//         // Landscape mode
+//         overlay.style.display = 'none'; // Hide the overlay
+//         body.classList.remove('unclickable'); // Enable interactions
+//     }
+// }
+
+// // Check on load
+// checkOrientation();
+
+// // Check on resize (when user rotates the screen)
+// window.addEventListener('resize', checkOrientation);
+
+
     
     </script>
     <script>
@@ -127,9 +160,10 @@
     // }
 </script>
 
-    <div id="landscape-popup" class="landscape-popup" style="display: none;">
+    <!-- <div id="landscape-popup" class="landscape-popup" style="display: none;">
         <p>Please rotate your device to landscape mode for a better experience!</p>
-    </div>
+    </div> -->
+     
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

@@ -1,16 +1,12 @@
 <?php
 
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 486e4ea8f033a5ccfeab218f56c958f2721fedfd
 
 // Landing Pages
 Route::get('/', function () {
@@ -76,9 +72,12 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->trackProjectReportDetails($projectid);
     });
     
+    // Route::get('/marketplace/hardwares', function () {
+    //     return (new AuthController)->dashboard('customer/marketplace_hardwares');
+    // });
 
     Route::get('/marketplace/hardwares', function () {
-        return (new AuthController)->dashboard('customer/marketplace_hardwares');
+        return (new AuthController)->fetchHardware();
     });
 
     Route::get('/marketplace/hardwares-orders', function () {
@@ -97,8 +96,12 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->dashboard('customer/referandearn');
     });
 
+    // Route::get('/notifications', function () {
+    //     return (new AuthController)->dashboard('customer/notifications');
+    // });
+
     Route::get('/notifications', function () {
-        return (new AuthController)->dashboard('customer/notifications');
+        return (new AuthController)->fetchNotification();
     });
 
     // Route::get('/track-project-overdue', function () {
@@ -129,9 +132,13 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->trackProjectDelivered();
     });
 
-    Route::get('/marketplace/hardwares-details', function () {
-        return (new AuthController)->dashboard('customer/marketplace_hardwares_details');
+    Route::get('/marketplace/hardwares-details/{hrdws_id}', function ($hrdws_id) {
+        return (new AuthController)->fetchHardwareById($hrdws_id);
     });
+
+    // Route::get('/marketplace/hardwares-details', function () {
+    //     return (new AuthController)->dashboard('customer/marketplace_hardwares_details');
+    // });
 
     // Route::get('/track-project-report-details', function () {
     //     return (new AuthController)->dashboard('customer/track_project_report_details');
@@ -150,6 +157,12 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/ticket', function () {
         return (new AuthController)->dashboard('customer/ticket');
     });
+
+    Route::get('/notification-details/{notificationId}', function ($notificationId) {
+        return (new AuthController)->fetchNotificationDetails($notificationId);
+    });
+
+    // Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
 });
 
 // Services and Queries
@@ -258,12 +271,9 @@ Route::get('service-partner/session/notifications', function () {
     return view('/service-partner/notifications');
 });
 
-<<<<<<< HEAD
 Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store'); 
-=======
+
 Route::get('service-partner/session/find-project', [ProjectController::class, 'index']);
 
 
 Route::get('service-partner/session/find-project-details', [ProjectController::class, 'showProjectDetails']);
-
->>>>>>> 486e4ea8f033a5ccfeab218f56c958f2721fedfd

@@ -10,52 +10,52 @@
     <form id="hardware-form" style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
       <div style="margin-bottom: 20px;">
         <label for="serialNumber" style="font-weight: bold; font-size: 16px; color: #555;">Serial Number</label><br>
-        <input type="text" id="serialNumber" value="123" readonly
+        <input type="text" id="serialNumber" value="{{ $hardware->hrdws_serial_number }}" readonly
           style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);">
       </div>
 
       <div style="margin-bottom: 20px;">
         <label for="hardwareIdentifier" style="font-weight: bold; font-size: 16px; color: #555;">Hardware Identifier</label><br>
-        <input type="text" id="hardwareIdentifier" name="hardwareIdentifier" value="aq1" readonly
+        <input type="text" id="hardwareIdentifier" name="hardwareIdentifier" value="{{ $hardware->hrdws_hw_identifier }}" readonly
           style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);">
       </div>
 
       <div style="margin-bottom: 20px;">
         <label for="modelNumber" style="font-weight: bold; font-size: 16px; color: #555;">Model Number</label><br>
-        <input type="text" id="modelNumber" name="modelNumber" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="zaq1">
+        <input type="text" id="modelNumber" name="modelNumber" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="{{ $hardware->hrdws_model_number }}">
       </div>
 
       <div style="margin-bottom: 20px;">
         <label for="modelDescription" style="font-weight: bold; font-size: 16px; color: #555;">Model Description</label><br>
-        <textarea id="modelDescription" name="modelDescription" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);">xsw2</textarea>
+        <textarea id="modelDescription" name="modelDescription" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);">{{ $hardware->hrdws_model_description }}</textarea>
       </div>
 
       <div style="margin-bottom: 20px;">
         <label for="quantity" style="font-weight: bold; font-size: 16px; color: #555;">Quantity</label><br>
         <input type="number" id="quantity" required name="quantity"
           style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;"
-          placeholder="Quantity" min="1">
-        <small style="display: block; margin-top: 5px; font-size: 14px; color: #777;">Quantity available: <span id="availableQuantity" style="font-weight: bold;">2</span></small>
+          placeholder="{{ $hardware->hrdws_qty }}" min="1">
+        <small style="display: block; margin-top: 5px; font-size: 14px; color: #777;">Quantity available: <span id="availableQuantity" style="font-weight: bold;">{{ $hardware->hrdws_qty }}</span></small>
       </div>
 
       <div style="margin-bottom: 20px;">
         <label for="family" style="font-weight: bold; font-size: 16px; color: #555;">Family</label><br>
-        <input type="text" id="family" name="family" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="cde1">
+        <input type="text" id="family" name="family" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="{{ $hardware->hrdws_family }}">
       </div>
 
       <div style="margin-bottom: 20px;">
         <label for="city" style="font-weight: bold; font-size: 16px; color: #555;">City</label><br>
-        <input type="text" id="city" name="city" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="delhi">
+        <input type="text" id="city" name="city" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="{{ $hardware->hrdws_city }}">
       </div>
 
       <div style="margin-bottom: 20px;">
         <label for="state" style="font-weight: bold; font-size: 16px; color: #555;">State</label><br>
-        <input type="text" id="state" name="state" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="delhi">
+        <input type="text" id="state" name="state" readonly style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background-color: #f7f7f7; color: #333; font-size: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);" value="{{ $hardware->hrdws_state }}">
       </div>
 
       <button type="button" onclick="submitForm()"
         style="width: 20%;  padding: 12px; background-color: #007bff; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;">
-        Request Purchase
+        Add To Cart
       </button>
     </form>
   </div>

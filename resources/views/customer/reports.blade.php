@@ -15,12 +15,12 @@
     </div>
     <!-- Progress Summary Section -->
     <div class="container text-center mt-4" style="max-width: 1000px; margin: auto;">
-        <div class="row gx-3 gy-3">
+        <div class="row gx-3 gy-3 d-flex">
             <!-- Pending -->
             <div class="col-md-3">
                 <div class="card p-3 text-white border-0 w-100"
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
-                       height: 80px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+                       height: 120px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #ffcc00;">
                     <a href="{{ url('customer/session/track-project-pending') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                         <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">No SP Assigned</h5>
@@ -33,10 +33,10 @@
             <div class="col-md-3">
                 <div class="card p-3 text-white border-0 w-100"
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
-                       height: 80px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+                       height: 120px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #28a745;">
                     <a href="{{ url('customer/session/track-project-delivered') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">Full-Filled</h5>
+                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">Delivered</h5>
                         <h4 id="deliveredCount" style="font-size: 1.5rem; font-weight: normal;">0</h4>
                     </a>
                 </div>
@@ -46,10 +46,10 @@
             <div class="col-md-3">
                 <div class="card p-3 text-white border-0 w-100"
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
-                       height: 80px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+                       height: 120px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #007bff;">
                     <a href="{{ url('customer/session/track-project-in-progress') }}"  style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">On-Going</h5>
+                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">In Progress</h5>
                         <h4 id="inProgressCount" style="font-size: 1.5rem; font-weight: normal;">0</h4>
                     </a>
                 </div>
@@ -59,7 +59,7 @@
             <div class="col-md-3">
                 <div class="card p-3 text-white border-0 w-100"
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
-                       height: 80px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+                       height: 120px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #dc3545;">
                     <a href="{{ url('customer/session/track-project-overdue') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                         <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">Overdue</h5>

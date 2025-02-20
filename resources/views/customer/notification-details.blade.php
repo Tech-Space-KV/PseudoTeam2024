@@ -6,89 +6,60 @@
     <div class="container  " style="height: 100vh;">
 
         <div class="mb-4 ">
-            <h2>Notifications</h2>
+            <h2>Notification-details</h2>
         </div>
-        <table class="table table-hover" id="notificationsTable"
-            style="background-color: #fff; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 
-            <thead class="thead-light" style="background-color: #f9f9f9; border-bottom: 2px solid #ddd;">
-                <tr>
-                    <th scope="col" style="width: 20%; padding: 10px; font-size: 0.9rem; color: #555;">Date</th>
-                    <th scope="col" style="width: 50%; padding: 10px; font-size: 0.9rem; color: #555;">Notification</th>
+        <!-- Notification Card -->
+        <div class="notification-card"
+            style="background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; margin-bottom: 20px;">
+            <div style="font-size: 1.1rem; font-weight: bold; color: #333;">Notification #:
+            </div><br>
+            <div style="font-size: 1.1rem; font-weight: bold; color: #333;">
+                {{ $notification->ntfn_notification }}</div><br>
+            <div style="font-size: 0.9rem; color: #777; margin-top: 10px;">Date: {{ $notification->ntfn_date_time }}</div>
 
-                    <th scope="col" style="width: 10%; text-align: center; padding: 10px; font-size: 0.9rem; color: #555;">
-                        Delete</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <!-- @foreach ($notifications as $notification)
-                        <tr class="notification-row" data-id="{{ $notification->ntfn_id }}" style="background-color: #fafafa;">
-                            <td style="padding: 15px; font-size: 0.9rem; color: #333;">{{ $notification->ntfn_date_time }}</td>
-                            <td class="notification-text"
-                                style="padding: 15px; font-size: 0.9rem; color: #333; line-height: 1.5; font-weight: bold; cursor: pointer;"
-                                data-id="{{ $notification->ntfn_id }}">
-                                Notification #: {{ $notification->ntfn_notification }}
-                            </td>
-                            <td style="text-align: center; padding: 15px;">
-                                <button class="btn btn-default btn-sm delete-notification"
-                                    style="background: none; border: none; color: #007bff; font-size: 1.1rem; cursor: pointer;">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    @endforeach -->
-
-                @foreach ($notifications as $notification)
-                    <tr class="notification-row" data-id="{{ $notification->ntfn_id }}" style="background-color: #fafafa;">
-                        <td style="padding: 15px; font-size: 0.9rem; color: #333;">{{ $notification->ntfn_date_time }}</td>
-                        <td class="notification-text"
-                            style="padding: 15px; font-size: 0.9rem; color: #333; line-height: 1.5; cursor: pointer;" data-id="{{ $notification->ntfn_id }} 
-                    @if(!$notification->ntfn_readflag) font-weight: bold; @endif">
-                            Notification #: {{ $notification->ntfn_notification }}
-                        </td>
-                        <td style="text-align: center; padding: 15px;">
-                            <button class="btn btn-default btn-sm delete-notification"
-                                style="background: none; border: none; color: #007bff; font-size: 1.1rem; cursor: pointer;">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                @endforeach
-
-
-            </tbody>
-        </table>
+            <!-- Delete Button -->
+            <div style="text-align: right; margin-top: 20px;">
+                <button class="btn btn-danger btn-sm" id="deleteNotificationBtn" style="cursor: pointer;">
+                    <i class="bi bi-trash"></i> Delete
+                </button>
+            </div>
+        </div>
 
         <div class="pagination" id="pagination" style="float: right; margin-top: 20px;"></div>
     </div>
 
+    <div class="pagination" id="pagination" style="float: right; margin-top: 20px;"></div>
+    </div>
+
+
     <!-- sanskar javascript code -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const rowsPerPage = 8;
+            const rowsPerPage = 8; // Number of rows per page
             let currentPage = 1;
             const table = document.getElementById("notificationsTable");
             const tbody = table.querySelector("tbody");
             const pagination = document.getElementById("pagination");
             const allRows = Array.from(tbody.rows);
 
+            // Sort notifications by date in descending order
             allRows.sort((a, b) => {
                 const dateA = new Date(a.cells[0].textContent);
                 const dateB = new Date(b.cells[0].textContent);
-                return dateB - dateA;
+                return dateB - dateA; // Sort in descending order
             });
 
+            // Apply sorted rows to the table
             function renderTable() {
                 tbody.innerHTML = "";
                 const start = (currentPage - 1) * rowsPerPage;
                 const end = start + rowsPerPage;
                 allRows.slice(start, end).forEach(row => tbody.appendChild(row));
                 renderPagination();
-                attachClickListeners();
             }
 
+            // Render pagination buttons
             function renderPagination() {
                 pagination.innerHTML = "";
 
@@ -117,20 +88,17 @@
                     });
             }
 
-
             function attachClickListeners() {
                 document.querySelectorAll('.notification-text').forEach(notificationText => {
                     notificationText.addEventListener('click', function () {
-                        const notificationId = this.getAttribute('data-id');
-                        if (notificationId) {
-                            window.location.href = `/customer/session/notification-details/${notificationId}`;
+                        if (this.style.fontWeight === 'bold') {
+                            this.style.fontWeight = 'normal';
                         } else {
-                            console.error('Notification ID not found!');
+                            this.style.fontWeight = 'bold';
                         }
                     });
                 });
             }
-
 
             function attachDeleteListeners() {
                 document.querySelectorAll('.delete-notification').forEach(button => {
@@ -144,6 +112,7 @@
                 });
             }
 
+            // Initial rendering
             renderTable();
             attachClickListeners();
             attachDeleteListeners();

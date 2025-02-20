@@ -1,13 +1,16 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Hardware;
 use App\Models\ProjectPlanner;
 use App\Models\ProjectScope;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Project;
+use App\Models\Notification;
 
 class AuthController extends Controller
 {
@@ -170,7 +173,7 @@ class AuthController extends Controller
 
     public function trackProjectInProgress()
     {
-        $projects = Project::where('plist_status', 'OnGoing')->get();
+        $projects = Project::where('plist_status', 'In Progress')->get();
 
         if ($projects->isEmpty()) {
             return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
@@ -181,7 +184,7 @@ class AuthController extends Controller
 
     public function trackProjectDelivered()
     {
-        $projects = Project::where('plist_status', 'FullFilled')->get();
+        $projects = Project::where('plist_status', 'Delivered')->get();
 
         if ($projects->isEmpty()) {
             return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
@@ -192,13 +195,66 @@ class AuthController extends Controller
 
     public function trackProjectOverdue()
     {
-        $projects = Project::where('plist_status', 'Overdue')->get();
+        $currentDate = Carbon::now()->toDateString();
+
+        $projects = Project::whereNotNull('plist_enddate')
+        ->where('plist_enddate', '<=', now()->subDay()->format('d/m/Y'))
+        ->get();
 
         if ($projects->isEmpty()) {
             return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
         } 
 
         return view('customer.track_project_report', compact('projects'));
+    }
+
+    public function fetchHardware()
+    {
+        $hardwares = Hardware::all();
+
+        return view('customer.marketplace_hardwares', compact('hardwares'));
+    }
+
+    public function fetchHardwareById($hrdws_id)
+    {
+        $hardware = Hardware::where('hrdws_id' , $hrdws_id)->first();
+
+        if ($hardware) {
+            return view('customer.marketplace_hardwares_details', compact('hardware'));
+        }
+
+        return back()->with('error','Problem while fetching data');
+    }
+
+    public function fetchNotification()
+    {
+        $notifications = Notification::all();
+
+        if($notifications)
+        {
+            return view('customer.notifications', compact('notifications'));
+        }
+
+        return back()->with('error','No notification found!');
+    }
+
+    public function fetchNotificationDetails($notificationId)
+    {
+        $notification = Notification::where('ntfn_id' , $notificationId)->first();
+
+        if (!$notification->ntfn_readflag)
+        {
+            \Log::info('if condition is working'. $notificationId);
+            $notification->ntfn_readflag = true;
+            $notification->save();
+        }
+
+        if($notification)
+        {
+            return view('customer.notification-details', compact('notification'));
+        }
+
+        return back()->with('error','No notification found!');
     }
 
 }

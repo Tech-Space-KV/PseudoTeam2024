@@ -16,5 +16,9 @@
 </form>
 
         </div>
+
+        <a class="navbar-brand ms-3 text-primary">
+            <span class="navbar-toggler-icon"></span>
+        </a>
     </div>
 </nav>

@@ -41,31 +41,49 @@ class AuthController extends Controller
     // Show login page
     public function showLoginPage()
     {
-       
-    $response = response()->view('auth/customer_sign_in');
-    $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
-    $response->header('Pragma', 'no-cache');
-    $response->header('Expires', '0');
-    
-    return $response;
-}
 
-    
+        $response = response()->view('auth/customer_sign_in');
+        $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+        $response->header('Pragma', 'no-cache');
+        $response->header('Expires', '0');
+
+        return $response;
+    }
+
 
     // Handle login
     public function login(Request $request)
     {
         // Validate the login data
         $credentials = $request->only('email', 'password');
-       
-        
+
+
         if (Auth::attempt($credentials)) {
+
+            //added by sanskar on 22/02/2025
+            $user = Auth::user();
+
             // Redirect to the customer dashboard after successful login
             $token = bin2hex(random_bytes(16)); // Generates a 32-character hexadecimal token
             session(['user_session_token' => $token]);
+
+            session(['customer_id' => $user->customer_id]);
+            session(['name' => $user->name]);
+
+            //code added by sanskar sharma (20/02/2025)
+            $dashboardData = [
+                'unreadNotificationsCount' => Notification::where('ntfn_readflag', false)->count(),
+                'recentProjects' => Project::orderBy('created_at', 'desc')->take(5)->get(),
+                'inProgressCount' => Project::where('plist_status', 'In Progress')->count(),
+                'pendingCount' => Project::where('plist_status', 'No SP Assigned')->count(),
+                'deliveredCount' => Project::where('plist_status', 'Delivered')->count(),
+            ];
+
+            session($dashboardData);
+            
             return redirect()->route('customer.dashboard');
         }
-    
+
         // If authentication fails, return to the login page with an error message
         return redirect()->route('auth.customer.sign_in')->withErrors([
             'email' => 'These credentials do not match our records.',
@@ -73,188 +91,107 @@ class AuthController extends Controller
     }
 
     // Show dashboard
-    public function dashboard($viewName = 'customer/dashboard' , $data = []) 
+    public function dashboard($viewName = 'customer/dashboard', $data = [])
     {
         // Check if user session token exists, redirect to home if not
         // Uncomment the following block if this logic is required:
         // if (!session('user_session_token')) {
         //     return view('website/home');
         // }
-    
+
         //changes made by sanskar
         if ($viewName === 'customer/track_project_report') {
-            $projects = Project::all(); 
+            $projects = Project::all();
             $data['projects'] = $projects;
         }
 
         // Generate response for the given view
-        $response = response()->view($viewName , $data);
-    
+        $response = response()->view($viewName, $data);
+
         // Add headers to prevent caching
         $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
         $response->header('Pragma', 'no-cache');
         $response->header('Expires', '0');
-    
+
         return $response;
     }
-    
+
 
     // Handle logout
     public function logout(Request $request)
     {
+
+        \Log::info('Logout method working!');
+
         // Logout the user
         Auth::logout();
-    
+
         // Invalidate the session
         $request->session()->invalidate();
-    
+
         // Regenerate the session token
         $request->session()->regenerateToken();
-    
+
         // Clear PHP's file status cache
         clearstatcache();
-    
+
         // Clear session variables and destroy the session
         session_unset();
         // session_destroy();
         session_write_close();
-    
+
         // Remove the session cookie
         setcookie(session_name(), '', 0, '/');
-    
+
         // Regenerate session ID to prevent session fixation
         // session_regenerate_id(true);
-    
+
         // Redirect with cache headers
         $response = response()
             ->redirectToRoute('auth.customer.sign_in')
             ->with('status', 'You have been logged out.');
-    
+
         $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
         $response->header('Pragma', 'no-cache');
         $response->header('Expires', '0');
-    
+
+
+        \Log::info('Logout method working1!');
+
         return $response;
-    }
-
-    public function trackProjectReportLocation($projectid)
-    {
-        $project_scope = ProjectScope::where('pscope_project_id', $projectid)->first();
-
-        if (!$project_scope) {
-            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
-        }
- 
-        return view('customer.track_project_report_location', compact('project_scope'));
-    }
-
-
-    public function trackProjectReportDetails($projectid)
-    {
-        $project_planner = ProjectPlanner::where('pplnr_scope_id', $projectid)->first();
-
-        if (!$project_planner) {
-            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
-        }
- 
-        return view('customer.track_project_report_details', compact('project_planner'));
-    }
-
-    public function trackProjectPending()
-    {
-        $projects = Project::where('plist_status', 'No SP Assigned')->get();
-
-        if ($projects->isEmpty()) {
-            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
-        }
-
-        return view('customer.track_project_report', compact('projects'));
-    }
-
-    public function trackProjectInProgress()
-    {
-        $projects = Project::where('plist_status', 'In Progress')->get();
-
-        if ($projects->isEmpty()) {
-            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
-        }
-
-        return view('customer.track_project_report', compact('projects'));
-    }
-
-    public function trackProjectDelivered()
-    {
-        $projects = Project::where('plist_status', 'Delivered')->get();
-
-        if ($projects->isEmpty()) {
-            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
-        }
-
-        return view('customer.track_project_report', compact('projects'));
-    }
-
-    public function trackProjectOverdue()
-    {
-        $currentDate = Carbon::now()->toDateString();
-
-        $projects = Project::whereNotNull('plist_enddate')
-        ->where('plist_enddate', '<=', now()->subDay()->format('d/m/Y'))
-        ->get();
-
-        if ($projects->isEmpty()) {
-            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
-        } 
-
-        return view('customer.track_project_report', compact('projects'));
-    }
-
-    public function fetchHardware()
-    {
-        $hardwares = Hardware::all();
-
-        return view('customer.marketplace_hardwares', compact('hardwares'));
-    }
-
-    public function fetchHardwareById($hrdws_id)
-    {
-        $hardware = Hardware::where('hrdws_id' , $hrdws_id)->first();
-
-        if ($hardware) {
-            return view('customer.marketplace_hardwares_details', compact('hardware'));
-        }
-
-        return back()->with('error','Problem while fetching data');
     }
 
     public function fetchNotification()
     {
         $notifications = Notification::all();
 
-        if($notifications)
-        {
+        if ($notifications) {
             return view('customer.notifications', compact('notifications'));
         }
 
-        return back()->with('error','No notification found!');
+        return back()->with('error', 'No notification found!');
     }
 
     public function fetchNotificationDetails($notificationId)
     {
-        $notification = Notification::where('ntfn_id' , $notificationId)->first();
+        $notification = Notification::where('ntfn_id', $notificationId)->first();
 
-        if (!$notification->ntfn_readflag)
-        {
-            \Log::info('if condition is working'. $notificationId);
+        if (!$notification->ntfn_readflag) {
             $notification->ntfn_readflag = true;
             $notification->save();
+
+            $unreadNotificationsCount = session('unreadNotificationsCount', 0);
+
+            if ($unreadNotificationsCount > 0) {
+                session(['unreadNotificationsCount' => $unreadNotificationsCount - 1]);
+            }
         }
 
-        if($notification)
-        {
+        if ($notification) {
             return view('customer.notification-details', compact('notification'));
         }
 
-        return back()->with('error','No notification found!');
+        return back()->with('error', 'No notification found!');
     }
 
 }

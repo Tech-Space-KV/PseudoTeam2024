@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HardwareController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
@@ -39,45 +41,37 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/reports', function () {
         return (new AuthController)->dashboard('customer/reports');
     });
+    
     Route::get('/search_project', function () {
         return view('customer/search_project');
     });
-    ///customer/session/search_project
    
     Route::get('/upload-project', function () {
         return (new AuthController)->dashboard('customer/project_upload_form');
     });
 
-    // Route::get('/track-project-report-location', function () {
-    //     return (new AuthController)->dashboard('customer/track_project_report_location');
-    // });
-
     Route::get('/track-project-report', function () {
-        return (new AuthController)->dashboard('customer/track_project_report');
+        return (new ProjectController)->trackProjects();
     });
 
     Route::get('/track-project-report-location/{projectid}', function ($projectid) {
-        return (new AuthController)->trackProjectReportLocation($projectid);
+        return (new ProjectController)->trackProjectReportLocation($projectid);
     }); 
 
     Route::get('/track-project-report-details/{projectid}', function ($projectid) {
-        return (new AuthController)->trackProjectReportDetails($projectid);
+        return (new ProjectController)->trackProjectReportDetails($projectid);
     });
 
     Route::get('/track-project-pending-location/{projectid}', function ($projectid) {
-        return (new AuthController)->trackProjectReportLocation($projectid);
+        return (new ProjectController)->trackProjectReportLocation($projectid);
     }); 
 
     Route::get('/track-project-report-details/{projectid}', function ($projectid) {
-        return (new AuthController)->trackProjectReportDetails($projectid);
+        return (new ProjectController)->trackProjectReportDetails($projectid);
     });
-    
-    // Route::get('/marketplace/hardwares', function () {
-    //     return (new AuthController)->dashboard('customer/marketplace_hardwares');
-    // });
 
     Route::get('/marketplace/hardwares', function () {
-        return (new AuthController)->fetchHardware();
+        return (new HardwareController)->fetchHardware();
     });
 
     Route::get('/marketplace/hardwares-orders', function () {
@@ -96,53 +90,29 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->dashboard('customer/referandearn');
     });
 
-    // Route::get('/notifications', function () {
-    //     return (new AuthController)->dashboard('customer/notifications');
-    // });
-
     Route::get('/notifications', function () {
         return (new AuthController)->fetchNotification();
     });
 
-    // Route::get('/track-project-overdue', function () {
-    //     return (new AuthController)->dashboard('customer/track-project-overdue');
-    // });
-
     Route::get('/track-project-overdue', function () {
-        return (new AuthController)->trackProjectOverdue();
+        return (new ProjectController)->trackProjectOverdue();
     });
 
-    // Route::get('/track-project-pending', function () {
-    //     return (new AuthController)->dashboard('customer/track-project-pending');
-    // });
-
     Route::get('/track-project-pending', function () {
-        return (new AuthController)->trackProjectPending();
+        return (new ProjectController)->trackProjectPending();
     });
 
     Route::get('/track-project-in-progress', function () {
-        return (new AuthController)->trackProjectInProgress();
+        return (new ProjectController)->trackProjectInProgress();
     });
 
-    // Route::get('/track-project-delivered', function () {
-    //     return (new AuthController)->dashboard('customer/track-project-delivered');
-    // });
-
     Route::get('/track-project-delivered', function () {
-        return (new AuthController)->trackProjectDelivered();
+        return (new ProjectController)->trackProjectDelivered();
     });
 
     Route::get('/marketplace/hardwares-details/{hrdws_id}', function ($hrdws_id) {
-        return (new AuthController)->fetchHardwareById($hrdws_id);
+        return (new HardwareController)->fetchHardwareById($hrdws_id);
     });
-
-    // Route::get('/marketplace/hardwares-details', function () {
-    //     return (new AuthController)->dashboard('customer/marketplace_hardwares_details');
-    // });
-
-    // Route::get('/track-project-report-details', function () {
-    //     return (new AuthController)->dashboard('customer/track_project_report_details');
-    // });
 
     Route::get('/project-timeline', function () {
         return (new AuthController)->dashboard('customer/project_timeline');
@@ -151,6 +121,13 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/cart', function () {
         return (new AuthController)->dashboard('customer/cart');
     });
+
+    // Route::post('/addToCart', function () {
+    //     return (new CartController)->addToCart();
+    // });
+
+    Route::post('/marketplace/hardwares-details/addToCart', [CartController::class,'addToCart']);
+
     Route::get('/trackticket', function () {
         return (new AuthController)->dashboard('customer/trackticket');
     });
@@ -161,8 +138,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/notification-details/{notificationId}', function ($notificationId) {
         return (new AuthController)->fetchNotificationDetails($notificationId);
     });
-
-    // Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+    
 });
 
 // Services and Queries

@@ -2,15 +2,26 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <div class="mx-auto w-75" id="">
-                <a href="{{ url('customer/session/notifications') }}" type="button" class="btn btn-primary position-relative me-2" style="float: left;">
+                <!-- <a href="{{ url('customer/session/notifications') }}" type="button" class="btn btn-primary position-relative me-2" style="float: left;">
                     <i class="fa fa-bell text-white"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         99+
                         <span class="visually-hidden">unread messages</span>
                     </span>
+                </a> -->
+
+                <a href="{{ url('customer/session/notifications') }}" type="button"
+                    class="btn btn-primary position-relative me-2" style="float: left;">
+                    <i class="fa fa-bell text-white"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        id="unread-notification-count">
+                        {{ session('unreadNotificationsCount', 0) > 99 ? '99+' : session('unreadNotificationsCount', 0) }}
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
                 </a>
 
-                <a type="button" class="btn btn-outline-danger position-relative ms-2" style="float: right;">
+
+                <a href="{{ url('logout') }}" type="button" class="btn btn-outline-danger position-relative ms-2" style="float: right;">
                     Logout <i class="fa fa-sign-out"></i>
                 </a>
 
@@ -46,25 +57,31 @@
             </div>
         </div>
 
-    {{-- <hr class="border border-1 border-primary"> --}}
+        {{--
+        <hr class="border border-1 border-primary"> --}}
 
         <div class="row justify-content-md-center">
             <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
                 <a href="" class="text-decoration-none w-100">
                     <div class="card p-3 w-100 cardbgylw">
-                       Visit Partner Zone
+                        Visit Partner Zone
                     </div>
                 </a>
             </div>
         </div>
 
-        <div id="calendar" style="width: 100%; max-width: 400px; margin: 20px auto; border: 1px solid #ccc; border-radius: 8px; padding: 15px; text-align: center; background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <div id="calendar-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                <button onclick="prevMonth()" style="background-color:  #006EC4; padding: 8px 12px; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">&#9664;</button>
+        <div id="calendar"
+            style="width: 100%; max-width: 400px; margin: 20px auto; border: 1px solid #ccc; border-radius: 8px; padding: 15px; text-align: center; background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div id="calendar-header"
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <button onclick="prevMonth()"
+                    style="background-color:  #006EC4; padding: 8px 12px; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">&#9664;</button>
                 <h3 id="month-year" style="margin: 0; font-size: 1.2em; color: #333; font-weight: bold;"></h3>
-                <button onclick="nextMonth()" style="padding: 8px 12px; background-color:  #006EC4; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">&#9654;</button>
+                <button onclick="nextMonth()"
+                    style="padding: 8px 12px; background-color:  #006EC4; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">&#9654;</button>
             </div>
-            <div id="calendar-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; color:black;text-align: center; background-color: #f9f9f9; border-radius: 5px;">
+            <div id="calendar-grid"
+                style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; color:black;text-align: center; background-color: #f9f9f9; border-radius: 5px;">
                 <!-- Dates will be dynamically inserted here -->
             </div>
         </div>
@@ -72,9 +89,12 @@
 </div>
 
 <!-- Modal for Notifications -->
-<div id="dateModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
-    <div style="background: white; width: 300px; padding: 20px; border-radius: 8px; text-align: center; position: relative; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-        <button onclick="closeModal()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 18px; font-weight: bold; cursor: pointer;">&times;</button>
+<div id="dateModal"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div
+        style="background: white; width: 300px; padding: 20px; border-radius: 8px; text-align: center; position: relative; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <button onclick="closeModal()"
+            style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 18px; font-weight: bold; cursor: pointer;">&times;</button>
         <h4 id="modalTitle"></h4>
         <p id="modalBody"></p>
     </div>

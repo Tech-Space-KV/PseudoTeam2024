@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notification extends Model
+class Cart extends Model
 {
     use HasFactory;
 
-    protected $table = 'notifications';
-
-    protected $primaryKey = 'ntfn_id';
+    protected $table = "cart";
 
     protected $fillable = [
-        'ntfn_readflag',
-    ] ;
+        "cart_order_no",
+        "cart_hw_id",
+        "cart_qty",
+        "cart_customer_id",
+        ] ;
 }

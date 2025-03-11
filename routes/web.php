@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HardwareController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\SupportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\QueryController;
@@ -24,11 +25,11 @@ Route::prefix('authentication/customer')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('customer.logout');
     Route::get('/login', [AuthController::class, 'showLoginPage'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-    
+
 });
 
-Route::get('/authentication/service-partner/sign-in', fn () => view('auth/service_sign_in'));
-Route::get('/authentication/service-partner/sign-up', fn () => view('auth/service_sign_up'));
+Route::get('/authentication/service-partner/sign-in', fn() => view('auth/service_sign_in'));
+Route::get('/authentication/service-partner/sign-up', fn() => view('auth/service_sign_up'));
 
 // Customer Session Routes
 Route::middleware(['auth'])->prefix('customer/session')->group(function () {
@@ -41,11 +42,11 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/reports', function () {
         return (new AuthController)->dashboard('customer/reports');
     });
-    
+
     Route::get('/search_project', function () {
         return view('customer/search_project');
     });
-   
+
     Route::get('/upload-project', function () {
         return (new AuthController)->dashboard('customer/project_upload_form');
     });
@@ -56,7 +57,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
     Route::get('/track-project-report-location/{projectid}', function ($projectid) {
         return (new ProjectController)->trackProjectReportLocation($projectid);
-    }); 
+    });
 
     Route::get('/track-project-report-details/{projectid}', function ($projectid) {
         return (new ProjectController)->trackProjectReportDetails($projectid);
@@ -64,7 +65,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
     Route::get('/track-project-pending-location/{projectid}', function ($projectid) {
         return (new ProjectController)->trackProjectReportLocation($projectid);
-    }); 
+    });
 
     Route::get('/track-project-report-details/{projectid}', function ($projectid) {
         return (new ProjectController)->trackProjectReportDetails($projectid);
@@ -114,19 +115,29 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new HardwareController)->fetchHardwareById($hrdws_id);
     });
 
-    Route::get('/project-timeline', function () {
-        return (new AuthController)->dashboard('customer/project_timeline');
+
+    //need to make changes in this route.
+
+    // Route::get('/project-timeline', function () {
+    //     return (new AuthController)->dashboard('customer/project_timeline');
+    // });
+
+    Route::get('/project-timeline/{pplnr_id}', function ($pplnr_id) {
+        return (new ProjectController)->projectTimeline($pplnr_id);
     });
 
     Route::get('/cart', function () {
-        return (new AuthController)->dashboard('customer/cart');
+        return (new CartController)->viewCart();
     });
 
     // Route::post('/addToCart', function () {
     //     return (new CartController)->addToCart();
     // });
 
-    Route::post('/marketplace/hardwares-details/addToCart', [CartController::class,'addToCart']);
+    // routes/web.php
+    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+
+    Route::post('/marketplace/hardwares-details/addToCart', [CartController::class, 'addToCart']);
 
     Route::get('/trackticket', function () {
         return (new AuthController)->dashboard('customer/trackticket');
@@ -138,8 +149,13 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/notification-details/{notificationId}', function ($notificationId) {
         return (new AuthController)->fetchNotificationDetails($notificationId);
     });
-    
+
 });
+
+
+Route::post('/submit-query', [QueryController::class, 'submitSupportQuery'])->name('submit.query');
+
+// Route::delete('/remove-from-cart/{id}' , [CartController::class , 'removeFromCart']);
 
 // Services and Queries
 Route::get('/services', [ServiceController::class, 'showServices'])->name('services');
@@ -247,9 +263,10 @@ Route::get('service-partner/session/notifications', function () {
     return view('/service-partner/notifications');
 });
 
-Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store'); 
+Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store');
 
 Route::get('service-partner/session/find-project', [ProjectController::class, 'index']);
 
 
 Route::get('service-partner/session/find-project-details', [ProjectController::class, 'showProjectDetails']);
+

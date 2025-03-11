@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Hardware;
 use App\Models\ProjectPlanner;
 use App\Models\ProjectScope;
@@ -77,6 +78,7 @@ class AuthController extends Controller
                 'inProgressCount' => Project::where('plist_status', 'In Progress')->count(),
                 'pendingCount' => Project::where('plist_status', 'No SP Assigned')->count(),
                 'deliveredCount' => Project::where('plist_status', 'Delivered')->count(),
+                'cartCount' => Cart::where('cart_customer_id', $user->customer_id)->count(),
             ];
 
             session($dashboardData);

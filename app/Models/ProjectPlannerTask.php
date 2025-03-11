@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hardware extends Model
+class ProjectPlannerTask extends Model
 {
     use HasFactory;
 
-    protected $table = 'hardwares';
-
-    protected $primaryKey = 'hrdws_id';
-
     protected $fillable = [
-        'hrdws_hw_identifier', 
-        'hrdws_model_description',
+        '',
+        'pptasks_task_title',
+        'pptasks_pt_status',
+        'pptasks_date_of_completion',
     ];
-    
 }

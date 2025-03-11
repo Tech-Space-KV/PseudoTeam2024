@@ -7,7 +7,7 @@
 <div class="container">
 
   <div class="mb-4">
-      <h2>Track project: &lt;Project ID&gt;</h2>
+      <h2>Track project: &lt;Project ID: {{ $project_planner->pplnr_scope_id }}&gt;</h2>
   </div>
   </br>
 
@@ -97,7 +97,7 @@
         <td>{{ $project_planner->pplnr_start_date }}</td>
         <td>{{ $project_planner->pplnr_end_date }}</td>
         <td>{{ $project_planner->pplnr_status }}</td>
-        <td ><a href="{{ url('customer/session/project-timeline') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+        <td ><a href="{{ url('customer/session/project-timeline/'.$project_planner->pplnr_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
 
     </tbody>

@@ -6,7 +6,7 @@
 <div class="container d-flex justify-content-between align-items-center py-3">
     <!-- Project Timeline Section -->
     <div>
-        <h2 class="mb-0">Project Timeline: &lt;Project ID&gt;</h2>
+        <h2 class="mb-0">Project Timeline: &lt;Project ID : {{ $projectTimeline->pptasks_planner_id }}&gt;</h2>
     </div>
 
     <!-- Share Invite Section -->
@@ -32,23 +32,23 @@
 <div class="timeline">
     <div class="timeline-item">
         <div class="timeline-item-content">
-            <h4>Website Revamp</h4>
-            <span class="date">2024-09-14</span>
+            <h4>{{ $projectTimeline->pptasks_task_title }}</h4>
+            <span class="date">{{ $projectTimeline->pptasks_date_of_completion }}</span>
         </div>
     </div>
-    <div class="timeline-item">
+    <!-- <div class="timeline-item">
         <div class="timeline-item-content">
-            <h4>Customer Dashboard</h4>
-            <span class="date">2024-09-14</span>
+            <h4>{{ $projectTimeline->pptasks_pt_status }}</h4>
+            <span class="date">{{ $projectTimeline->pptasks_date_of_completion }}</span>
         </div>
-    </div>
-    <div class="timeline-item">
+    </div> -->
+    <!-- <div class="timeline-item">
         <div class="timeline-item-content">
             <h4>Hardware Marketplace Functionality</h4>
-            <span class="date">2024-09-14</span>
+            <span class="date">{{ $projectTimeline->pptasks_date_of_completion }}</span>
         </div>
-    </div>
-    <div class="timeline-item">
+    </div> -->
+    <!-- <div class="timeline-item">
         <div class="timeline-item-content">
             <h4>Signup/Signin Forms</h4>
             <span class="date">2024-09-14</span>
@@ -59,7 +59,7 @@
             <h4>OpenProject App Test</h4>
             <span class="date">2024-09-14</span>
         </div>
-    </div>
+    </div> -->
 </div>
 </div>
 

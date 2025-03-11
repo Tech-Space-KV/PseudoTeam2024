@@ -10,30 +10,42 @@
     <h2>Support</h2>
   </div><br>
   <div class="card shadow p-4">
+
+  <form id="queryform" action="{{ route('submit.query') }}" method="POST">
+    @csrf
     <div class="form-group mb-3">
       <label for="query" class="form-label  fw-semibold">Your Query</label>
       <textarea
         id="query"
-        class="form-control "
+        class="form-control"
         rows="5"
-        placeholder="Type your query here...">
-        </textarea>
+        placeholder="Type your query here..."
+        name="query"></textarea>
     </div>
     <div class="d-grid">
-      <button id="submit-btn" class="btn btn-primary btn-lg ">Submit</button>
+      <button type="submit" id="submit-btn" class="btn btn-primary btn-lg">Submit</button>
     </div>
+  </form>
   </div>
 
-  </div>
+</div>
 
   <script>
+
     document.getElementById('submit-btn').addEventListener('click', function() {
+
+      event.preventDefault();
+
       const query = document.getElementById('query').value.trim();
+
       if (query) {
-        alert(`Your query: ${query}`);
+        document.getElementById('queryform').submit();
+        alert('Form submit successfullly!');
       } else {
         alert('Please enter a query before submitting.');
       }
+
     });
+
   </script>
   @endsection

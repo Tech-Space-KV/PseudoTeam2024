@@ -16,5 +16,5 @@ class Cart extends Model
         "cart_hw_id",
         "cart_qty",
         "cart_customer_id",
-        ] ;
+        ];
 }

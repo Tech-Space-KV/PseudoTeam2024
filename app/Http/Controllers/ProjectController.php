@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ProjectUploadedMail;
 use App\Models\ProjectPlanner;
+use App\Models\ProjectPlannerTask;
 use App\Models\ProjectScope;
 use Illuminate\Http\Request;
 use App\Models\Project;
@@ -180,5 +181,16 @@ class ProjectController extends Controller
         return view('customer.track_project_report', compact('projects'));
     }
 
-}
+    public function projectTimeline($pplnr_id) 
+    {
+        $projectTimeline = ProjectPlannerTask::where('pptasks_planner_id' , $pplnr_id)->first();
 
+        if(!$projectTimeline)
+        {
+            return redirect()->back()->with('error', 'ProjectTimeline not found.');
+        }
+        
+        return view('customer.project_timeline' , compact('projectTimeline'));
+    }   
+        
+}

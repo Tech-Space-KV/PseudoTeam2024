@@ -20,10 +20,16 @@
                     </span>
                 </a>
 
-
-                <a href="{{ url('logout') }}" type="button" class="btn btn-outline-danger position-relative ms-2" style="float: right;">
+                <!-- <a href="{{ url('logout') }}" type="button" class="btn btn-outline-danger position-relative ms-2" style="float: right;">
                     Logout <i class="fa fa-sign-out"></i>
-                </a>
+                </a> -->
+
+                <form action="{{ route('customer.logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger position-relative ms-2" style="float: right;">
+                        Logout <i class="fa fa-sign-out"></i>
+                    </button>
+                </form>
 
             </div>
         </div>
@@ -41,7 +47,7 @@
             <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
                 <a href="{{ url('customer/session/cart') }}" class="text-decoration-none w-100">
                     <div class="card p-3 w-100 cardbgylw">
-                        <i class="fa fa-bullseye"></i> 3 items in your cart
+                        <i class="fa fa-bullseye"></i> {{ session('cartCount') }} Items in your cart
                     </div>
                 </a>
             </div>
@@ -191,7 +197,7 @@
         const modalBody = document.getElementById('modalBody');
 
         modalTitle.textContent = `Notifications for ${date}`;
-        modalTitle.style.fontSize = '1.25em'; // Adjust font size here
+        modalTitle.style.fontSize = '1.25em'; 
         modalBody.innerHTML = messages.map(msg => `<br><p>${msg}</p>`).join('');
         modal.style.display = 'flex';
     }

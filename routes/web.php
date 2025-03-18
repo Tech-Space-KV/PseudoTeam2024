@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HardwareController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SupportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
@@ -43,9 +44,11 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->dashboard('customer/reports');
     });
 
-    Route::get('/search_project', function () {
-        return view('customer/search_project');
-    });
+    // Route::get('/search_project', function () {
+    //     return view('customer/search_project');
+    // });
+
+    Route::get('/search_project' , [ProjectController::class, 'searchProject']);
 
     Route::get('/upload-project', function () {
         return (new AuthController)->dashboard('customer/project_upload_form');
@@ -75,8 +78,12 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new HardwareController)->fetchHardware();
     });
 
+    // Route::get('/marketplace/hardwares-orders', function () {
+    //     return (new AuthController)->dashboard('customer/marketplace_hardwares_orders');
+    // });
+
     Route::get('/marketplace/hardwares-orders', function () {
-        return (new AuthController)->dashboard('customer/marketplace_hardwares_orders');
+        return (new OrderController)->fetchOrderHistory();
     });
 
     Route::get('/help', function () {
@@ -135,8 +142,8 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     // });
 
     // routes/web.php
-    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
-
+    // Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+ 
     Route::post('/marketplace/hardwares-details/addToCart', [CartController::class, 'addToCart']);
 
     Route::get('/trackticket', function () {
@@ -150,12 +157,13 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->fetchNotificationDetails($notificationId);
     });
 
+    Route::post('/submitSupportQuery', [QueryController::class, 'submitSupportQuery'])->name('submitSupportQuery');
+
 });
 
+Route::delete('/remove-from-cart/{id}' , [CartController::class , 'removeFromCart'])->name('cart.remove');
 
-Route::post('/submit-query', [QueryController::class, 'submitSupportQuery'])->name('submit.query');
-
-// Route::delete('/remove-from-cart/{id}' , [CartController::class , 'removeFromCart']);
+Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
 
 // Services and Queries
 Route::get('/services', [ServiceController::class, 'showServices'])->name('services');

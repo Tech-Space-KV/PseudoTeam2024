@@ -113,7 +113,7 @@ class ProjectController extends Controller
 
     public function trackProjectReportLocation($projectid)
     {
-        $project_scope = ProjectScope::where('pscope_project_id', $projectid)->first();
+        $project_scope = ProjectScope::where('pscope_project_id', $projectid)->get();
 
         if (!$project_scope) {
             return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
@@ -124,13 +124,25 @@ class ProjectController extends Controller
 
     public function trackProjectReportDetails($projectid)
     {
-        $project_planner = ProjectPlanner::where('pplnr_scope_id', $projectid)->first();
+        $project_planner = ProjectPlanner::where('pplnr_scope_id', $projectid)->get();
 
         if (!$project_planner) {
             return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
         }
 
-        return view('customer.track_project_report_details', compact('project_planner'));
+        $totalProjects = ProjectPlanner::where('pplnr_scope_id' , $projectid)->whereNot('pplnr_status' , 'Fullfilled')->count();;
+
+        $fullfilledProjects = ProjectPlanner::where('pplnr_scope_id' , $projectid)->where('pplnr_status' , 'Fullfilled')->count();
+
+        //$nd = ProjectPlanner::where('pplnr_scope_id' , $projectid)->whereNot('pplnr_status' , 'ND')->count();
+
+        $average = $totalProjects > 0 ? ($fullfilledProjects) / $totalProjects * 100 : 0;
+
+        $average = number_format($average, 2); 
+
+        \Log::info('Average : ' . $average . '%');
+
+        return view('customer.track_project_report_details', compact('project_planner' , 'average'));
     }
 
     public function trackProjectPending()
@@ -192,5 +204,20 @@ class ProjectController extends Controller
         
         return view('customer.project_timeline' , compact('projectTimeline'));
     }   
+
+    public function searchProject(Request $request) 
+    {
+        $query = $request->input('query', '');
+
+        if (!empty($query)) {
+            $projects = Project::where('plist_projectid', 'like', '%' . $query . '%')
+                                ->orWhere('plist_title', 'like', '%' . $query . '%')
+                                ->paginate(10);
+        } else {
+            $projects = Project::paginate(10); 
+        }
+
+        return view('customer.search_project', compact('projects'));
+    }
         
 }

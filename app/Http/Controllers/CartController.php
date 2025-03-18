@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Hardware;
+use App\Models\OrderPlaced;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -26,6 +27,9 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'Customer id not found!');
         }
 
+
+        $cart = session()->get('cart', []);
+
         $orderNo = \DB::table('cart')->max('cart_id') + 1;
         $orderNo = 'Order-' . $orderNo;
 
@@ -38,12 +42,7 @@ class CartController extends Controller
                 'cart_customer_id' => $customerId,
             ]);
 
-            \Log::info('Cart count before updating ' . session('cartCount'));
-
             session()->put('cartCount', session('cartCount', 0) + 1);
-
-
-            \Log::info('Cart count after updating ' . session('cartCount'));
 
             return redirect()->back()->with('success', 'Added to cart!');
 
@@ -87,10 +86,64 @@ class CartController extends Controller
 
         if ($cartItem) {
             $cartItem->delete();
-            return response()->json(['success' => true]);
+
+            session()->put('cartCount', session('cartCount', 0) - 1);
+
+            return response()->json([
+                'success' => true,
+                'cartCount' => session('cartCount', 0)
+            ]);
+
+            // return response()->json(['success' => true]);
         }
 
+        \Log::info('If not working!');
         return response()->json(['success' => false, 'message' => 'Item not found']);
     }
+
+    // public function placeOrder(Request $request)
+    // {
+    //     $customerId = session('customer_id');
+        
+    //     $cartItems = Cart::where('cart_customer_id', $customerId)->get();
+
+    //     if ($cartItems->isEmpty()) {
+    //         return response()->json(['message' => 'Your cart is empty.'], 400);
+    //     }
+
+    //     $hardwareDetails = [];
+    //     $totalPrice = 0;
+
+    //     foreach ($cartItems as $cartItem) {
+    //         $hardware = Hardware::where('hrdws_id', $cartItem->cart_hw_id)->first();
+
+    //         if ($hardware) {
+    //             $hardwareDetails[] = $hardware;
+
+    //             $totalPrice += $hardware->hrdws_price * $cartItem->cart_qty;
+    //         }
+    //     }
+
+    //     $deliveryAddress = $request->input('delivery_address');
+    //     if (!$deliveryAddress || $deliveryAddress == 'Select delivery address') {
+    //         return response()->json(['message' => 'Please select a delivery address.'], 400);
+    //     }
+
+    //     $order = OrderPlaced::create([
+    //         'ordplcd_hw_id' => 
+    //         'user_id' => $customerId,
+    //         'cart_items' => json_encode($hardwareDetails), 
+    //         'total_price' => $totalPrice,
+    //         'delivery_address' => $deliveryAddress,
+    //     ]);
+
+    //     Cart::where('cart_customer_id', $customerId)->delete();
+
+    //     return response()->json([
+    //         'message' => 'Order placed successfully!',
+    //         'order_id' => $order->id,
+    //         'total_price' => $totalPrice
+    //     ]);
+    // }
 
 }

@@ -103,7 +103,7 @@
     if (serialNumber && hardwareIdentifier && modelNumber && quantity) {
 
       document.getElementById('hardware-form').submit();
-      alert('Form submitted successfully!');
+      alert('Item added to cart successfully!');
       
     } else {
       alert('Please fill in all required fields.');

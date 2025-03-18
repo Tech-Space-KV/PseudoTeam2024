@@ -9,6 +9,7 @@
            type="search" 
            name="query" 
            placeholder="Search project id or title" 
+           value="{{ request('query') }}"
            aria-label="Search">
     <button class="btn btn-sm btn-outline-primary rounded-pill" type="submit">
         Search

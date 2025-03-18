@@ -33,6 +33,7 @@
     <div class="timeline-item">
         <div class="timeline-item-content">
             <h4>{{ $projectTimeline->pptasks_task_title }}</h4>
+            <span>{{ $projectTimeline->pptasks_pt_status }}</span><br>
             <span class="date">{{ $projectTimeline->pptasks_date_of_completion }}</span>
         </div>
     </div>

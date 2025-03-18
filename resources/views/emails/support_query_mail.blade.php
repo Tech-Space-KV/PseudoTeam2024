@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-<p>
-    Hello, Test Mail.
-</p>
+    Hello, 
+    We have received a help query :<br> 
+    {{ $query['query']}}
 </body>
 </html>

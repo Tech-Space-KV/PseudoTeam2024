@@ -9,9 +9,8 @@
     </div>
     </br>
 
-    <form>
+    <form method="POST">
     @csrf
-
     <div class="mb-2">
       <select class="form-select form-select-sm" aria-label=".form-select-sm example">
       <option selected>Select delivery address</option>
@@ -28,14 +27,15 @@
     <div class="order-md-last">
       <ul class="list-group mb-3">
       @foreach($hardwareDetails as $hardware)
-      <li class="list-group-item d-flex justify-content-between lh-sm">
+      <li class="list-group-item d-flex justify-content-between lh-sm" id="cart-item-{{ $hardware->hrdws_id }}">
       <div>
       <h6 class="my-0">{{ $hardware->hrdws_hw_identifier ?? 'Identifier not found' }}</h6>
       <small
         class="text-body-secondary">{{ $hardware->hrdws_model_description ?? 'Description not found' }}</small>
       </div>
       <span class="text-body-secondary">
-      <i class="fa fa-times" style="cursor: pointer;" data-cart-item-id="{{ $hardware->hrdws_id }}"></i>
+      <i class="fa fa-times remove-from-cart" style="cursor: pointer;"
+        data-cart-item-id="{{ $hardware->hrdws_id }}"></i>
       </span>
       </li>
     @endforeach
@@ -48,7 +48,7 @@
       </div>
       </div> --}}
 
-      <button type="submit" class="btn btn-primary w-100 mt-2">Place order</button>
+      <button type="submit" class="btn btn-primary w-100 mt-2" id="place-order-btn">Place order</button>
 
 
     </div>
@@ -57,64 +57,114 @@
 
   </div>
 
-
   <script>
-    function removeItem(itemId) {
-    if (confirm('Are you sure you want to remove this item from your cart?')) {
-      fetch(`/remove-from-cart/${itemId}`, {
-      method: 'DELETE',
-      headers: {
-        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-        'Content-Type': 'application/json'
+
+
+    // $(document).ready(function() {
+    //     $('.remove-from-cart').on('click', function() {
+    //         var cartItemId = $(this).data('cart-item-id'); 
+
+    //         $.ajax({
+    //             url: '/remove-from-cart/' + cartItemId,  
+    //             method: 'DELETE',
+    //             data: {
+    //                 _token: $('meta[name="csrf-token"]').attr('content')  
+    //             },
+    //             success: function(response) {
+
+    //                 console.log(response.message);  
+
+    //                 $('#cart-item-' + cartItemId).remove();  
+
+    //                 $('.cart-count').text(response.cartCount); 
+
+    //                 alert('Item removed from cart.');
+    //             },
+    //             error: function(xhr, status, error) {
+
+    //                 console.log('Error:', error);
+    //                 alert('Failed to remove item from cart.');
+    //             }
+    //         });
+    //     });
+    // });
+
+
+    $(document).ready(function () {
+
+    $('#place-order-btn').on('click', function () {
+
+      $('#place-order-btn').prop('disabled', true).text('Processing...');
+
+      $.ajax({
+
+      url: '/place-order',
+      method: 'POST',
+      data: {
+        _token: $('meta[name="csrf-token"]').attr('content')
       },
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-        const itemElement = document.getElementById('cart-item-' + itemId);
-        if (itemElement) {
-          itemElement.remove();
-        }
-        } else {
-        alert('There was an error removing the item.');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('Something went wrong. Please try again later.');
+      success: function (response) {
+
+        $('#place-order-btn').prop('disabled', false).text('Place Order');
+
+
+        alert(response.message);
+
+        setTimeout(function () {
+              window.location.href = '/customer/session/marketplace/hardwares-orders';
+        }, 1500);
+
+        // // Optionally, redirect to order confirmation page
+        // window.location.href = '/order-confirmation';  // Redirect to order confirmation page, for example
+      },
+      error: function (xhr, status, error) {
+
+        $('#place-order-btn').prop('disabled', false).text('Place Order');
+
+        console.log('Error:', error);
+        alert('Failed to place order.');
+      }
       });
-    }
-    }
-  </script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $(".fa-times").click(function() {
-        var cartItemId = $(this).data("cart-item-id");  
-        var row = $(this).closest("li");  
-        
-        $.ajax({
-            url: "{{ route('cart.remove') }}",  
-            method: "POST",
-            data: {
-                _token: "{{ csrf_token() }}",  
-                cart_item_id: cartItemId 
-            },
-            success: function(response) {
-                if (response.cartCount !== undefined) {
-                    $('#cart-count').text(response.cartCount);
-                }
-                row.remove();
-            },
-            error: function() {
-                alert("Error removing item from cart.");
-            }
-        });
     });
-});
-</script>
+
+    // Remove item from cart
+    $('.remove-from-cart').on('click', function () {
+      var cartItemId = $(this).data('cart-item-id');
+
+      $.ajax({
+      url: '/remove-from-cart/' + cartItemId,
+      method: 'DELETE',
+      data: {
+        _token: $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response) {
+        console.log(response.message);  // Log success message
+
+        // Remove the item from the cart list
+        $('#cart-item-' + cartItemId).remove();
+
+        // Update the cart count on the page
+        $('.cart-count').text(response.cartCount);
+
+        // Optionally, alert the user about the removed item
+        alert('Item removed from cart.');
+
+        // If the cart is empty, you may want to disable the "Place order" button
+        if (response.cartCount === 0) {
+        $('#place-order-btn').prop('disabled', true).text('Your cart is empty');
+        }
+      },
+      error: function (xhr, status, error) {
+        // Handle error
+        console.log('Error:', error);
+        alert('Failed to remove item from cart.');
+      }
+      });
+    });
+    });
+
+
+  </script>
 
 
 

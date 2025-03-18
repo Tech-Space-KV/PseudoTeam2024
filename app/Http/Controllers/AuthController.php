@@ -79,6 +79,7 @@ class AuthController extends Controller
                 'pendingCount' => Project::where('plist_status', 'No SP Assigned')->count(),
                 'deliveredCount' => Project::where('plist_status', 'Delivered')->count(),
                 'cartCount' => Cart::where('cart_customer_id', $user->customer_id)->count(),
+                'addedToCart' => Cart::where('cart_customer_id', $user->customer_id)->get(),
             ];
 
             session($dashboardData);

@@ -47,7 +47,7 @@
             <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
                 <a href="{{ url('customer/session/cart') }}" class="text-decoration-none w-100">
                     <div class="card p-3 w-100 cardbgylw">
-                        <i class="fa fa-bullseye"></i> {{ session('cartCount') }} Items in your cart
+                        <i class="fa fa-bullseye"></i><span class="cart-count">{{ session('cartCount') }}</span> Items in your cart
                     </div>
                 </a>
             </div>
@@ -105,6 +105,7 @@
         <p id="modalBody"></p>
     </div>
 </div>
+
 
 <script>
     const calendarGrid = document.getElementById('calendar-grid');

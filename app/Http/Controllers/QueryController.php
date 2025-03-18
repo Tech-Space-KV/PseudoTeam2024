@@ -33,7 +33,7 @@ class QueryController extends Controller
 
         Mail::to($request->email)->send(new SendQueryMail($data));
 
-        Mail::to('sanskarsharma0119@gmail.com')->send(new SendQueryMailCopy($data));
+        Mail::to('info@pseudoteam.com')->send(new SendQueryMailCopy($data));
 
         return redirect()->back()->with('success', 'Your query has been submitted successfully!');
     }
@@ -41,16 +41,15 @@ class QueryController extends Controller
     public function submitSupportQuery(Request $request)
     {
 
-        \Log::info('Working SubmitSupportQuery method working!');
-
         $request->validate([
             'query' => 'required|string|max:1000',
         ]);
 
-        \Log::info('Working');
+        $query = [ 
+           'query' => $request->input('query')
+        ];
 
-        $query = $request->input('query');
-        Mail::to('sanskarsharma0119@gmail.com')->send(new SupportQueryReceived($query));
+        Mail::to('info@pseudoteam.com')->send(new SupportQueryReceived($query));
 
         return redirect()->back()->with('success', 'Your query has been submitted.');
     }

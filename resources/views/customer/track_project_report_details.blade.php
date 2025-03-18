@@ -7,7 +7,7 @@
 <div class="container">
 
   <div class="mb-4">
-      <h2>Track project: &lt;Project ID: {{ $project_planner->pplnr_scope_id }}&gt;</h2>
+      <h2>Track project: &lt;Project ID: &gt;</h2>
   </div>
   </br>
 
@@ -31,7 +31,7 @@
 {{-- <hr class="border border-2 border-secondary"> --}}
 
 <div class="progress" style="height:25px;">
-  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25% completed</div>
+  <div class="progress-bar" role="progressbar" style="width: {{ $average }}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $average }}% completed</div>
 </div>
 
 </br>
@@ -91,14 +91,19 @@
         <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr> -->
 
+      @foreach ($project_planner as  $pp)
+
+
       <tr>
-        <td>{{ $project_planner->pplnr_milestone }}</td>
-        <td>{{ $project_planner->	pplnr_description }}</td>
-        <td>{{ $project_planner->pplnr_start_date }}</td>
-        <td>{{ $project_planner->pplnr_end_date }}</td>
-        <td>{{ $project_planner->pplnr_status }}</td>
-        <td ><a href="{{ url('customer/session/project-timeline/'.$project_planner->pplnr_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+        <td>{{ $pp->pplnr_milestone }}</td>
+        <td>{{ $pp->	pplnr_description }}</td>
+        <td>{{ $pp->pplnr_start_date }}</td>
+        <td>{{ $pp->pplnr_end_date }}</td>
+        <td>{{ $pp->pplnr_status }}</td>
+        <td><a href="{{ url('customer/session/project-timeline/'.$pp->pplnr_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
+      
+      @endforeach
 
     </tbody>
   </table>

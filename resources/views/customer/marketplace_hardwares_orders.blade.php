@@ -21,22 +21,34 @@
 
 <table class="table table-hover" id="myTable">
     <thead>
-      <tr class = "text-pseudo">
+    <tr class = "text-pseudo">
         <th scope="col">Order No</th>
         <th scope="col">No. of items</th>
         <th scope="col">Ordered On</th>
         <th scope="col">Status</th>
-        <th scope="col">Amount</th>
+   <!-- <th scope="col">Amount</th>  -->
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
+
+    @foreach ($orderHistory as $oh)
       <tr>
+        <th scope="row">{{ $oh->ordplcd_order_no }}</th>
+        <td>{{ $oh->ordplcd_qty_placed }}</td>
+        <td>{{ $oh->ordplcd_order_date }}</td>
+        <td>{{ $oh->ordplcd_status }}</td>
+       <!-- <td>21000</td>  -->
+        <td><a href="{{ url('/customer/session/marketplace/hardwares-details/'.$oh->ordplcd_hw_id) }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+      </tr>
+      @endforeach
+
+      <!--   <tr>
         <th scope="row">123</th>
         <td>3</td>
         <td>28/11/2023</td>
         <td>Pending</td>
-        <td>20000</td>
+     <td>20000</td>
         <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
@@ -44,7 +56,7 @@
         <td>5</td>
         <td>17/12/2023</td>
         <td>Finalized</td>
-        <td>30000</td>
+     <td>30000</td> 
         <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
@@ -52,7 +64,7 @@
         <td>9</td>
         <td>07/09/2024</td>
         <td>Pending</td>
-        <td>15000</td>
+      <td>15000</td>
         <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
@@ -60,7 +72,7 @@
         <td>10</td>
         <td>08/10/2024</td>
         <td>Pending</td>
-        <td>25000</td>
+     <td>25000</td>
         <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
@@ -68,7 +80,7 @@
         <td>4</td>
         <td>20/11/2024</td>
         <td>Finalized</td>
-        <td>18000</td>
+      <td>18000</td> 
         <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       <tr>
@@ -76,9 +88,10 @@
         <td>6</td>
         <td>17/12/2024</td>
         <td>Pending</td>
-        <td>21000</td>
+       <td>21000</td> 
         <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
-      </tr>
+      </tr> -->
+
     </tbody>
   </table>
 

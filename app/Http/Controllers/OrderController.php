@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Hardware;
 use App\Models\OrderPlaced;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use Log;
 
@@ -24,13 +25,16 @@ class OrderController extends Controller
 
             $orderDate = $orderDate = Carbon::now()->format('d-m-Y');
 
+            $orderNo = 'Order-' . Carbon::now()->format('YmdHis');
+
             foreach ($cartItems as $cartItem) {
+
                 $hardware = Hardware::find($cartItem->cart_hw_id);
                 if ($hardware) {
 
                     $order = new OrderPlaced();
                     $order->ordplcd_customer_id = $customerId;
-                    $order->ordplcd_order_no = $cartItem->cart_order_no;
+                    $order->ordplcd_order_no = $orderNo;
                     $order->ordplcd_qty_placed = $cartItem->cart_qty;
                     $order->ordplcd_hw_id = $cartItem->cart_hw_id;
                     $order->ordplcd_amt = $hardware->hrdws_price * $cartItem->cart_qty;
@@ -70,13 +74,44 @@ class OrderController extends Controller
         }
     }
 
-    public function fetchOrderHistory() 
+    public function fetchOrderHistory()
     {
         $customerId = session('customer_id');
-        
-        $orderHistory = OrderPlaced::where('ordplcd_customer_id' , $customerId)->get();
 
-        return view('customer.marketplace_hardwares_orders' , compact('orderHistory'));
+        // $orderHistory = OrderPlaced::where('ordplcd_customer_id' , $customerId)->get();
+
+        $orderHistory = OrderPlaced::where('ordplcd_customer_id', $customerId)
+            ->select('ordplcd_order_no', DB::raw('SUM(ordplcd_qty_placed) as total_qty'), 'ordplcd_order_date')
+            ->groupBy('ordplcd_order_no', 'ordplcd_order_date')->orderBy('ordplcd_id', 'desc') 
+            ->get();
+
+        return view('customer.marketplace_hardwares_orders', compact('orderHistory'));
+    }
+
+    public function fetchOrderHistoryDetails($ordplcd_order_no)
+    {
+        // $placedOrders = OrderPlaced::where('ordplcd_order_no', $ordplcd_order_no)->get();
+
+        $placedOrders = OrderPlaced::where('ordplcd_order_no', $ordplcd_order_no)
+            ->orderBy('ordplcd_id', 'desc')
+            ->get();
+
+        $hardwareDetails = [];
+        foreach ($placedOrders as $order) {
+
+            $hardware = Hardware::find($order->ordplcd_hw_id);
+
+            $hardwareDetails[] = [
+                'hardware' => $hardware,
+                'address' => $order->ordplcd_address,
+                'status' => $order->ordplcd_status,
+                'delivery_date' => $order->ordplcd_delivery_date,
+                'quantity' => $order->ordplcd_qty_placed,
+            ];
+        }
+
+        return view('customer.marketplace_hardwares_order_details', compact('hardwareDetails', 'ordplcd_order_no'));
     }
 
 }
+

@@ -20,6 +20,14 @@ class CartController extends Controller
         $cartHwId = $validated['cart_hw_id'];
         $cartQty = $validated['cart_qty'];
 
+        $hardware = Hardware::where('hrdws_id' , $cartHwId)->first();
+
+        if($hardware)
+        {
+            $hardware->hrdws_qty -= $cartQty;
+            $hardware->save();
+        }
+
         $customerId = session('customer_id');
 
         if (!$customerId) {
@@ -30,13 +38,25 @@ class CartController extends Controller
 
         $cart = session()->get('cart', []);
 
-        $orderNo = \DB::table('cart')->max('cart_id') + 1;
-        $orderNo = 'Order-' . $orderNo;
+        // $orderNo = \DB::table('cart')->max('cart_id') + 1;
+        // $orderNo = 'Order-' . $orderNo;
 
         try {
 
+            $addedItem = Cart::where('cart_hw_id' , $cartHwId)->first();
+
+            if($addedItem)
+            {
+                $addedItem->cart_qty += $cartQty;
+                $addedItem->save();
+
+                // session()->put('cartCount', session('cartCount', 0) + 1);
+
+                return redirect()->back()->with('success', 'Item added to cart!');
+            }
+            
             Cart::create([
-                'cart_order_no' => $orderNo,
+                // 'cart_order_no' => $orderNo,
                 'cart_hw_id' => $cartHwId,
                 'cart_qty' => $cartQty,
                 'cart_customer_id' => $customerId,
@@ -44,7 +64,7 @@ class CartController extends Controller
 
             session()->put('cartCount', session('cartCount', 0) + 1);
 
-            return redirect()->back()->with('success', 'Added to cart!');
+            return redirect()->back()->with('success', 'Item added to cart!');
 
         } catch (\Throwable $th) {
 
@@ -67,7 +87,13 @@ class CartController extends Controller
             foreach ($cartItems as $cartItem) {
                 $hardware = Hardware::where('hrdws_id' , $cartItem->cart_hw_id)->first(); 
                 if ($hardware) {
-                    $hardwareDetails[] = $hardware; 
+                    // $hardwareDetails[] = $hardware; 
+
+                    $hardwareDetails[] = [
+                        'hardware' => $hardware,
+                        'quantity' => $cartItem->cart_qty
+                    ];
+
                 }
             }
 
@@ -85,6 +111,17 @@ class CartController extends Controller
         $cartItem = Cart::where('cart_customer_id', $customerId)->where('cart_hw_id', $id)->first();
 
         if ($cartItem) {
+
+            $hardware = Hardware::where('hrdws_id' , $id)->first();
+
+            $cartItemQty = $cartItem->cart_qty;
+
+            if($hardware)
+            {
+                $hardware->hrdws_qty += $cartItemQty;
+                $hardware->save();
+            }
+
             $cartItem->delete();
 
             session()->put('cartCount', session('cartCount', 0) - 1);

@@ -4,7 +4,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HardwareController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReferAndEarnController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\QueryController;
@@ -48,7 +50,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     //     return view('customer/search_project');
     // });
 
-    Route::get('/search_project' , [ProjectController::class, 'searchProject']);
+    Route::get('/search_project', [ProjectController::class, 'searchProject']);
 
     Route::get('/upload-project', function () {
         return (new AuthController)->dashboard('customer/project_upload_form');
@@ -82,6 +84,10 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     //     return (new AuthController)->dashboard('customer/marketplace_hardwares_orders');
     // });
 
+    Route::get('/marketplace/hardwares-order-details/{ordplcd_order_no}', function ($ordplcd_order_no) {
+        return (new OrderController)->fetchOrderHistoryDetails($ordplcd_order_no);
+    });
+
     Route::get('/marketplace/hardwares-orders', function () {
         return (new OrderController)->fetchOrderHistory();
     });
@@ -97,6 +103,8 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/referandearn', function () {
         return (new AuthController)->dashboard('customer/referandearn');
     });
+
+    Route::post('/referandearnmail', [ReferAndEarnController::class, 'sendMail']);
 
     Route::get('/notifications', function () {
         return (new AuthController)->fetchNotification();
@@ -143,14 +151,24 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
     // routes/web.php
     // Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
- 
+
     Route::post('/marketplace/hardwares-details/addToCart', [CartController::class, 'addToCart']);
 
-    Route::get('/trackticket', function () {
-        return (new AuthController)->dashboard('customer/trackticket');
-    });
+    // Route::get('/trackticket', function () {
+    //     return (new AuthController)->dashboard('customer/trackticket');
+    // });
+
     Route::get('/ticket', function () {
         return (new AuthController)->dashboard('customer/ticket');
+    });
+
+
+    Route::get('/trackticket', function () {
+        return (new TicketController)->fetchTickets();
+    });
+
+    Route::get('/ticketdetails/{tckt_id}', function ($tckt_id) {
+        return (new TicketController)->ticketDetails($tckt_id);
     });
 
     Route::get('/notification-details/{notificationId}', function ($notificationId) {
@@ -159,9 +177,22 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
     Route::post('/submitSupportQuery', [QueryController::class, 'submitSupportQuery'])->name('submitSupportQuery');
 
+    Route::get('/project-details/{plist_id}', function ($plist_id) {
+        return (new ProjectController)->fetchProject($plist_id);
+    });
+    
 });
 
-Route::delete('/remove-from-cart/{id}' , [CartController::class , 'removeFromCart'])->name('cart.remove');
+
+Route::get('/projects/export/csv', [ProjectController::class, 'exportCSV'])->name('projects.export.csv');
+Route::get('/projects/export/pdf', [ProjectController::class, 'exportPDF'])->name('projects.export.pdf');
+
+
+// Route::post('/storeticket' , [TicketController::class , 'storeTicket']);
+
+Route::post('/customer/session/ticket/storeticket', [TicketController::class, 'storeTicket']);
+
+Route::delete('/remove-from-cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
 Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
 

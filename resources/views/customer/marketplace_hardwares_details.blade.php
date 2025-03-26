@@ -3,10 +3,25 @@
 @section('content')
   </br>
   <div class="container">
-    <div class="mb-4">
+    <div class="mb-4" id="message-container">
+      
     <h2 style="font-size: 24px; font-weight: bold; color: #333;">Hardware Details</h2>
+
+          @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+          @endif
+
+          @if(session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+          @endif
+
     </div>
     <div class="container w-100 mb-4">
+
     <form id="hardware-form" action="addToCart" method="POST"
       style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
       @csrf
@@ -89,24 +104,53 @@
 
     // Validation logic
     if (!quantity) {
-      alert("Please enter a valid quantity.");
+      // alert("Please enter a valid quantity.");
+
+      document.getElementById('message-container').innerHTML = `
+        <div class="alert alert-warning" role="alert">
+          Please enter a valid quantity.
+        </div>
+      `;
+
+      document.getElementById('message-container').scrollIntoView({ behavior: 'smooth' });
+
+      return;
+
       quantityInput.focus();
       return;
     }
 
     if (quantity > availableQuantity) {
-      alert(`Quantity cannot exceed the available quantity (${availableQuantity}).`);
+      // alert(`Quantity cannot exceed the available quantity (${availableQuantity}).`);
+
+      document.getElementById('message-container').innerHTML = `
+        <div class="alert alert-warning" role="alert">
+          Quantity cannot exceed the available quantity (${availableQuantity}).
+        </div>
+      `;
+
       quantityInput.focus();
+
+      document.getElementById('message-container').scrollIntoView({ behavior: 'smooth' });
+
       return;
     }
 
     if (serialNumber && hardwareIdentifier && modelNumber && quantity) {
 
       document.getElementById('hardware-form').submit();
-      alert('Item added to cart successfully!');
+      // alert('Item added to cart successfully!');
       
     } else {
-      alert('Please fill in all required fields.');
+      // alert('Please fill in all required fields.');
+      document.getElementById('message-container').innerHTML = `
+        <div class="alert alert-warning" role="alert">
+        Please fill in all required fields.
+        </div>
+      `;
+
+      document.getElementById('message-container').scrollIntoView({ behavior: 'smooth' });
+
     }
     }
   </script>

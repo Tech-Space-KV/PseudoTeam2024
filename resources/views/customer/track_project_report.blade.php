@@ -11,8 +11,13 @@
 <div class="d-flex justify-content-end">
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group me-2">
-      <button type="button" class="btn btn-sm btn-outline-primary">CSV</button>
-      <button type="button" class="btn btn-sm btn-outline-primary">XLSX</button>
+      <!-- <button type="button" class="btn btn-sm btn-outline-primary">CSV</button>
+      <button type="button" class="btn btn-sm btn-outline-primary">PDF</button> -->
+      <div class="btn-group me-2">
+    <a href="{{ route('projects.export.csv') }}" class="btn btn-sm btn-outline-primary">CSV</a>
+    <a href="{{ route('projects.export.pdf') }}" class="btn btn-sm btn-outline-primary">PDF</a>
+</div>
+
     </div>
   </div>
 </div>
@@ -73,7 +78,8 @@
              <td>{{ $project->plist_startdate }}</td>
              <td>{{ $project->plist_enddate }}</td>
              <td>{{ $project->plist_status }}</td>
-            <td><a href="{{ url('customer/session/track-project-report-location/'.$project->plist_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td> 
+            <td><a href="{{ url('customer/session/track-project-report-location/'.$project->plist_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa fa-location-arrow"></i></a></td> 
+            <td><a href="{{ url('customer/session/project-details/'.$project->plist_id) }}"><i class="fa fa-eye btn btn-sm btn-outline-primary"></i></a></td>
          @endforeach
 
     </tbody>

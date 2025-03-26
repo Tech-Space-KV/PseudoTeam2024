@@ -23,9 +23,10 @@
     <tr class="text-pseudo">
       {{-- <th scope="col">Proj. ID.</th>
       <th scope="col">Title</th> --}}
-      <th scope="col">Location</th>
+      <th scope="col">Country</th>
       <!-- <th scope="col">End Date</th> -->
-      <th scope="col">Created at</th>
+      <th scope="col">State</th>
+      <th scope="col">City</th>
       <th scope="col">Status</th>
       <th scope="col"></th>
     </tr>
@@ -62,12 +63,13 @@
     @foreach ($project_scope as $pscope)
 
     <tr>
-      <td>{{ $pscope->pscope_address ?: 'No address available' }}</td>
-      <td>{{ $pscope->created_at ?: 'Date not available' }}</td>
-      <td>{{ $pscope->pscope_status ?: 'Status not set' }}</td>
+      <td>{{ $pscope->pscope_country ?: 'No country available' }}</td>
+      <td>{{ $pscope->pscope_state ?: 'No state available' }}</td>
+      <td>{{ $pscope->pscope_city ?: 'No city available' }}</td>
+      <td>{{ $pscope->pscope_status ?: 'No status available' }}</td>
       <td>
         <a href="{{ url('customer/session/track-project-report-details/'.$pscope->pscope_id)}}" class="btn btn-sm btn-outline-primary" title="Track Progress">
-            <i class="fa fa-eye"></i>
+            <i class="fa fa fa-location-arrow"></i>
         </a>
       </td>
     </tr>

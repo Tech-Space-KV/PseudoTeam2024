@@ -6,35 +6,48 @@
 <div class="container">
   <div class="">
     <h2>Upload Ticket</h2>
+    @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
   </div>
 
-  <form action="#">
-
+  <form action="/customer/session/ticket/storeticket" method="POST" enctype="multipart/form-data" @if($readonly) disabled @endif>
+  @csrf
     <h5 class="mt-4 mb-4 text-pseudo">
       <span class="fa fa-bars"></span> Details of support ticket
     </h5>
 
-
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input type="text" class="form-control" id="title" placeholder="Issue">
+      <input type="text" class="form-control" id="title" name="tckt_title" placeholder="Issue" value="{{ $readonly ? $ticket->tckt_title : old('tckt_title') }}" {{ $readonly ? 'readonly' : '' }}>
     </div>
 
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
       <!-- <input type="textarea" class="form-control" id="description" placeholder="About project"> -->
-      <textarea id="description" name="description" class="form-control"
-        placeholder="Please elaborate your issue"></textarea>
+      <textarea id="description" name="tckt_description" class="form-control"
+        placeholder="Please elaborate your issue" {{ $readonly ? 'readonly' : '' }}>{{ $readonly ? $ticket->tckt_description : old('tckt_description') }}</textarea>
     </div>
 
     <div class="mb-3">
-      <label for="sow" class="form-label">Upload screenshot</label>
-      <input type="file" class="form-control" id="screenshot" placeholder="Upload screenshot">
+      <label for="sow" class="form-label">Add Attachment</label>
+      <input type="file" class="form-control" id="screenshot" name="tckt_attachment" placeholder="Add Attachment" {{ $readonly ? 'disabled' : '' }}>
+      @if($readonly && $ticket->tckt_attachment)
+        <a href="{{ asset('storage/attachments/'.$ticket->tckt_attachment) }}" target="_blank">View Attachment</a>
+      @endif
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
         <label for="projectIs" class="form-label">Ticket type</label>
-        <select class="form-select" id="tickettype">
+        <select class="form-select" id="tickettype" name="#">
           <option selected>--Select type--</option>
           <option value="t1">On Site</option>
           <option value="t2">On Remote</option>
@@ -42,8 +55,6 @@
         </select>
       
     </div>
-
-
 
     <h5 class="mt-4 mb-4 text-pseudo">
       <span class="fa fa-bars"></span> Define interval
@@ -85,9 +96,13 @@
     <div class="mb-3">
       <label for="coupon" class="form-label">Coupon/Promo Code</label>
       <input type="text" class="form-control" id="title" placeholder="Add your coupon or promocode here">
-    </div>
+    </div> -->
 
-    <button type="submit" class="btn btn-primary">Upload</button>
+    <!-- <button type="submit" class="btn btn-primary">Upload</button> -->
+
+    @if(!$readonly)
+      <button type="submit" class="btn btn-primary">Upload</button>
+    @endif
 
   </form>
 </div>

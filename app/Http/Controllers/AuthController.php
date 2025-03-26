@@ -83,7 +83,7 @@ class AuthController extends Controller
             ];
 
             session($dashboardData);
-            
+
             return redirect()->route('customer.dashboard');
         }
 
@@ -106,6 +106,26 @@ class AuthController extends Controller
         if ($viewName === 'customer/track_project_report') {
             $projects = Project::all();
             $data['projects'] = $projects;
+        }
+
+        if ($viewName === 'customer/ticket') {
+
+            if (isset($data['ticket'])) {
+                $data['readonly'] = true;
+            } else {
+                $data['readonly'] = false;
+            }
+
+        }
+
+        if ($viewName === 'customer/project_upload_form') {
+            if (isset($data['project_upload_form'])) {
+                $data['readonly'] = true;
+                $data['project'] = $data['project'] ?? null;
+            } else {
+                $data['readonly'] = false;
+                $data['project'] = $data['project'] ?? null;
+            }
         }
 
         // Generate response for the given view

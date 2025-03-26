@@ -33,21 +33,16 @@
         <tr class="text-pseudo">
           {{-- <th scope="col">Proj. ID.</th>
         <th scope="col">Title</th> --}}
+          <th scope="col">Project ID</th>
           <th scope="col">Title</th>
-          <th scope="col">Country</th>
-          <th scope="col">State</th>
-          <th scope="col">City</th>
-          <th scope="col">Start Date</th>
-          <th scope="col">End Date</th>
-          <th scope="col">Budget</th>
-          <th scope="col">Final Price</th>
+          <th scope="col">Description</th>
           <th scope="col">Status</th>
-          <th scope="col">Project</th>
+          <th scope="col">DateTime</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <!-- <tr>
           {{-- <th scope="row">100134</th>
         <td>Test Project 1</td> --}}
           <td>Test Ticket</td>
@@ -91,7 +86,22 @@
           <td>In Progress</td>
           <td>Live</td>
           <td><a href="{{ url('customer/session/project-timeline') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+        </tr> -->
+
+        @if ($tickets->isNotEmpty())
+        @foreach ($tickets as $ticket)
+        <tr>
+          <td>{{ $ticket->tckt_project_id ?: 'Not Available' }}</td>
+          <td>{{ $ticket->tckt_title ?: 'Not Available' }}</td>
+          <td>{{ $ticket->tckt_description ?: 'Not Available' }}</td>
+          <td>{{ $ticket->tckt_date_time ?: 'Not Available' }}</td>
+          <td>{{ $ticket->tckt_status ?: 'Not Available'}}</td>
+          <td><a href="{{ url('customer/session/ticketdetails/'.$ticket->tckt_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
         </tr>
+        @endforeach
+        @else
+        <tr><td colspan="7">Tickets Not Found!</td></tr>
+        @endif
       </tbody>
     </table>
 

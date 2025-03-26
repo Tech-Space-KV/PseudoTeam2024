@@ -25,7 +25,6 @@
         <th scope="col">Order No</th>
         <th scope="col">No. of items</th>
         <th scope="col">Ordered On</th>
-        <th scope="col">Status</th>
    <!-- <th scope="col">Amount</th>  -->
         <th scope="col"></th>
       </tr>
@@ -35,11 +34,10 @@
     @foreach ($orderHistory as $oh)
       <tr>
         <th scope="row">{{ $oh->ordplcd_order_no }}</th>
-        <td>{{ $oh->ordplcd_qty_placed }}</td>
+        <td>{{ $oh->total_qty }}</td>
         <td>{{ $oh->ordplcd_order_date }}</td>
-        <td>{{ $oh->ordplcd_status }}</td>
        <!-- <td>21000</td>  -->
-        <td><a href="{{ url('/customer/session/marketplace/hardwares-details/'.$oh->ordplcd_hw_id) }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+        <td><a href="{{ url('/customer/session/marketplace/hardwares-order-details/'.$oh->ordplcd_order_no) }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
       </tr>
       @endforeach
 

@@ -15,7 +15,8 @@
             <div style="font-size: 1.1rem; font-weight: bold; color: #333;">Notification #:
             </div><br>
             <div style="font-size: 1.1rem; font-weight: bold; color: #333;">
-                {{ $notification->ntfn_notification }}</div><br>
+                {{ $notification->ntfn_notification }}
+            </div><br>
             <div style="font-size: 0.9rem; color: #777; margin-top: 10px;">Date: {{ $notification->ntfn_date_time }}</div>
 
             <!-- Delete Button -->
@@ -118,6 +119,5 @@
             attachDeleteListeners();
         });
     </script>
-
 
 @endsection

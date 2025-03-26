@@ -13,9 +13,11 @@ class Project extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'plist_id';
     protected $table = 'project_list';
 
     protected $fillable = [
+        'plist_id',
         'plist_customer_id',
         'plist_projectid',
         'plist_title',

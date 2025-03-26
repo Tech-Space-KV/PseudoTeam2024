@@ -4,8 +4,19 @@
 
   </br>
   <div class="container ">
-    <div class="mb-4">
     <h2>Support</h2>
+    <div class="mb-4" id="message-container">
+    @if(session('success'))
+    <div class="alert alert-success" role="alert">
+      {{ session('success') }}
+    </div>
+  @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger" role="alert">
+      {{ session('error') }}
+    </div>
+  @endif
     </div><br>
     <form id="support-query-form" action="{{ route('submitSupportQuery') }}" method="POST">
     @csrf 
@@ -24,20 +35,27 @@
 
 
   <script>
-
-    document.getElementById('submit-btn').addEventListener('click', function (event) {
-
+  document.getElementById('submit-btn').addEventListener('click', function (event) {
     const query = document.getElementById('query').value.trim();
     if (!query) {
       event.preventDefault();
-      alert('Please enter a query before submitting.');
+
+      document.getElementById('message-container').innerHTML = `
+        <div class="alert alert-warning" role="alert">
+          Please enter a query before submitting.
+        </div>
+      `;
     }
-    });
+  });
 
-    @if(session('success'))
-      alert('{{ session('success') }}');
-    @endif
+  @if(session('success'))
+    document.getElementById('message-container').innerHTML = `
+      <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+      </div>
+    `;
+  @endif
+</script>
 
-  </script>
 
 @endsection

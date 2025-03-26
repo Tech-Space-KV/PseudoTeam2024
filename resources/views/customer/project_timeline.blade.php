@@ -6,7 +6,7 @@
 <div class="container d-flex justify-content-between align-items-center py-3">
     <!-- Project Timeline Section -->
     <div>
-        <h2 class="mb-0">Project Timeline: &lt;Project ID : {{ $projectTimeline->pptasks_planner_id }}&gt;</h2>
+        <h2 class="mb-0">Project Timeline: &lt;Project ID : {{ $projectTimeline->first()->pptasks_planner_id }}&gt;</h2>
     </div>
 
     <!-- Share Invite Section -->
@@ -30,25 +30,16 @@
 
 
 <div class="timeline">
+    @foreach ($projectTimeline as $pt)
     <div class="timeline-item">
         <div class="timeline-item-content">
-            <h4>{{ $projectTimeline->pptasks_task_title }}</h4>
-            <span>{{ $projectTimeline->pptasks_pt_status }}</span><br>
-            <span class="date">{{ $projectTimeline->pptasks_date_of_completion }}</span>
+            <h4>{{ $pt->pptasks_task_title }}</h4>
+            <span>{{ $pt->pptasks_pt_status }}</span><br>
+            <span class="date">{{ $pt->pptasks_date_of_completion }}</span>
         </div>
     </div>
-    <!-- <div class="timeline-item">
-        <div class="timeline-item-content">
-            <h4>{{ $projectTimeline->pptasks_pt_status }}</h4>
-            <span class="date">{{ $projectTimeline->pptasks_date_of_completion }}</span>
-        </div>
-    </div> -->
-    <!-- <div class="timeline-item">
-        <div class="timeline-item-content">
-            <h4>Hardware Marketplace Functionality</h4>
-            <span class="date">{{ $projectTimeline->pptasks_date_of_completion }}</span>
-        </div>
-    </div> -->
+    @endforeach
+  
     <!-- <div class="timeline-item">
         <div class="timeline-item-content">
             <h4>Signup/Signin Forms</h4>
@@ -63,7 +54,6 @@
     </div> -->
 </div>
 </div>
-
 
 
 @endsection

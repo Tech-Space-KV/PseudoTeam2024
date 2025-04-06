@@ -1,0 +1,41 @@
+@media (max-width: 1030px) {
+  .h-shifter {
+    height: 380px; /* Change this to your desired mobile height */
+  }
+  .f-shifter-subhead {
+    font-size: 15px; /* Change this to your desired mobile height */
+    
+  }
+  .f-shifter-head{
+    font-size: 35px; /* Change this to your desired mobile height */
+    margin-top: -80px;
+  }
+
+  .div-hide {
+    display: none;
+  }
+}
+
+
+
+
+@media (max-width: 768px) {
+  .h-shifter {
+    height: 220px; /* Change this to your desired mobile height */
+  }
+  .f-shifter-subhead {
+    font-size: 15px; /* Change this to your desired mobile height */
+    
+  }
+  .f-shifter-head{
+    font-size: 20px; /* Change this to your desired mobile height */
+    margin-top: -80px;
+  }
+  
+  .bg-gif {
+    background: none no-repeat center center;
+    background-size: cover;
+    position: relative;
+    z-index: 0;
+  }
+}

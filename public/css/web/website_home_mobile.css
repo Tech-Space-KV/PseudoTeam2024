@@ -1,14 +1,84 @@
-@media (max-width: 1030px) {
+/* @media (max-width: 1030px) {
   .h-shifter {
-    height: 380px; /* Change this to your desired mobile height */
+    height: 380px; 
   }
   .f-shifter-subhead {
-    font-size: 15px; /* Change this to your desired mobile height */
+    font-size: 15px; 
+    display: none;
     
   }
   .f-shifter-head{
-    font-size: 35px; /* Change this to your desired mobile height */
+    font-size: 35px; 
     margin-top: -80px;
+    display: none;
+  }
+
+  .div-hide {
+    display: none;
+  }
+} */
+
+
+
+@media (max-width: 1030px) {
+  .h-shifter {
+    height: 400px; /* Change this to your desired mobile height */
+  }
+  .f-shifter-subhead {
+    font-size: 15px; /* Change this to your desired mobile height */
+    display: none;
+    
+  }
+  .f-shifter-head{
+    font-size: 20px; /* Change this to your desired mobile height */
+    margin-top: -80px;
+    display: none;
+  }
+
+  .start-btns{
+    display: none;
+  }
+  
+  .bg-gif {
+    /* background: #316ddb no-repeat center center; */
+    background: url('../../images/bgr3.gif') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    z-index: 0;
+  }
+
+  .div-hide {
+    display: none;
+  }
+}
+
+
+
+@media (max-width: 855px) {
+  .h-shifter {
+    height: 350px; /* Change this to your desired mobile height */
+  }
+  .f-shifter-subhead {
+    font-size: 15px; /* Change this to your desired mobile height */
+    display: none;
+    
+  }
+  .f-shifter-head{
+    font-size: 20px; /* Change this to your desired mobile height */
+    margin-top: -80px;
+    display: none;
+  }
+
+  .start-btns{
+    display: none;
+  }
+  
+  .bg-gif {
+    /* background: #316ddb no-repeat center center; */
+    background: url('../../images/bgr3.gif') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    z-index: 0;
   }
 
   .div-hide {
@@ -19,23 +89,32 @@
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .h-shifter {
-    height: 220px; /* Change this to your desired mobile height */
+    height: 200px; /* Change this to your desired mobile height */
   }
   .f-shifter-subhead {
     font-size: 15px; /* Change this to your desired mobile height */
+    display: none;
     
   }
   .f-shifter-head{
     font-size: 20px; /* Change this to your desired mobile height */
     margin-top: -80px;
+    display: none;
+  }
+
+  .start-btns{
+    display: none;
   }
   
   .bg-gif {
-    background: none no-repeat center center;
+    /* background: #316ddb no-repeat center center; */
+    background: url('../../images/bgr3.gif') no-repeat center center;
     background-size: cover;
     position: relative;
     z-index: 0;
   }
 }
+
+

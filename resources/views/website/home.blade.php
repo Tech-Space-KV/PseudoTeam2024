@@ -59,7 +59,7 @@
                             id="demo"></span></br><span id="demo2"></span></h3>
                     <h5 class="col-md-4 text-light neon-yellow-border-text f-shifter-subhead">Let us handle your
                         projects while you focus on growing your business.</h5>
-                    <a class="btn btn-outline-light btn-lg mt-2" href="{{ url('authentication/customer/sign-in') }}"
+                    <a class="btn btn-outline-light btn-lg mt-2 start-btns" href="{{ url('authentication/customer/sign-in') }}"
                         style="width: 260px" type="button">Start Project <i class="material-icons"
                             style="font-size:14px">arrow_forward</i></a>
                     <br>

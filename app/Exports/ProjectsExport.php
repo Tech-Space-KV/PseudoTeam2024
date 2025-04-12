@@ -4,17 +4,31 @@ namespace App\Exports;
 
 use App\Models\Project;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ProjectsExport implements FromCollection, WithHeadings
+class ProjectsExport implements FromQuery, WithHeadings
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+
+    protected $customerId;
+
+    public function __construct($customerId)
     {
-        return Project::all();
+        $this->customerId = $customerId;
     }
+
+    public function query()
+    {
+        return Project::where('plist_customer_id', $this->customerId);
+    }
+
+    // /**
+    // * @return \Illuminate\Support\Collection
+    // */
+    // public function collection()
+    // {
+    //     return Project::all();
+    // }
 
     public function headings(): array
     {

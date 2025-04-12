@@ -28,7 +28,7 @@ class CartController extends Controller
             $hardware->save();
         }
 
-        $customerId = session('customer_id');
+        $customerId = session('user_id');
 
         if (!$customerId) {
 
@@ -76,7 +76,7 @@ class CartController extends Controller
     public function viewCart()
     {
 
-        $customerId = session('customer_id');
+        $customerId = session('user_id');
 
         $cartItems = Cart::where('cart_customer_id', $customerId)->get();
 
@@ -106,7 +106,7 @@ class CartController extends Controller
     public function removeFromCart($id)
     {
 
-        $customerId = session('customer_id');
+        $customerId = session('user_id');
 
         $cartItem = Cart::where('cart_customer_id', $customerId)->where('cart_hw_id', $id)->first();
 

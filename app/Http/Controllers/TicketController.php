@@ -12,13 +12,9 @@ class TicketController extends Controller
     public function storeTicket(Request $request) 
     {  
 
-        \Log::info('working till here!');
-
-        $customerId = session('customer_id');
+        $customerId = session('user_id');
 
         if (!$customerId) {
-
-            \Log::info('working customer id!');
 
             return redirect()->back()->with('error', 'Customer ID not found!');
         }
@@ -28,9 +24,6 @@ class TicketController extends Controller
             'tckt_description' => 'required|string',
             'tckt_attachment' => 'nullable|file|mimes:pdf,docx,doc|max:2048',
         ]);
-
-
-        \Log::info('working till here! validated');
 
         try {
 
@@ -65,7 +58,7 @@ class TicketController extends Controller
 
     public function fetchTickets() 
     {
-        $customerId = session('customer_id');
+        $customerId = session('user_id');
 
         $tickets = Ticket::where('tckt_customer_id' , $customerId)->get();
 

@@ -18,16 +18,17 @@ class ChartController extends Controller
     public function getData()
     {
 
-        $noSPAssignedCount = Project::where('plist_status', 'No SP Assigned')->count();
-        $deliveredCount = Project::where('plist_status', 'Delivered')->count();
-        $inProgressCount = Project::where('plist_status', 'In Progress')->count();
+        $customerId = session('user_id');
+
+        $noSPAssignedCount = Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id' , $customerId)->count();
+        $deliveredCount = Project::where('plist_status', 'Delivered')->where('plist_customer_id' , $customerId)->count();
+        $inProgressCount = Project::where('plist_status', 'In Progress')->where('plist_customer_id' , $customerId)->count();
         //$overdueCount = Project::where('plist_enddate' ,'<', now())->count();
         $overdueCount = DB::table('project_list')
             ->whereRaw("STR_TO_DATE(plist_enddate, '%d-%m-%Y') < CURDATE()")
             ->where('plist_status', 'No SP Assigned')
+            ->where('plist_customer_id' , $customerId)
             ->count();
-
-        \Log::info($overdueCount);
 
         $statuses = [
             'pending' => $noSPAssignedCount,

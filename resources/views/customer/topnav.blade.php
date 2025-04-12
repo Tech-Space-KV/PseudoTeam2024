@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light mb-4">
     <div class="container-fluid">
-        <a class="navbar-brand ms-3 text-primary" onclick="showleftbar()">
+        <a class="navbar-brand ms-2 text-primary" onclick="showleftbar()">
             <span class="navbar-toggler-icon"></span>
         </a>
         <div class="mx-auto w-75">
@@ -18,7 +18,7 @@
 
         </div>
 
-        <a class="navbar-brand ms-3 text-primary">
+        <a class="navbar-brand ms-2 text-primary">
             <span class="navbar-toggler-icon"></span>
         </a>
     </div>

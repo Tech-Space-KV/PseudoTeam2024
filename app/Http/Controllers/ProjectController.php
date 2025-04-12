@@ -12,8 +12,6 @@ use DB;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Mail;
 
@@ -46,6 +44,7 @@ class ProjectController extends Controller
             'plist_ongnew' => 'required|string',
             'plist_category' => 'required|string',
             'plist_coupon' => 'nullable|string',
+            'plist_customeremail' => 'nullable|string',
         ]);
 
         $currentTime = Carbon::now('Asia/Kolkata');
@@ -67,7 +66,7 @@ class ProjectController extends Controller
         $projectStatus = 'Live';
         $checkrcv = $request->has('plist_checkrcv') ? 'True' : 'False';
 
-        $custId = 'custid';
+        $custId = session('user_id');
 
         try {
 
@@ -85,6 +84,7 @@ class ProjectController extends Controller
                     'plist_currency' => $validated['plist_currency'],
                     'plist_budget' => $validated['plist_budget'],
                     'plist_checkrcv' => $checkrcv,
+                    'plist_customeremail' => $validated['plist_customeremail'],
                     'plist_name' => $validated['plist_name'],
                     'plist_email' => $validated['plist_email'],
                     'plist_contact' => $validated['plist_contact'],
@@ -95,6 +95,12 @@ class ProjectController extends Controller
                     'plist_coupon' => $validated['plist_coupon'],
                     'updated_at' => $updatedAt,
                 ]);
+
+                //session code updated by sanskar sharma on 05-04-2024
+
+                $recentProjects = Project::orderBy('plist_id', 'desc')->where('plist_customer_id' ,     session('user_id'))->take(5)->get();
+
+                session(['recentProjects' => $recentProjects]);
 
                 return redirect()->back()->with('success', 'Project has been updated successfully.');
             } else {
@@ -111,6 +117,7 @@ class ProjectController extends Controller
                     'plist_currency' => $validated['plist_currency'],
                     'plist_budget' => $validated['plist_budget'],
                     'plist_checkrcv' => $checkrcv,
+                    'plist_customeremail' => $validated['plist_customeremail'],
                     'plist_name' => $validated['plist_name'],
                     'plist_email' => $validated['plist_email'],
                     'plist_contact' => $validated['plist_contact'],
@@ -122,6 +129,14 @@ class ProjectController extends Controller
                     'created_at' => $createdAt,
                     'updated_at' => $updatedAt,
                 ]);
+
+                $recentProjects = Project::orderBy('plist_id', 'desc')
+                    ->where('plist_customer_id', session('user_id'))
+                    ->take(5)
+                    ->get();
+
+                // Updating the session with the latest projects
+                session(['recentProjects' => $recentProjects]);
 
                 return redirect()->back()->with('success', 'Project has been uploaded successfully.');
             }
@@ -140,7 +155,20 @@ class ProjectController extends Controller
 
     public function trackProjects()
     {
-        $projects = Project::all();
+
+        $customerId = session('user_id');
+
+        if ($customerId) {
+
+            $projects = Project::orderBy('plist_id' , 'desc')->where('plist_customer_id', $customerId)->get();
+
+        } else {
+
+            return redirect()->back()->with('error', 'Customer ID did not exists!');
+
+        }
+
+        // $projects = Project::all();
 
         if ($projects) {
             return view('customer.track_project_report', compact('projects'));
@@ -151,6 +179,7 @@ class ProjectController extends Controller
 
     public function trackProjectReportLocation($projectid)
     {
+
         $project_scope = ProjectScope::where('pscope_project_id', $projectid)->get();
 
         if (!$project_scope) {
@@ -183,7 +212,10 @@ class ProjectController extends Controller
 
     public function trackProjectPending()
     {
-        $projects = Project::where('plist_status', 'No SP Assigned')->get();
+
+        $customerId = session('user_id');
+
+        $projects = Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id', $customerId)->get();
 
         if ($projects->isEmpty()) {
             return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
@@ -194,7 +226,10 @@ class ProjectController extends Controller
 
     public function trackProjectInProgress()
     {
-        $projects = Project::where('plist_status', 'In Progress')->get();
+
+        $customerId = session('user_id');
+
+        $projects = Project::where('plist_status', 'In Progress')->where('plist_customer_id', $customerId)->get();
 
         if ($projects->isEmpty()) {
             return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
@@ -205,7 +240,10 @@ class ProjectController extends Controller
 
     public function trackProjectDelivered()
     {
-        $projects = Project::where('plist_status', 'Delivered')->get();
+
+        $customerId = session('user_id');
+
+        $projects = Project::where('plist_status', 'Delivered')->where('plist_customer_id', $customerId)->get();
 
         if ($projects->isEmpty()) {
             return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
@@ -216,6 +254,9 @@ class ProjectController extends Controller
 
     public function trackProjectOverdue()
     {
+
+        $customerId = session('user_id');
+
         $currentDate = Carbon::now()->toDateString();
 
         // $projects = Project::whereNotNull('plist_enddate')
@@ -225,6 +266,7 @@ class ProjectController extends Controller
         $projects = DB::table('project_list')
             ->whereRaw("STR_TO_DATE(plist_enddate, '%d-%m-%Y') < CURDATE()")
             ->where('plist_status', 'No SP Assigned')
+            ->where('plist_customer_id', $customerId)
             ->get();
 
         if ($projects->isEmpty()) {
@@ -247,12 +289,20 @@ class ProjectController extends Controller
 
     public function searchProject(Request $request)
     {
+
+        $customerId = session('user_id');
+
         $query = $request->input('query', '');
 
         if (!empty($query)) {
-            $projects = Project::where('plist_projectid', 'like', '%' . $query . '%')
-                ->orWhere('plist_title', 'like', '%' . $query . '%')
+            // $projects = Project::where('plist_projectid', 'like', '%' . $query . '%')
+            //     ->orWhere('plist_title', 'like', '%' . $query . '%')
+            //     ->paginate(10);
+
+            $projects = Project::where('plist_projectid', 'like', '%' . $query . '%')->where('plist_customer_id', $customerId)
+                ->orWhere('plist_title', 'like', '%' . $query . '%')->where('plist_customer_id', $customerId)
                 ->paginate(10);
+
         } else {
             $projects = Project::paginate(10);
         }
@@ -271,7 +321,9 @@ class ProjectController extends Controller
 
     public function exportCSV()
     {
-        return Excel::download(new ProjectsExport, 'projects.csv');
+        $customerId = session('customer_id');
+
+        return Excel::download(new ProjectsExport($customerId), 'projects.csv');
     }
 
     public function exportPDF()
@@ -279,5 +331,56 @@ class ProjectController extends Controller
         $projects = Project::all();
         $pdf = Pdf::loadView('customer.projectspdf', compact('projects'));
         return $pdf->download('projects.pdf');
-    } 
+    }
+
+    public function reports()
+    {
+        $cusomerId = session('user_id');
+
+        $projects = Project::where('plist_customer_id', $cusomerId)->get();
+    }
+
+    public function listOfProjects(){
+        
+        $serviceProviderId = session('sp_user_id');
+
+        $projects = ProjectPlannerTask::with([
+            'projectPlanner.projectScope.project'
+        ])
+        ->where('pptasks_sp_id', $serviceProviderId)
+        ->get()
+        ->map(function ($task) {
+            return optional(optional($task->projectPlanner)->projectScope)->project;
+        })
+        ->filter()
+        ->unique('plist_id')
+        ->values();
+
+        if($projects) {
+
+            return view('/service-partner/all_projects' , compact('projects'));
+
+        }
+
+        return redirect()->back()->with('error' , 'Project not found!');
+
+    }
+
+    public function manageprojectLocation($projectId){
+        
+        $project_scope = ProjectScope::where('pscope_project_id', $projectId)->get();
+
+        if (!$project_scope) {
+            return redirect()->route('service-partner.dashboard')->with('error', 'Project not found.');
+        }
+
+        return view('service-partner.manage_project_location', compact('project_scope'));
+
+    }
+
+    public function manageProjectdetails($pscopeId) {
+        
+        
+
+    }
 }

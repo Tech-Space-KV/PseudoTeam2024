@@ -12,9 +12,7 @@ class ReferAndEarnController extends Controller
     public function sendMail(Request $request) 
     {
 
-        \Log::info('working till here!');
-
-        $customer_id = session('customer_id');
+        $customer_id = session('user_id');
 
         if(!$customer_id)
         {

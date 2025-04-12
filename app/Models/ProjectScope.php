@@ -13,4 +13,8 @@ class ProjectScope extends Model
 
     protected $primaryKey = 'pscope_id';
     
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'pscope_project_id');
+    }
 }

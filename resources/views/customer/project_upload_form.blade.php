@@ -186,7 +186,7 @@
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Additional Email (Optional)</label>
-                    <input type="email" class="form-control" id="emailInput" name="plist_additional_email"
+                    <input type="email" class="form-control" id="emailInput" name="plist_customeremail"
                         placeholder="Additional email" readonly>
                 </div>
 

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectOwners extends Model
 {
     use HasFactory;
+
+    protected $table = 'project_owners';
+
+    protected $fillable = [
+        'pown_email',
+        'pown_password',
+        'pown_profile_completion_flag',
+    ];
 }

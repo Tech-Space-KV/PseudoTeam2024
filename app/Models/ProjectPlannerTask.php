@@ -15,4 +15,9 @@ class ProjectPlannerTask extends Model
         'pptasks_pt_status',
         'pptasks_date_of_completion',
     ];
+
+    public function projectPlanner()
+    {
+        return $this->belongsTo(ProjectPlanner::class, 'pptasks_planner_id');
+    }
 }

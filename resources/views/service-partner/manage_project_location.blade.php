@@ -31,7 +31,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <!-- <tr>
       {{-- <th scope="row">100134</th>
       <td>Test Project 1</td> --}}
       <td>Location: city, state, country, pincode</td>
@@ -57,7 +57,24 @@
       <td>28/11/2024</td>
       <td>In Progress</td>
       <td ><a href="{{ url('service-partner/session/manage_project_details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+    </tr> -->
+
+    @foreach ($project_scope as $pscope)
+
+    <tr>
+      <td>{{ $pscope->pscope_country ?: 'No country available' }}</td>
+      <td>{{ $pscope->pscope_state ?: 'No state available' }}</td>
+      <td>{{ $pscope->pscope_city ?: 'No city available' }}</td>
+      <td>{{ $pscope->pscope_status ?: 'No status available' }}</td>
+      <td>
+        <a href="{{ url('service-partner/session/manage_project_details')}}" class="btn btn-sm btn-outline-primary" title="Track Progress">
+            <i class="fa fa fa-location-arrow"></i>
+        </a>
+      </td>
     </tr>
+    
+    @endforeach
+
   </tbody>
 </table>
 

@@ -1,17 +1,23 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Mail\CustomerSignUpMail;
 use App\Models\Cart;
 use App\Models\Hardware;
+use App\Models\ProjectOwners;
 use App\Models\ProjectPlanner;
+use App\Models\ProjectPlannerTask;
 use App\Models\ProjectScope;
+use App\Models\ServiceProvider;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Project;
 use App\Models\Notification;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -27,14 +33,19 @@ class AuthController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8',
+            'contact' => ['required', 'regex:/^\+?[0-9]{10,15}$/', 'unique:users,contact'],
         ]);
+
+        //Need to generate user_id also
 
         User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
+            'contact' => $validated['contact'],
+            'user_type' => 'customer',
         ]);
+
+        Mail::to($request->email)->send(new CustomerSignUpMail());
 
         return redirect()->route('auth.customer.sign_in')->with('success', 'Signup successful! Please log in.');
     }
@@ -53,44 +64,242 @@ class AuthController extends Controller
 
 
     // Handle login
+    //old login method/function
+    // public function login(Request $request)
+    // {
+    //     // Validate the login data
+    //     $credentials = $request->only('email', 'password');
+
+    //     if (Auth::attempt($credentials)) {
+
+    //         //added by sanskar on 22/02/2025
+    //         $user = Auth::user();
+
+    //         // Redirect to the customer dashboard after successful login
+    //         $token = bin2hex(random_bytes(16)); // Generates a 32-character hexadecimal token
+    //         session(['user_session_token' => $token]);
+
+    //         session(['customer_id' => $user->customer_id]);
+    //         session(['name' => $user->name]);
+
+    //         //code added by sanskar sharma (20/02/2025)
+    //         $dashboardData = [
+    //             'unreadNotificationsCount' => Notification::where('ntfn_readflag', false)->count(),
+    //             'recentProjects' => Project::orderBy('created_at', 'desc')->take(5)->get(),
+    //             'inProgressCount' => Project::where('plist_status', 'In Progress')->count(),
+    //             'pendingCount' => Project::where('plist_status', 'No SP Assigned')->count(),
+    //             'deliveredCount' => Project::where('plist_status', 'Delivered')->count(),
+    //             'cartCount' => Cart::where('cart_customer_id', $user->customer_id)->count(),
+    //             'addedToCart' => Cart::where('cart_customer_id', $user->customer_id)->get(),
+    //         ];
+
+    //         session($dashboardData);
+
+    //         return redirect()->route('customer.dashboard');
+    //     }
+
+    //     // If authentication fails, return to the login page with an error message
+    //     return redirect()->route('auth.customer.sign_in')->withErrors([
+    //         'email' => 'These credentials do not match our records.',
+    //     ]);
+    // }
+
+
+    //new login method/function implemented by sanskar sharma on 31/03/2025
     public function login(Request $request)
     {
-        // Validate the login data
-        $credentials = $request->only('email', 'password');
+        $email = $request->email;
+        $password = $request->password;
 
+        $user = User::where('email', $email)->where('user_type', 'customer')->first();
 
-        if (Auth::attempt($credentials)) {
+        if ($user) {
 
-            //added by sanskar on 22/02/2025
-            $user = Auth::user();
+            $projectOwner = ProjectOwners::where('pown_email', $email)->first();
 
-            // Redirect to the customer dashboard after successful login
-            $token = bin2hex(random_bytes(16)); // Generates a 32-character hexadecimal token
-            session(['user_session_token' => $token]);
+            if ($projectOwner) {
 
-            session(['customer_id' => $user->customer_id]);
-            session(['name' => $user->name]);
+                if (Hash::check($password, $projectOwner->pown_password)) {
 
-            //code added by sanskar sharma (20/02/2025)
-            $dashboardData = [
-                'unreadNotificationsCount' => Notification::where('ntfn_readflag', false)->count(),
-                'recentProjects' => Project::orderBy('created_at', 'desc')->take(5)->get(),
-                'inProgressCount' => Project::where('plist_status', 'In Progress')->count(),
-                'pendingCount' => Project::where('plist_status', 'No SP Assigned')->count(),
-                'deliveredCount' => Project::where('plist_status', 'Delivered')->count(),
-                'cartCount' => Cart::where('cart_customer_id', $user->customer_id)->count(),
-                'addedToCart' => Cart::where('cart_customer_id', $user->customer_id)->get(),
-            ];
+                    Auth::login($user);
 
-            session($dashboardData);
+                    if ($projectOwner->pown_profile_completion_flag) {
 
-            return redirect()->route('customer.dashboard');
+                        $token = bin2hex(random_bytes(16));
+                        session(['user_session_token' => $token]);
+
+                        // session(['user_id' => $user->user_id]);
+
+                        session(['user_id' => $projectOwner->pown_id]);
+                        // session(['pown_id' => $projectOwner->pown_id]);
+                        session(['pown_name' => $projectOwner->pown_name]);
+                        session(['pown_username' => $projectOwner->pown_username]);
+                        session(['pown_email' => $projectOwner->pown_email]);
+                        session(['pown_complete_profile_flag' => $projectOwner->pown_profile_completion_flag]);
+
+                        //pown_id , pown_email , pown_complete_profile_flag , pown_name , pown_username
+
+                        //code added by sanskar sharma (20/02/2025)
+                        $dashboardData = [
+                            'unreadNotificationsCount' => Notification::where('ntfn_readflag', false)->where('ntfn_forUserId', $projectOwner->pown_id)->where('ntfn_type', 'cust')->count(),
+                            'recentProjects' => Project::orderBy('plist_id', 'desc')->where('plist_customer_id', $projectOwner->pown_id)->take(5)->get(),
+                            'inProgressCount' => Project::where('plist_status', 'In Progress')->where('plist_customer_id', $projectOwner->pown_id)->count(),
+                            'pendingCount' => Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id', $projectOwner->pown_id)->count(),
+                            'deliveredCount' => Project::where('plist_status', 'Delivered')->where('plist_customer_id', $projectOwner->pown_id)->count(),
+                            'cartCount' => Cart::where('cart_customer_id', $projectOwner->pown_id)->count(),
+                            'addedToCart' => Cart::where('cart_customer_id', $projectOwner->pown_id)->get(),
+                        ];
+
+                        session($dashboardData);
+
+                        return redirect()->route('customer.dashboard');
+                    } else {
+                        return redirect()->route('customer.complete_profile');
+                    }
+
+                } else {
+
+                    return redirect()->route('auth.customer.sign_in')->withErrors(['error' => 'The provided credentials are incorrect.']);
+
+                }
+
+            } else {
+
+                return redirect()->route('auth.customer.sign_in')->withErrors(['email' => 'No account found with the provided email.']);
+            }
+
         }
 
-        // If authentication fails, return to the login page with an error message
         return redirect()->route('auth.customer.sign_in')->withErrors([
             'email' => 'These credentials do not match our records.',
         ]);
+
+    }
+
+    public function splogin(Request $request)
+    {
+
+        \Log::info('executing till here! 001');
+
+        $email = $request->email;
+        $password = $request->password;
+
+        // $user = User::where('email', $email)->where('user_type', 'sp')->first();
+
+        // DB::listen(function ($query) {
+        //     \Log::info($query->sql);
+        // });
+
+        \Log::info('executing till here! 002' . $email);
+
+        // Log the query directly before the User fetch to see what SQL is being executed
+        DB::listen(function ($query) {
+            \Log::info('SQL Query: ' . $query->sql);
+            \Log::info('Bindings: ' . implode(', ', $query->bindings));  // to view bindings used in the query
+        });
+
+        // Fetch user
+        $user = User::where('email', $email)->where('user_type', 'sp')->first();
+
+        \Log::info('executing till here! 002');
+
+        if ($user) {
+
+            \Log::info('executing till here!');
+
+            $serviceProvider = ServiceProvider::where('sprov_email', $email)->first();
+
+            if ($serviceProvider) {
+
+                if (Hash::check($password, $serviceProvider->sprov_password)) {
+
+                    Auth::login($user);
+
+                    if ($serviceProvider->sprov_profile_completion_flag) {
+
+                        session(['sp_user_id' => $serviceProvider->sprov_id]);
+                        session(['sprov_name' => $serviceProvider->sprov_name]);
+                        session(['sprov_username' => $serviceProvider->sprov_username]);
+                        session(['sprov_email' => $serviceProvider->sprov_email]);
+                        session(['sprov_complete_profile_flag' => $serviceProvider->sprov_profile_completion_flag]);
+
+                        $spId = 1; // example sp_id
+                        // $projects = ProjectPlannerTask::with('projectPlanner.projectScope.project')
+                        //     ->where('pptasks_sp_id', $spId)
+                        //     ->get()
+                        //     ->pluck('planner.pscope.project')
+                        //     ->flatten()
+                        //     ->unique('id'); // Get unique projects
+
+                        //     \Log::info('Projects:', $projects->toArray());
+
+                        // $projects = ProjectPlannerTask::with('projectPlanner.projectScope.project')
+                        //     ->where('pptasks_sp_id', $spId)
+                        //     ->get()
+                        //     ->map(function ($task) {
+                        //         return optional($task->projectPlanner)
+                        //             ? optional($task->projectPlanner->projectScope)->project
+                        //             : null;
+                        //     })
+                        //     ->filter() // Remove nulls
+                        //     ->unique('plist_id') // Assuming plist_id is the primary key
+                        //     ->values(); 
+
+                        $projects = ProjectPlannerTask::with([
+                            'projectPlanner.projectScope.project.manager' // Eager load manager
+                        ])
+                        ->where('pptasks_sp_id', $spId)
+                        ->get()
+                        ->map(function ($task) {
+                            return optional(optional($task->projectPlanner)->projectScope)->project;
+                        })
+                        ->filter()
+                        ->unique('plist_id')
+                        ->values();
+                    
+
+                        // Log the cleaned projects list
+                        \Log::info('Filtered Projects:', $projects->toArray());
+
+                        // dd(DB::getQueryLog());
+
+                        //code added by sanskar sharma (07/04/2025)
+                        $dashboardData = [
+                            'unreadNotificationsCount' => Notification::where('ntfn_readflag', false)->where('ntfn_forUserId', $serviceProvider->sprov_id)->where('ntfn_type', 'cust')->count(),
+                            // 'recentProjects' => Project::orderBy('plist_id', 'desc')->where('plist_customer_id', $serviceProvider->sprov_id)->take(5)->get(),
+                            'recentProjects' => $projects,
+                            'inProgressCount' => Project::where('plist_status', 'In Progress')->where('plist_customer_id', $serviceProvider->sprov_id)->count(),
+                            'pendingCount' => Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id', $serviceProvider->sprov_id)->count(),
+                            'deliveredCount' => Project::where('plist_status', 'Delivered')->where('plist_customer_id', $serviceProvider->sprov_id)->count(),
+                            'cartCount' => Cart::where('cart_customer_id', $serviceProvider->sprov_id)->count(),
+                            'addedToCart' => Cart::where('cart_customer_id', $serviceProvider->sprov_id)->get(),
+                        ];
+
+                        session($dashboardData);
+
+                        return redirect()->route('service-partner.dashboard');
+
+                    } else {
+
+                        \Log::info('executing till here!');
+
+                        return redirect()->route('service-partner.complete_profile');
+
+                    }
+
+
+                }
+
+            }
+
+        } else {
+
+            return redirect()->route('auth.sp.sign_in')->withErrors([
+                'email' => 'These credentials do not match our records.',
+            ]);
+
+        }
+
     }
 
     // Show dashboard
@@ -182,39 +391,6 @@ class AuthController extends Controller
         \Log::info('Logout method working1!');
 
         return $response;
-    }
-
-    public function fetchNotification()
-    {
-        $notifications = Notification::all();
-
-        if ($notifications) {
-            return view('customer.notifications', compact('notifications'));
-        }
-
-        return back()->with('error', 'No notification found!');
-    }
-
-    public function fetchNotificationDetails($notificationId)
-    {
-        $notification = Notification::where('ntfn_id', $notificationId)->first();
-
-        if (!$notification->ntfn_readflag) {
-            $notification->ntfn_readflag = true;
-            $notification->save();
-
-            $unreadNotificationsCount = session('unreadNotificationsCount', 0);
-
-            if ($unreadNotificationsCount > 0) {
-                session(['unreadNotificationsCount' => $unreadNotificationsCount - 1]);
-            }
-        }
-
-        if ($notification) {
-            return view('customer.notification-details', compact('notification'));
-        }
-
-        return back()->with('error', 'No notification found!');
     }
 
 }

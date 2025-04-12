@@ -36,8 +36,8 @@
               <label for="floatingEmail">Email address</label>
             </div>
             <div class="form-floating">
-              <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
-              <label for="floatingPassword">Password</label>
+              <input type="phone" class="form-control" id="floatingPassword" name="contact" placeholder="Contact" required>
+              <label for="floatingPassword">Contact</label>
             </div>
             <button class="btn btn-primary mt-3 w-100 py-2" type="submit">Sign Up</button>
             

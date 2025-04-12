@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HardwareController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OrderAddressController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReferAndEarnController;
 use App\Http\Controllers\SupportController;
@@ -31,7 +32,7 @@ Route::prefix('authentication/customer')->group(function () {
 
 });
 
-Route::get('/authentication/service-partner/sign-in', fn() => view('auth/service_sign_in'));
+Route::get('/authentication/service-partner/sign-in', fn() => view('auth/service_sign_in'))->name('auth.sp.sign_in');
 Route::get('/authentication/service-partner/sign-up', fn() => view('auth/service_sign_up'));
 
 // Customer Session Routes
@@ -107,7 +108,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::post('/referandearnmail', [ReferAndEarnController::class, 'sendMail']);
 
     Route::get('/notifications', function () {
-        return (new AuthController)->fetchNotification();
+        return (new NotificationController)->fetchNotification();
     });
 
     Route::get('/track-project-overdue', function () {
@@ -172,7 +173,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     });
 
     Route::get('/notification-details/{notificationId}', function ($notificationId) {
-        return (new AuthController)->fetchNotificationDetails($notificationId);
+        return (new NotificationController)->fetchNotificationDetails($notificationId);
     });
 
     Route::post('/submitSupportQuery', [QueryController::class, 'submitSupportQuery'])->name('submitSupportQuery');
@@ -183,9 +184,12 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     
 });
 
+Route::post('/login', [AuthController::class, 'spLogin'])->name('splogin.post');
 
 Route::get('/projects/export/csv', [ProjectController::class, 'exportCSV'])->name('projects.export.csv');
 Route::get('/projects/export/pdf', [ProjectController::class, 'exportPDF'])->name('projects.export.pdf');
+
+Route::post('/save-address', [OrderAddressController::class, 'saveAddress'])->name('saveAddress');
 
 
 // Route::post('/storeticket' , [TicketController::class , 'storeTicket']);
@@ -207,10 +211,11 @@ Route::get('/chart-data', [ChartController::class, 'getData'])->name('chart.data
 
 Route::get('service-partner/session/complete-profile', function () {
     return view('/service-partner/complete_profile');
-});
+})->name('service-partner.complete_profile');
+
 Route::get('/service-partner/session/', function () {
     return view('/service-partner/dashboard');
-});
+})->name('service-partner.dashboard');
 
 Route::get('/service-partner/session/dashboard', function () {
     return view('/service-partner/dashboard');
@@ -224,9 +229,17 @@ Route::get('service-partner/session/manage_project_details', function () {
     return view('/service-partner/manage_project_details');
 });
 
+// Route::get('service-partner/session/manage_project_details/{pscopeId}', function ($pscopeId) {
+//     return (new ProjectController)->manageprojectDetails();
+// });
+
 Route::get('service-partner/session/manage_project_location', function () {
     return view('/service-partner/manage_project_location');
 });
+
+// Route::get('service-partner/session/manage_project_location/{projectId}', function ($projectId) {
+//     return (new ProjectController)->manageProjectLocation($projectId);
+// });
 
 Route::get('service-partner/session/manage_project_view_tasks', function () {
     return view('/service-partner/manage_project_view_tasks');
@@ -294,8 +307,12 @@ Route::get('service-partner/session/referandearn', function () {
     return view('/service-partner/referandearn');
 });
 
+// Route::get('service-partner/session/all-projects', function () {
+//     return view('/service-partner/all_projects');
+// });
+
 Route::get('service-partner/session/all-projects', function () {
-    return view('/service-partner/all_projects');
+    return (new ProjectController)->listOfProjects();
 });
 
 Route::get('service-partner/session/notifications', function () {

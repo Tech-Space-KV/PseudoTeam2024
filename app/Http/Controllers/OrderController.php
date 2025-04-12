@@ -17,7 +17,7 @@ class OrderController extends Controller
     {
         try {
 
-            $customerId = session('customer_id');
+            $customerId = session('user_id');
             // $deliveryAddress = $request->input('delivery_address');
 
             $cartItems = Cart::where('cart_customer_id', $customerId)->get();
@@ -76,7 +76,7 @@ class OrderController extends Controller
 
     public function fetchOrderHistory()
     {
-        $customerId = session('customer_id');
+        $customerId = session('user_id');
 
         // $orderHistory = OrderPlaced::where('ordplcd_customer_id' , $customerId)->get();
 

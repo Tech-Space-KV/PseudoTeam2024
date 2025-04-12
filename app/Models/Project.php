@@ -32,6 +32,7 @@ class Project extends Model
         'plist_checkrcv',
         'plist_name',
         'plist_email',
+        'plist_customeremail',
         'plist_contact',
         'plist_status',
         'plist_project_status',
@@ -40,5 +41,10 @@ class Project extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function manager()
+    {
+        return $this->belongsTo(WeUsers::class, 'plist_pt_mngr_id' , 'id');
+    }
 }
 

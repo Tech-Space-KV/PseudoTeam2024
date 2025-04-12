@@ -5,7 +5,7 @@
 </br>
 <div class="container">
   <div class="">
-    <h2>Upload Ticket</h2>
+    <h2>Ticket Details</h2>
     @if(session('success'))
                 <div class="alert alert-success" role="alert">
                     {{ session('success') }}

@@ -11,4 +11,11 @@ class ProjectPlanner extends Model
 
     protected $table = 'project_planner';
 
+    protected $primaryKey = 'pplnr_id';
+
+    public function projectScope()
+    {
+        return $this->belongsTo(ProjectScope::class, 'pplnr_scope_id');
+    }
+
 }

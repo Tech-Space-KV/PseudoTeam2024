@@ -5,7 +5,7 @@
   </br>
   <div class="container">
 
-  <h2>Your Cart</h2>
+    <h2>Your Cart</h2>
 
     <div class="mb-4" id="message-container">
     @if(session('success'))
@@ -35,10 +35,15 @@
       </select>
     </div>
 
-    <div class="mb-4">
+    <!-- <div class="mb-4">
       <a class="text-decoration-none" href="">+ add new adress</a>
+    </div> -->
+
+    <div class="mb-4">
+      <a class="text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#addressModal">+ Add new
+      address</a>
     </div>
-    
+
     <div class="order-md-last">
       <ul class="list-group mb-3">
       @foreach($hardwareDetails as $detail)
@@ -72,6 +77,45 @@
     </div>
 
     </form>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addressModalLabel">Enter New Address</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addressForm">
+        <div class="mb-3">
+          <label for="street" class="form-label">Street Address</label>
+          <input type="text" class="form-control" id="street" required>
+        </div>
+        <div class="mb-3">
+          <label for="city" class="form-label">City</label>
+          <input type="text" class="form-control" id="city" required>
+        </div>
+        <div class="mb-3">
+          <label for="state" class="form-label">State</label>
+          <input type="text" class="form-control" id="state" required>
+        </div>
+        <div class="mb-3">
+          <label for="zipcode" class="form-label">Zipcode</label>
+          <input type="text" class="form-control" id="zipcode" required>
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" form="addressForm" class="btn btn-primary">Save Address</button>
+      </div>
+      </div>
+    </div>
+    </div>
+
+
 
   </div>
 
@@ -127,7 +171,7 @@
 
         $('#message-container').html(`
       <div class="alert alert-success" role="alert">
-        ${response.message}
+      ${response.message}
       </div>
     `);
 
@@ -146,7 +190,7 @@
 
         $('#message-container').html(`
       <div class="alert alert-danger" role="alert">
-        An error occurred while placing the order. Please try again.
+      An error occurred while placing the order. Please try again.
       </div>
     `);
 
@@ -192,6 +236,51 @@
 
 
   </script>
+
+<!-- <script>
+  document.getElementById('addressForm').addEventListener('submit', function(e) {
+    e.preventDefault(); /
+    // You can add your logic to process the address here, like saving to a database
+    let street = document.getElementById('street').value;
+    let city = document.getElementById('city').value;
+    let state = document.getElementById('state').value;
+    let zipcode = document.getElementById('zipcode').value;
+
+    console.log('Address:', street, city, state, zipcode);
+ 
+    let modal = new bootstrap.Modal(document.getElementById('addressModal'));
+    modal.hide();
+  });
+</script> -->
+
+<script>
+  document.getElementById('saveAddressButton').addEventListener('click', function() {
+  
+    let form = new FormData(document.getElementById('addressForm'));
+    
+    // Send the data to the server using AJAX
+    fetch('{{ route('saveAddress') }}', {
+      method: 'POST',
+      body: form
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert(data.message); // Show success message
+        // Optionally close the modal
+        let modal = new bootstrap.Modal(document.getElementById('addressModal'));
+        modal.hide();
+      } else {
+        alert('There was an error saving the address.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('There was an error with the request.');
+    });
+  });
+</script>
+
 
 
 

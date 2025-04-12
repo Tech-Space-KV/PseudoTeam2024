@@ -24,16 +24,17 @@
     <div class="d-flex justify-content-center align-items-center mt-4">
       <div class="card fixed-width-card p-4 rounded-3 border-primary">    
         <main class="form-signin w-100 m-auto">
-          <form>
+          <form method="POST" action="{{ route('splogin.post') }}">
+            @csrf
             <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
             <h1 class="h5 mb-3 ms-1 text-muted">Service Partner Sign In</h1>
             <hr>
             <div class="form-floating mb-3 mt-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+              <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
               <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-              <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+              <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
               <label for="floatingPassword">Password</label>
             </div>
 

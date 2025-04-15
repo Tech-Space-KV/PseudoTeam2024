@@ -221,31 +221,44 @@ Route::get('/service-partner/session/dashboard', function () {
     return view('/service-partner/dashboard');
 });
 
+// Route::get('service-partner/session/manage_project', function () {
+//     return view('/service-partner/manage_project');
+// });
+
 Route::get('service-partner/session/manage_project', function () {
-    return view('/service-partner/manage_project');
+    return (new ProjectController)->manageProject();
 });
 
-Route::get('service-partner/session/manage_project_details', function () {
-    return view('/service-partner/manage_project_details');
-});
-
-// Route::get('service-partner/session/manage_project_details/{pscopeId}', function ($pscopeId) {
-//     return (new ProjectController)->manageprojectDetails();
+// Route::get('service-partner/session/manage_project_details', function () {
+//     return view('/service-partner/manage_project_details');
 // });
 
-Route::get('service-partner/session/manage_project_location', function () {
-    return view('/service-partner/manage_project_location');
+Route::get('service-partner/session/manage_project_details/{pscopeId}', function ($pscopeId) {
+    return (new ProjectController)->manageprojectDetails($pscopeId);
 });
 
-// Route::get('service-partner/session/manage_project_location/{projectId}', function ($projectId) {
-//     return (new ProjectController)->manageProjectLocation($projectId);
+// Route::get('service-partner/session/manage_project_location', function () {
+//     return view('/service-partner/manage_project_location');
 // });
 
-Route::get('service-partner/session/manage_project_view_tasks', function () {
-    return view('/service-partner/manage_project_view_tasks');
+Route::get('service-partner/session/manage_project_location/{projectId}', function ($projectId) {
+    return (new ProjectController)->manageProjectLocation($projectId);
 });
-Route::get('service-partner/session/manage_project_edit_task', function () {
-    return view('/service-partner/manage_project_edit_task');
+
+// Route::get('service-partner/session/manage_project_view_tasks', function () {
+//     return view('/service-partner/manage_project_view_tasks');
+// });
+
+Route::get('service-partner/session/manage_project_view_tasks/{plannerId}', function ($plannerId) {
+    return (new ProjectController)->manageProjectViewTasks($plannerId);
+});
+
+// Route::get('service-partner/session/manage_project_edit_task', function () {
+//     return view('/service-partner/manage_project_edit_task');
+// });
+
+Route::get('service-partner/session/manage_project_edit_task/{ppTaskId}', function ($ppTaskId) {
+    return (new ProjectController)->manageProjectEditTasks($ppTaskId);
 });
 
 Route::get('service-partner/session/hardware', function () {

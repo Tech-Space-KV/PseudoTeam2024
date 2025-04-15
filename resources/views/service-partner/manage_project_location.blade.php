@@ -67,7 +67,7 @@
       <td>{{ $pscope->pscope_city ?: 'No city available' }}</td>
       <td>{{ $pscope->pscope_status ?: 'No status available' }}</td>
       <td>
-        <a href="{{ url('service-partner/session/manage_project_details')}}" class="btn btn-sm btn-outline-primary" title="Track Progress">
+        <a href="{{ url('service-partner/session/manage_project_details/'.$pscope->pscope_id)}}" class="btn btn-sm btn-outline-primary" title="Track Progress">
             <i class="fa fa fa-location-arrow"></i>
         </a>
       </td>

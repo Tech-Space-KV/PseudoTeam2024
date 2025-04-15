@@ -340,6 +340,91 @@ class ProjectController extends Controller
         $projects = Project::where('plist_customer_id', $cusomerId)->get();
     }
 
+    public function manageProject(){
+        
+        $serviceProviderId = session('sp_user_id');
+
+        $projects = ProjectPlannerTask::with([
+            'projectPlanner.projectScope.project'
+        ])
+        ->where('pptasks_sp_id', $serviceProviderId)
+        ->get()
+        ->map(function ($task) {
+            return optional(optional($task->projectPlanner)->projectScope)->project;
+        })
+        ->filter()
+        ->unique('plist_id')
+        ->values();
+
+        if($projects) {
+
+            return view('/service-partner/manage_project' , compact('projects'));
+
+        }
+
+        return redirect()->back()->with('error' , 'Project not found!');
+
+    }
+
+    public function manageprojectLocation($projectId){
+        
+        $project_scope = ProjectScope::where('pscope_project_id', $projectId)->get();
+
+        \Log::info('log : ' . print_r($project_scope->toArray(), true));
+
+        if (!$project_scope) {
+            return redirect()->route('service-partner.dashboard')->with('error', 'Project not found.');
+        }
+
+        return view('service-partner.manage_project_location', compact('project_scope'));
+
+    }
+
+    public function manageProjectdetails($pscopeId) {
+        
+        $projectPlanner = ProjectPlanner::where('pplnr_scope_id' , $pscopeId)->get(); 
+        
+        if(!$projectPlanner) {
+
+            return redirect()->back()->with('error' , 'Not found!');
+
+        }
+
+        \Log::info('pplnr' . $projectPlanner);
+        
+        return view('/service-partner/manage_project_details' , compact('projectPlanner'));
+
+    }
+
+    public function manageProjectViewTasks($plannerId) {
+        
+        $projectPlannerTasks = ProjectPlannerTask::where('pptasks_planner_id' , $plannerId)->get();
+
+        if(!$projectPlannerTasks)
+        {
+
+            return redirect()->back()->with('error' , 'Project Planner Tasks Not Found!');
+
+        }
+
+        return view('service-partner/manage_project_view_tasks' , compact('projectPlannerTasks'));
+
+    }
+
+    public function manageProjectEditTasks($ppTaskId) {
+        
+        $projectPlannerTasks = ProjectPlannerTask::where('pptasks_id' , $ppTaskId)->first();
+
+        if(!$projectPlannerTasks) {
+
+            return redirect()->back()->with('error' , 'Project Planner Tasks Not Found!');
+
+        }
+
+        return view('service-partner/manage_project_edit_task' , compact('projectPlannerTasks'));
+
+    }
+
     public function listOfProjects(){
         
         $serviceProviderId = session('sp_user_id');
@@ -363,24 +448,6 @@ class ProjectController extends Controller
         }
 
         return redirect()->back()->with('error' , 'Project not found!');
-
-    }
-
-    public function manageprojectLocation($projectId){
-        
-        $project_scope = ProjectScope::where('pscope_project_id', $projectId)->get();
-
-        if (!$project_scope) {
-            return redirect()->route('service-partner.dashboard')->with('error', 'Project not found.');
-        }
-
-        return view('service-partner.manage_project_location', compact('project_scope'));
-
-    }
-
-    public function manageProjectdetails($pscopeId) {
-        
-        
 
     }
 }

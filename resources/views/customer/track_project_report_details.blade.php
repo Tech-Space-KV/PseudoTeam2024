@@ -12,19 +12,19 @@
   </br>
 
   <div style="text-align: center; margin-bottom: 20px;">
-    <h5 style="font-weight: bold;" class="text-pseudo">Title:</h5>
+    <h5 style="font-weight: bold;" class="text-pseudo">State:</h5>
     <p style="font-size: 1.2rem;">This is the project title</p>
   </div>
 
   <div style="display: flex; margin-left: 50px; flex-wrap: wrap; gap: 10px;">
     <div style="flex: 1; min-width: 300px; font-size: 1rem;">
-      <p style="margin: 0;"><strong class="text-pseudo">Description:</strong> This is the project Description.</p>
-      <p style="margin: 0;"><strong class="text-pseudo">Start date:</strong> 12/12/2024</p>
+      <p style="margin: 0;"><strong class="text-pseudo">City, Pincode:</strong> This is the project Description.</p>
+      <p style="margin: 0;"><strong class="text-pseudo">Status:</strong> 12/12/2024</p>
     </div>
-    <div style="flex: 1; margin-left: 180px; min-width: 300px; font-size: 1rem;">
+    <!-- <div style="flex: 1; margin-left: 180px; min-width: 300px; font-size: 1rem;">
       <p style="margin: 0;"><strong class="text-pseudo">End date:</strong> 12/12/2024</p>
       <p style="margin: 0;"><strong class="text-pseudo">Status:</strong> In Progress</p>
-    </div>
+    </div> -->
   </div>
 
 </br>

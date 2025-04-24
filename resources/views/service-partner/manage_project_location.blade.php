@@ -23,10 +23,10 @@
     <tr class="text-pseudo">
       {{-- <th scope="col">Proj. ID.</th>
       <th scope="col">Title</th> --}}
-      <th scope="col">Location</th>
-      <th scope="col">Start Date</th>
-      <th scope="col">End Date</th>
-      <th scope="col">Status</th>
+      <th scope="col">Country</th>
+      <th scope="col">State</th>
+      <th scope="col">City</th>
+      <!-- <th scope="col">Status</th> -->
       <th scope="col"></th>
     </tr>
   </thead>
@@ -65,7 +65,7 @@
       <td>{{ $pscope->pscope_country ?: 'No country available' }}</td>
       <td>{{ $pscope->pscope_state ?: 'No state available' }}</td>
       <td>{{ $pscope->pscope_city ?: 'No city available' }}</td>
-      <td>{{ $pscope->pscope_status ?: 'No status available' }}</td>
+      <!-- <td>{{ $pscope->pscope_status ?: 'No status available' }}</td> -->
       <td>
         <a href="{{ url('service-partner/session/manage_project_details/'.$pscope->pscope_id)}}" class="btn btn-sm btn-outline-primary" title="Track Progress">
             <i class="fa fa fa-location-arrow"></i>

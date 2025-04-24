@@ -9,6 +9,11 @@ class ProjectPlannerTask extends Model
 {
     use HasFactory;
 
+
+    protected $table = 'project_planner_tasks';
+
+    protected $primaryKey = 'pptasks_id';
+
     protected $fillable = [
         '',
         'pptasks_task_title',

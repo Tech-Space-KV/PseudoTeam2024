@@ -2,6 +2,8 @@
 
 @section('content')
 
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
   </br>
   <div class="container">
 
@@ -26,12 +28,15 @@
 
     <form method="POST">
     @csrf
+
+    <input type="hidden" id="selectedAddressId" name="selected_address_id">
+
     <div class="mb-2">
-      <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-      <option selected>Select delivery address</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
+      <select class="form-select form-select-sm" id="existingAddressSelect" aria-label=".form-select-sm example">
+      <option selected disabled>Select delivery address</option>
+      @foreach($userAddresses as $address)
+      <option value="{{ $address->ordradrs_id }}">{{ $address->ordradrs_address }}</option>
+    @endforeach
       </select>
     </div>
 
@@ -89,21 +94,22 @@
       </div>
       <div class="modal-body">
         <form id="addressForm">
+        @csrf
         <div class="mb-3">
           <label for="street" class="form-label">Street Address</label>
-          <input type="text" class="form-control" id="street" required>
+          <input type="text" class="form-control" id="street" name="street" required>
         </div>
         <div class="mb-3">
           <label for="city" class="form-label">City</label>
-          <input type="text" class="form-control" id="city" required>
+          <input type="text" class="form-control" id="city" name="city" required>
         </div>
         <div class="mb-3">
           <label for="state" class="form-label">State</label>
-          <input type="text" class="form-control" id="state" required>
+          <input type="text" class="form-control" id="state" name="state" required>
         </div>
         <div class="mb-3">
           <label for="zipcode" class="form-label">Zipcode</label>
-          <input type="text" class="form-control" id="zipcode" required>
+          <input type="text" class="form-control" id="zipcode" name="zipcode" required>
         </div>
         </form>
       </div>
@@ -156,6 +162,8 @@
 
     $('#place-order-btn').on('click', function () {
 
+      const selectedAddressId = $('#selectedAddressId').val();
+
       $('#place-order-btn').prop('disabled', true).text('Processing...');
 
       $.ajax({
@@ -163,7 +171,8 @@
       url: '/place-order',
       method: 'POST',
       data: {
-        _token: $('meta[name="csrf-token"]').attr('content')
+        _token: $('meta[name="csrf-token"]').attr('content'),
+        selected_address_id: selectedAddressId
       },
       success: function (response) {
 
@@ -237,8 +246,8 @@
 
   </script>
 
-<!-- <script>
-  document.getElementById('addressForm').addEventListener('submit', function(e) {
+  <!-- <script>
+    document.getElementById('addressForm').addEventListener('submit', function(e) {
     e.preventDefault(); /
     // You can add your logic to process the address here, like saving to a database
     let street = document.getElementById('street').value;
@@ -247,17 +256,17 @@
     let zipcode = document.getElementById('zipcode').value;
 
     console.log('Address:', street, city, state, zipcode);
- 
+
     let modal = new bootstrap.Modal(document.getElementById('addressModal'));
     modal.hide();
-  });
-</script> -->
+    });
+    </script> -->
 
-<script>
-  document.getElementById('saveAddressButton').addEventListener('click', function() {
-  
+  <!-- <script>
+    document.getElementById('saveAddressButton').addEventListener('click', function() {
+
     let form = new FormData(document.getElementById('addressForm'));
-    
+
     // Send the data to the server using AJAX
     fetch('{{ route('saveAddress') }}', {
       method: 'POST',
@@ -266,22 +275,122 @@
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        alert(data.message); // Show success message
-        // Optionally close the modal
-        let modal = new bootstrap.Modal(document.getElementById('addressModal'));
-        modal.hide();
+      alert(data.message); // Show success message
+      // Optionally close the modal
+      let modal = new bootstrap.Modal(document.getElementById('addressModal'));
+      modal.hide();
       } else {
-        alert('There was an error saving the address.');
+      alert('There was an error saving the address.');
       }
     })
     .catch(error => {
       console.error('Error:', error);
       alert('There was an error with the request.');
     });
-  });
-</script>
+    });
+    </script> -->
+
+  <!-- JavaScript to handle AJAX submission -->
+  <script>
+    document.getElementById('addressForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    let form = new FormData(this);
+
+    fetch('{{ route('saveAddress') }}', {
+      method: 'POST',
+      headers: {
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+      },
+      body: form
+    })
+      .then(response => response.json())
+      .then(data => {
+      if (data.success) {
+        alert(data.message);
+
+        // Hide modal after success
+        let modalElement = document.getElementById('addressModal');
+        let modalInstance = bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
+
+        setTimeout(() => {
+        location.reload();
+        }, 500);
+
+        // Optional: reset form
+        // document.getElementById('addressForm').reset();
+      } else {
+        alert(data.message || 'There was an error saving the address.');
+      }
+      })
+      .catch(error => {
+      console.error('Error:', error);
+      alert('There was an error with the request.');
+      });
+    });
+  </script>
+
+  <!-- <script>
+    document.getElementById('existingAddressSelect').addEventListener('change', function () {
+    const selectedAddressId = this.value;
+
+    fetch('{{ route('saveExistingAddress') }}', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+      },
+      body: JSON.stringify({ address_id: selectedAddressId })
+    })
+      .then(response => response.json())
+      .then(data => {
+      if (data.success) {
+      alert(data.message);
+      } else {
+      alert('Failed to save selected address.');
+      }
+      })
+      .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while saving address.');
+      });
+    });
+    </script> -->
 
 
+  <!-- <script>
+    document.getElementById('existingAddressSelect').addEventListener('change', function () {
+    const selectedAddressId = this.value;
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+    fetch('{{ route("saveExistingAddress") }}', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': csrfToken
+      },
+      body: JSON.stringify({ address_id: selectedAddressId })
+    })
+      .then(response => response.json())
+      .then(data => {
+      if (data.success) {
+      alert(data.message);
+      } else {
+      alert('Failed to save selected address: ' + data.message);
+      }
+      })
+      .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while saving address.');
+      });
+    });
+    </script> -->
+
+  <script>
+    document.getElementById('existingAddressSelect').addEventListener('change', function () {
+    document.getElementById('selectedAddressId').value = this.value;
+    });
+  </script>
 
 @endsection

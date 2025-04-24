@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Hardware;
+use App\Models\OrderAddress;
 use App\Models\OrderPlaced;
 use Carbon\Carbon;
 use DB;
@@ -15,10 +16,28 @@ class OrderController extends Controller
 
     public function placeOrder(Request $request)
     {
+
+        Log::info('Request data:', $request->all());
+
         try {
 
             $customerId = session('user_id');
             // $deliveryAddress = $request->input('delivery_address');
+
+            $ordplcd_addressId = $request->input('selected_address_id');
+
+            Log::info('Working till here!');
+
+            Log::info('Selected Address ID: ' . $ordplcd_addressId);
+
+            if($ordplcd_addressId)
+            {
+                Log::info('Working till if condition!');
+
+                $deliveryAddress = OrderAddress::where('ordradrs_id' , $ordplcd_addressId)->first();
+
+                Log::info('Delivery Address: ' . $deliveryAddress);
+            }
 
             $cartItems = Cart::where('cart_customer_id', $customerId)->get();
             $totalAmount = 0;
@@ -36,10 +55,12 @@ class OrderController extends Controller
                     $order->ordplcd_customer_id = $customerId;
                     $order->ordplcd_order_no = $orderNo;
                     $order->ordplcd_qty_placed = $cartItem->cart_qty;
+                    $order->ordplcd_no_of_items = $cartItems->count();
                     $order->ordplcd_hw_id = $cartItem->cart_hw_id;
                     $order->ordplcd_amt = $hardware->hrdws_price * $cartItem->cart_qty;
                     $order->ordplcd_status = 'Pending';
                     $order->ordplcd_order_date = $orderDate;
+                    $order->ordplcd_address = $deliveryAddress ? $deliveryAddress->ordradrs_address : null;
                     $order->save();
                     $totalAmount += $order->ordplcd_amt;
 
@@ -81,8 +102,8 @@ class OrderController extends Controller
         // $orderHistory = OrderPlaced::where('ordplcd_customer_id' , $customerId)->get();
 
         $orderHistory = OrderPlaced::where('ordplcd_customer_id', $customerId)
-            ->select('ordplcd_order_no', DB::raw('SUM(ordplcd_qty_placed) as total_qty'), 'ordplcd_order_date')
-            ->groupBy('ordplcd_order_no', 'ordplcd_order_date')->orderBy('ordplcd_id', 'desc') 
+            ->select('ordplcd_order_no', DB::raw('ordplcd_no_of_items as total_qty'), 'ordplcd_order_date')
+            ->groupBy('ordplcd_order_no', 'ordplcd_order_date' , 'ordplcd_no_of_items')->orderBy('ordplcd_id', 'desc') 
             ->get();
 
         return view('customer.marketplace_hardwares_orders', compact('orderHistory'));

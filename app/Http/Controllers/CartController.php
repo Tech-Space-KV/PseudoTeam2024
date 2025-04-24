@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Hardware;
+use App\Models\OrderAddress;
 use App\Models\OrderPlaced;
 use Illuminate\Http\Request;
 
@@ -97,9 +98,11 @@ class CartController extends Controller
                 }
             }
 
-            return view('customer.cart', compact('hardwareDetails'));
-        }
+            $userAddresses = OrderAddress::where('ordradrs_projectowner_id', $customerId)->get();
 
+            return view('customer.cart', compact('hardwareDetails' , 'userAddresses'));
+        }
+        
         return back()->with('error', 'Problem while fetching hardwares');
     }
 

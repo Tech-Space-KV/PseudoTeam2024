@@ -43,7 +43,7 @@
                     <div class="card p-3 w-100 cardbgylw">
                        Job Success Rate
                        <div class="progress mt-2">
-                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                        <div class="progress-bar" role="progressbar" style="width: {{ session('jobSuccessRate') }}%;" aria-valuenow="{{ session('jobSuccessRate') }}" aria-valuemin="0" aria-valuemax="100">{{ session('jobSuccessRate') }}%</div>
                       </div>
                     </div>
                 </a>

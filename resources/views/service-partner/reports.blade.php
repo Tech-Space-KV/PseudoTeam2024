@@ -22,8 +22,8 @@
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
                        height: 80px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #ffcc00;">
-                    <a href="{{ url('service-partner/session/track-project-pending') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">Pending</h5>
+                    <a href="{{ url('service-partner/session/project-reports-not-started') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">Not Started</h5>
                         <h4 id="pendingCount" style="font-size: 1.5rem; font-weight: normal;">0</h4>
                     </a>
                 </div>
@@ -35,8 +35,8 @@
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
                        height: 80px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #28a745;">
-                    <a href="{{ url('service-partner/session/track-project-delivered') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">Delivered</h5>
+                    <a href="{{ url('service-partner/session/project-reports-fullfilled') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">FullFilled</h5>
                         <h4 id="deliveredCount" style="font-size: 1.5rem; font-weight: normal;">0</h4>
                     </a>
                 </div>
@@ -48,8 +48,8 @@
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
                        height: 80px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #007bff;">
-                    <a href="{{ url('service-partner/session/track-project-report') }}"  style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">In Progress</h5>
+                    <a href="{{ url('service-partner/session/project-reports-on-going') }}"  style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">On Going</h5>
                         <h4 id="inProgressCount" style="font-size: 1.5rem; font-weight: normal;">0</h4>
                     </a>
                 </div>
@@ -61,8 +61,8 @@
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
                        height: 80px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #dc3545;">
-                    <a href="{{ url('service-partner/session/track-project-overdue') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">Overdue</h5>
+                    <a href="{{ url('service-partner/session/project-reports-scrapped') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">Scrapped</h5>
                         <h4 id="overdueCount" style="font-size: 1.5rem; font-weight: normal;">0</h4>
                     </a>
                 </div>
@@ -75,7 +75,7 @@
 
 <script>
     // Fetch data dynamically from Laravel route
-    fetch('/chart-data')
+    fetch('/sp-chart-data')
         .then(response => response.json())
         .then(data => {
             // Parse the data into Chart.js format

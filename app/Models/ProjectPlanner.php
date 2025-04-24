@@ -17,5 +17,4 @@ class ProjectPlanner extends Model
     {
         return $this->belongsTo(ProjectScope::class, 'pplnr_scope_id');
     }
-
 }

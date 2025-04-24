@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Project;
 use App\Models\Notification;
 use Mail;
+use Str;
 
 class AuthController extends Controller
 {
@@ -154,6 +155,8 @@ class AuthController extends Controller
 
                         return redirect()->route('customer.dashboard');
                     } else {
+                        session(['user_id' => $projectOwner->pown_id]);
+                        session(['pown_name' => $projectOwner->pown_name]);
                         return redirect()->route('customer.complete_profile');
                     }
 
@@ -248,18 +251,39 @@ class AuthController extends Controller
                         $projects = ProjectPlannerTask::with([
                             'projectPlanner.projectScope.project.manager' // Eager load manager
                         ])
-                        ->where('pptasks_sp_id', $spId)
-                        ->get()
-                        ->map(function ($task) {
-                            return optional(optional($task->projectPlanner)->projectScope)->project;
-                        })
-                        ->filter()
-                        ->unique('plist_id')
-                        ->values();
-                    
+                            ->where('pptasks_sp_id', $spId)
+                            ->get()
+                            ->map(function ($task) {
+                                return optional(optional($task->projectPlanner)->projectScope)->project;
+                            })
+                            ->filter()
+                            ->unique('plist_id')
+                            ->values();
+
+                        $totalAssignedProjects = ProjectPlannerTask::where('pptasks_sp_id', $spId)->count();
+
+                        // $totalFullfilledProjects = ProjectPlannerTask::where('pptasks_sp_id', $spId)
+                        //     ->where('pptasks_pt_status',  'Fullfilled')->count();
+
+                        $totalFullfilledProjects = ProjectPlannerTask::where('pptasks_sp_id', $spId)
+                            ->get()
+                            ->filter(function ($task) {
+                                return Str::lower($task->pptasks_pt_status) === 'fullfilled';
+                            })
+                            ->count();
+
+                        $jobSuccessRate = $totalAssignedProjects > 0
+                            ? round(($totalFullfilledProjects / $totalAssignedProjects) * 100, 2)
+                            : 0;
 
                         // Log the cleaned projects list
                         \Log::info('Filtered Projects:', $projects->toArray());
+
+                        \Log::info('Job Success Rate:', ['rate' => $jobSuccessRate]);
+                        // Log the total assigned and fulfilled projects
+                        \Log::info('Total Assigned Projects:', ['count' => $totalAssignedProjects]);
+
+                        \Log::info('Total Fulfilled Projects:', ['count' => $totalFullfilledProjects]);
 
                         // dd(DB::getQueryLog());
 
@@ -268,6 +292,7 @@ class AuthController extends Controller
                             'unreadNotificationsCount' => Notification::where('ntfn_readflag', false)->where('ntfn_forUserId', $serviceProvider->sprov_id)->where('ntfn_type', 'cust')->count(),
                             // 'recentProjects' => Project::orderBy('plist_id', 'desc')->where('plist_customer_id', $serviceProvider->sprov_id)->take(5)->get(),
                             'recentProjects' => $projects,
+                            'jobSuccessRate' => $jobSuccessRate,
                             'inProgressCount' => Project::where('plist_status', 'In Progress')->where('plist_customer_id', $serviceProvider->sprov_id)->count(),
                             'pendingCount' => Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id', $serviceProvider->sprov_id)->count(),
                             'deliveredCount' => Project::where('plist_status', 'Delivered')->where('plist_customer_id', $serviceProvider->sprov_id)->count(),

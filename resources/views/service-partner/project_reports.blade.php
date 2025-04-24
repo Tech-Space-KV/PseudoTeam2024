@@ -1,118 +1,79 @@
-@extends('customer.base_layout')
+@extends('service-partner.base_layout')
 
 @section('content')
 
   </br>
   <div class="container">
     <div class="mb-4">
-    <h2>Hardware List</h2>
+    <h2>Project Reports</h2>
     </div>
+    </br>
     <div class="search-box-container w-100 mb-4">
     <div class="mx-auto">
       <Label>Search: </Label>
-      <input class="rounded-3" type="text" id="searchCol1" placeholder="Serial No">
-      <input class="rounded-3" type="text" id="searchCol2" placeholder="H/W Identifier">
-      <input class="rounded-3" type="text" id="searchCol5" placeholder="Family">
+      <input class="rounded-3" type="text" id="searchCol2" placeholder="Proj. ID.">
+      <input class="rounded-3" type="text" id="searchCol3" placeholder="Title">
+      <input class="rounded-3" type="text" id="searchCol4" placeholder="Status">
     </div>
     </div>
     </br>
-
-
     <table class="table table-hover" id="myTable">
     <thead>
       <tr class="text-pseudo">
-      <th scope="col">Serial No</th>
-      <th scope="col">H/W Identifier</th>
-      <th scope="col">Model No</th>
-      <th scope="col">Qty</th>
-      <th scope="col">Family</th>
-      <th scope="col">City</th>
-      <th scope="col">State</th>
+      <th scope="col">Proj. ID.</th>
+      <th scope="col">Location</th>
+      <th scope="col">Milestone</th>
+      <th scope="col">Task Title</th>
+      <th scope="col">SP Status</th>
+      <th scope="col">PT Status</th>
+      <th scope="col">Manager Email</th>
       <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <!-- <tr>
-      <th scope="row">123</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+      <th scope="row">100134</th>
+      <td>Test Project 1</td>
+      <td>28/11/2023</td>
+      <td>28/11/2024</td>
+      <td>In Progress</td>
+      <td ><a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
       <tr>
-      <th scope="row">124</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+      <th scope="row">100135</th>
+      <td>Test Project 2</td>
+      <td>28/11/2023</td>
+      <td>28/11/2024</td>
+      <td>In Progress</td>
+       <td> <a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr>
       <tr>
-      <th scope="row">127</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
-      </tr>
-      <tr>
-      <th scope="row">123</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
-      </tr>
-      <tr>
-      <th scope="row">124</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
-      </tr>
-      <tr>
-      <th scope="row">127</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
+      <th scope="row">100136</th>
+      <td>Test Project 3</td>
+      <td>28/11/2023</td>
+      <td>28/11/2024</td>
+      <td>In Progress</td>
+      <td> <a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
       </tr> -->
 
-      @foreach($hardwares as $hardware)
+      @foreach($projects as $project)
       <tr>
-      <th scope="row">{{ $hardware->hrdws_serial_number }}</th>
-      <td>{{ $hardware->hrdws_hw_identifier }}</td>
-      <td>{{ $hardware->hrdws_model_number }}</td>
-      <td>{{ $hardware->hrdws_qty }}</td>
-      <td>{{ $hardware->hrdws_family }}</td>
-      <td>{{ $hardware->hrdws_city }}</td>
-      <td>{{ $hardware->hrdws_state }}</td>
+      <th scope="row">{{ $project['plist_projectid'] ?? '-' }}</th>
+      <td>{{ $project['pscope_country'] ?? '-' }} , {{ $project['pscope_state'] ?? '-' }} , {{ $project['pscope_pincode'] ?? '-' }} </td>
+      <td>{{ $project['pplnr_milestone'] ?? '-' }}</td>
+      <td>{{ $project['pptasks_task_title' ?? '-'] }}</td>
+      <td>{{ $project['pptasks_sp_status'] ?? '-' }}</td>
+      <td>{{ $project['pptasks_pt_status'] ?? '-' }}</td>
+      <td>{{ $project['manager_email'] ?? '-' }}</td>
       <td>
-      @if($hardware->hrdws_qty == 0)
-        <span class="badge bg-danger">Out of Stock</span>
-      @else
-        <a href="{{ url('/customer/session/marketplace/hardwares-details/' . $hardware->hrdws_id) }}"
-        class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a>
-      @endif
+      <a href="{{ url('service-partner/session/manage_project_view_tasks/' . ($project['pptasks_planner_id'] ?? 0)) }}"
+      class="btn btn-sm btn-outline-primary" title="Track Progress">
+      <i class="fa fa-location-arrow"></i>
+      </a>
       </td>
-      <!-- <td ><a href="{{ url('/customer/session/marketplace/hardwares-details/'.$hardware->hrdws_id) }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td> -->
       </tr>
     @endforeach
+
 
     </tbody>
     </table>
@@ -207,18 +168,18 @@
 
     // Function to filter the table
     function filterTable() {
-    const searchCol1 = document.getElementById("searchCol1").value.toLowerCase();
     const searchCol2 = document.getElementById("searchCol2").value.toLowerCase();
-    const searchCol5 = document.getElementById("searchCol5").value.toLowerCase();
+    const searchCol3 = document.getElementById("searchCol3").value.toLowerCase();
+    const searchCol4 = document.getElementById("searchCol4").value.toLowerCase();
 
     filteredRows = allRows.filter(row => {
-      const col1 = row.cells[0].textContent.toLowerCase();
-      const col2 = row.cells[1].textContent.toLowerCase();
-      const col5 = row.cells[4].textContent.toLowerCase();
+      const col2 = row.cells[0].textContent.toLowerCase();
+      const col3 = row.cells[1].textContent.toLowerCase();
+      const col4 = row.cells[4].textContent.toLowerCase();
       return (
-      col1.includes(searchCol1) &&
       col2.includes(searchCol2) &&
-      col5.includes(searchCol5)
+      col3.includes(searchCol3) &&
+      col4.includes(searchCol4)
       );
     });
 
@@ -227,9 +188,9 @@
     }
 
     // Event listeners for search boxes
-    document.getElementById("searchCol1").addEventListener("input", filterTable);
     document.getElementById("searchCol2").addEventListener("input", filterTable);
-    document.getElementById("searchCol5").addEventListener("input", filterTable);
+    document.getElementById("searchCol3").addEventListener("input", filterTable);
+    document.getElementById("searchCol4").addEventListener("input", filterTable);
 
     // Initial rendering
     renderTable();

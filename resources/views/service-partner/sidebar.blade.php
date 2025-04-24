@@ -23,7 +23,7 @@
             </div>
             <div class="col col-lg-5 sitem  d-flex flex-column align-items-center mx-2 text-decoration-none">
                    <a href="{{ url('service-partner/session/all-projects') }}" class="text-decoration-none"> <i class="fa fa-line-chart card cardbg p-3 iconix"></i>
-                   </a><span class="fst">List of Projects</span>
+                   </a><span class="fst">List of Tasks</span>
             </div>        
         </div>
 

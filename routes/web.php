@@ -191,6 +191,7 @@ Route::get('/projects/export/pdf', [ProjectController::class, 'exportPDF'])->nam
 
 Route::post('/save-address', [OrderAddressController::class, 'saveAddress'])->name('saveAddress');
 
+Route::post('/save-existing-address', [OrderAddressController::class, 'saveExistingAddress'])->name('saveExistingAddress');
 
 // Route::post('/storeticket' , [TicketController::class , 'storeTicket']);
 
@@ -261,6 +262,8 @@ Route::get('service-partner/session/manage_project_edit_task/{ppTaskId}', functi
     return (new ProjectController)->manageProjectEditTasks($ppTaskId);
 });
 
+Route::post('/update-task', [ProjectController::class, 'updateTask'])->name('update.task');
+
 Route::get('service-partner/session/hardware', function () {
     return view('/service-partner/hardware');
 });
@@ -292,16 +295,41 @@ Route::get('service-partner/session/hardware-orders', function () {
 Route::get('service-partner/session/hardware-details', function () {
     return view('/service-partner/marketplace_hardwares_details');
 });
-Route::get('service-partner/session/reports', function () {
-    return view('/service-partner/reports');
+// Route::get('service-partner/session/reports', function () {
+//     return view('/service-partner/reports');
+// });
+
+Route::get('service-partner/session/reports',[ChartController::class , 'spIndex'])->name('sp.reports');
+Route::get('/sp-chart-data', [ChartController::class, 'getSPData'])->name('chart.data');
+
+// Route::get('service-partner/session/track-project-pending', function () {
+//     return view('/service-partner/track-project-pending');
+// });
+
+Route::get('service-partner/session/project-reports-not-started' , function () {
+    return (new ProjectController)->projectNotStartedReports();
 });
 
-Route::get('service-partner/session/track-project-pending', function () {
-    return view('/service-partner/track-project-pending');
+Route::get('service-partner/session/project-reports-fullfilled' , function () {
+    return (new ProjectController)->projectFullfilledReports();
 });
+
+Route::get('service-partner/session/project-reports-on-going' , function () {
+    return (new ProjectController)->projectOnGoingreports();
+});
+
+Route::get('service-partner/session/project-reports-scrapped' , function () {
+    return (new ProjectController)->projectScrappedReports();
+});
+
+// Route::get('service-partner/session/track-project-delivered', function () {
+//     return view('/service-partner/track-project-delivered');
+// });
+
 Route::get('service-partner/session/track-project-delivered', function () {
-    return view('/service-partner/track-project-delivered');
+    return (new ProjectController)->spTrackProjectDelivered();
 });
+
 Route::get('service-partner/session/track-project-report', function () {
     return view('/service-partner/manage_project');
 });

@@ -32,7 +32,7 @@
   <!-- Profile Section -->
   <div class="container">
     <p>
-      <span class="fs-1 fw-bold">Hi, Kunal</span><br><br>
+      <span class="fs-1 fw-bold">Hi, {{ session('pown_name') }}</span><br><br>
       <span class="fs-4 " style="color: black;"> Please complete your Profile</span>
     </p>
   </div>

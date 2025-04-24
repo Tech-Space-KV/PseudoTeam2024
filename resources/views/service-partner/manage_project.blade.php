@@ -25,7 +25,7 @@
         <th scope="col">Title</th>
         <th scope="col">Start Date</th>
         <th scope="col">End Date</th>
-        <th scope="col">Status</th>
+        <!-- <th scope="col">Status</th> -->
         <th scope="col"></th>
       </tr>
     </thead>
@@ -61,7 +61,7 @@
              <td>{{ $project->plist_title }}</td>
              <td>{{ $project->plist_startdate }}</td>
              <td>{{ $project->plist_enddate }}</td>
-             <td>{{ $project->plist_status }}</td>
+             <!-- <td>{{ $project->plist_status }}</td> -->
             <td><a href="{{ url('service-partner/session/manage_project_location/'.$project->plist_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa fa-location-arrow"></i></a></td> 
             <!-- <td><a href="{{ url('customer/session/project-details/'.$project->plist_id) }}"><i class="fa fa-eye btn btn-sm btn-outline-primary"></i></a></td> -->
          @endforeach

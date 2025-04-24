@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ProjectsExport;
 use App\Mail\ProjectUploadedMail;
+use App\Models\Notification;
 use App\Models\ProjectPlanner;
 use App\Models\ProjectPlannerTask;
 use App\Models\ProjectScope;
@@ -98,7 +99,7 @@ class ProjectController extends Controller
 
                 //session code updated by sanskar sharma on 05-04-2024
 
-                $recentProjects = Project::orderBy('plist_id', 'desc')->where('plist_customer_id' ,     session('user_id'))->take(5)->get();
+                $recentProjects = Project::orderBy('plist_id', 'desc')->where('plist_customer_id', session('user_id'))->take(5)->get();
 
                 session(['recentProjects' => $recentProjects]);
 
@@ -138,6 +139,12 @@ class ProjectController extends Controller
                 // Updating the session with the latest projects
                 session(['recentProjects' => $recentProjects]);
 
+                $unreadNotificationsCount =  Notification::where('ntfn_readflag', false)
+                ->where('ntfn_forUserId', session('user_id'))
+                ->where('ntfn_type', 'cust')->count();
+
+                session(['unreadNotificationsCount' => $unreadNotificationsCount]);
+
                 return redirect()->back()->with('success', 'Project has been uploaded successfully.');
             }
         } catch (\Exception $e) {
@@ -160,7 +167,7 @@ class ProjectController extends Controller
 
         if ($customerId) {
 
-            $projects = Project::orderBy('plist_id' , 'desc')->where('plist_customer_id', $customerId)->get();
+            $projects = Project::orderBy('plist_id', 'desc')->where('plist_customer_id', $customerId)->get();
 
         } else {
 
@@ -217,9 +224,9 @@ class ProjectController extends Controller
 
         $projects = Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id', $customerId)->get();
 
-        if ($projects->isEmpty()) {
-            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
-        }
+        // if ($projects->isEmpty()) {
+        //     return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
+        // }
 
         return view('customer.track_project_report', compact('projects'));
     }
@@ -231,9 +238,9 @@ class ProjectController extends Controller
 
         $projects = Project::where('plist_status', 'In Progress')->where('plist_customer_id', $customerId)->get();
 
-        if ($projects->isEmpty()) {
-            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
-        }
+        // if ($projects->isEmpty()) {
+        //     return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
+        // }
 
         return view('customer.track_project_report', compact('projects'));
     }
@@ -245,9 +252,9 @@ class ProjectController extends Controller
 
         $projects = Project::where('plist_status', 'Delivered')->where('plist_customer_id', $customerId)->get();
 
-        if ($projects->isEmpty()) {
-            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
-        }
+        // if ($projects->isEmpty()) {
+        //     return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
+        // }
 
         return view('customer.track_project_report', compact('projects'));
     }
@@ -269,9 +276,9 @@ class ProjectController extends Controller
             ->where('plist_customer_id', $customerId)
             ->get();
 
-        if ($projects->isEmpty()) {
-            return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
-        }
+        // if ($projects->isEmpty()) {
+        //     return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
+        // }
 
         return view('customer.track_project_report', compact('projects'));
     }
@@ -340,34 +347,36 @@ class ProjectController extends Controller
         $projects = Project::where('plist_customer_id', $cusomerId)->get();
     }
 
-    public function manageProject(){
-        
+    public function manageProject()
+    {
+
         $serviceProviderId = session('sp_user_id');
 
         $projects = ProjectPlannerTask::with([
             'projectPlanner.projectScope.project'
         ])
-        ->where('pptasks_sp_id', $serviceProviderId)
-        ->get()
-        ->map(function ($task) {
-            return optional(optional($task->projectPlanner)->projectScope)->project;
-        })
-        ->filter()
-        ->unique('plist_id')
-        ->values();
+            ->where('pptasks_sp_id', $serviceProviderId)
+            ->get()
+            ->map(function ($task) {
+                return optional(optional($task->projectPlanner)->projectScope)->project;
+            })
+            ->filter()
+            ->unique('plist_id')
+            ->values();
 
-        if($projects) {
+        if ($projects) {
 
-            return view('/service-partner/manage_project' , compact('projects'));
+            return view('/service-partner/manage_project', compact('projects'));
 
         }
 
-        return redirect()->back()->with('error' , 'Project not found!');
+        return redirect()->back()->with('error', 'Project not found!');
 
     }
 
-    public function manageprojectLocation($projectId){
-        
+    public function manageprojectLocation($projectId)
+    {
+
         $project_scope = ProjectScope::where('pscope_project_id', $projectId)->get();
 
         \Log::info('log : ' . print_r($project_scope->toArray(), true));
@@ -380,74 +389,295 @@ class ProjectController extends Controller
 
     }
 
-    public function manageProjectdetails($pscopeId) {
-        
-        $projectPlanner = ProjectPlanner::where('pplnr_scope_id' , $pscopeId)->get(); 
-        
-        if(!$projectPlanner) {
+    public function manageProjectdetails($pscopeId)
+    {
 
-            return redirect()->back()->with('error' , 'Not found!');
+        $projectPlanner = ProjectPlanner::where('pplnr_scope_id', $pscopeId)->get();
+
+        if (!$projectPlanner) {
+
+            return redirect()->back()->with('error', 'Not found!');
 
         }
 
         \Log::info('pplnr' . $projectPlanner);
-        
-        return view('/service-partner/manage_project_details' , compact('projectPlanner'));
+
+        return view('/service-partner/manage_project_details', compact('projectPlanner'));
 
     }
 
-    public function manageProjectViewTasks($plannerId) {
-        
-        $projectPlannerTasks = ProjectPlannerTask::where('pptasks_planner_id' , $plannerId)->get();
+    public function manageProjectViewTasks($plannerId)
+    {
 
-        if(!$projectPlannerTasks)
-        {
+        $projectPlannerTasks = ProjectPlannerTask::where('pptasks_planner_id', $plannerId)->get();
 
-            return redirect()->back()->with('error' , 'Project Planner Tasks Not Found!');
+        if (!$projectPlannerTasks) {
+
+            return redirect()->back()->with('error', 'Project Planner Tasks Not Found!');
 
         }
 
-        return view('service-partner/manage_project_view_tasks' , compact('projectPlannerTasks'));
+        return view('service-partner/manage_project_view_tasks', compact('projectPlannerTasks'));
 
     }
 
-    public function manageProjectEditTasks($ppTaskId) {
-        
-        $projectPlannerTasks = ProjectPlannerTask::where('pptasks_id' , $ppTaskId)->first();
+    public function manageProjectEditTasks($ppTaskId)
+    {
 
-        if(!$projectPlannerTasks) {
+        // $projectPlannerTasks = ProjectPlannerTask::where('pptasks_id', $ppTaskId)->first();
 
-            return redirect()->back()->with('error' , 'Project Planner Tasks Not Found!');
+        $task = ProjectPlannerTask::with([
+            'projectPlanner.projectScope.project'
+        ])
+            ->where('pptasks_id', $ppTaskId)
+            ->first();
+
+        $projectPlannerTasks = optional(optional($task->projectPlanner)->projectScope)->project;
+
+        $currentDate = Carbon::now()->format('Y-m-d');
+
+        if (!$projectPlannerTasks) {
+
+            return redirect()->back()->with('error', 'Project Planner Tasks Not Found!');
 
         }
 
-        return view('service-partner/manage_project_edit_task' , compact('projectPlannerTasks'));
+        return view('service-partner/manage_project_edit_task', compact('projectPlannerTasks' , 'task' , 'currentDate'));
 
     }
 
-    public function listOfProjects(){
+    public function updateTask(Request $request) {
         
+            // $request->validate([
+            //     'pptasks_id' => 'required|integer',
+            //     'pptasks_sp_status' => 'required|string',
+            //     'pptasks_proof_of_completion' => 'nullable|file|mimes:pdf,csv,xlsx|max:20480',
+            // ]);
+    
+            // $status = $request->input('pptasks_sp_status');
+            // $currentDate = Carbon::now()->toDateString();
+            // $filePath = null;
+            // $fileName = null;
+    
+            // if ($request->hasFile('file')) {
+            //     $file = $request->file('file');
+            //     $fileName = time() . '_' . $file->getClientOriginalName();
+            //     $filePath = $file->storeAs('task_uploads', $fileName, 'public');
+            // }
+    
+            // // Save to database
+            // DB::table('project_planner_tasks')->where('pptasks_id', $request->pptasks_id)->update([
+            //     'pptasks_status' => $status,
+            //     'pptasks_file_path' => $filePath,
+            //     'pptasks_file_name' => $fileName,
+            //     'updated_at' => $currentDate,
+            // ]);
+    
+            // return redirect()->back()->with('success', 'Task updated successfully!');
+
+
+            $request->validate([
+                'pptasks_id' => 'required|exists:project_planner_tasks,pptasks_id',
+                'pptasks_sp_status' => 'required|string',
+                'pptasks_proof_of_completion' => 'nullable|file|mimes:pdf,csv,xlsx|max:20480',
+            ]);
+
+            $task = ProjectPlannerTask::find($request->pptasks_id);
+            $task->pptasks_sp_status = $request->pptasks_sp_status;
+    
+            if ($request->hasFile('pptasks_proof_of_completion')) {
+
+                $file = $request->file('pptasks_proof_of_completion');
+                // $task->pptasks_file_name = $file->getClientOriginalName();
+                $task->pptasks_proof_of_completion = file_get_contents($file->getRealPath());
+
+            } 
+    
+            $task->pptasks_date_of_completion = Carbon::now()->format('Y-m-d');
+            $task->save();
+    
+            return redirect()->back()->with('success', 'Task updated and file saved in DB!');
+    }
+
+    public function listOfProjects()
+    {
+
         $serviceProviderId = session('sp_user_id');
 
         $projects = ProjectPlannerTask::with([
             'projectPlanner.projectScope.project'
         ])
-        ->where('pptasks_sp_id', $serviceProviderId)
-        ->get()
-        ->map(function ($task) {
-            return optional(optional($task->projectPlanner)->projectScope)->project;
-        })
-        ->filter()
-        ->unique('plist_id')
-        ->values();
+            ->where('pptasks_sp_id', $serviceProviderId)
+            ->get()
+            ->map(function ($task) {
+                return optional(optional($task->projectPlanner)->projectScope)->project;
+            })
+            ->filter()
+            ->unique('plist_id')
+            ->values();
 
-        if($projects) {
+        if ($projects) {
 
-            return view('/service-partner/all_projects' , compact('projects'));
+            return view('/service-partner/all_projects', compact('projects'));
 
         }
 
-        return redirect()->back()->with('error' , 'Project not found!');
+        return redirect()->back()->with('error', 'Project not found!');
+
+    }
+
+    public function spTrackProjectDelivered()
+    {
+
+        $serviceProvider = session('sp_user_id');
+
+        return view('service-partner/project_reports');
+
+    }
+
+    public function projectNotStartedReports()
+    {
+
+        $serviceProviderId = session('sp_user_id');
+
+        $projects = ProjectPlannerTask::with([
+            'projectPlanner.projectScope.project.manager',
+            'projectPlanner',
+            'projectPlanner.projectScope'
+        ])
+            ->where('pptasks_sp_id', $serviceProviderId)
+            ->where('pptasks_sp_status', 'Not Started')
+            ->get()
+            ->map(function ($task) {
+                $project = optional(optional(optional($task->projectPlanner)->projectScope)->project);
+
+                return [
+                    'plist_projectid' => $project->plist_projectid ?? null,
+                    'pscope_country' => $task->projectPlanner->projectScope->pscope_country ?? null,
+                    'pscope_state' => $task->projectPlanner->projectScope->pscope_state ?? null,
+                    'pscope_pincode' => $task->projectPlanner->projectScope->pscope_pincode ?? null,
+                    'pplnr_milestone' => $task->projectPlanner->pplnr_milestone ?? null,
+                    'pptasks_task_title' => $task->pptasks_task_title,
+                    'pptasks_sp_status' => $task->pptasks_sp_status,
+                    'pptasks_pt_status' => $task->pptasks_pt_status,
+                    'manager_email' => optional($project->manager)->email ?? null,
+                    'pptasks_planner_id' => $task->pptasks_planner_id,
+                ];
+            })
+            ->filter(fn($item) => $item['plist_projectid'] !== null)
+            ->unique('plist_projectid')
+            ->values();
+
+        return view('service-partner/project_reports', compact('projects'));
+    }
+
+    public function projectFullfilledreports()
+    {
+
+        $serviceProviderId = session('sp_user_id');
+
+        $projects = ProjectPlannerTask::with([
+            'projectPlanner.projectScope.project.manager',
+            'projectPlanner',
+            'projectPlanner.projectScope'
+        ])
+            ->where('pptasks_sp_id', $serviceProviderId)
+            ->where('pptasks_sp_status', 'Fullfilled')
+            ->get()
+            ->map(function ($task) {
+                $project = optional(optional(optional($task->projectPlanner)->projectScope)->project);
+
+                return [
+                    'plist_projectid' => $project->plist_projectid ?? null,
+                    'pscope_country' => $task->projectPlanner->projectScope->pscope_country ?? null,
+                    'pscope_state' => $task->projectPlanner->projectScope->pscope_state ?? null,
+                    'pscope_pincode' => $task->projectPlanner->projectScope->pscope_pincode ?? null,
+                    'pplnr_milestone' => $task->projectPlanner->pplnr_milestone ?? null,
+                    'pptasks_task_title' => $task->pptasks_task_title,
+                    'pptasks_sp_status' => $task->pptasks_sp_status,
+                    'pptasks_pt_status' => $task->pptasks_pt_status,
+                    'manager_email' => optional($project->manager)->email ?? null,
+                    'pptasks_planner_id' => $task->pptasks_planner_id,
+                ];
+            })
+            ->filter(fn($item) => $item['plist_projectid'] !== null)
+            ->unique('plist_projectid')
+            ->values();
+
+        return view('service-partner/project_reports', compact('projects'));
+
+    }
+
+    public function projectOnGoingReports()
+    {
+
+        $serviceProviderId = session('sp_user_id');
+
+        $projects = ProjectPlannerTask::with([
+            'projectPlanner.projectScope.project.manager',
+            'projectPlanner',
+            'projectPlanner.projectScope'
+        ])
+            ->where('pptasks_sp_id', $serviceProviderId)
+            ->where('pptasks_sp_status', 'On Going')
+            ->get()
+            ->map(function ($task) {
+                $project = optional(optional(optional($task->projectPlanner)->projectScope)->project);
+
+                return [
+                    'plist_projectid' => $project->plist_projectid ?? null,
+                    'pscope_country' => $task->projectPlanner->projectScope->pscope_country ?? null,
+                    'pscope_state' => $task->projectPlanner->projectScope->pscope_state ?? null,
+                    'pscope_pincode' => $task->projectPlanner->projectScope->pscope_pincode ?? null,
+                    'pplnr_milestone' => $task->projectPlanner->pplnr_milestone ?? null,
+                    'pptasks_task_title' => $task->pptasks_task_title,
+                    'pptasks_sp_status' => $task->pptasks_sp_status,
+                    'pptasks_pt_status' => $task->pptasks_pt_status,
+                    'manager_email' => optional($project->manager)->email ?? null,
+                    'pptasks_planner_id' => $task->pptasks_planner_id,
+                ];
+            })
+            ->filter(fn($item) => $item['plist_projectid'] !== null)
+            ->unique('plist_projectid')
+            ->values();
+
+        return view('service-partner/project_reports', compact('projects'));
+    }
+
+    public function projectScrappedReports()
+    {
+
+        $serviceProviderId = session('sp_user_id');
+
+        $projects = ProjectPlannerTask::with([
+            'projectPlanner.projectScope.project.manager',
+            'projectPlanner',
+            'projectPlanner.projectScope'
+        ])
+            ->where('pptasks_sp_id', $serviceProviderId)
+            ->where('pptasks_sp_status', 'Scrapped')
+            ->get()
+            ->map(function ($task) {
+                $project = optional(optional(optional($task->projectPlanner)->projectScope)->project);
+
+                return [
+                    'plist_projectid' => $project->plist_projectid ?? null,
+                    'pscope_country' => $task->projectPlanner->projectScope->pscope_country ?? null,
+                    'pscope_state' => $task->projectPlanner->projectScope->pscope_state ?? null,
+                    'pscope_pincode' => $task->projectPlanner->projectScope->pscope_pincode ?? null,
+                    'pplnr_milestone' => $task->projectPlanner->pplnr_milestone ?? null,
+                    'pptasks_task_title' => $task->pptasks_task_title,
+                    'pptasks_sp_status' => $task->pptasks_sp_status,
+                    'pptasks_pt_status' => $task->pptasks_pt_status,
+                    'manager_email' => optional($project->manager)->email ?? null,
+                    'pptasks_planner_id' => $task->pptasks_planner_id,
+                ];
+            })
+            ->filter(fn($item) => $item['plist_projectid'] !== null)
+            ->unique('plist_projectid')
+            ->values();
+
+        return view('service-partner/project_reports', compact('projects'));
 
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\TodoController;
 use App\Http\Controllers\HardwareController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderAddressController;
@@ -29,7 +30,6 @@ Route::prefix('authentication/customer')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('customer.logout');
     Route::get('/login', [AuthController::class, 'showLoginPage'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-
 });
 
 Route::get('/authentication/service-partner/sign-in', fn() => view('auth/service_sign_in'))->name('auth.sp.sign_in');
@@ -38,6 +38,16 @@ Route::get('/authentication/service-partner/sign-up', fn() => view('auth/service
 // Customer Session Routes
 Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/', [AuthController::class, 'dashboard'])->name('customer.dashboard');
+    // // In web.php
+    // Route::prefix('customer/session')->group(function () {
+    //     Route::post('/todo/add', [TodoController::class, 'add'])->name('todo.add');
+    // });
+    // Route::post('/todo/add', [TodoController::class, 'add'])->name('todo.add');
+    // Route::post('/customer/session/todo/add', [TodoController::class, 'add'])->name('todo.add');
+
+    // Route::post('/customer/session/todo/delete', [TodoController::class, 'delete'])->name('todo.delete');
+    // Route::get('/customer/session/todo/fetch', [TodoController::class, 'fetchTodos'])->name('todo.fetch');
+
 
     Route::get('/complete-profile', function () {
         return (new AuthController)->dashboard('customer/complete_profile');
@@ -46,6 +56,8 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/reports', function () {
         return (new AuthController)->dashboard('customer/reports');
     });
+
+
 
     // Route::get('/search_project', function () {
     //     return view('customer/search_project');
@@ -181,8 +193,11 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/project-details/{plist_id}', function ($plist_id) {
         return (new ProjectController)->fetchProject($plist_id);
     });
-    
 });
+
+Route::post('/customer/session/todo/add', [TodoController::class, 'add'])->name('todo.add');
+Route::post('/customer/session/todo/delete', [TodoController::class, 'delete'])->name('todo.delete');
+Route::get('/customer/session/todo/fetch', [TodoController::class, 'fetchTodos'])->name('todo.fetch');
 
 Route::post('/login', [AuthController::class, 'spLogin'])->name('splogin.post');
 
@@ -280,7 +295,6 @@ Route::get('service-partner/session/hardware-details', function () {
 
 Route::get('service-partner/session/profileoptions', function () {
     return view('/service-partner/profileoptions');
-
 });
 
 Route::get('service-partner/session/find-project', function () {
@@ -299,26 +313,26 @@ Route::get('service-partner/session/hardware-details', function () {
 //     return view('/service-partner/reports');
 // });
 
-Route::get('service-partner/session/reports',[ChartController::class , 'spIndex'])->name('sp.reports');
+Route::get('service-partner/session/reports', [ChartController::class, 'spIndex'])->name('sp.reports');
 Route::get('/sp-chart-data', [ChartController::class, 'getSPData'])->name('chart.data');
 
 // Route::get('service-partner/session/track-project-pending', function () {
 //     return view('/service-partner/track-project-pending');
 // });
 
-Route::get('service-partner/session/project-reports-not-started' , function () {
+Route::get('service-partner/session/project-reports-not-started', function () {
     return (new ProjectController)->projectNotStartedReports();
 });
 
-Route::get('service-partner/session/project-reports-fullfilled' , function () {
+Route::get('service-partner/session/project-reports-fullfilled', function () {
     return (new ProjectController)->projectFullfilledReports();
 });
 
-Route::get('service-partner/session/project-reports-on-going' , function () {
+Route::get('service-partner/session/project-reports-on-going', function () {
     return (new ProjectController)->projectOnGoingreports();
 });
 
-Route::get('service-partner/session/project-reports-scrapped' , function () {
+Route::get('service-partner/session/project-reports-scrapped', function () {
     return (new ProjectController)->projectScrappedReports();
 });
 
@@ -366,4 +380,3 @@ Route::get('service-partner/session/find-project', [ProjectController::class, 'i
 
 
 Route::get('service-partner/session/find-project-details', [ProjectController::class, 'showProjectDetails']);
-

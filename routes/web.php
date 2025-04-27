@@ -14,6 +14,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 
 // Landing Pages
@@ -198,6 +199,13 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 Route::post('/customer/session/todo/add', [TodoController::class, 'add'])->name('todo.add');
 Route::post('/customer/session/todo/delete', [TodoController::class, 'delete'])->name('todo.delete');
 Route::get('/customer/session/todo/fetch', [TodoController::class, 'fetchTodos'])->name('todo.fetch');
+Route::post('/customer/session/upload-dp', [ProfileController::class, 'uploadProfilePicture'])->name('profileController.upload.dp');
+Route::get('/customer/session/get-profile-picture', [ProfileController::class, 'getProfilePicture'])->name('profileController.get.dp');
+Route::get('/customer/session/get-location', [ProfileController::class, 'getLocation'])->name('profileController.get.location');
+Route::post('/customer/session/update-location', [ProfileController::class, 'updateLocation'])->name('profileController.update.location');
+Route::post('/customer/session/update-cinid', [ProfileController::class, 'updateCinId'])->name('profileController.update.cinid');
+Route::get('/customer/session/cinid', [ProfileController::class, 'getCinGovId'])->name('profileController.get.cinid');
+Route::post('/customer/session//change-password', [ProfileController::class, 'changePassword'])->name('profileController.changePassword');
 
 Route::post('/login', [AuthController::class, 'spLogin'])->name('splogin.post');
 

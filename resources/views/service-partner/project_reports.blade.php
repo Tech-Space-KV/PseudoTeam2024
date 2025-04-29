@@ -31,31 +31,8 @@
       </tr>
     </thead>
     <tbody>
-      <!-- <tr>
-      <th scope="row">100134</th>
-      <td>Test Project 1</td>
-      <td>28/11/2023</td>
-      <td>28/11/2024</td>
-      <td>In Progress</td>
-      <td ><a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-      </tr>
-      <tr>
-      <th scope="row">100135</th>
-      <td>Test Project 2</td>
-      <td>28/11/2023</td>
-      <td>28/11/2024</td>
-      <td>In Progress</td>
-       <td> <a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-      </tr>
-      <tr>
-      <th scope="row">100136</th>
-      <td>Test Project 3</td>
-      <td>28/11/2023</td>
-      <td>28/11/2024</td>
-      <td>In Progress</td>
-      <td> <a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-      </tr> -->
-
+      
+      @if($projects->isNotEmpty())
       @foreach($projects as $project)
       <tr>
       <th scope="row">{{ $project['plist_projectid'] ?? '-' }}</th>
@@ -73,6 +50,11 @@
       </td>
       </tr>
     @endforeach
+    @else
+      <tr>
+        <td colspan="8" class="text-center">No projects found!</td>
+      </tr>
+    @endif
 
 
     </tbody>

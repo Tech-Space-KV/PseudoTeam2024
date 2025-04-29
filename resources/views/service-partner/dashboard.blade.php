@@ -26,52 +26,7 @@
     </br>
     <p><span class="fs-2 fw-bold mt-4 text-pseudo">Recently Assigned Projects</span></p>
 
-    <!-- <div class="card p-3 bg-light btn-outline-primary my-3 text-dark">
-      <h5>Project Title: Project ID</h5>
-      <p>Project description</p>
-      <p>Project details</p>
-    </div>
-
-    <div class="card p-3 bg-light btn-outline-primary my-3 text-dark">
-      <h5>Project Title: Project ID</h5>
-      <p>Project description</p>
-      <p>Project details</p>
-    </div>
-
-    <div class="card p-3 bg-light btn-outline-primary my-3 text-dark">
-      <h5>Project Title: Project ID</h5>
-      <p>Project description</p>
-      <p>Project details</p>
-    </div>
-
-    <div class="card p-3 bg-light btn-outline-primary my-3 text-dark">
-      <h5>Project Title: Project ID</h5>
-      <p>Project description</p>
-      <p>Project details</p>
-    </div> -->
-
-    @if(session('recentProjects') && session('recentProjects')->count() > 0)
-    @foreach(session('recentProjects') as $project)
-    <div class="card p-3 bg-light btn-outline-primary my-3 text-dark"> 
-    <h5><strong>Project ID: </strong>{{ $project->plist_projectid }}</h5>
-    <p><strong>Title: </strong> {{ $project->plist_title }}</p>
-    <p><strong>Description: </strong> {{ $project->plist_description }}</p>
-    <p><strong>Manager Name:</strong> {{ $project->manager->username }}</p>
-    <p><strong>Manager Email:</strong> {{ $project->manager->email }}</p>
-    <a href="{{ url('customer/session/track-project-report-location/' . $project->plist_id) }}"
-      class="btn btn-sm btn-outline-primary" title="Track Progress">
-      <i class="fa fa-eye"></i> Track Progress
-    </a>
-    </div>
-  @endforeach
-  @else
-  <div class="card p-3 bg-light my-3 text-dark">
-  <p>No recent projects found.</p>
-  </div>
-@endif
-
-
-
+    @livewire('sp-recent-projects')
 
   </div>
 

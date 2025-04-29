@@ -37,31 +37,34 @@
     </p>
   </div>
 
+
   <!-- Profile Form -->
   <div class="container mt-3">
+  <form id="profileForm" method="POST" action="{{ route('customer.profile.save') }}" enctype="multipart/form-data">
+    @csrf
     <div class="card" id="card-one">
       <div class="card-body">
         <fieldset class="active">
           <div class="form-group">
             <label>Country</label>
-            <select class="form-control form-select" id="country" onchange="populateCities();" required>
+            <select class="form-control form-select" id="country" name="pown_country" onchange="populateCities();" required>
               <option value="" disabled selected>--Select Country--</option>
               <option value="India">India</option>
             </select>
           </div>
           <div class="form-group">
             <label>City</label>
-            <select class="form-control form-select" id="city" required>
+            <select class="form-control form-select" name="pown_state" id="city" required>
               <option value="" disabled selected>--Select City--</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Piwwncode</label>
-            <input class="form-control" id="pincode" type="text" placeholder="Area Pincode" required>
+            <label>Pincode</label>
+            <input class="form-control" id="pincode" type="text" name="pown_pincode" placeholder="Area Pincode" required>
           </div>
           <div class="form-group">
             <label>Mailing Address</label>
-            <textarea class="form-control" id="address" rows="3" placeholder="Your address" required></textarea>
+            <textarea class="form-control" id="address" rows="3" placeholder="Your address" name="" required></textarea>
           </div>
           <div class="btn-group  w-25 mx-auto">
             <button class="btn btn-primary fw-bold" type="button" onclick="nextStep()">Next</button>
@@ -107,6 +110,7 @@
         </div>
       </div>
     </div>
+    </form>
   </div>
 
   <script>

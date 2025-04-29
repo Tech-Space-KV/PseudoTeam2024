@@ -55,6 +55,7 @@
         <td> <a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
         </tr> -->
 
+        @if($projects->isNotEmpty())
         @foreach($projects as $project)
            <tr>
              <th scope="row">{{ $project->plist_projectid }}</th>
@@ -65,6 +66,12 @@
             <td><a href="{{ url('service-partner/session/manage_project_location/'.$project->plist_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa fa-location-arrow"></i></a></td> 
             <!-- <td><a href="{{ url('customer/session/project-details/'.$project->plist_id) }}"><i class="fa fa-eye btn btn-sm btn-outline-primary"></i></a></td> -->
          @endforeach
+        @else
+            <tr>
+                <td colspan="6" class="text-center">No projects found!</td>
+            </tr>
+        @endif
+
 
     </tbody>
   </table>

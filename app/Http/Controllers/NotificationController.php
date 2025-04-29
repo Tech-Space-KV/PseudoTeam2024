@@ -9,12 +9,7 @@ class NotificationController extends Controller
 {
     public function fetchNotification()
     {
-        // $notifications = Notification::all();
-
         $customerId = session('user_id');
-
-        // $notifications = Notification::where('ntfn_forUserId' , $customerId)
-        // ->where('ntfn_type' , 'cust')->get();
 
         $notifications = Notification::orderBy('ntfn_id' , 'desc')->where('ntfn_forUserId' , $customerId)
         ->where('ntfn_type' , 'cust')->get();
@@ -43,6 +38,20 @@ class NotificationController extends Controller
 
         if ($notification) {
             return view('customer.notification-details', compact('notification'));
+        }
+
+        return back()->with('error', 'No notification found!');
+    }
+
+    public function fetchSpNotification()
+    {
+        $spId = session('sp_user_id');
+
+        $notifications = Notification::orderBy('ntfn_id' , 'desc')->where('ntfn_forUserId' , $spId)
+        ->where('ntfn_type' , 'sp')->get();
+
+        if ($notifications) {
+            return view('service-partner.notifications', compact('notifications'));
         }
 
         return back()->with('error', 'No notification found!');

@@ -54,6 +54,8 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->dashboard('customer/complete_profile');
     })->name('customer.complete_profile');
 
+    Route::post('/customer/profile/save', [AuthController::class, 'completeProfileCustomer'])->name('customer.profile.save');
+
     Route::get('/reports', function () {
         return (new AuthController)->dashboard('customer/reports');
     });
@@ -245,6 +247,8 @@ Route::get('/service-partner/session/dashboard', function () {
     return view('/service-partner/dashboard');
 });
 
+Route::get('/service-partner/session/sp_search_project', [ProjectController::class, 'spSearchProject']);
+
 // Route::get('service-partner/session/manage_project', function () {
 //     return view('/service-partner/manage_project');
 // });
@@ -366,6 +370,7 @@ Route::get('service-partner/session/help', function () {
 Route::get('service-partner/session/reports', function () {
     return view('/service-partner/reports');
 });
+
 Route::get('service-partner/session/referandearn', function () {
     return view('/service-partner/referandearn');
 });
@@ -378,8 +383,12 @@ Route::get('service-partner/session/all-projects', function () {
     return (new ProjectController)->listOfProjects();
 });
 
+// Route::get('service-partner/session/notifications', function () {
+//     return view('/service-partner/notifications');
+// });
+
 Route::get('service-partner/session/notifications', function () {
-    return view('/service-partner/notifications');
+    return (new NotificationController)->fetchSpNotification();
 });
 
 Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store');

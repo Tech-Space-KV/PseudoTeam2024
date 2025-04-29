@@ -51,6 +51,27 @@ class AuthController extends Controller
         return redirect()->route('auth.customer.sign_in')->with('success', 'Signup successful! Please log in.');
     }
 
+    public function completeProfileCustomer(Request $request)
+    {
+        $validated = $request->validate([
+            'pown_country' => 'required|string|max:255',
+            'pown_username' => 'required|string|max:255',
+            'pown_email' => 'required|email|unique:project_owners,pown_email',
+            'pown_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $projectOwner = new ProjectOwners();
+        $projectOwner->pown_name = $validated['pown_name'];
+        $projectOwner->pown_username = $validated['pown_username'];
+        $projectOwner->pown_email = $validated['pown_email'];
+        $projectOwner->pown_password = Hash::make($validated['pown_password']);
+        $projectOwner->pown_profile_completion_flag = true;
+        $projectOwner->save();
+
+        return redirect()->route('auth.customer.sign_in')->with('success', 'Profile completed successfully! Please log in.');
+    }
+
+
     // Show login page
     public function showLoginPage()
     {
@@ -181,34 +202,12 @@ class AuthController extends Controller
 
     public function splogin(Request $request)
     {
-
-        \Log::info('executing till here! 001');
-
         $email = $request->email;
         $password = $request->password;
 
-        // $user = User::where('email', $email)->where('user_type', 'sp')->first();
-
-        // DB::listen(function ($query) {
-        //     \Log::info($query->sql);
-        // });
-
-        \Log::info('executing till here! 002' . $email);
-
-        // Log the query directly before the User fetch to see what SQL is being executed
-        DB::listen(function ($query) {
-            \Log::info('SQL Query: ' . $query->sql);
-            \Log::info('Bindings: ' . implode(', ', $query->bindings));  // to view bindings used in the query
-        });
-
-        // Fetch user
         $user = User::where('email', $email)->where('user_type', 'sp')->first();
 
-        \Log::info('executing till here! 002');
-
         if ($user) {
-
-            \Log::info('executing till here!');
 
             $serviceProvider = ServiceProvider::where('sprov_email', $email)->first();
 
@@ -226,73 +225,39 @@ class AuthController extends Controller
                         session(['sprov_email' => $serviceProvider->sprov_email]);
                         session(['sprov_complete_profile_flag' => $serviceProvider->sprov_profile_completion_flag]);
 
-                        $spId = 1; // example sp_id
-                        // $projects = ProjectPlannerTask::with('projectPlanner.projectScope.project')
-                        //     ->where('pptasks_sp_id', $spId)
-                        //     ->get()
-                        //     ->pluck('planner.pscope.project')
-                        //     ->flatten()
-                        //     ->unique('id'); // Get unique projects
+                        $spId = 1;
 
-                        //     \Log::info('Projects:', $projects->toArray());
-
-                        // $projects = ProjectPlannerTask::with('projectPlanner.projectScope.project')
+                        // $projects = ProjectPlannerTask::with([
+                        //     'projectPlanner.projectScope.project.manager' 
+                        // ])
                         //     ->where('pptasks_sp_id', $spId)
                         //     ->get()
                         //     ->map(function ($task) {
-                        //         return optional($task->projectPlanner)
-                        //             ? optional($task->projectPlanner->projectScope)->project
-                        //             : null;
+                        //         return optional(optional($task->projectPlanner)->projectScope)->project;
                         //     })
-                        //     ->filter() // Remove nulls
-                        //     ->unique('plist_id') // Assuming plist_id is the primary key
-                        //     ->values(); 
+                        //     ->filter()
+                        //     ->unique('plist_id')
+                        //     ->values();
 
-                        $projects = ProjectPlannerTask::with([
-                            'projectPlanner.projectScope.project.manager' // Eager load manager
-                        ])
-                            ->where('pptasks_sp_id', $spId)
-                            ->get()
-                            ->map(function ($task) {
-                                return optional(optional($task->projectPlanner)->projectScope)->project;
-                            })
-                            ->filter()
-                            ->unique('plist_id')
-                            ->values();
-
-                        $totalAssignedProjects = ProjectPlannerTask::where('pptasks_sp_id', $spId)->count();
+                        // $totalAssignedProjects = ProjectPlannerTask::where('pptasks_sp_id', $spId)->count();
 
                         // $totalFullfilledProjects = ProjectPlannerTask::where('pptasks_sp_id', $spId)
-                        //     ->where('pptasks_pt_status',  'Fullfilled')->count();
+                        //     ->get()
+                        //     ->filter(function ($task) {
+                        //         return Str::lower($task->pptasks_pt_status) === 'fullfilled';
+                        //     })
+                        //     ->count();
 
-                        $totalFullfilledProjects = ProjectPlannerTask::where('pptasks_sp_id', $spId)
-                            ->get()
-                            ->filter(function ($task) {
-                                return Str::lower($task->pptasks_pt_status) === 'fullfilled';
-                            })
-                            ->count();
-
-                        $jobSuccessRate = $totalAssignedProjects > 0
-                            ? round(($totalFullfilledProjects / $totalAssignedProjects) * 100, 2)
-                            : 0;
-
-                        // Log the cleaned projects list
-                        \Log::info('Filtered Projects:', $projects->toArray());
-
-                        \Log::info('Job Success Rate:', ['rate' => $jobSuccessRate]);
-                        // Log the total assigned and fulfilled projects
-                        \Log::info('Total Assigned Projects:', ['count' => $totalAssignedProjects]);
-
-                        \Log::info('Total Fulfilled Projects:', ['count' => $totalFullfilledProjects]);
-
-                        // dd(DB::getQueryLog());
+                        // $jobSuccessRate = $totalAssignedProjects > 0
+                        //     ? round(($totalFullfilledProjects / $totalAssignedProjects) * 100, 2)
+                        //     : 0;
 
                         //code added by sanskar sharma (07/04/2025)
                         $dashboardData = [
                             'unreadNotificationsCount' => Notification::where('ntfn_readflag', false)->where('ntfn_forUserId', $serviceProvider->sprov_id)->where('ntfn_type', 'cust')->count(),
                             // 'recentProjects' => Project::orderBy('plist_id', 'desc')->where('plist_customer_id', $serviceProvider->sprov_id)->take(5)->get(),
-                            'recentProjects' => $projects,
-                            'jobSuccessRate' => $jobSuccessRate,
+                            // 'recentProjects' => $projects,
+                            // 'jobSuccessRate' => $jobSuccessRate,
                             'inProgressCount' => Project::where('plist_status', 'In Progress')->where('plist_customer_id', $serviceProvider->sprov_id)->count(),
                             'pendingCount' => Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id', $serviceProvider->sprov_id)->count(),
                             'deliveredCount' => Project::where('plist_status', 'Delivered')->where('plist_customer_id', $serviceProvider->sprov_id)->count(),
@@ -306,12 +271,9 @@ class AuthController extends Controller
 
                     } else {
 
-                        \Log::info('executing till here!');
-
                         return redirect()->route('service-partner.complete_profile');
 
                     }
-
 
                 }
 

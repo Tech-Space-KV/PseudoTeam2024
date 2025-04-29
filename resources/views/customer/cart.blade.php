@@ -160,9 +160,19 @@
 
     $(document).ready(function () {
 
-    $('#place-order-btn').on('click', function () {
+    $('#place-order-btn').on('click', function (e) {
+      e.preventDefault();
 
       const selectedAddressId = $('#selectedAddressId').val();
+
+      if (!selectedAddressId) {
+      $('#message-container').html(`
+      <div class="alert alert-danger" role="alert">
+      Select a delivery address to proceed with your order.
+      </div>
+    `);
+      return; 
+      }
 
       $('#place-order-btn').prop('disabled', true).text('Processing...');
 

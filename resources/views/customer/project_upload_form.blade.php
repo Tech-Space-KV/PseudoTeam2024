@@ -49,7 +49,7 @@
             <!-- Scope of Work -->
             <div class="mb-3">
                 <label for="sow" class="form-label">Scope of work</label>
-                <input type="file" class="form-control" id="sow" name="plist_sow" placeholder="Scope of work"
+                <input type="file" class="form-control" id="sow" name="plist_sow" placeholder="Scope of work" accept=""
                     value="{{ old('plist_sow', $project->plist_sow ?? '') }}" {{ $readonly ? 'readonly' : '' }}>
             </div>
 
@@ -187,7 +187,7 @@
                 <div class="mb-3">
                     <label for="email" class="form-label">Additional Email (Optional)</label>
                     <input type="email" class="form-control" id="emailInput" name="plist_customeremail"
-                        placeholder="Additional email" readonly>
+                        placeholder="Additional email" value="{{ $readonly ? ($project->plist_customeremail ?? '') : old('plist_customeremail', $project->plist_customeremail ?? '') }}"  readonly>
                 </div>
 
                 <h5 class="mt-4 mb-4 text-pseudo">
@@ -197,7 +197,8 @@
                 <div class="mb-3">
                     <label for="coupon" class="form-label">Coupon/Promo Code</label>
                     <input type="text" class="form-control" id="title" name="plist_coupon"
-                        placeholder="Add your coupon or promocode here">
+                    value="{{ $readonly ? ($project->plist_coupon ?? '') : old('plist_coupon', $project->plist_coupon ?? '') }}"
+                    placeholder="Add your coupon or promocode here">
                 </div>
             @endif
 

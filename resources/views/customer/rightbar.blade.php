@@ -13,11 +13,12 @@
                 <a href="{{ url('customer/session/notifications') }}" type="button"
                     class="btn btn-primary position-relative me-2" style="float: left;">
                     <i class="fa fa-bell text-white"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    @livewire('unread-notifications-count')
+                    <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                         id="unread-notification-count">
                         {{ session('unreadNotificationsCount', 0) > 99 ? '99+' : session('unreadNotificationsCount', 0) }}
                         <span class="visually-hidden">unread messages</span>
-                    </span>
+                    </span> -->
                 </a>
 
                 <!-- <a href="{{ url('logout') }}" type="button" class="btn btn-outline-danger position-relative ms-2" style="float: right;">

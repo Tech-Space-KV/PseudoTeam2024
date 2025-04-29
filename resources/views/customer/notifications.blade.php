@@ -24,38 +24,46 @@
             <tbody>
 
                 <!-- @foreach ($notifications as $notification)
-                                    <tr class="notification-row" data-id="{{ $notification->ntfn_id }}" style="background-color: #fafafa;">
-                                        <td style="padding: 15px; font-size: 0.9rem; color: #333;">{{ $notification->ntfn_date_time }}</td>
-                                        <td class="notification-text"
-                                            style="padding: 15px; font-size: 0.9rem; color: #333; line-height: 1.5; font-weight: bold; cursor: pointer;"
-                                            data-id="{{ $notification->ntfn_id }}">
-                                            Notification #: {{ $notification->ntfn_notification }}
-                                        </td>
-                                        <td style="text-align: center; padding: 15px;">
-                                            <button class="btn btn-default btn-sm delete-notification"
-                                                style="background: none; border: none; color: #007bff; font-size: 1.1rem; cursor: pointer;">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach -->
+                                        <tr class="notification-row" data-id="{{ $notification->ntfn_id }}" style="background-color: #fafafa;">
+                                            <td style="padding: 15px; font-size: 0.9rem; color: #333;">{{ $notification->ntfn_date_time }}</td>
+                                            <td class="notification-text"
+                                                style="padding: 15px; font-size: 0.9rem; color: #333; line-height: 1.5; font-weight: bold; cursor: pointer;"
+                                                data-id="{{ $notification->ntfn_id }}">
+                                                Notification #: {{ $notification->ntfn_notification }}
+                                            </td>
+                                            <td style="text-align: center; padding: 15px;">
+                                                <button class="btn btn-default btn-sm delete-notification"
+                                                    style="background: none; border: none; color: #007bff; font-size: 1.1rem; cursor: pointer;">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach -->
 
-                @foreach ($notifications as $notification)
-                    <tr class="notification-row" data-id="{{ $notification->ntfn_id }}" style="background-color: #fafafa;">
-                        <td style="padding: 15px; font-size: 0.9rem; color: #333;">{{ $notification->ntfn_date_time }}</td>
-                        <td class="notification-text" style="padding: 15px; font-size: 0.9rem; color: #333; line-height: 1.5; cursor: pointer; 
-                                    @if(!$notification->ntfn_readflag) font-weight: bold; @endif"
-                            data-id="{{ $notification->ntfn_id }}">
-                            Notification #: {{ $notification->ntfn_notification }}
-                        </td>
-                        <td style="text-align: center; padding: 15px;">
-                            <button class="btn btn-default btn-sm delete-notification"
-                                style="background: none; border: none; color: #007bff; font-size: 1.1rem; cursor: pointer;">
-                                <i class="bi bi-trash"></i>
-                            </button>
+                @if ($notifications->isNotEmpty())
+                    @foreach ($notifications as $notification)
+                        <tr class="notification-row" data-id="{{ $notification->ntfn_id }}" style="background-color: #fafafa;">
+                            <td style="padding: 15px; font-size: 0.9rem; color: #333;">{{ $notification->ntfn_date_time }}</td>
+                            <td class="notification-text" style="padding: 15px; font-size: 0.9rem; color: #333; line-height: 1.5; cursor: pointer; 
+                                                @if(!$notification->ntfn_readflag) font-weight: bold; @endif"
+                                data-id="{{ $notification->ntfn_id }}">
+                                Notification #: {{ $notification->ntfn_notification }}
+                            </td>
+                            <td style="text-align: center; padding: 15px;">
+                                <button class="btn btn-default btn-sm delete-notification"
+                                    style="background: none; border: none; color: #007bff; font-size: 1.1rem; cursor: pointer;">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="3" style="text-align: center; padding: 15px; font-size: 1rem; color: #555;">
+                            No notifications available!
                         </td>
                     </tr>
-                @endforeach
+                @endif
 
 
             </tbody>

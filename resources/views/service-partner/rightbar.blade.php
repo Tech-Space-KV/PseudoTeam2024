@@ -4,10 +4,11 @@
             <div class="mx-auto w-75" id="">
                 <a href="{{ url('service-partner/session/notifications') }}" type="button" class="btn btn-primary position-relative me-2" style="float: left;">
                     <i class="fa fa-bell text-white"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    @livewire('sp-unread-notifications-count')
+                    <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         99+
                         <span class="visually-hidden">unread messages</span>
-                    </span>
+                    </span> -->
                 </a>
 
                 <a type="button" class="btn btn-outline-danger position-relative ms-2" style="float: right;">
@@ -43,7 +44,8 @@
                     <div class="card p-3 w-100 cardbgylw">
                        Job Success Rate
                        <div class="progress mt-2">
-                        <div class="progress-bar" role="progressbar" style="width: {{ session('jobSuccessRate') }}%;" aria-valuenow="{{ session('jobSuccessRate') }}" aria-valuemin="0" aria-valuemax="100">{{ session('jobSuccessRate') }}%</div>
+                        @livewire('sp-job-success-rate')
+                        <!-- <div class="progress-bar" role="progressbar" style="width: {{ session('jobSuccessRate') }}%;" aria-valuenow="{{ session('jobSuccessRate') }}" aria-valuemin="0" aria-valuemax="100">{{ session('jobSuccessRate') }}%</div> -->
                       </div>
                     </div>
                 </a>

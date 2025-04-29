@@ -19,15 +19,15 @@
   </br>
 
   <div>
-    <div class="search-box-container w-100 mb-4">
+    <!-- <div class="search-box-container w-100 mb-4">
       <div class="mx-auto">
         <Label>Search: </Label>
         <input class="rounded-3" type="text" id="searchCol2" placeholder="Proj. ID.">
         <input class="rounded-3" type="text" id="searchCol3" placeholder="Title">
         <input class="rounded-3" type="text" id="searchCol4" placeholder="Status">
       </div>
-    </div>
-    </br>
+    </div> -->
+    </br> 
     <table class="table table-hover" id="myTable">
       <thead>
         <tr class="text-pseudo">
@@ -100,7 +100,7 @@
         </tr>
         @endforeach
         @else
-        <tr><td colspan="7">Tickets Not Found!</td></tr>
+        <tr><td colspan="6" class="text-center">Tickets Not Found!</td></tr>
         @endif
       </tbody>
     </table>

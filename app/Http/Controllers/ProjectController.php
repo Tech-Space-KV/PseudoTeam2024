@@ -139,9 +139,9 @@ class ProjectController extends Controller
                 // Updating the session with the latest projects
                 session(['recentProjects' => $recentProjects]);
 
-                $unreadNotificationsCount =  Notification::where('ntfn_readflag', false)
-                ->where('ntfn_forUserId', session('user_id'))
-                ->where('ntfn_type', 'cust')->count();
+                $unreadNotificationsCount = Notification::where('ntfn_readflag', false)
+                    ->where('ntfn_forUserId', session('user_id'))
+                    ->where('ntfn_type', 'cust')->count();
 
                 session(['unreadNotificationsCount' => $unreadNotificationsCount]);
 
@@ -317,6 +317,48 @@ class ProjectController extends Controller
         return view('customer.search_project', compact('projects'));
     }
 
+    public function spSearchProject(Request $request)
+    {
+        \Log::info('spSearchProject called!');
+
+        $serviceProviderId = session('sp_user_id');
+        $query = $request->input('query', '');
+
+        // Step 1: Backtrack from tasks to projects related to the service provider
+        $relatedProjects = ProjectPlannerTask::with([
+            'projectPlanner.projectScope.project'
+        ])
+            ->where('pptasks_sp_id', $serviceProviderId)
+            ->get()
+            ->map(function ($task) {
+                return optional(optional($task->projectPlanner)->projectScope)->project;
+            })
+            ->filter()
+            ->unique('plist_id')
+            ->values();
+
+        $projectIds = $relatedProjects->pluck('plist_id');
+
+        // Step 2: Build query for filtering
+        $projectsQuery = Project::whereIn('plist_id', $projectIds);
+
+        if (!empty($query)) {
+            \Log::info('Filtering by query: ' . $query);
+
+            $projectsQuery->where(function ($q) use ($query) {
+                $q->where('plist_projectid', 'like', '%' . $query . '%')
+                    ->orWhere('plist_title', 'like', '%' . $query . '%');
+            });
+        }
+
+        // Step 3: Paginate results
+        $projects = $projectsQuery->paginate(10);
+
+        \Log::info('Returning ' . $projects->count() . ' projects.');
+
+        return view('service-partner/search_project', compact('projects', 'query'));
+    }
+
     public function fetchProject($plist_id)
     {
         $project = Project::where('plist_id', $plist_id)->first();
@@ -442,61 +484,34 @@ class ProjectController extends Controller
 
         }
 
-        return view('service-partner/manage_project_edit_task', compact('projectPlannerTasks' , 'task' , 'currentDate'));
+        return view('service-partner/manage_project_edit_task', compact('projectPlannerTasks', 'task', 'currentDate'));
 
     }
 
-    public function updateTask(Request $request) {
-        
-            // $request->validate([
-            //     'pptasks_id' => 'required|integer',
-            //     'pptasks_sp_status' => 'required|string',
-            //     'pptasks_proof_of_completion' => 'nullable|file|mimes:pdf,csv,xlsx|max:20480',
-            // ]);
-    
-            // $status = $request->input('pptasks_sp_status');
-            // $currentDate = Carbon::now()->toDateString();
-            // $filePath = null;
-            // $fileName = null;
-    
-            // if ($request->hasFile('file')) {
-            //     $file = $request->file('file');
-            //     $fileName = time() . '_' . $file->getClientOriginalName();
-            //     $filePath = $file->storeAs('task_uploads', $fileName, 'public');
-            // }
-    
-            // // Save to database
-            // DB::table('project_planner_tasks')->where('pptasks_id', $request->pptasks_id)->update([
-            //     'pptasks_status' => $status,
-            //     'pptasks_file_path' => $filePath,
-            //     'pptasks_file_name' => $fileName,
-            //     'updated_at' => $currentDate,
-            // ]);
-    
-            // return redirect()->back()->with('success', 'Task updated successfully!');
+    public function updateTask(Request $request)
+    {
 
+        $request->validate([
+            'pptasks_id' => 'required|exists:project_planner_tasks,pptasks_id',
+            'pptasks_sp_status' => 'required|string',
+            'pptasks_proof_of_completion' => 'nullable|file|mimes:pdf,csv,xlsx|max:20480',
+        ]);
 
-            $request->validate([
-                'pptasks_id' => 'required|exists:project_planner_tasks,pptasks_id',
-                'pptasks_sp_status' => 'required|string',
-                'pptasks_proof_of_completion' => 'nullable|file|mimes:pdf,csv,xlsx|max:20480',
-            ]);
+        $task = ProjectPlannerTask::find($request->pptasks_id);
+        $task->pptasks_sp_status = $request->pptasks_sp_status;
 
-            $task = ProjectPlannerTask::find($request->pptasks_id);
-            $task->pptasks_sp_status = $request->pptasks_sp_status;
-    
-            if ($request->hasFile('pptasks_proof_of_completion')) {
+        if ($request->hasFile('pptasks_proof_of_completion')) {
 
-                $file = $request->file('pptasks_proof_of_completion');
-                // $task->pptasks_file_name = $file->getClientOriginalName();
-                $task->pptasks_proof_of_completion = file_get_contents($file->getRealPath());
+            $file = $request->file('pptasks_proof_of_completion');
+            // $task->pptasks_file_name = $file->getClientOriginalName();
+            $task->pptasks_proof_of_completion = file_get_contents($file->getRealPath());
 
-            } 
-    
-            $task->pptasks_date_of_completion = Carbon::now()->format('Y-m-d');
-            $task->save();
-    
-            return redirect()->back()->with('success', 'Task updated and file saved in DB!');
+        }
+
+        $task->pptasks_date_of_completion = Carbon::now()->format('Y-m-d');
+        $task->save();
+
+        return redirect()->back()->with('success', 'Task updated and file saved in DB!');
     }
 
     public function listOfProjects()
@@ -504,17 +519,45 @@ class ProjectController extends Controller
 
         $serviceProviderId = session('sp_user_id');
 
+        // $projects = ProjectPlannerTask::with([
+        //     'projectPlanner.projectScope.project'
+        // ])
+        //     ->where('pptasks_sp_id', $serviceProviderId)
+        //     ->get()
+        //     ->map(function ($task) {
+        //         return optional(optional($task->projectPlanner)->projectScope)->project;
+        //     })
+        //     ->filter()
+        //     ->unique('plist_id')
+        //     ->values();
+
         $projects = ProjectPlannerTask::with([
-            'projectPlanner.projectScope.project'
+            'projectPlanner.projectScope.project.manager',
+            'projectPlanner',
+            'projectPlanner.projectScope'
         ])
             ->where('pptasks_sp_id', $serviceProviderId)
             ->get()
             ->map(function ($task) {
-                return optional(optional($task->projectPlanner)->projectScope)->project;
+                $project = optional(optional(optional($task->projectPlanner)->projectScope)->project);
+
+                return [
+                    'plist_projectid' => $project->plist_projectid ?? null,
+                    'pscope_country' => $task->projectPlanner->projectScope->pscope_country ?? null,
+                    'pscope_state' => $task->projectPlanner->projectScope->pscope_state ?? null,
+                    'pscope_pincode' => $task->projectPlanner->projectScope->pscope_pincode ?? null,
+                    'pplnr_milestone' => $task->projectPlanner->pplnr_milestone ?? null,
+                    'pptasks_task_title' => $task->pptasks_task_title,
+                    'pptasks_sp_status' => $task->pptasks_sp_status,
+                    'pptasks_pt_status' => $task->pptasks_pt_status,
+                    'manager_email' => optional($project->manager)->email ?? null,
+                    'pptasks_planner_id' => $task->pptasks_planner_id,
+                ];
             })
-            ->filter()
-            ->unique('plist_id')
+            ->filter(fn($item) => $item['plist_projectid'] !== null)
+            ->unique('plist_projectid')
             ->values();
+
 
         if ($projects) {
 

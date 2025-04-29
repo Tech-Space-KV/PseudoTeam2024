@@ -19,52 +19,45 @@
 </div>
 </br>
 <table class="table table-hover" id="myTable">
-    <thead>
+  
+<thead>
       <tr class="text-pseudo">
-        <th scope="col">Proj. ID.</th>
-        <th scope="col">Title</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-        <th scope="col">Status</th>
-        <th scope="col"></th>
+      <th scope="col">Proj. ID.</th>
+      <th scope="col">Location</th>
+      <th scope="col">Milestone</th>
+      <th scope="col">Task Title</th>
+      <th scope="col">SP Status</th>
+      <th scope="col">PT Status</th>
+      <th scope="col">Manager Email</th>
+      <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <!-- <tr>
-        <th scope="row">100134</th>
-        <td>Test Project 1</td>
-        <td>28/11/2023</td>
-        <td>28/11/2024</td>
-        <td>In Progress</td>
-        <td ><a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-      </tr>
+      
+      @if($projects->isNotEmpty())
+      @foreach($projects as $project)
       <tr>
-        <th scope="row">100135</th>
-        <td>Test Project 2</td>
-        <td>28/11/2023</td>
-        <td>28/11/2024</td>
-        <td>In Progress</td>
-       <td> <a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+      <th scope="row">{{ $project['plist_projectid'] ?? '-' }}</th>
+      <td>{{ $project['pscope_country'] ?? '-' }} , {{ $project['pscope_state'] ?? '-' }} , {{ $project['pscope_pincode'] ?? '-' }} </td>
+      <td>{{ $project['pplnr_milestone'] ?? '-' }}</td>
+      <td>{{ $project['pptasks_task_title' ?? '-'] }}</td>
+      <td>{{ $project['pptasks_sp_status'] ?? '-' }}</td>
+      <td>{{ $project['pptasks_pt_status'] ?? '-' }}</td>
+      <td>{{ $project['manager_email'] ?? '-' }}</td>
+      <td>
+      <a href="{{ url('service-partner/session/manage_project_view_tasks/' . ($project['pptasks_planner_id'] ?? 0)) }}"
+      class="btn btn-sm btn-outline-primary" title="Track Progress">
+      <i class="fa fa-location-arrow"></i>
+      </a>
+      </td>
       </tr>
+    @endforeach
+    @else
       <tr>
-        <th scope="row">100136</th>
-        <td>Test Project 3</td>
-        <td>28/11/2023</td>
-        <td>28/11/2024</td>
-        <td>In Progress</td>
-        <td> <a href="{{ url('service-partner/session/manage_project_location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-        </tr> -->
+        <td colspan="8" class="text-center">No projects found!</td>
+      </tr>
+    @endif
 
-        @foreach($projects as $project)
-           <tr>
-             <th scope="row">{{ $project->plist_projectid }}</th>
-             <td>{{ $project->plist_title }}</td>
-             <td>{{ $project->plist_startdate }}</td>
-             <td>{{ $project->plist_enddate }}</td>
-             <td>{{ $project->plist_status }}</td>
-            <td><a href="{{ url('service-partner/session/manage_project_location/'.$project->plist_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa fa-location-arrow"></i></a></td> 
-            <!-- <td><a href="{{ url('customer/session/project-details/'.$project->plist_id) }}"><i class="fa fa-eye btn btn-sm btn-outline-primary"></i></a></td> -->
-         @endforeach
 
     </tbody>
   </table>

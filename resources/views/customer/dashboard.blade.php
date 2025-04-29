@@ -67,49 +67,7 @@
       <th scope="col"></th>
       </tr>
     </thead>
-    <tbody>
-      <!-- <tr>
-      <th scope="row">100134</th>
-      <td>Test Project 1</td>
-      <td>28/11/2023</td>
-      <td>28/11/2024</td>
-      <td>In Progress</td>
-      <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-      </tr>
-      <tr>
-      <th scope="row">100135</th>
-      <td>Test Project 2</td>
-      <td>28/11/2023</td>
-      <td>28/11/2024</td>
-      <td>In Progress</td>
-      <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-      </tr>
-      <tr>
-      <th scope="row">100136</th>
-      <td>Test Project 3</td>
-      <td>28/11/2023</td>
-      <td>28/11/2024</td>
-      <td>In Progress</td>
-      <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-      </tr> -->
-      <!-- 
-      @if(session('recentProjects'))
-        @foreach(session('recentProjects') as $project)
-          <tr>
-            <th scope="row">{{ $project->plist_projectid }}</th>
-            <td>{{ $project->plist_title }}</td>
-            <td>{{ $project->plist_startdate }}</td>
-            <td>{{ $project->plist_enddate }}</td>
-            <td>{{ $project->plist_status }}</td>
-            <td><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-          </tr>
-        @endforeach
-      @else
-        <tr>
-          <td colspan="6">No recent projects found.</td>
-        </tr>
-      @endif -->
-
+    <!-- <tbody>
       @if(session('recentProjects') && session('recentProjects')->count() > 0)
       @foreach(session('recentProjects') as $project)
       <tr>
@@ -118,13 +76,9 @@
       <td>{{ $project->plist_startdate }}</td>
       <td>{{ $project->plist_enddate }}</td>
       <td>{{ $project->plist_status }}</td>
-      <!-- <td>
-      <a class="btn btn-sm btn-outline-primary" title="Track Progress">
-      <i class="fa fa-eye"></i>
-      </a>
-      </td> -->
       <td>
-        <a href="{{ url('customer/session/track-project-report-location/'.$project->plist_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a>
+      <a href="{{ url('customer/session/track-project-report-location/' . $project->plist_id) }}"
+      class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a>
       </td>
       </tr>
     @endforeach
@@ -133,9 +87,10 @@
       <td colspan="6">No recent projects found.</td>
       </tr>
     @endif
+    </tbody> -->
 
+    @livewire('recent-projests')
 
-    </tbody>
     </table>
 
     <div class="pagination" id="pagination"></div>

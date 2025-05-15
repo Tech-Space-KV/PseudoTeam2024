@@ -22,6 +22,13 @@ Route::get('/', function () {
     return view('website/home');
 })->name('home');
 
+
+//kal krunga
+
+// Route::get('/forgot-password', function () {
+//     return (new AuthController)->dashboard('customer/forgot_password');
+// })->name('customer.forgot-password');
+
 // Authentication Routes
 Route::prefix('authentication/customer')->group(function () {
     Route::get('/sign-up', [AuthController::class, 'showSignupPage'])->name('auth.customer.sign_up');
@@ -31,10 +38,20 @@ Route::prefix('authentication/customer')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('customer.logout');
     Route::get('/login', [AuthController::class, 'showLoginPage'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+    Route::get('/verify', [AuthController::class, 'verify'])->name('auth.customer.verify');
+    Route::post('/verify', [AuthController::class, 'setPassword'])->name('customer.set-password');
 });
 
-Route::get('/authentication/service-partner/sign-in', fn() => view('auth/service_sign_in'))->name('auth.sp.sign_in');
-Route::get('/authentication/service-partner/sign-up', fn() => view('auth/service_sign_up'));
+Route::prefix('authentication/service-partner')->group(function () {
+
+    Route::get('/sign-in', fn() => view('auth/service_sign_in'))->name('auth.sp.sign_in');
+    Route::get('/sign-up', fn() => view('auth/service_sign_up'))->name('auth.sp.sign_up');
+    Route::post('/sign-up', [AuthController::class, 'spSignup'])->name('auth.sp.sign_up.post');
+    Route::post('/logout', [AuthController::class, 'spLogout'])->name('service-partner.logout');
+    Route::get('/verify', [AuthController::class, 'spVerify'])->name('auth.sp.verify');
+    Route::post('/verify', [AuthController::class, 'spSetPassword'])->name('sp.set-password');
+
+});
 
 // Customer Session Routes
 Route::middleware(['auth'])->prefix('customer/session')->group(function () {
@@ -49,6 +66,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     // Route::post('/customer/session/todo/delete', [TodoController::class, 'delete'])->name('todo.delete');
     // Route::get('/customer/session/todo/fetch', [TodoController::class, 'fetchTodos'])->name('todo.fetch');
 
+    Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store');
 
     Route::get('/complete-profile', function () {
         return (new AuthController)->dashboard('customer/complete_profile');
@@ -60,11 +78,28 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->dashboard('customer/reports');
     });
 
+    Route::get('/forgot-password', function () {
+        return (new AuthController)->dashboard('customer/forgot_password');
+    })->name('customer.forgot-password');
 
+    Route::post('/forgot-password', [AuthController::class, 'customerForgotPassword'])->name('customer.forgot-password.post');
+
+
+    Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm'])->name('customer.password.reset');
+
+
+    Route::get('/customer/session/reset-password', [AuthController::class, 'showPasswordResetForm']);
+    Route::post('/customer/session/reset-password', [AuthController::class, 'resetPassword']);
+
+    Route::post('/customer/session/reset-password', [AuthController::class, 'resetPassword'])->name('customer.reset-password.post');
 
     // Route::get('/search_project', function () {
     //     return view('customer/search_project');
     // });
+
+    Route::get('/customer-verification', function () {
+        return (new AuthController)->dashboard('customer/forgot_password');
+    })->name('customer.customer-verification');
 
     Route::get('/search_project', [ProjectController::class, 'searchProject']);
 
@@ -235,165 +270,183 @@ Route::get('/customer/session/reports', [ChartController::class, 'index'])->name
 Route::get('/chart-data', [ChartController::class, 'getData'])->name('chart.data');
 
 
-Route::get('service-partner/session/complete-profile', function () {
-    return view('/service-partner/complete_profile');
-})->name('service-partner.complete_profile');
 
-Route::get('/service-partner/session/', function () {
-    return view('/service-partner/dashboard');
-})->name('service-partner.dashboard');
+Route::middleware(['auth'])->prefix('service-partner/session')->group(function () {
 
-Route::get('/service-partner/session/dashboard', function () {
-    return view('/service-partner/dashboard');
+    Route::get('service-partner/session/complete-profile', function () {
+        return view('/service-partner/complete_profile');
+    })->name('service-partner.complete_profile');
+
+    Route::post('/service-partner/profile/save', [AuthController::class, 'spCompleteProfile'])->name('sp.profile.save');
+
+    Route::get('/', function () {
+        return view('/service-partner/dashboard');
+    })->name('service-partner.dashboard');
+
+    Route::get('/dashboard', function () {
+        return view('/service-partner/dashboard');
+    });
+
+    Route::get('/sp_search_project', [ProjectController::class, 'spSearchProject']);
+
+    // Route::get('service-partner/session/manage_project', function () {
+    //     return view('/service-partner/manage_project');
+    // });
+
+    Route::get('/manage_project', function () {
+        return (new ProjectController)->manageProject();
+    });
+
+    // Route::get('service-partner/session/manage_project_details', function () {
+    //     return view('/service-partner/manage_project_details');
+    // });
+
+    Route::get('/manage_project_details/{pscopeId}', function ($pscopeId) {
+        return (new ProjectController)->manageprojectDetails($pscopeId);
+    });
+
+    // Route::get('service-partner/session/manage_project_location', function () {
+    //     return view('/service-partner/manage_project_location');
+    // });
+
+    Route::get('/manage_project_location/{projectId}', function ($projectId) {
+        return (new ProjectController)->manageProjectLocation($projectId);
+    });
+
+    // Route::get('service-partner/session/manage_project_view_tasks', function () {
+    //     return view('/service-partner/manage_project_view_tasks');
+    // });
+
+    Route::get('/manage_project_view_tasks/{plannerId}', function ($plannerId) {
+        return (new ProjectController)->manageProjectViewTasks($plannerId);
+    });
+
+    // Route::get('service-partner/session/manage_project_edit_task', function () {
+    //     return view('/service-partner/manage_project_edit_task');
+    // });
+
+    Route::get('/manage_project_edit_task/{ppTaskId}', function ($ppTaskId) {
+        return (new ProjectController)->manageProjectEditTasks($ppTaskId);
+    });
+
+    Route::post('/update-task', [ProjectController::class, 'updateTask'])->name('update.task');
+
+    // Route::get('/hardware', function () {
+    //     return view('/service-partner/hardware');
+    // });
+
+    Route::get('/hardware', function () {
+        return (new HardwareController)->spFetchHardware();
+    })->name('hardware.fetch');
+
+    Route::get('/import-hardware', function () {
+        return view('/service-partner/import_hardware');
+    });
+
+    Route::post('/hardware/import', [HardwareController::class, 'importHardware'])->name('hardware.import');
+
+    Route::get('/add-hardware', function () {
+        return view('/service-partner/add_hardware');
+    });
+
+    Route::post('/hardware/store', [HardwareController::class, 'storeHardware'])->name('hardware.store');
+
+    Route::get('/hardware-details', function () {
+        return view('/service-partner/hardware_details');
+    });
+
+    Route::get('/profileoptions', function () {
+        return view('/service-partner/profileoptions');
+    });
+
+    Route::get('/find-project', function () {
+        return view('/service-partner/find_project');
+    });
+    Route::get('/find-project-details', function () {
+        return view('/service-partner/find_project_details');
+    });
+    Route::get('/hardware-orders', function () {
+        return view('/service-partner/marketplace_hardwares_orders');
+    });
+    Route::get('/hardware-details', function () {
+        return view('/service-partner/marketplace_hardwares_details');
+    });
+    // Route::get('service-partner/session/reports', function () {
+    //     return view('/service-partner/reports');
+    // });
+
+    Route::get('/reports', [ChartController::class, 'spIndex'])->name('sp.reports');
+    Route::get('/sp-chart-data', [ChartController::class, 'getSPData'])->name('chart.data');
+
+    // Route::get('service-partner/session/track-project-pending', function () {
+    //     return view('/service-partner/track-project-pending');
+    // });
+
+    Route::get('/project-reports-not-started', function () {
+        return (new ProjectController)->projectNotStartedReports();
+    });
+
+    Route::get('/project-reports-fullfilled', function () {
+        return (new ProjectController)->projectFullfilledReports();
+    });
+
+    Route::get('/project-reports-on-going', function () {
+        return (new ProjectController)->projectOnGoingreports();
+    });
+
+    Route::get('/project-reports-scrapped', function () {
+        return (new ProjectController)->projectScrappedReports();
+    });
+
+    // Route::get('service-partner/session/track-project-delivered', function () {
+    //     return view('/service-partner/track-project-delivered');
+    // });
+
+    Route::get('/track-project-delivered', function () {
+        return (new ProjectController)->spTrackProjectDelivered();
+    });
+
+    Route::get('/track-project-report', function () {
+        return view('/service-partner/manage_project');
+    });
+    Route::get('/track-project-overdue', function () {
+        return view('/service-partner/track-project-overdue');
+    });
+
+    Route::get('/help', function () {
+        return view('/service-partner/help');
+    });
+
+    Route::get('/reports', function () {
+        return view('/service-partner/reports');
+    });
+
+    Route::get('/referandearn', function () {
+        return view('/service-partner/referandearn');
+    });
+
+    // Route::get('service-partner/session/all-projects', function () {
+    //     return view('/service-partner/all_projects');
+    // });
+
+    Route::get('/all-projects', function () {
+        return (new ProjectController)->listOfProjects();
+    });
+
+    // Route::get('service-partner/session/notifications', function () {
+    //     return view('/service-partner/notifications');
+    // });
+
+    Route::get('/notifications', function () {
+        return (new NotificationController)->fetchSpNotification();
+    });
+
+    // Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store');
+
+    Route::get('/find-project', [ProjectController::class, 'index']);
+
+
+    Route::get('/find-project-details', [ProjectController::class, 'showProjectDetails']);
+
+
 });
-
-Route::get('/service-partner/session/sp_search_project', [ProjectController::class, 'spSearchProject']);
-
-// Route::get('service-partner/session/manage_project', function () {
-//     return view('/service-partner/manage_project');
-// });
-
-Route::get('service-partner/session/manage_project', function () {
-    return (new ProjectController)->manageProject();
-});
-
-// Route::get('service-partner/session/manage_project_details', function () {
-//     return view('/service-partner/manage_project_details');
-// });
-
-Route::get('service-partner/session/manage_project_details/{pscopeId}', function ($pscopeId) {
-    return (new ProjectController)->manageprojectDetails($pscopeId);
-});
-
-// Route::get('service-partner/session/manage_project_location', function () {
-//     return view('/service-partner/manage_project_location');
-// });
-
-Route::get('service-partner/session/manage_project_location/{projectId}', function ($projectId) {
-    return (new ProjectController)->manageProjectLocation($projectId);
-});
-
-// Route::get('service-partner/session/manage_project_view_tasks', function () {
-//     return view('/service-partner/manage_project_view_tasks');
-// });
-
-Route::get('service-partner/session/manage_project_view_tasks/{plannerId}', function ($plannerId) {
-    return (new ProjectController)->manageProjectViewTasks($plannerId);
-});
-
-// Route::get('service-partner/session/manage_project_edit_task', function () {
-//     return view('/service-partner/manage_project_edit_task');
-// });
-
-Route::get('service-partner/session/manage_project_edit_task/{ppTaskId}', function ($ppTaskId) {
-    return (new ProjectController)->manageProjectEditTasks($ppTaskId);
-});
-
-Route::post('/update-task', [ProjectController::class, 'updateTask'])->name('update.task');
-
-Route::get('service-partner/session/hardware', function () {
-    return view('/service-partner/hardware');
-});
-Route::get('service-partner/session/import-hardware', function () {
-    return view('/service-partner/import_hardware');
-});
-Route::get('service-partner/session/add-hardware', function () {
-    return view('/service-partner/add_hardware');
-});
-
-Route::get('service-partner/session/hardware-details', function () {
-    return view('/service-partner/hardware_details');
-});
-
-Route::get('service-partner/session/profileoptions', function () {
-    return view('/service-partner/profileoptions');
-});
-
-Route::get('service-partner/session/find-project', function () {
-    return view('/service-partner/find_project');
-});
-Route::get('service-partner/session/find-project-details', function () {
-    return view('/service-partner/find_project_details');
-});
-Route::get('service-partner/session/hardware-orders', function () {
-    return view('/service-partner/marketplace_hardwares_orders');
-});
-Route::get('service-partner/session/hardware-details', function () {
-    return view('/service-partner/marketplace_hardwares_details');
-});
-// Route::get('service-partner/session/reports', function () {
-//     return view('/service-partner/reports');
-// });
-
-Route::get('service-partner/session/reports', [ChartController::class, 'spIndex'])->name('sp.reports');
-Route::get('/sp-chart-data', [ChartController::class, 'getSPData'])->name('chart.data');
-
-// Route::get('service-partner/session/track-project-pending', function () {
-//     return view('/service-partner/track-project-pending');
-// });
-
-Route::get('service-partner/session/project-reports-not-started', function () {
-    return (new ProjectController)->projectNotStartedReports();
-});
-
-Route::get('service-partner/session/project-reports-fullfilled', function () {
-    return (new ProjectController)->projectFullfilledReports();
-});
-
-Route::get('service-partner/session/project-reports-on-going', function () {
-    return (new ProjectController)->projectOnGoingreports();
-});
-
-Route::get('service-partner/session/project-reports-scrapped', function () {
-    return (new ProjectController)->projectScrappedReports();
-});
-
-// Route::get('service-partner/session/track-project-delivered', function () {
-//     return view('/service-partner/track-project-delivered');
-// });
-
-Route::get('service-partner/session/track-project-delivered', function () {
-    return (new ProjectController)->spTrackProjectDelivered();
-});
-
-Route::get('service-partner/session/track-project-report', function () {
-    return view('/service-partner/manage_project');
-});
-Route::get('service-partner/session/track-project-overdue', function () {
-    return view('/service-partner/track-project-overdue');
-});
-
-Route::get('service-partner/session/help', function () {
-    return view('/service-partner/help');
-});
-
-Route::get('service-partner/session/reports', function () {
-    return view('/service-partner/reports');
-});
-
-Route::get('service-partner/session/referandearn', function () {
-    return view('/service-partner/referandearn');
-});
-
-// Route::get('service-partner/session/all-projects', function () {
-//     return view('/service-partner/all_projects');
-// });
-
-Route::get('service-partner/session/all-projects', function () {
-    return (new ProjectController)->listOfProjects();
-});
-
-// Route::get('service-partner/session/notifications', function () {
-//     return view('/service-partner/notifications');
-// });
-
-Route::get('service-partner/session/notifications', function () {
-    return (new NotificationController)->fetchSpNotification();
-});
-
-Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store');
-
-Route::get('service-partner/session/find-project', [ProjectController::class, 'index']);
-
-
-Route::get('service-partner/session/find-project-details', [ProjectController::class, 'showProjectDetails']);

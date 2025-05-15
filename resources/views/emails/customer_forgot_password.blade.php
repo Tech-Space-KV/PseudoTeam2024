@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Customer Sign Up</title>
+    <title>Document</title>
 </head>
 <body>
-    Test Mail <br>
-    {{ $verificationLink }}
+    Hi, <br>
+    {{ $resetLink }}
 </body>
 </html>

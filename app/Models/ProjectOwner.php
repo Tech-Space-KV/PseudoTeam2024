@@ -22,3 +22,5 @@ class ProjectOwner extends Model
         'pown_adhaarfile', 'pown_profile_completion_flag', 'pown_dp', 'pown_refered_by'
     ];
 }
+
+//not created by sanskar

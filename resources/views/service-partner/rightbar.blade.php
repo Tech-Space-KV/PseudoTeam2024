@@ -11,9 +11,16 @@
                     </span> -->
                 </a>
 
-                <a type="button" class="btn btn-outline-danger position-relative ms-2" style="float: right;">
+                <!-- <a type="button" class="btn btn-outline-danger position-relative ms-2" style="float: right;">
                     Logout <i class="fa fa-sign-out"></i>
-                </a>
+                </a> -->
+
+                <form action="{{ route('service-partner.logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger position-relative ms-2" style="float: right;">
+                        Logout <i class="fa fa-sign-out"></i>
+                    </button>
+                </form>
 
             </div>
         </div>

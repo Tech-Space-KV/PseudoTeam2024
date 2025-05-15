@@ -3,13 +3,14 @@
 @section('content')
     <div class="container">
         <div class="mb-4">
-            <h2>Project Timeline: &lt;Project ID: {{ $projectPlannerTasks->plist_projectid }}&gt;</h2>
+            {{-- <h2>Project Timeline: <Project ID: {{ $projectPlannerTasks->plist_projectid }}> </h2> --}}
+            <h2>Project Timeline: {{ $projectPlannerTasks->plist_projectid }}</h2>
         </div>
         </br>
 
         <div class="container mt-5">
-            <form class="task-form text-pseudo bg-light p-4 rounded shadow-sm" method="POST" action="{{ route('update.task') }}"
-                enctype="multipart/form-data">
+            <form class="task-form text-pseudo bg-light p-4 rounded shadow-sm" method="POST"
+                action="{{ route('update.task') }}" enctype="multipart/form-data">
                 @csrf
 
                 <input type="hidden" name="pptasks_id" value="{{ $task->pptasks_id }}">
@@ -36,7 +37,8 @@
                 <div class="mb-3 row align-items-center">
                     <label for="file" class="col-sm-2 col-form-label fw-bold">Proof of Completion:</label>
                     <div class="col-sm-7">
-                        <input type="file" class="form-control" name="pptasks_proof_of_completion" id="fileUpload" accept=".pdf,.csv,.xlsx" />
+                        <input type="file" class="form-control" name="pptasks_proof_of_completion" id="fileUpload"
+                            accept=".pdf,.csv,.xlsx" />
                     </div>
                     <div class="col-sm-3">
                         <button type="button" class="btn btn-outline-secondary btn-sm" id="viewFileBtn">
@@ -60,21 +62,63 @@
             </form>
 
             <!-- File preview area -->
-            <div id="filePreviewArea" class="mt-3 text-center"></div>
+            <div id="filePreviewArea" class="mt-3 text-center" style="display: none;"></div>
         </div>
 
+        <!-- File Preview Styles -->
+        <style>
+            #filePreviewArea {
+                max-height: 500px;
+                overflow: auto;
+                border: 1px solid #ddd;
+                padding: 10px;
+                background-color: #fff;
+                margin-top: 20px;
+                width: 100%;
+            }
+
+            #filePreviewArea table {
+                min-width: 800px;
+                width: max-content;
+                border-collapse: collapse;
+                margin: auto;
+            }
+
+            #filePreviewArea th,
+            #filePreviewArea td {
+                white-space: nowrap;
+                padding: 6px 12px;
+                border: 1px solid #ccc;
+                text-align: left;
+            }
+
+            iframe {
+                width: 100% !important;
+                height: 500px;
+                border: none;
+            }
+
+            body {
+                overflow-x: hidden;
+            }
+        </style>
+
+        <!-- File Preview Logic -->
         <script>
             document.getElementById('viewFileBtn').addEventListener('click', function () {
                 const fileInput = document.getElementById('fileUpload');
                 const previewArea = document.getElementById('filePreviewArea');
                 const file = fileInput.files[0];
 
-                previewArea.innerHTML = ''; // Clear previous content
+                previewArea.innerHTML = '';
 
                 if (!file) {
+                    previewArea.style.display = 'none';
                     previewArea.innerHTML = '<p class="text-danger fw-bold">No file has been uploaded. Please upload a file.</p>';
                     return;
                 }
+
+                previewArea.style.display = 'block';
 
                 const fileType = file.type;
                 const fileName = file.name.toLowerCase();
@@ -84,9 +128,6 @@
                     reader.onload = function (e) {
                         const iframe = document.createElement('iframe');
                         iframe.src = e.target.result;
-                        iframe.width = '100%';
-                        iframe.height = '500px';
-                        iframe.style.border = '1px solid #ccc';
                         previewArea.appendChild(iframe);
                     };
                     reader.readAsDataURL(file);
@@ -160,9 +201,7 @@
             });
         </script>
 
-        <!-- Add these before </body> -->
+        <!-- CSV & XLSX Libraries -->
         <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-
-
 @endsection

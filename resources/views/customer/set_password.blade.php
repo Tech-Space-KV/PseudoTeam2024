@@ -1,3 +1,7 @@
+<!-- <div>
+     Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less. - Marie Curie
+</div> -->
+
 <!doctype html>
 <html lang="en">
 
@@ -27,23 +31,26 @@
   <div class="d-flex justify-content-center align-items-center mt-4">
     <div class="card fixed-width-card p-4 rounded-3 border-primary">
       <main class="form-signin w-100 m-auto">
-        <form method="POST" action="{{ route('login.post') }}">
+        <form method="POST" action="{{ route('customer.set-password') }}">
           @csrf
           <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
-          <h1 class="h5 mb-3 ms-1 text-muted">Customer Sign In</h1>
+          <h1 class="h5 mb-3 ms-1 text-muted">Set Password</h1>
           <hr>
+          <input type="hidden" name="user_id" value="{{ $id }}">
           <div class="form-floating mb-3 mt-3">
-            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com"
+            <input type="password" class="form-control" id="floatingInput" name="password" placeholder="name@example.com"
               required>
-            <label for="floatingInput">Email address</label>
+            <label for="floatingInput">New Password</label>
           </div>
           <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
+            <input type="password" class="form-control" id="floatingPassword" name="password_confirmation" placeholder="Password"
               required>
-            <label for="floatingPassword">Password</label>
+            <label for="floatingPassword">Confirm Password</label>
           </div>
 
-          <div class="d-flex justify-content-between my-3">
+          <br>
+
+          <!-- <div class="d-flex justify-content-between my-3">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
               <label class="form-check-label" for="flexCheckDefault">
@@ -52,8 +59,8 @@
             </div>
 
             <a href="{{ route('customer.forgot-password') }}" class="text-decoration-none">Forgot Password?</a>
-          </div>
-          <button class="btn btn-primary w-100 py-2" type="submit">Sign In</button>
+          </div> -->
+          <button class="btn btn-primary w-100 py-2" type="submit">Verify</button>
 
           <p class="mt-3 text-center">New user? <a href="{{ url('/authentication/customer/sign-up') }}"
               class="text-decoration-none">Sign Up</a></p>

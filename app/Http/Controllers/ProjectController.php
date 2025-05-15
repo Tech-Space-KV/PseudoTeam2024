@@ -103,7 +103,24 @@ class ProjectController extends Controller
 
                 session(['recentProjects' => $recentProjects]);
 
+                // $data  = [
+                //     'plist_title' => $validated['plist_title'],
+                //     'plist_projectid' => $projectId,
+                // ];
+
+                // \Log::info('(1) Sending Project Uploaded Mail', [
+                //     'data' => $data,
+                // ]);
+
+                // mail::to($validated['plist_email'])->send(new ProjectUploadedMail($data));
+
+
+                // \Log::info('(3) Sending Project Uploaded Mail', [
+                //     'data' => $data,
+                // ]);
+
                 return redirect()->back()->with('success', 'Project has been updated successfully.');
+
             } else {
                 // If the project does not exist, create it
                 Project::create([
@@ -144,6 +161,23 @@ class ProjectController extends Controller
                     ->where('ntfn_type', 'cust')->count();
 
                 session(['unreadNotificationsCount' => $unreadNotificationsCount]);
+
+
+                $data  = [
+                    'plist_title' => $validated['plist_title'],
+                    'plist_projectid' => $projectId,
+                ];
+
+                \Log::info('(1) Sending Project Uploaded Mail', [
+                    'data' => $data,
+                ]);
+
+                mail::to($validated['plist_email'])->send(new ProjectUploadedMail($data));
+
+
+                \Log::info('(3) Sending Project Uploaded Mail', [
+                    'data' => $data,
+                ]);
 
                 return redirect()->back()->with('success', 'Project has been uploaded successfully.');
             }
@@ -200,6 +234,8 @@ class ProjectController extends Controller
     {
         $project_planner = ProjectPlanner::where('pplnr_scope_id', $projectid)->get();
 
+        $projectScope = ProjectScope::where('pscope_id', $projectid)->first();
+
         if (!$project_planner) {
             return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
         }
@@ -214,7 +250,7 @@ class ProjectController extends Controller
 
         $average = number_format($average, 2);
 
-        return view('customer.track_project_report_details', compact('project_planner', 'average'));
+        return view('customer.track_project_report_details', compact('project_planner', 'average' , 'projectScope'));
     }
 
     public function trackProjectPending()
@@ -370,14 +406,15 @@ class ProjectController extends Controller
 
     public function exportCSV()
     {
-        $customerId = session('customer_id');
+        $customerId = session('user_id');
 
         return Excel::download(new ProjectsExport($customerId), 'projects.csv');
     }
 
     public function exportPDF()
     {
-        $projects = Project::all();
+        // $projects = Project::all();
+        $projects = Project::where('plist_customer_id', session('user_id'))->get();
         $pdf = Pdf::loadView('customer.projectspdf', compact('projects'));
         return $pdf->download('projects.pdf');
     }

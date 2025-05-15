@@ -34,6 +34,7 @@ class TicketController extends Controller
                 'tckt_attachment' => $validated['tckt_attachment'] ?? null, 
             ]);
 
+            //need to change the reciever email address
             Mail::to('sanskarsharma0119@gmail.com')->send(new TicketRaised(
                 $validated['tckt_title'],
                 $validated['tckt_description'],

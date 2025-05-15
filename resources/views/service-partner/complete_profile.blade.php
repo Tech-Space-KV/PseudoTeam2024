@@ -26,7 +26,8 @@
         <img src="http://127.0.0.1:8000/images/logopt.png" class="logo" alt="Logo">
       </a>
     </div>
-    <a type="button" class="btn btn-outline-danger position-relative mx-4 my-4" style="float: right; border: 1px solid #ccc;">
+    <a type="button" class="btn btn-outline-danger position-relative mx-4 my-4"
+      style="float: right; border: 1px solid #ccc;">
       Logout <i class="fa fa-sign-out"></i>
     </a>
   </div>
@@ -34,14 +35,16 @@
   <!-- Welcome Message -->
   <div class="container">
     <p>
-      <span class="fs-1 fw-bold">Hi, Kunal</span><br><br>
+      <span class="fs-1 fw-bold">Hi, {{ session('sprov_name') }}</span><br><br>
       <span class="fs-4" style="color: black;"> Please complete your Profile</span>
     </p>
   </div>
 
   <!-- Profile Form -->
   <div class="container">
-    <form id="profileForm" onsubmit="return submitForm(event)">
+    <form id="profileForm" method="POST" action="{{ route('sp.profile.save') }}" enctype="multipart/form-data"
+      onsubmit="return submitForm(event)">
+      @csrf
       <!-- Step 1 -->
       <div class="card mb-4" id="step1">
         <div class="card-body">
@@ -65,7 +68,8 @@
           </div>
           <div class="form-group">
             <label for="address">Mailing Address</label>
-            <textarea class="form-control" id="address" name="address" rows="3" placeholder="Your address" required></textarea>
+            <textarea class="form-control" id="address" name="address" rows="3" placeholder="Your address"
+              required></textarea>
           </div>
           <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
         </div>
@@ -86,12 +90,14 @@
           </div>
           <div class="form-group">
             <label for="about">About</label>
-            <textarea class="form-control" id="about" name="about" placeholder="Please describe your work" rows="3" required></textarea>
+            <textarea class="form-control" id="about" name="about" placeholder="Please describe your work" rows="3"
+              required></textarea>
           </div>
           <!-- Skills section -->
           <div class="form-group d-flex align-items-center" style="gap: 10px; margin: 0; padding: 0;">
             <label for="skills" class="mb-0" style="font-weight: bold; margin-right: 0;">Key Skills</label>
-            <button type="button" style="padding: 0; border: none; background: transparent; margin: 0;" data-bs-toggle="modal" data-bs-target="#skillsModal">
+            <button type="button" style="padding: 0; border: none; background: transparent; margin: 0;"
+              data-bs-toggle="modal" data-bs-target="#skillsModal">
               <i class="fa fa-pencil" style="font-size: 1.2rem; color: #007bff; cursor: pointer;"></i>
             </button>
           </div>
@@ -101,14 +107,8 @@
           <div id="organizationFields">
             <div class="form-group position-relative">
               <label for="orgName">Organization Name</label>
-              <input
-                class="form-control"
-                id="orgName"
-                name="orgName"
-                type="text"
-                placeholder="Enter Organization Name"
-                oninput="showSuggestions(this.value)"
-                onfocus="showSuggestions(this.value)">
+              <input class="form-control" id="orgName" name="orgName" type="text" placeholder="Enter Organization Name"
+                oninput="showSuggestions(this.value)" onfocus="showSuggestions(this.value)">
 
               <ul class="list-group position-absolute w-100" id="orgSuggestions" style="z-index: 1050;"></ul>
             </div>
@@ -138,54 +138,52 @@
       </div>
     </form>
   </div>
-<!-- Modal for Managing Skills -->
-<div class="modal fade" id="skillsModal" tabindex="-1" aria-labelledby="skillsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; height: 80%;">
-    <div class="modal-content" style="height: 100%; width: 100%;">
-      <div class="modal-header">
-        <h5 class="modal-title" id="skillsModalLabel">Manage Your Skills</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" style="overflow-y: auto;">
-        <!-- Add Skill Section -->
-        <div class="form-group mb-3 d-flex justify-content-between" style="gap: 10px;">
-          <div class="w-50 position-relative">
-            <label for="addSkill" class="mb-0" style="font-weight: bold;">Add Skill</label>
-            <input
-              type="text"
-              class="form-control"
-              id="addSkill"
-              placeholder="Enter a skill"
-              oninput="showSkillSuggestions(this.value)"
-              autocomplete="off" />
-            <ul id="skillSuggestions" class="list-group mt-2" style="max-height: 200px; overflow-y: auto; display: none;"></ul>
+  <!-- Modal for Managing Skills -->
+  <div class="modal fade" id="skillsModal" tabindex="-1" aria-labelledby="skillsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; height: 80%;">
+      <div class="modal-content" style="height: 100%; width: 100%;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="skillsModalLabel">Manage Your Skills</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="overflow-y: auto;">
+          <!-- Add Skill Section -->
+          <div class="form-group mb-3 d-flex justify-content-between" style="gap: 10px;">
+            <div class="w-50 position-relative">
+              <label for="addSkill" class="mb-0" style="font-weight: bold;">Add Skill</label>
+              <input type="text" class="form-control" id="addSkill" placeholder="Enter a skill"
+                oninput="showSkillSuggestions(this.value)" autocomplete="off" />
+              <ul id="skillSuggestions" class="list-group mt-2"
+                style="max-height: 200px; overflow-y: auto; display: none;"></ul>
+            </div>
+            <div class="w-50">
+              <label for="yearsOfExperience" class="mb-0" style="font-weight: bold;">Years of Experience</label>
+              <input type="number" class="form-control" id="yearsOfExperience" placeholder="Enter years of experience"
+                min="0" oninput="validateExperience(this)">
+            </div>
           </div>
-          <div class="w-50">
-            <label for="yearsOfExperience" class="mb-0" style="font-weight: bold;">Years of Experience</label>
-            <input type="number" class="form-control" id="yearsOfExperience" placeholder="Enter years of experience" min="0" oninput="validateExperience(this)">
+
+          <!-- Add Skill Button -->
+          <div class="text-center mt-3">
+            <button class="btn btn-primary mx-auto btn-lg d-flex justify-content-center align-items-center"
+              type="button" onclick="addSkill()">
+              <i class="fa fa-plus"></i>&nbsp;&nbsp;Add
+            </button>
+          </div>
+
+          <!-- List of Selected Skills -->
+          <h6 class="mt-4">Selected Skills:</h6>
+          <div id="selectedSkillsWrapper" style="max-height: 200px; overflow-y: auto;">
+            <ul id="selectedSkills" class="list-group"></ul>
           </div>
         </div>
-
-        <!-- Add Skill Button -->
-        <div class="text-center mt-3">
-          <button class="btn btn-primary mx-auto btn-lg d-flex justify-content-center align-items-center" type="button" onclick="addSkill()">
-            <i class="fa fa-plus"></i>&nbsp;&nbsp;Add
-          </button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" onclick="saveSkills()">Save</button>
         </div>
-
-        <!-- List of Selected Skills -->
-        <h6 class="mt-4">Selected Skills:</h6>
-        <div id="selectedSkillsWrapper" style="max-height: 200px; overflow-y: auto;">
-          <ul id="selectedSkills" class="list-group"></ul>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" onclick="saveSkills()">Save</button>
       </div>
     </div>
   </div>
-</div>
 
 
 
@@ -324,7 +322,7 @@
 
             skillSuggestions.appendChild(suggestion);
           });
-        } 
+        }
       }
     }
 
@@ -378,16 +376,16 @@
       }
     }
     // Hide organization suggestions when the skills modal is opened
-    $('#skillsModal').on('show.bs.modal', function() {
+    $('#skillsModal').on('show.bs.modal', function () {
       document.getElementById('orgSuggestions').innerHTML = ''; // Clear suggestions
     });
 
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       const input = document.getElementById("skillsInput");
       const suggestions = document.getElementById("skillSuggestions");
 
       // Adjust width dynamically to match the input field
-      input.addEventListener("input", function() {
+      input.addEventListener("input", function () {
         suggestions.style.width = `${input.offsetWidth}px`;
         suggestions.style.left = `${input.offsetLeft}px`;
         suggestions.style.top = `${input.offsetTop + input.offsetHeight}px`;
@@ -395,13 +393,45 @@
     });
 
     // Hide organization suggestions when clicking outside the input field
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
       const orgInput = document.getElementById('orgName');
       const orgSuggestions = document.getElementById('orgSuggestions');
       if (!orgInput.contains(event.target) && !orgSuggestions.contains(event.target)) {
         orgSuggestions.innerHTML = ''; // Clear suggestions if clicked outside
       }
     });
+
+
+    //form submission method 
+
+    function submitForm(e) {
+      e.preventDefault();
+
+      // Remove old inputs
+      document.querySelectorAll('.hidden-skill-input').forEach(el => el.remove());
+
+      const form = document.getElementById('profileForm');
+
+      selectedSkills.forEach((s, i) => {
+        const skillInput = document.createElement('input');
+        skillInput.type = 'hidden';
+        skillInput.name = `skills[${i}][name]`;
+        skillInput.value = s.skill;
+        skillInput.classList.add('hidden-skill-input');
+        form.appendChild(skillInput);
+
+        const expInput = document.createElement('input');
+        expInput.type = 'hidden';
+        expInput.name = `skills[${i}][experience]`;
+        expInput.value = s.experience;
+        expInput.classList.add('hidden-skill-input');
+        form.appendChild(expInput);
+      });
+
+      form.submit();
+    }
+
+
   </script>
 </body>
 

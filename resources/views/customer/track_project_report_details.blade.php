@@ -13,13 +13,13 @@
 
   <div style="text-align: center; margin-bottom: 20px;">
     <h5 style="font-weight: bold;" class="text-pseudo">State:</h5>
-    <p style="font-size: 1.2rem;">This is the project title</p>
+    <p style="font-size: 1.2rem;">{{ $projectScope->pscope_state }}</p>
   </div>
 
   <div style="display: flex; margin-left: 50px; flex-wrap: wrap; gap: 10px;">
     <div style="flex: 1; min-width: 300px; font-size: 1rem;">
-      <p style="margin: 0;"><strong class="text-pseudo">City, Pincode:</strong> This is the project Description.</p>
-      <p style="margin: 0;"><strong class="text-pseudo">Status:</strong> 12/12/2024</p>
+      <p style="margin: 0;"><strong class="text-pseudo">City, Pincode:</strong> {{ $projectScope->pscope_city  .', '. $projectScope->pscope_pincode }}</p>
+      <p style="margin: 0;"><strong class="text-pseudo">Status:</strong> {{ $projectScope->pscope_status }}</p>
     </div>
     <!-- <div style="flex: 1; margin-left: 180px; min-width: 300px; font-size: 1rem;">
       <p style="margin: 0;"><strong class="text-pseudo">End date:</strong> 12/12/2024</p>

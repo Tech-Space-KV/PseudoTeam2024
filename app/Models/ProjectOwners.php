@@ -11,7 +11,9 @@ class ProjectOwners extends Model
 
     protected $table = 'project_owners';
 
+    protected $primaryKey = 'pown_id';
     protected $fillable = [
+        'pown_name',
         'pown_email',
         'pown_password',
         'pown_profile_completion_flag',

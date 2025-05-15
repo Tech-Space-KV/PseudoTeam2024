@@ -23,10 +23,17 @@ class ProjectUploadedMail extends Mailable
         $this->data = $data;
     }
 
+
+
     public function build()
     {
+
+        \Log::info('(2)Sending Project Uploaded Mail', [
+            'data' => $this->data,
+        ]);
+
         return $this->subject('Project Uploaded Successfully')
-                    ->view('emails/send_query_mail')
+                    ->view('emails/project_uploaded_mail')
                     ->with('data', $this->data);
     }
 }

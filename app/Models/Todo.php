@@ -9,6 +9,10 @@ class Todo extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'td_id'; // <-- your real primary key name
+    public $incrementing = true; // or false if not auto-increment
+    protected $keyType = 'int'; // or 'string' if not integer
+
     protected $table = 'todo';
     public $timestamps = false;
 
@@ -18,8 +22,4 @@ class Todo extends Model
         'td_event',
         'td_date',
     ];
-
-    protected $primaryKey = 'td_id'; // <-- your real primary key name
-    public $incrementing = true; // or false if not auto-increment
-    protected $keyType = 'int'; // or 'string' if not integer
 }

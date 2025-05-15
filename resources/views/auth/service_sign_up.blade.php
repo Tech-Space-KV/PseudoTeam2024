@@ -25,21 +25,22 @@
     <div class="d-flex justify-content-center align-items-center mt-4">
       <div class="card fixed-width-card p-4 rounded-3 border-primary">    
         <main class="form-signin w-100 m-auto">
-          <form>
+          <form action="{{ route('auth.sp.sign_up.post') }}" method="POST"> 
+            @csrf
             <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
             <h1 class="h5 mb-3 ms-1 text-muted">Service Partner Sign Up</h1>
             <hr>
             <div class="form-floating mb-3 mt-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+              <input type="text" class="form-control" id="floatingInput" name="name" placeholder="name@example.com">
               <label for="floatingInput">Full Name</label>
             </div>
             <div class="form-floating mb-3 mt-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+              <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
               <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-              <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-              <label for="floatingPassword">Password</label>
+              <input type="phone" class="form-control" id="floatingPassword" name="contact" placeholder="Contact">
+              <label for="floatingPassword">Contact</label>
             </div>
             <button class="btn btn-primary mt-3 w-100 py-2" type="submit">Sign Up</button>
             

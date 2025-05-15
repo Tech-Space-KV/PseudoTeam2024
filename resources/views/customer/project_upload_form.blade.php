@@ -21,7 +21,7 @@
 
         </div>
 
-        <form action="/project/store" method="POST" enctype="multipart/form-data" @if($readonly) disabled @endif>
+        <form action="{{ route('project.store') }}" method="POST" enctype="multipart/form-data" @if($readonly) disabled @endif>
             @csrf
             <h5 class="mt-4 mb-4 text-pseudo">
                 <span class="fa fa-bars"></span> First details of the project

@@ -78,25 +78,27 @@
 
         <!-- Content Section -->
         <div class="content">
-            <h1>🔒 Password Reset Request</h1>
+            <h1>✅ Order Confirmed!</h1>
             <p>Hello {{ $name }},</p>
             <p>
-                We received a request to reset the password for your account with <strong>Pseudoteam</strong>. If you
-                made this request, please click the button below to reset your password.
+                Thank you for placing your order with <strong>Pseudoteam</strong>! We're excited to get started and
+                ensure everything goes smoothly for you.
             </p>
             <p>
-                If you did not request a password reset, you can safely ignore this email—your account will remain
-                secure.
+                Here are your order details:
+                <br><strong>Order No:</strong> [ORDER_ID]
+                <br><strong>Order Date:</strong> [ORDER_DATE]
             </p>
-            <a href="{{ $resetLink }}" class="button">Reset Your Password</a>
-            <p>{{ $resetLink }}</p>
+            <p>
+                Our team will begin processing your order shortly.  
+            </p>
+            <!-- <a href="[TRACKING_LINK]" class="button">Track Your Order</a> -->
             <p style="margin-top: 20px;">
-                For security reasons, this link will expire in 24 hours. If you need further assistance, feel free to
-                reach out to our support team.
+                If you have any questions or need further assistance, just reply to this email or contact our support
+                team.
             </p>
-            <p>Best regards,<br><strong>Pseudoteam</strong></p>
+            <p>Thanks again,<br><strong>Pseudoteam</strong></p>
         </div>
-
 
         <!-- Footer -->
         <div class="footer">

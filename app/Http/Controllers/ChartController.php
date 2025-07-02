@@ -34,6 +34,7 @@ class ChartController extends Controller
         $overdueCount = DB::table('project_list')
             ->whereRaw("STR_TO_DATE(plist_enddate, '%d-%m-%Y') < CURDATE()")
             ->where('plist_status', 'No SP Assigned')
+            // ->where('plist_status', 'In Progress')
             ->where('plist_customer_id' , $customerId)
             ->count();
 
@@ -53,6 +54,9 @@ class ChartController extends Controller
         //need to make changes here 
 
         $serviceProviderId = session('sp_user_id');
+
+        \Log::info('Get sp data method is working and the Service Provider ID: ' . $serviceProviderId);
+
 
         // $notStartedCount = Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id' , $serviceProviderId)->count();
         // $fullfilledCount = Project::where('plist_status', 'Delivered')->where('plist_customer_id' , $serviceProviderId)->count();

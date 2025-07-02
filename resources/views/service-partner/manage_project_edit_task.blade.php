@@ -15,6 +15,21 @@
 
                 <input type="hidden" name="pptasks_id" value="{{ $task->pptasks_id }}">
 
+                <div class="">
+                    @if(session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+                </div>
+
                 <h4 class="text-center text-dark mb-4">
                     Task: <span class="text-pseudo fw-bold">{{  $task->pptasks_task_title }}</span>
                 </h4>
@@ -63,6 +78,71 @@
 
             <!-- File preview area -->
             <div id="filePreviewArea" class="mt-3 text-center" style="display: none;"></div>
+        </div>
+
+        <br><br>
+
+        <p class="text-pseudo fw-bold">Comments :</p>
+        <div class="w-100 p-2" style="height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+
+            <div class="card p-2 mb-2">
+                <form action="{{ route('sp.comment.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="tconv_comment_by_sp_id" value="{{ session('sp_user_id') }}">
+                    <input type="hidden" name="tconv_task_id" value="{{ $task->pptasks_id }}">
+                    <!-- <textarea class="p-2" placeholder="Write a comment" name="tconv_comment"></textarea> -->
+
+                    <div class="mb-2">
+                        <textarea class="form-control w-100" name="tconv_comment" rows="3"
+                            placeholder="Write a comment"></textarea>
+                    </div>
+
+                    <!-- <button class="btn btn-sm btn-outline-primary mt-1 w-25">Post</button> -->
+                    <input class="btn btn-sm btn-outline-primary mt-1 w-25" type="submit" value="Post">
+                </form>
+            </div>
+
+            @foreach ($SpComments as $comment)
+                <div class="card p-2 mb-2">
+                    <p class="fw-bold">{{ $comment->tconv_comment_by_sp_id }} :</p>
+                    <p class="fw-bold">{{ $comment->tconv_comment_date_time }}</p>
+                    <p>{{ $comment->tconv_comment }}</p>
+                </div>
+            @endforeach
+
+            <!-- <div class="card p-2 mb-2">
+                    <p class="fw-bold">username :</p>
+                    <p>Dummy content line 1</p>
+                </div>
+                <div class="card p-2 mb-2">
+                    <p class="fw-bold">username :</p>
+                    <p>Dummy content line 1</p>
+                </div>
+                <div class="card p-2 mb-2">
+                    <p class="fw-bold">username :</p>
+                    <p>Dummy content line 1</p>
+                </div>
+                <div class="card p-2 mb-2">
+                    <p class="fw-bold">username :</p>
+                    <p>Dummy content line 1</p>
+                </div>
+                <div class="card p-2 mb-2">
+                    <p class="fw-bold">username :</p>
+                    <p>Dummy content line 1</p>
+                </div>
+                <div class="card p-2 mb-2">
+                    <p class="fw-bold">username :</p>
+                    <p>Dummy content line 1</p>
+                </div>
+                <div class="card p-2 mb-2">
+                    <p class="fw-bold">username :</p>
+                    <p>Dummy content line 1</p>
+                </div>
+                <div class="card p-2 mb-2">
+                    <p class="fw-bold">username :</p>
+                    <p>Dummy content line 1</p>
+                </div> -->
+
         </div>
 
         <!-- File Preview Styles -->

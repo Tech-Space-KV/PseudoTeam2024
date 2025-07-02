@@ -14,16 +14,21 @@ class CustomerSignUpMail extends Mailable
     use Queueable, SerializesModels;
 
     public $verificationLink;
+    public $userName;
 
-    public function __construct($verificationLink)
+    public function __construct($verificationLink, $name)
     {
         $this->verificationLink = $verificationLink;
+        $this->userName = $name;
     }
 
     public function build()
     {
         return $this->subject('New Customer Sign Up')
                     ->view('emails/customer_sign_up_mail')
-                    ->with('verificationLink' , $this->verificationLink);
-    }
+                    ->with([
+                        'verificationLink' => $this->verificationLink,
+                        'name' => $this->userName
+                    ]);
+    }           
 }

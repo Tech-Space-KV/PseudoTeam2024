@@ -54,25 +54,29 @@
         <form id="locationForm">
           <div class="mb-3">
             <label for="country" class="form-label" style="font-weight: bold;">Country</label>
-            <select class="form-control form-select" id="country" onchange="populateCities();" required>
+            <!-- <select class="form-control form-select" id="country" onchange="populateCities();" required>
               <option value="India" selected>India</option>
-            </select>
+            </select> -->
+            <input type="text" id="country" class="form-control" placeholder="Enter your country" value="{{ $user->pown_country }}">
           </div>
           <div class="mb-3">
             <label for="city" class="form-label" style="font-weight: bold;">City</label>
-            <select class="form-control form-select" id="city" required>
+            <!-- <select class="form-control form-select" id="city" required>
               <option value="Delhi">Delhi</option>
               <option value="Mumbai">Mumbai</option>
               <option value="Kolkata">Kolkata</option>
-            </select>
+            </select> -->
+
+            <input type="text" id="city" class="form-control" placeholder="Enter your city" value="{{ $user->pown_state ?? 'N/A' }}">
+
           </div>
           <div class="mb-3">
             <label for="pincode" class="form-label" style="font-weight: bold;">Pincode</label>
-            <input type="text" id="pincode" class="form-control" placeholder="Enter your pincode" value="110034">
+            <input type="text" id="pincode" class="form-control" placeholder="Enter your pincode" value="{{ $user->pown_pincode ?? 'N/A' }}">
           </div>
-          <div class="mb-3">
+          <div class="mb-3">  
             <label for="mailingAddress" class="form-label" style="font-weight: bold;">Mailing Address</label>
-            <textarea id="mailingAddress" class="form-control" rows="3" placeholder="Enter your address">206e</textarea>
+            <textarea id="mailingAddress" class="form-control" rows="3" placeholder="Enter your address">{{ $user->pown_address ?? 'N/A' }}</textarea>
           </div>
         </form>
         <div class="w-25 mx-auto">
@@ -89,7 +93,7 @@
               <label style="font-weight: bold; margin-bottom: 10px;">You are an</label>
               <div class="switch-field"
                 style="display: flex; justify-content: center; width: 100%; border-radius: 25px; overflow: hidden; position: relative; height: 40px;">
-                <input type="radio" id="radio-one" name="type" value="Organization" checked
+                <input type="radio" id="radio-one" name="type" value="{{ $user->pown_type ?? 'N/A' }}" checked
                   style="position: absolute; clip: rect(0, 0, 0, 0); height: 1px; width: 1px; border: 0; overflow: hidden;">
                 <label for="radio-one"
                   style="background-color: #007bff; color: white; font-size: 16px; text-align: center; border: 1px solid #007bff; border-radius: 25px 0 0 25px; cursor: pointer; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; transition: background-color 0.3s, color 0.3s;">
@@ -142,7 +146,6 @@
           </div>
           <div class="w-25 mx-auto">
             <button id="submitCinGovButton" class="btn btn-primary mx-2 fw-bold" type="submit">Submit</button>
-
           </div>
         </form>
       </div>
@@ -438,7 +441,7 @@
           },
           success: function (response) {
             alert(response.success || 'Password updated successfully!');
-            location.reload();
+            window.location.href = response.redirect_url;
           },
           error: function (xhr) {
             if (xhr.responseJSON && xhr.responseJSON.errors) {

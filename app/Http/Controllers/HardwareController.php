@@ -61,7 +61,7 @@ class HardwareController extends Controller
 
         \Log::info('Hardware data stored successfully');
 
-        return back()->with('success', 'Hardware data stored successfully.');
+        return back()->with('success', 'Hardware added successfully!');
     }
 
     public function importHardware(Request $request)

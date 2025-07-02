@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderPlacedMail;
 use App\Models\Cart;
 use App\Models\Hardware;
 use App\Models\OrderAddress;
 use App\Models\OrderPlaced;
+use App\Models\ProjectOwner;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Log;
+use Mail;
 
 class OrderController extends Controller
 {
@@ -78,6 +81,10 @@ class OrderController extends Controller
                 }
             }
 
+            $name = ProjectOwner::where('pown_id', $customerId)->value('pown_name');
+
+            Mail::to('sanskarsharma0119@gmail.com')->send(new OrderPlacedMail($orderNo, $name));
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Order placed successfully!',
@@ -128,6 +135,7 @@ class OrderController extends Controller
                 'status' => $order->ordplcd_status,
                 'delivery_date' => $order->ordplcd_delivery_date,
                 'quantity' => $order->ordplcd_qty_placed,
+                'quantity_approved' => $order->ordplcd_final_qty,
             ];
         }
 

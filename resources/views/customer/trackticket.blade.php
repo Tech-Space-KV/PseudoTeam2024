@@ -94,8 +94,8 @@
           <td>{{ $ticket->tckt_project_id ?: 'Not Available' }}</td>
           <td>{{ $ticket->tckt_title ?: 'Not Available' }}</td>
           <td>{{ $ticket->tckt_description ?: 'Not Available' }}</td>
-          <td>{{ $ticket->tckt_date_time ?: 'Not Available' }}</td>
           <td>{{ $ticket->tckt_status ?: 'Not Available'}}</td>
+          <td>{{ $ticket->tckt_date_time ?: 'Not Available' }}</td>
           <td><a href="{{ url('customer/session/ticketdetails/'.$ticket->tckt_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
         </tr>
         @endforeach

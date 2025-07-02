@@ -67,7 +67,7 @@
         {{--
         <hr class="border border-1 border-primary"> --}}
 
-        <div class="row justify-content-md-center">
+        <!-- <div class="row justify-content-md-center">
             <div class="col col-lg-10 sitem d-flex flex-column align-items-center mx-2">
                 <a href="" class="text-decoration-none w-100">
                     <div class="card p-3 w-100 cardbgylw">
@@ -75,7 +75,9 @@
                     </div>
                 </a>
             </div>
-        </div>
+        </div> -->
+
+        <br>
 
         <div id="calendar"
             style="width: 100%; max-width: 400px; margin: 20px auto; border: 1px solid #ccc; border-radius: 8px; padding: 15px; text-align: center; background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
@@ -88,7 +90,7 @@
                     style="padding: 8px 12px; background-color:  #006EC4; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">&#9654;</button>
             </div>
             <div id="calendar-grid"
-                style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; color:black;text-align: center; background-color: #f9f9f9; border-radius: 5px;">
+                style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; color:black;text-align: center; background-color: #f9f9f9; border-radius: 5px;">
                 <!-- Dates will be dynamically inserted here -->
             </div>
         </div>

@@ -3,9 +3,21 @@
 @section('content')
 <br>
 <div class="container" style="height: calc(100vh - 200px); overflow: scrollable; max-height: 100%;">
-  <div class="mb-4">
-    <h2>Refer a friend</h2>
-  </div>
+
+  <h2>Refer a friend</h2>
+  <div class="mb-4" id="message-container">
+    @if(session('success'))
+    <div class="alert alert-success" role="alert">
+      {{ session('success') }}
+    </div>
+  @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger" role="alert">
+      {{ session('error') }}
+    </div>
+  @endif
+    </div>
 
   <!-- Main Content Container -->
   <div class="container mt-5" style="
@@ -19,7 +31,7 @@
     ">
 
 
-    <form id="referFriendForm" method="get" style="margin-top: 20px;">
+    <form action="spreferandearnmail" id="referFriendForm" method="POST" style="margin-top: 20px;">
       @csrf
       <div class="form-group mb-4 mt-2">
         <label for="friendEmail" style="
@@ -98,23 +110,52 @@
   </div>
 </br>
 </div>
+
 <script>
   document.getElementById('referFriendForm').addEventListener('submit', function(event) {
+    // Prevent the form submission initially
+    event.preventDefault();
+
     const email = document.getElementById('friendEmail').value.trim();
 
     if (!email) {
-      alert('Please provide an email.');
-      event.preventDefault();
+      // Display an error message if no email is provided
+      document.getElementById('message-container').innerHTML = `
+        <div class="alert alert-warning" role="alert">
+          Please provide an email.
+        </div>
+      `;
       return;
     }
 
-    const confirmSubmit = confirm('Are you sure you want to send this invitation?');
-    if (!confirmSubmit) {
-      event.preventDefault();
-    } else {
-      alert('Invitation sent successfully!');
-    }
+    // Show confirmation message with "Yes" and "No" buttons
+    document.getElementById('message-container').innerHTML = `
+      <div class="alert alert-info" role="alert">
+        Are you sure you want to send this invitation?
+        <button id="confirm-invite" class="btn btn-primary btn-sm">Yes, send invitation</button>
+        <button id="cancel-invite" class="btn btn-secondary btn-sm">No, cancel</button>
+      </div>
+    `;
+
+    // Add event listener for the "Yes" button
+    document.getElementById('confirm-invite').addEventListener('click', function() {
+      // On confirmation, display success message and submit the form
+      document.getElementById('message-container').innerHTML = `
+        <div class="alert alert-success" role="alert">
+          Invitation sent successfully!
+        </div>
+      `;
+      // Now submit the form
+      document.getElementById('referFriendForm').submit();
+    });
+
+    // Add event listener for the "No" button
+    document.getElementById('cancel-invite').addEventListener('click', function() {
+      // On cancel, just clear the message container and do nothing
+      document.getElementById('message-container').innerHTML = '';
+    });
   });
 </script>
+
 
 @endsection

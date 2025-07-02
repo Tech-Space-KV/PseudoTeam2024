@@ -30,11 +30,12 @@
       <li class="list-group-item d-flex justify-content-between lh-sm"
       id="cart-item-{{ $detail['hardware']->hrdws_id }}">
       <div>
-      <h6 class="my-0">Identifier: {{ $detail['hardware']->hrdws_hw_identifier ?? 'Identifier not found' }}</h6>
-      <small class="text-body-secondary">Address: {{ $detail['address'] ?? 'Address not found' }}</small><br>
-      <small class="text-body-secondary">Status: {{ $detail['status'] ?? 'Status not found' }}</small><br>
-      <small class="text-body-secondary">Delivery Date: {{ $detail['delivery_date'] ?? 'Status not found' }}</small><br>
-      <small class="quantity-info">Quantity: {{ $detail['quantity'] }}</small>
+      <h6 class="my-0">Identifier: {{ $detail['hardware']->hrdws_hw_identifier ?? 'Identifier not available' }}</h6>
+      <small class="text-body-secondary">Address: {{ $detail['address'] ?? 'Address not available' }}</small><br>
+      <small class="text-body-secondary">Status: {{ $detail['status'] ?? 'Status not available' }}</small><br>
+      <small class="text-body-secondary">Delivery Date: {{ $detail['delivery_date'] ?? 'Not Available' }}</small><br>
+      <small class="quantity-info">Quantity requested: {{ $detail['quantity'] }}</small><br>          
+      <small class="quantity-info">Quantity approved: {{ $detail['quantity_approved'] }}</small>
       </div>
       <!-- <span class="text-body-secondary">
       <i class="fa fa-times remove-from-cart" style="cursor: pointer;"

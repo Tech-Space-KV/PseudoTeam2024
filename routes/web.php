@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\HardwareController;
 use App\Http\Controllers\NotificationController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReferAndEarnController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TicketController;
+use Dom\Comment;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\QueryController;
@@ -21,6 +23,10 @@ use App\Http\Controllers\ProjectController;
 Route::get('/', function () {
     return view('website/home');
 })->name('home');
+
+Route::get('/index', function () {
+    return view('service-partner/index');
+})->name('index');
 
 
 //kal krunga
@@ -40,6 +46,10 @@ Route::prefix('authentication/customer')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
     Route::get('/verify', [AuthController::class, 'verify'])->name('auth.customer.verify');
     Route::post('/verify', [AuthController::class, 'setPassword'])->name('customer.set-password');
+    Route::get('/forgot-password', function () {
+        return (new AuthController)->dashboard('customer/forgot_password');
+    })->name('customer.forgot-password');
+    Route::post('/forgot-password', [AuthController::class, 'customerForgotPassword'])->name('customer.forgot-password.post');
 });
 
 Route::prefix('authentication/service-partner')->group(function () {
@@ -78,11 +88,11 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->dashboard('customer/reports');
     });
 
-    Route::get('/forgot-password', function () {
-        return (new AuthController)->dashboard('customer/forgot_password');
-    })->name('customer.forgot-password');
+    // Route::get('/forgot-password', function () {
+    //     return (new AuthController)->dashboard('customer/forgot_password');
+    // })->name('customer.forgot-password');
 
-    Route::post('/forgot-password', [AuthController::class, 'customerForgotPassword'])->name('customer.forgot-password.post');
+    // Route::post('/forgot-password', [AuthController::class, 'customerForgotPassword'])->name('customer.forgot-password.post');
 
 
     Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm'])->name('customer.password.reset');
@@ -147,9 +157,13 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->dashboard('customer/help');
     });
 
+    // Route::get('/profileoptions', function () {
+    //     return (new AuthController)->dashboard('customer/profileoptions');
+    // });
+
     Route::get('/profileoptions', function () {
-        return (new AuthController)->dashboard('customer/profileoptions');
-    });
+        return (new ProfileController)->profileOptions();
+    })->name('customer.profileoptions');
 
     Route::get('/referandearn', function () {
         return (new AuthController)->dashboard('customer/referandearn');
@@ -231,6 +245,14 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/project-details/{plist_id}', function ($plist_id) {
         return (new ProjectController)->fetchProject($plist_id);
     });
+
+    Route::get('/ticket/{id}/attachment', [TicketController::class, 'viewAttachment'])->name('ticket.attachment');
+
+
+    Route::get('/project/{id}/sow', [ProjectController::class, 'viewSow'])->name('project.sow');
+
+    Route::post('/project/comment', [CommentController::class, 'store'])->name('comment.store');
+
 });
 
 Route::post('/customer/session/todo/add', [TodoController::class, 'add'])->name('todo.add');
@@ -355,9 +377,13 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
         return view('/service-partner/hardware_details');
     });
 
+    // Route::get('/profileoptions', function () {
+    //     return view('/service-partner/profileoptions');
+    // });
+
     Route::get('/profileoptions', function () {
-        return view('/service-partner/profileoptions');
-    });
+        return (new ProfileController)->spProfileOptions();
+    })->name('service-partner.profileoptions');
 
     Route::get('/find-project', function () {
         return view('/service-partner/find_project');
@@ -376,7 +402,7 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
     // });
 
     Route::get('/reports', [ChartController::class, 'spIndex'])->name('sp.reports');
-    Route::get('/sp-chart-data', [ChartController::class, 'getSPData'])->name('chart.data');
+    // Route::get('/sp-chart-data', [ChartController::class, 'getSPData'])->name('chart.data');
 
     // Route::get('service-partner/session/track-project-pending', function () {
     //     return view('/service-partner/track-project-pending');
@@ -425,6 +451,8 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
         return view('/service-partner/referandearn');
     });
 
+    Route::post('/spreferandearnmail', [ReferAndEarnController::class, 'spSendMail']);
+
     // Route::get('service-partner/session/all-projects', function () {
     //     return view('/service-partner/all_projects');
     // });
@@ -443,10 +471,34 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
 
     // Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store');
 
-    Route::get('/find-project', [ProjectController::class, 'index']);
+    // Route::get('/find-project', [ProjectController::class, 'index']);
+
+    Route::get('/find-project', [ProjectController::class, 'findProjects']);
 
 
     Route::get('/find-project-details', [ProjectController::class, 'showProjectDetails']);
 
+    Route::post('/submitSupportQuery', [QueryController::class, 'submitSupportQuery'])->name('spSubmitSupportQuery');
+
+    Route::post('/sp/project/comment', [CommentController::class, 'spCommentStore'])->name('sp.comment.store');
+
+    Route::post('/todo/add', [TodoController::class, 'spAdd'])->name('todo.sp.add');
+    Route::post('todo/delete', [TodoController::class, 'spDelete'])->name('todo.sp.delete');
+    Route::get('/todo/fetch', [TodoController::class, 'spFetchTodos'])->name('todo.sp.fetch');
+
+    // Route::post('/change-password', [ProfileController::class, 'spChangePassword'])->name('profileController.spChangePassword');
+
+    Route::post('/upload-dp', [ProfileController::class, 'spUploadProfilePicture'])->name('profileController.upload.dp.sp');
+    Route::get('/get-profile-picture', [ProfileController::class, 'spGetProfilePicture'])->name('profileController.get.dp.sp');
+    Route::get('get-location', [ProfileController::class, 'spGetLocation'])->name('profileController.get.location.sp');
+    Route::post('/update-location', [ProfileController::class, 'spUpdateLocation'])->name('profileController.update.location.sp');
+    Route::post('/update-cinid', [ProfileController::class, 'spUpdateCinId'])->name('profileController.update.cinid.sp');
+    Route::get('/cinid', [ProfileController::class, 'spGetCinGovId'])->name('profileController.get.cinid.sp');
+    Route::post('/change-password', [ProfileController::class, 'spChangePassword'])->name('profileController.changePassword.sp');
+
 
 });
+
+ Route::post('/change-password', [ProfileController::class, 'spChangePassword'])->name('profileController.spChangePassword');
+
+Route::get('/sp-chart-data', [ChartController::class, 'getSPData'])->name('chart.data');

@@ -37,7 +37,8 @@ class AuthController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
-            'contact' => ['required', 'regex:/^\+?[0-9]{10,15}$/', 'unique:users,contact'],
+            // 'contact' => ['required', 'regex:/^\+?[0-9]{10,15}$/', 'unique:users,contact'],
+            'contact' => ['required', 'regex:/^\+?[0-9]{10,15}$/'],
         ]);
 
         //Need to generate user_id also
@@ -51,11 +52,11 @@ class AuthController extends Controller
 
         $verificationLink = URL::to('authentication/customer/verify') . '?id=' . $user->id;
 
-        \Log::info('Verification link: ' . $verificationLink);
+        Mail::to($request->email)->send(new CustomerSignUpMail($verificationLink , $user->name));
 
-        Mail::to($request->email)->send(new CustomerSignUpMail($verificationLink));
+        return redirect()->route('auth.customer.sign_in')->with('success', 'Signup successful! Check your email for verification link.');
 
-        return redirect()->route('auth.customer.sign_in')->with('success', 'Signup successful! Please log in.');
+        // return redirect()->back()->with('success', 'Signup successful! Check your email for verification link.');
     }
 
     // public function spSignUp(Request $request){
@@ -89,7 +90,8 @@ class AuthController extends Controller
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|email',
-                'contact' => ['required', 'regex:/^\+?[0-9]{10,15}$/', 'unique:users,contact'],
+                // 'contact' => ['required', 'regex:/^\+?[0-9]{10,15}$/', 'unique:users,contact'],
+                'contact' => ['required', 'regex:/^\+?[0-9]{10,15}$/'],
             ]);
 
             $user = User::create([
@@ -103,9 +105,9 @@ class AuthController extends Controller
 
             \Log::info('Verification link: ' . $verificationLink);
 
-            Mail::to($request->email)->send(new CustomerSignUpMail($verificationLink));
+            Mail::to($request->email)->send(new CustomerSignUpMail($verificationLink, $user->name));
 
-            return redirect()->route('auth.sp.sign_in')->with('success', 'Signup successful! Please log in.');
+            return redirect()->route('auth.sp.sign_in')->with('success', 'Signup successful! Check your email for verification link.');
         } catch (\Exception $e) {
             \Log::error('Service Partner Signup Error: ' . $e->getMessage(), [
                 'stack' => $e->getTraceAsString(),
@@ -180,7 +182,10 @@ class AuthController extends Controller
 
             \Log::info('Profile updated successfully for user ID: ' . $profile->pown_id);
 
-            return redirect()->route('auth.customer.sign_in')
+            // return redirect()->route('auth.customer.sign_in')
+            //     ->with('success', 'Profile completed successfully! Please log in.');
+
+             return redirect()->route('customer.dashboard')
                 ->with('success', 'Profile completed successfully! Please log in.');
 
         } catch (\Exception $e) {
@@ -330,6 +335,8 @@ class AuthController extends Controller
                 return redirect()->back()->with('error', 'User not found.');
             }
 
+            \Log::info('Service Provider found, updating ID: ' . $data['address']);
+
             $seviceProvider->sprov_country = $data['country'];
             $seviceProvider->sprov_state = $data['city'];
             $seviceProvider->sprov_pincode = $data['pincode'];
@@ -365,7 +372,7 @@ class AuthController extends Controller
 
             \Log::info('Profile saved to database for spCompleteProfile' . $seviceProvider->sprov_id);
 
-            return redirect()->route('auth.sp.sign_in')
+            return redirect()->route('service-partner.dashboard')
                 ->with('success', 'Profile completed successfully! Please log in.');
         } catch (\Exception $e) {
             \Log::error('Profile submission error: ' . $e->getMessage());
@@ -431,7 +438,7 @@ class AuthController extends Controller
                 'pown_profile_completion_flag' => false,
             ]);
 
-            return redirect()->route('auth.customer.sign_in')->with('success', 'Password set successfully! Please log in.');
+            return redirect()->route('auth.customer.sign_in')->with('success', 'Verification successful! Please sign in.');
         }
 
         \Log::warning('User not found for password set. ID: ' . $request->user_id);
@@ -594,9 +601,9 @@ class AuthController extends Controller
                         $dashboardData = [
                             'unreadNotificationsCount' => Notification::where('ntfn_readflag', false)->where('ntfn_forUserId', $projectOwner->pown_id)->where('ntfn_type', 'cust')->count(),
                             'recentProjects' => Project::orderBy('plist_id', 'desc')->where('plist_customer_id', $projectOwner->pown_id)->take(5)->get(),
-                            'inProgressCount' => Project::where('plist_status', 'In Progress')->where('plist_customer_id', $projectOwner->pown_id)->count(),
-                            'pendingCount' => Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id', $projectOwner->pown_id)->count(),
-                            'deliveredCount' => Project::where('plist_status', 'Delivered')->where('plist_customer_id', $projectOwner->pown_id)->count(),
+                            // 'inProgressCount' => Project::where('plist_status', 'In Progress')->where('plist_customer_id', $projectOwner->pown_id)->count(),
+                            // 'pendingCount' => Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id', $projectOwner->pown_id)->count(),
+                            // 'deliveredCount' => Project::where('plist_status', 'Delivered')->where('plist_customer_id', $projectOwner->pown_id)->count(),
                             'cartCount' => Cart::where('cart_customer_id', $projectOwner->pown_id)->count(),
                             'addedToCart' => Cart::where('cart_customer_id', $projectOwner->pown_id)->get(),
                         ];
@@ -711,9 +718,11 @@ class AuthController extends Controller
 
         } else {
 
-            return redirect()->route('auth.sp.sign_in')->withErrors([
-                'email' => 'These credentials do not match our records.',
-            ]);
+            // return redirect()->route('auth.sp.sign_in')->withErrors([
+            //     'email' => 'These credentials do not match our records.',
+            // ]);
+
+            return redirect()->route('auth.sp.sign_in')->with('error', 'The provided credentials are incorrect.');
 
         }
 
@@ -761,7 +770,7 @@ class AuthController extends Controller
             $resetLink = URL::to('/customer/session/reset-password') . '?token=' . urlencode($token) . '&email=' . urlencode($email);
 
             // Send email
-            Mail::to($email)->send(new CustomerForgotPasswordMail($resetLink));
+            Mail::to($email)->send(new CustomerForgotPasswordMail($resetLink , $projectOwner->pown_name));
 
             \Log::info('5 Customer forgot password method working!');
 
@@ -774,7 +783,7 @@ class AuthController extends Controller
 
         \Log::info('Customer forgot password method working!  but getting error thats why returning back ');
 
-        return redirect()->back()->withErrors(['email' => 'Email not found.']);
+        return redirect()->back()->withErrors(['email' => 'Invalid email address or no account found!']);
 
     }
 
@@ -914,7 +923,7 @@ class AuthController extends Controller
         // Redirect with cache headers
         $response = response()
             ->redirectToRoute('auth.customer.sign_in')
-            ->with('status', 'You have been logged out.');
+            ->with('success', 'You have been logged out.');
 
         $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
         $response->header('Pragma', 'no-cache');
@@ -957,7 +966,7 @@ class AuthController extends Controller
         // Redirect with cache headers
         $response = response()
             ->redirectToRoute('auth.sp.sign_in')
-            ->with('status', 'You have been logged out.');
+            ->with('success', 'You have been logged out.');
 
         $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
         $response->header('Pragma', 'no-cache');

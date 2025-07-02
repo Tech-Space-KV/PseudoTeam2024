@@ -23,12 +23,15 @@ class QueryController extends Controller
             'contact' => 'nullable'
         ]);
 
+        $queryRefId = $request->firstName. '-' . time();
+
         $data = [
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
             'query' => $request->address,
-            'contact' => $request->address2
+            'contact' => $request->address2,
+            'queryRefId' => $queryRefId
         ];
 
         Mail::to($request->email)->send(new SendQueryMail($data));

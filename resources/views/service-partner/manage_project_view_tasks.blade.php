@@ -80,7 +80,7 @@
     </br>
 
 
-    <p class="text-pseudo fw-bold">Comments :</p>
+    <!-- <p class="text-pseudo fw-bold">Comments :</p>
     <div class="w-100 p-2" style="height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
 
     <div class="card p-2 mb-2">
@@ -121,7 +121,7 @@
       <p>Dummy content line 1</p>
     </div>
 
-    </div>
+    </div> -->
     </br></br>
 
   </div>

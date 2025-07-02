@@ -20,7 +20,7 @@
     <!-- Left Section - Logo -->
     <div class="left-section border px-4 py-4" style="background-color: white;">
       <a href="/">
-        <img src="http://127.0.0.1:8000/images/logopt.png" class="logo" alt="Logo">
+        <img src="{{ asset('images/logopt.png') }}" class="logo" alt="Logo">
       </a>
     </div>
 
@@ -29,6 +29,7 @@
       style="float: right;  border: 1px solid #ccc;">
       Logout <i class="fa fa-sign-out"></i>
     </a>
+
   </div>
 
   <!-- Profile Section -->
@@ -72,7 +73,9 @@
                 required></textarea>
             </div>
             <div class="btn-group  w-25 mx-auto">
-              <button class="btn btn-primary fw-bold" type="button" onclick="nextStep()">Next</button>
+              <button class="btn btn-primary fw-bold me-2" type="button" onclick="nextStep()">Next</button>
+              <!-- <button class="btn btn-primary fw-bold" type="button">Skip</button> -->
+               <a href="{{ route('customer.dashboard') }}" class="btn btn-primary fw-bold">Skip</a>
             </div>
           </fieldset>
         </div>
@@ -138,7 +141,7 @@
       const country = document.getElementById('country').value;
       const city = document.getElementById('city');
       city.innerHTML = country === 'India' ?
-        `<option value="Delhi">Delhi</option><option value="Mumbai">Mumbai</option><option value="Kolkata">Kolkata</option>` :
+        `<option value="Delhi">Delhi</option><option value="Maharastra">Maharastra</option><option value="West Bengal">West Bengal</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Andra Pradesh">Andra Pradesh</option><option value="Uttar Pradesh">Uttar Pradesh</option>` :
         `<option value="" disabled selected>--Select City--</option>`;
     }
 

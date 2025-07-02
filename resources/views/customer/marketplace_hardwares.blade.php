@@ -31,67 +31,7 @@
       <th scope="col"></th>
       </tr>
     </thead>
-    <tbody>
-      <!-- <tr>
-      <th scope="row">123</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
-      </tr>
-      <tr>
-      <th scope="row">124</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
-      </tr>
-      <tr>
-      <th scope="row">127</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
-      </tr>
-      <tr>
-      <th scope="row">123</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
-      </tr>
-      <tr>
-      <th scope="row">124</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
-      </tr>
-      <tr>
-      <th scope="row">127</th>
-      <td>aq1</td>
-      <td>zaq1</td>
-      <td>2</td>
-      <td>cde1</td>
-      <td>Delhi</td>
-      <td>Delhi</td>
-      <td ><a href="{{ url('/customer/session/marketplace/hardwares-details') }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td>
-      </tr> -->
+    <!-- <tbody>
 
       @foreach($hardwares as $hardware)
       <tr>
@@ -110,11 +50,13 @@
         class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a>
       @endif
       </td>
-      <!-- <td ><a href="{{ url('/customer/session/marketplace/hardwares-details/'.$hardware->hrdws_id) }}" class="btn btn-sm btn-outline-primary" title="View H/W Details">View</a></td> -->
       </tr>
     @endforeach
 
-    </tbody>
+    </tbody> -->
+
+    @livewire('hardwares');
+
     </table>
 
     <div class="pagination" style="float:right;" id="pagination"></div>

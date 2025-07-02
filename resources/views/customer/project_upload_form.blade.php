@@ -51,6 +51,9 @@
                 <label for="sow" class="form-label">Scope of work</label>
                 <input type="file" class="form-control" id="sow" name="plist_sow" placeholder="Scope of work" accept=""
                     value="{{ old('plist_sow', $project->plist_sow ?? '') }}" {{ $readonly ? 'readonly' : '' }}>
+                @if($readonly && $project->plist_sow)
+                        <a href="{{ route('project.sow', $project->plist_id) }}" target="_blank">View Scope of Work</a>
+                @endif
             </div>
 
             <!-- Project Type -->

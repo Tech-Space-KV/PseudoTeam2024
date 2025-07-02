@@ -63,7 +63,7 @@
                     <h2>Reset Password</h2>
 
                     @if ($errors->any())
-                        <div style="color: red;">
+                        <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -102,7 +102,7 @@
                 </div>
 
             </main>
-            @if ($errors->any())
+            <!-- @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -110,7 +110,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif -->
         </div>
     </div>
 

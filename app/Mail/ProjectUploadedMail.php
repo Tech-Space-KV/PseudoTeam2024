@@ -15,14 +15,19 @@ class ProjectUploadedMail extends Mailable
 
     public $data;
 
+    public $name;
+
+    public $projectTitle;
+
     /**
      * Create a new message instance.
      */
-    public function __construct($data)
+    public function __construct($data, $name , $projectTitle)
     {
         $this->data = $data;
+        $this->name = $name;
+        $this->projectTitle = $projectTitle;
     }
-
 
 
     public function build()
@@ -34,6 +39,8 @@ class ProjectUploadedMail extends Mailable
 
         return $this->subject('Project Uploaded Successfully')
                     ->view('emails/project_uploaded_mail')
-                    ->with('data', $this->data);
+                    ->with('data', $this->data)
+                    ->with('name', $this->name)
+                    ->with('projectTitle', $this->projectTitle);
     }
 }

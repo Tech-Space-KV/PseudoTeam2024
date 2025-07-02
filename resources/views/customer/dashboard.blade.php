@@ -12,6 +12,9 @@
     Want to get a job done? <a href="session/upload-project" class="btn btn-sm btn-outline-primary">Upload project</a>
   </div>
 
+<!-- 
+  need to implement livewire -->
+
   <div class="container px-4">
     <div class="row mx-auto">
 
@@ -20,7 +23,8 @@
       <div class="card-body">
         <h4 class="card-title">Projects In Progress</h4>
       </div>
-      <p class="card-title ms-3">No. of projects: {{ session('inProgressCount') }}</p>
+      <!-- <p class="card-title ms-3">No. of projects: {{ session('inProgressCount') }}</p> -->
+        @livewire('in-progress-projects-count')
       <a href="{{ url('customer/session/track-project-in-progress') }}" class="btn btn-sm btn-outline-dark m-2">View
         &gt;&gt;</a>
       </div>
@@ -32,19 +36,19 @@
       <div class="card-body">
         <h4 class="card-title">Pending Projects</h4>
       </div>
-      <p class="card-title ms-3">No. of projects: {{ session('pendingCount')  }}</p>
+      <!-- <p class="card-title ms-3">No. of projects: {{ session('pendingCount') }}</p> -->
+      @livewire('pending-projects-count')
       <a href="{{ url('customer/session/track-project-pending') }}" class="btn btn-sm btn-outline-dark m-2">View
         &gt;&gt;</a>
       </div>
     </div>
-
 
     <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
       <div class="card scr-card scr-card3">
       <div class="card-body">
         <h4 class="card-title">Delivered Projects</h4>
       </div>
-      <p class="card-title ms-3">No. of projects: {{ session('deliveredCount')  }}</p>
+      @livewire('delivered-count')
       <a href="{{ url('customer/session/track-project-delivered') }}" class="btn btn-sm btn-outline-dark m-2">View
         &gt;&gt;</a>
       </div>

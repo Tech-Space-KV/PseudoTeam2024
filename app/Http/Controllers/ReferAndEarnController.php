@@ -32,4 +32,29 @@ class ReferAndEarnController extends Controller
         return redirect()->back()->with('success', 'Invitation sent successfully!');
 
     }
+
+    public function spSendMail(Request $request) 
+    {
+        \Log::info('ReferAndEarnController@spSendMail called');
+
+        $servicePartner = session('sp_user_id');
+
+        if(!$servicePartner)
+        {
+            return redirect()->back()->with('error', 'Customer id not found!');
+        }
+
+        $projectOwner = ProjectOwners::where('pown_id' , $servicePartner)->first();
+
+        $email = $request->input('friend_email');
+        $message = $request->input('message');
+        $userName = 'sanskar';
+
+        $link = 'Pseudoteam.com/referal-registration/'.$servicePartner.'/'.$userName;
+
+        Mail::to($email)->send(new ReferAndEarnMail($link));
+
+        return redirect()->back()->with('success', 'Invitation sent successfully!');
+
+    }
 }

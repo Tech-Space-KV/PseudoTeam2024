@@ -29,6 +29,17 @@
       <main class="form-signin w-100 m-auto">
         <form method="POST" action="{{ route('customer.forgot-password.post') }}">
           @csrf
+
+          @if ($errors->any())
+          <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+          @endforeach
+          </ul>
+          </div>
+          @endif
+
           <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
           <h1 class="h5 mb-3 ms-1 text-muted">Forgot Password</h1>
           <hr>
@@ -60,15 +71,6 @@
         </form>
 
       </main>
-      @if ($errors->any())
-      <div class="alert alert-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-      <li>{{ $error }}</li>
-    @endforeach
-      </ul>
-      </div>
-    @endif
     </div>
   </div>
 

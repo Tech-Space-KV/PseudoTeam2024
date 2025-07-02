@@ -2,58 +2,69 @@
 
 @section('content')
 
-</br>
-<div class="container">
-  <div class="">
+  </br>
+  <div class="container">
+    <div class="">
     <h2>Ticket Details</h2>
     @if(session('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
+    <div class="alert alert-success" role="alert">
+      {{ session('success') }}
+    </div>
+    @endif
 
-            @if(session('error'))
-                <div class="alert alert-danger" role="alert">
-                    {{ session('error') }}
-                </div>
-            @endif
-  </div>
+    @if(session('error'))
+    <div class="alert alert-danger" role="alert">
+      {{ session('error') }}
+    </div>
+    @endif
+    </div>
 
-  <form action="/customer/session/ticket/storeticket" method="POST" enctype="multipart/form-data" @if($readonly) disabled @endif>
-  @csrf
+    <form action="/customer/session/ticket/storeticket" method="POST" enctype="multipart/form-data" @if($readonly)
+  disabled @endif>
+    @csrf
     <h5 class="mt-4 mb-4 text-pseudo">
       <span class="fa fa-bars"></span> Details of support ticket
     </h5>
 
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input type="text" class="form-control" id="title" name="tckt_title" placeholder="Issue" value="{{ $readonly ? $ticket->tckt_title : old('tckt_title') }}" {{ $readonly ? 'readonly' : '' }}>
+      <input type="text" class="form-control" id="title" name="tckt_title" placeholder="Issue"
+      value="{{ $readonly ? $ticket->tckt_title : old('tckt_title') }}" {{ $readonly ? 'readonly' : '' }}>
     </div>
 
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
       <!-- <input type="textarea" class="form-control" id="description" placeholder="About project"> -->
-      <textarea id="description" name="tckt_description" class="form-control"
-        placeholder="Please elaborate your issue" {{ $readonly ? 'readonly' : '' }}>{{ $readonly ? $ticket->tckt_description : old('tckt_description') }}</textarea>
+      <textarea id="description" name="tckt_description" class="form-control" placeholder="Please elaborate your issue"
+      {{ $readonly ? 'readonly' : '' }}>{{ $readonly ? $ticket->tckt_description : old('tckt_description') }}</textarea>
     </div>
+
+    @if($readonly)
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <input type="text" id="ticketStatus" name="tckt_status" class="form-control" value="{{ $ticket->tckt_status }}"
+      readonly>
+    </div>
+    @endif
+
 
     <div class="mb-3">
       <label for="sow" class="form-label">Add Attachment</label>
       <input type="file" class="form-control" id="screenshot" name="tckt_attachment" placeholder="Add Attachment" {{ $readonly ? 'disabled' : '' }}>
       @if($readonly && $ticket->tckt_attachment)
-        <a href="{{ asset('storage/attachments/'.$ticket->tckt_attachment) }}" target="_blank">View Attachment</a>
-      @endif
+      <a href="{{ route('ticket.attachment', $ticket->tckt_id) }}" target="_blank">View Attachment</a>
+    @endif
     </div>
 
     <!-- <div class="row">
-        <label for="projectIs" class="form-label">Ticket type</label>
-        <select class="form-select" id="tickettype" name="#">
-          <option selected>--Select type--</option>
-          <option value="t1">On Site</option>
-          <option value="t2">On Remote</option>
-          <option value="t3">t3</option>
-        </select>
-      
+      <label for="projectIs" class="form-label">Ticket type</label>
+      <select class="form-select" id="tickettype" name="#">
+      <option selected>--Select type--</option>
+      <option value="t1">On Site</option>
+      <option value="t2">On Remote</option>
+      <option value="t3">t3</option>
+      </select>
+
     </div>
 
     <h5 class="mt-4 mb-4 text-pseudo">
@@ -61,10 +72,10 @@
     </h5>
 
     <div class="row">
-      
-        <label for="startDate" class="form-label">Start date</label>
-        <input type="date" class="form-control" id="startDate" placeholder="Start date">
-    
+
+      <label for="startDate" class="form-label">Start date</label>
+      <input type="date" class="form-control" id="startDate" placeholder="Start date">
+
 
     </div>
 
@@ -101,10 +112,10 @@
     <!-- <button type="submit" class="btn btn-primary">Upload</button> -->
 
     @if(!$readonly)
-      <button type="submit" class="btn btn-primary">Upload</button>
+    <button type="submit" class="btn btn-primary">Upload</button>
     @endif
 
-  </form>
-</div>
+    </form>
+  </div>
 
 @endsection

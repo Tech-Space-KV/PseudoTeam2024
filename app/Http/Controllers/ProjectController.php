@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Exports\ProjectsExport;
 use App\Mail\ProjectUploadedMail;
+use App\Models\Comment;
 use App\Models\Notification;
+use App\Models\ProjectOwners;
 use App\Models\ProjectPlanner;
 use App\Models\ProjectPlannerTask;
 use App\Models\ProjectScope;
+use App\Models\ServiceProvider;
+use App\Models\SpComment;
 use Barryvdh\DomPDF\Facade\Pdf;
 use DB;
 use Illuminate\Http\Request;
@@ -23,6 +27,12 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
 
+        ini_set('upload_max_filesize', '100M');
+        ini_set('post_max_size', '100M');
+        ini_set('memory_limit', '256M');
+        ini_set('max_execution_time', '300'); 
+        ini_set('max_input_time', '300');
+
         $plistId = $request->input('plist_id');
 
         if ($request->has('plist_id') && $request->input('readonly') === 'true') {
@@ -32,7 +42,7 @@ class ProjectController extends Controller
         $validated = $request->validate([
             'plist_title' => 'required|string|max:255',
             'plist_description' => 'required|string',
-            'plist_sow' => 'nullable|file|mimes:pdf,docx,doc|max:2048',
+            'plist_sow' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv|max:5120',
             'plist_type' => 'required|string',
             'plist_startdate' => 'required|string',
             'plist_enddate' => 'required|string',
@@ -163,17 +173,18 @@ class ProjectController extends Controller
                 session(['unreadNotificationsCount' => $unreadNotificationsCount]);
 
 
-                $data  = [
+                $data = [
                     'plist_title' => $validated['plist_title'],
                     'plist_projectid' => $projectId,
                 ];
 
-                \Log::info('(1) Sending Project Uploaded Mail', [
-                    'data' => $data,
-                ]);
+                // \Log::info('(1) Sending Project Uploaded Mail', [
+                //     'data' => $data,
+                // ]);
 
-                mail::to($validated['plist_email'])->send(new ProjectUploadedMail($data));
+                $name = ProjectOwners::where('pown_id', session('user_id'))->value('pown_name');    
 
+                mail::to($validated['plist_email'])->send(new ProjectUploadedMail($data, $name, $validated['plist_title']));
 
                 \Log::info('(3) Sending Project Uploaded Mail', [
                     'data' => $data,
@@ -227,6 +238,8 @@ class ProjectController extends Controller
             return redirect()->route('customer.dashboard')->with('error', 'Project not found.');
         }
 
+        // $comments = Comment::where('pconv_scope_id', $projectid)->get();
+
         return view('customer.track_project_report_location', compact('project_scope'));
     }
 
@@ -250,7 +263,9 @@ class ProjectController extends Controller
 
         $average = number_format($average, 2);
 
-        return view('customer.track_project_report_details', compact('project_planner', 'average' , 'projectScope'));
+        $comments = Comment::where('pconv_scope_id', $projectid)->get();
+
+        return view('customer.track_project_report_details', compact('project_planner', 'average', 'projectScope', 'comments'));
     }
 
     public function trackProjectPending()
@@ -353,19 +368,84 @@ class ProjectController extends Controller
         return view('customer.search_project', compact('projects'));
     }
 
+    // public function spSearchProject(Request $request)
+    // {
+    //     \Log::info('spSearchProject called!');
+
+    //     $serviceProviderId = session('sp_user_id');
+    //     $query = $request->input('query', '');
+
+    //     \Log::info("[spSearchProject] Service Provider ID: {$serviceProviderId}");
+    //     \Log::info("[spSearchProject] Search Query: {$query}");
+
+    //     // Step 1: Backtrack from tasks to projects related to the service provider
+    //     $relatedProjects = ProjectPlannerTask::with([
+    //         'projectPlanner.projectScope.project'
+    //     ])
+    //         ->where('pptasks_sp_id', $serviceProviderId)
+    //         ->get()
+    //         ->map(function ($task) {
+    //             return optional(optional($task->projectPlanner)->projectScope)->project;
+    //         })
+    //         ->filter()
+    //         ->unique('plist_id')
+    //         ->values();
+
+    //     \Log::info('Related projects count: ' . $relatedProjects->count());
+    //     \Log::info('Related projects: ' . print_r($relatedProjects->toArray(), true));
+
+    //     $projectIds = $relatedProjects->pluck('plist_id');
+
+    //     \Log::info('Project IDs: ' . print_r($projectIds->toArray(), true));
+
+    //     // Step 2: Build query for filtering
+    //     $projectsQuery = Project::whereIn('plist_id', $projectIds);
+
+    //     // \Log::info('Initial projects query: ' . $projectsQuery->toSql());
+    //     // \Log::info('Initial projects query bindings: ' . print_r($projectsQuery->getBindings(), true));
+
+    //     if (!empty($query)) {
+    //         \Log::info('Filtering by query: ' . $query);
+
+    //         $projectsQuery->where(function ($q) use ($query) {
+    //             $q->where('plist_projectid', 'like', '%' . $query . '%')
+    //                 ->orWhere('plist_title', 'like', '%' . $query . '%');
+    //         });
+
+    //         // \Log::info('Filtered projects query: ' . $projectsQuery->toSql());
+    //         // \Log::info('Filtered projects query bindings: ' . print_r($projectsQuery->getBindings(), true));
+    //     }
+
+    //     // Step 3: Paginate results
+    //     $projects = $projectsQuery->paginate(10);
+
+    //     \Log::info('Returning ' . $projects->count() . ' projects.');
+
+    //     return view('service-partner/search_project', compact('projects', 'query'));
+    // }
+
     public function spSearchProject(Request $request)
     {
-        \Log::info('spSearchProject called!');
+        \Log::info('[spSearchProject] Method called');
 
         $serviceProviderId = session('sp_user_id');
         $query = $request->input('query', '');
 
-        // Step 1: Backtrack from tasks to projects related to the service provider
-        $relatedProjects = ProjectPlannerTask::with([
+        \Log::info("[spSearchProject] Service Provider ID: {$serviceProviderId}");
+        \Log::info("[spSearchProject] Search Query: {$query}");
+
+        // Step 1: Retrieve tasks for this service provider with related project data
+        $tasks = ProjectPlannerTask::with([
             'projectPlanner.projectScope.project'
         ])
             ->where('pptasks_sp_id', $serviceProviderId)
-            ->get()
+            ->get();
+
+        \Log::info("[spSearchProject] Total tasks found: " . $tasks->count());
+        \Log::debug("[spSearchProject] Raw tasks: " . print_r($tasks->toArray(), true));
+
+        // Map tasks to related projects
+        $relatedProjects = $tasks
             ->map(function ($task) {
                 return optional(optional($task->projectPlanner)->projectScope)->project;
             })
@@ -373,13 +453,19 @@ class ProjectController extends Controller
             ->unique('plist_id')
             ->values();
 
-        $projectIds = $relatedProjects->pluck('plist_id');
+        \Log::info("[spSearchProject] Unique related projects count: " . $relatedProjects->count());
+        \Log::debug("[spSearchProject] Related projects: " . print_r($relatedProjects->toArray(), true));
 
-        // Step 2: Build query for filtering
+        // Extract project IDs
+        $projectIds = $relatedProjects->pluck('plist_id');
+        \Log::info("[spSearchProject] Project IDs: " . implode(', ', $projectIds->toArray()));
+
+        // Step 2: Build the query
         $projectsQuery = Project::whereIn('plist_id', $projectIds);
 
+        // Apply search filter
         if (!empty($query)) {
-            \Log::info('Filtering by query: ' . $query);
+            \Log::info("[spSearchProject] Applying search filter for query: {$query}");
 
             $projectsQuery->where(function ($q) use ($query) {
                 $q->where('plist_projectid', 'like', '%' . $query . '%')
@@ -387,13 +473,19 @@ class ProjectController extends Controller
             });
         }
 
-        // Step 3: Paginate results
+        // Log the SQL and bindings
+        \Log::debug("[spSearchProject] Final SQL: " . $projectsQuery->toSql());
+        \Log::debug("[spSearchProject] Bindings: " . print_r($projectsQuery->getBindings(), true));
+
+        // Step 3: Paginate
         $projects = $projectsQuery->paginate(10);
 
-        \Log::info('Returning ' . $projects->count() . ' projects.');
+        \Log::info("[spSearchProject] Returning " . $projects->count() . " projects on this page");
+        \Log::debug("[spSearchProject] Paginated Projects: " . print_r($projects->items(), true));
 
         return view('service-partner/search_project', compact('projects', 'query'));
     }
+
 
     public function fetchProject($plist_id)
     {
@@ -521,7 +613,19 @@ class ProjectController extends Controller
 
         }
 
-        return view('service-partner/manage_project_edit_task', compact('projectPlannerTasks', 'task', 'currentDate'));
+        $SpComments = SpComment::where('tconv_task_id', $ppTaskId)
+            ->orderBy('tconv_comment_date_time', 'desc')
+            ->get();
+
+        if ($SpComments->isNotEmpty()) {
+            $sp_id = $SpComments->first()->tconv_comment_by_sp_id;
+        }
+
+        // $sp = ServiceProvider::where('sprov_id', $sp_id)->first('sprov_name');
+
+        // \Log::info('sp_name: ' . $sp->sprov_name);
+
+        return view('service-partner/manage_project_edit_task', compact('projectPlannerTasks', 'task', 'currentDate', 'SpComments'));
 
     }
 
@@ -548,7 +652,7 @@ class ProjectController extends Controller
         $task->pptasks_date_of_completion = Carbon::now()->format('Y-m-d');
         $task->save();
 
-        return redirect()->back()->with('success', 'Task updated and file saved in DB!');
+        return redirect()->back()->with('success', 'Task updated successfully!');
     }
 
     public function listOfProjects()
@@ -759,5 +863,33 @@ class ProjectController extends Controller
 
         return view('service-partner/project_reports', compact('projects'));
 
+    }
+
+    public function viewSow($id)
+    {
+
+        \Log::info('Fetching attachment for project ID: ' . $id);
+
+        $project = Project::findOrFail($id);
+
+        if (!$project->plist_sow) {
+            abort(404, 'No attachment found.');
+        }
+
+        // Try to detect MIME type
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_buffer($finfo, $project->plist_sow);
+        finfo_close($finfo);
+
+        return response($project->plist_sow)
+            ->header('Content-Type', $mime ?? 'application/octet-stream')
+            ->header('Content-Disposition', 'inline; filename="attachment"');
+    }
+
+    public function findProjects() 
+    {
+        $projects = Project::where('plist_status' , 'No SP Assigned')->get();
+
+        return view('service-partner/find_project', compact('projects'));
     }
 }

@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.30s>
     @if($projects->isNotEmpty())
         @foreach($projects as $project)
             <div class="card p-3 bg-light btn-outline-primary my-3 text-dark"> 

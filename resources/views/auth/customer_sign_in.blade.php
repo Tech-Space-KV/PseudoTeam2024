@@ -32,6 +32,32 @@
           <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
           <h1 class="h5 mb-3 ms-1 text-muted">Customer Sign In</h1>
           <hr>
+
+          <div class="">
+            @if(session('success'))
+        <div class="alert alert-success" role="alert">
+          {{ session('success') }}
+        </div>
+      @endif
+
+            @if(session('error'))
+        <div class="alert alert-danger" role="alert">
+          {{ session('error') }}
+        </div>
+      @endif
+
+          </div>
+
+          @if ($errors->any())
+        <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+        </ul>
+        </div>
+      @endif
+
           <div class="form-floating mb-3 mt-3">
             <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com"
               required>
@@ -60,15 +86,15 @@
         </form>
 
       </main>
-      @if ($errors->any())
+      <!-- @if ($errors->any())
       <div class="alert alert-danger">
       <ul>
         @foreach ($errors->all() as $error)
       <li>{{ $error }}</li>
-    @endforeach
+      @endforeach
       </ul>
       </div>
-    @endif
+    @endif -->
     </div>
   </div>
 

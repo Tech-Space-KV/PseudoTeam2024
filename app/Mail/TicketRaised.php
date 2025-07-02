@@ -16,13 +16,17 @@ class TicketRaised extends Mailable
     public $ticketTitle;
     public $ticketDescription;
     public $customerId;
+    public $ticketId;
+    public $name; // Added to include the customer's name
 
     // Constructor to initialize the properties
-    public function __construct($ticketTitle, $ticketDescription, $customerId)
+    public function __construct($ticketTitle, $ticketDescription, $customerId , $ticketId, $name)
     {
         $this->ticketTitle = $ticketTitle;
         $this->ticketDescription = $ticketDescription;
         $this->customerId = $customerId;
+        $this->ticketId = $ticketId;
+        $this->name = $name;
     }
 
     public function build()
@@ -34,6 +38,8 @@ class TicketRaised extends Mailable
                           'ticketTitle' => $this->ticketTitle,
                           'ticketDescription' => $this->ticketDescription,
                           'customerId' => $this->customerId,
+                          'ticketId' => $this->ticketId,
+                          'name' => $this->name, 
                       ]);
 
         return $email;

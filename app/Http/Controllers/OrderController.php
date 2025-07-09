@@ -25,21 +25,14 @@ class OrderController extends Controller
         try {
 
             $customerId = session('user_id');
-            // $deliveryAddress = $request->input('delivery_address');
 
             $ordplcd_addressId = $request->input('selected_address_id');
 
-            Log::info('Working till here!');
-
-            Log::info('Selected Address ID: ' . $ordplcd_addressId);
-
             if($ordplcd_addressId)
             {
-                Log::info('Working till if condition!');
 
                 $deliveryAddress = OrderAddress::where('ordradrs_id' , $ordplcd_addressId)->first();
 
-                Log::info('Delivery Address: ' . $deliveryAddress);
             }
 
             $cartItems = Cart::where('cart_customer_id', $customerId)->get();
@@ -93,8 +86,6 @@ class OrderController extends Controller
 
         } catch (\Exception $e) {
 
-            Log::error('Error placing order: ' . $e->getMessage());
-
             return response()->json([
                 'status' => 'error',
                 'message' => 'An error occurred while placing the order.',
@@ -106,8 +97,6 @@ class OrderController extends Controller
     {
         $customerId = session('user_id');
 
-        // $orderHistory = OrderPlaced::where('ordplcd_customer_id' , $customerId)->get();
-
         $orderHistory = OrderPlaced::where('ordplcd_customer_id', $customerId)
             ->select('ordplcd_order_no', DB::raw('ordplcd_no_of_items as total_qty'), 'ordplcd_order_date')
             ->groupBy('ordplcd_order_no', 'ordplcd_order_date' , 'ordplcd_no_of_items')->orderBy('ordplcd_id', 'desc') 
@@ -118,8 +107,6 @@ class OrderController extends Controller
 
     public function fetchOrderHistoryDetails($ordplcd_order_no)
     {
-        // $placedOrders = OrderPlaced::where('ordplcd_order_no', $ordplcd_order_no)->get();
-
         $placedOrders = OrderPlaced::where('ordplcd_order_no', $ordplcd_order_no)
             ->orderBy('ordplcd_id', 'desc')
             ->get();

@@ -20,12 +20,6 @@ class TicketController extends Controller
             return redirect()->back()->with('error', 'Customer ID not found!');
         }
 
-        // $validated = $request->validate([
-        //     'tckt_title' => 'required|string|max:255',
-        //     'tckt_description' => 'required|string',
-        //     'tckt_attachment' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx|max:5120', // 5MB max size
-        // ]);
-
         $validated = $request->validate([
             'tckt_title' => 'required|string|max:255',
             'tckt_description' => 'required|string',
@@ -94,16 +88,12 @@ class TicketController extends Controller
 
     public function viewAttachment($id)
     {
-
-        \Log::info('Fetching attachment for ticket ID: ' . $id);
-
         $ticket = Ticket::findOrFail($id);
 
         if (!$ticket->tckt_attachment) {
             abort(404, 'No attachment found.');
         }
 
-        // Try to detect MIME type
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime = finfo_buffer($finfo, $ticket->tckt_attachment);
         finfo_close($finfo);

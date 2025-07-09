@@ -35,8 +35,6 @@ class ReferAndEarnController extends Controller
 
     public function spSendMail(Request $request) 
     {
-        \Log::info('ReferAndEarnController@spSendMail called');
-
         $servicePartner = session('sp_user_id');
 
         if(!$servicePartner)

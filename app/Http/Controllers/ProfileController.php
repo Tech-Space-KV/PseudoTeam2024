@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 
 
 class ProfileController extends Controller
@@ -22,18 +21,13 @@ class ProfileController extends Controller
         if ($request->hasFile('profilePicture')) {
             $file = $request->file('profilePicture');
 
-            // Optional validation
             $request->validate([
                 'profilePicture' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
             ]);
 
-            // Save binary image
             $imageData = file_get_contents($file);
 
-            // \Log::info('Profile picture uploaded for user ID: ' . $pown_id);
-            // \Log::info('Image data size: ' . strlen($imageData) . ' bytes');
-
-            DB::table('project_owners')  // table name should be lowercase and plural if you followed Laravel convention
+            DB::table('project_owners') 
                 ->where('pown_id', $pown_id)
                 ->update(['pown_dp' => $imageData]);
 
@@ -45,9 +39,6 @@ class ProfileController extends Controller
 
     public function spUploadProfilePicture(Request $request)
     {
-
-        // \Log::info('Profile picture upload request received for service provider.');
-
         $sprov_id = session('sp_user_id');
 
         if (!$sprov_id) {
@@ -57,25 +48,15 @@ class ProfileController extends Controller
         if ($request->hasFile('profilePicture')) {
             $file = $request->file('profilePicture');
 
-            // Optional validation
             $request->validate([
                 'profilePicture' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
             ]);
 
-            \Log::info('Profile picture upload.');
-
-            // Save binary image
             $imageData = file_get_contents($file);
 
-            \Log::info('Profile picture uploaded for user ID: ' . $sprov_id);
-            \Log::info('Image data size: ' . strlen($imageData) . ' bytes');
-
-            DB::table('service_providers')  // table name should be lowercase and plural if you followed Laravel convention
+            DB::table('service_providers')  
                 ->where('sprov_id', $sprov_id)
                 ->update(['sprov_dp' => $imageData]);
-
-
-            \Log::info('Profile picture updated successfully for service provider ID: ' . $sprov_id);
 
             return response()->json(['success' => 'Profile picture updated successfully']);
         } else {
@@ -85,17 +66,17 @@ class ProfileController extends Controller
 
     public function getProfilePicture()
     {
-        $pown_id = session('user_id'); // or session('user_id'), depending what you store
+        $pown_id = session('user_id');
 
         if (!$pown_id) {
-            abort(404); // or return a default image
+            abort(404); 
         }
 
         $user = DB::table('project_owners')->where('pown_id', $pown_id)->first();
 
         if (!$user || !$user->pown_dp) {
-            // If no DP found, you can return a default image
-            $path = public_path('images/logo_icon.png'); // default image
+
+            $path = public_path('images/logo_icon.png'); 
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -103,24 +84,23 @@ class ProfileController extends Controller
         }
 
         $response = Response::make($user->pown_dp);
-        $response->header('Content-Type', 'image/jpeg'); // assuming your blob is jpeg
+        $response->header('Content-Type', 'image/jpeg'); 
 
         return $response;
     }
 
     public function spGetProfilePicture()
     {
-        $sprov_id = session('sp_user_id'); // or session('user_id'), depending what you store
+        $sprov_id = session('sp_user_id'); 
 
         if (!$sprov_id) {
-            abort(404); // or return a default image
+            abort(404); 
         }
 
         $user = DB::table('service_providers')->where('sprov_id', $sprov_id)->first();
 
         if (!$user || !$user->sprov_dp) {
-            // If no DP found, you can return a default image
-            $path = public_path('images/logo_icon.png'); // default image
+            $path = public_path('images/logo_icon.png'); 
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -128,7 +108,7 @@ class ProfileController extends Controller
         }
 
         $response = Response::make($user->sprov_dp);
-        $response->header('Content-Type', 'image/jpeg'); // assuming your blob is jpeg
+        $response->header('Content-Type', 'image/jpeg'); 
 
         return $response;
     }
@@ -204,7 +184,6 @@ class ProfileController extends Controller
         return response()->json(['success' => 'Location updated successfully']);
     }
 
-
     public function spUpdateLocation(Request $request)
     {
         $sprov_id = session('sp_user_id');
@@ -258,7 +237,7 @@ class ProfileController extends Controller
 
         if ($request->hasFile('govtID')) {
             $fileData = file_get_contents($request->file('govtID'));
-            $dataToUpdate['pown_adhaarfile'] = $fileData; // storing blob directly
+            $dataToUpdate['pown_adhaarfile'] = $fileData; 
         }
 
         DB::table('project_owners')
@@ -271,9 +250,6 @@ class ProfileController extends Controller
 
     public function spUpdateCinId(Request $request)
     {
-
-     \Log::info('Update CIN ID request received for service provider.' , [$request->all()]);
-
         $sprov_id = session('sp_user_id');
 
         if (!$sprov_id) {
@@ -303,7 +279,7 @@ class ProfileController extends Controller
 
         if ($request->hasFile('govtID')) {
             $fileData = file_get_contents($request->file('govtID'));
-            $dataToUpdate['pown_adhaarfile'] = $fileData; // storing blob directly
+            $dataToUpdate['pown_adhaarfile'] = $fileData; 
         }
 
         DB::table('service_providers')
@@ -320,15 +296,14 @@ class ProfileController extends Controller
         if (!$pown_id) {
             return response()->json([
                 'about' => '',
-                'type' => 'Organization',  // Default
+                'type' => 'Organization', 
                 'orgName' => '',
                 'cin' => '',
                 'gst' => '',
-                'govtIdUrl' => '',          // Important to add this
+                'govtIdUrl' => '',          
             ]);
         }
 
-        // Fetch from project_owners table
         $userData = DB::table('project_owners')->where('pown_id', $pown_id)->first();
 
         if (!$userData) {
@@ -344,7 +319,7 @@ class ProfileController extends Controller
 
         $response = [
             'about' => $userData->pown_about ?? '',
-            'type' => $userData->pown_type ?? 'Organization', // Now dynamic
+            'type' => $userData->pown_type ?? 'Organization', 
             'orgName' => $userData->pown_organisation_name ?? '',
             'cin' => $userData->pown_cin ?? '',
             'gst' => $userData->pown_gstpin ?? '',
@@ -354,9 +329,7 @@ class ProfileController extends Controller
             'govtIdUrl' => '',
         ];
 
-        // If user is Individual, check if govt id exists
         if (($userData->pown_type ?? 'Organization') === 'Individual' && !empty($userData->pown_govt_id)) {
-            // Generate URL to access government ID
             $response['govtIdUrl'] = route('profileController.get.govtid');
         }
 
@@ -370,15 +343,14 @@ class ProfileController extends Controller
         if (!$sprov_id) {
             return response()->json([
                 'about' => '',
-                'type' => 'Organization',  // Default
+                'type' => 'Organization',  
                 'orgName' => '',
                 'cin' => '',
                 'gst' => '',
-                'govtIdUrl' => '',          // Important to add this
+                'govtIdUrl' => '',         
             ]);
         }
 
-        // Fetch from service_providers table
         $userData = DB::table('service_providers')->where('sprov_id', $sprov_id)->first();
 
         if (!$userData) {
@@ -394,16 +366,14 @@ class ProfileController extends Controller
 
         $response = [
             'about' => $userData->sprov_about ?? '',
-            'type' => $userData->sprov_type ?? 'Organization', // Now dynamic
+            'type' => $userData->sprov_type ?? 'Organization', 
             'orgName' => $userData->sprov_organisation_name ?? '',
             'cin' => $userData->sprov_cin ?? '',
             'gst' => $userData->sprov_gstpin ?? '',
             'govtIdUrl' => '',
         ];
 
-        // If user is Individual, check if govt id exists
         if (($userData->sprov_type ?? 'Organization') === 'Individual' && !empty($userData->sprov_govt_id)) {
-            // Generate URL to access government ID
             $response['govtIdUrl'] = route('profileController.get.govtid');
         }
 
@@ -424,26 +394,21 @@ class ProfileController extends Controller
             return response()->json(['error' => 'User not authenticated.'], 401);
         }
 
-        // Fetch user manually from project_owners table
         $user = DB::table('project_owners')->where('pown_id', $pown_id)->first();
 
         if (!$user) {
             return response()->json(['error' => 'User not found.'], 404);
         }
 
-        // Check current password
         if (!Hash::check($request->input('current_password'), $user->pown_password)) {
             return response()->json(['error' => 'Current password is incorrect.'], 400);
         }
 
-        // Update new password
         DB::table('project_owners')
             ->where('pown_id', $pown_id)
             ->update([
                 'pown_password' => Hash::make($request->input('new_password'))
             ]);
-
-        // return response()->json(['success' => 'Password changed successfully.']);
 
         return response()->json([
             'success' => true,
@@ -454,8 +419,6 @@ class ProfileController extends Controller
 
     public function spChangePassword(Request $request)
     {
-
-        \Log::info('Change password request received for service provider.');
 
         $request->validate([
             'current_password' => ['required'],
@@ -468,33 +431,21 @@ class ProfileController extends Controller
             return response()->json(['error' => 'User not authenticated.'], 401);
         }
 
-        \Log::info('Service provider ID: ' . $sprov_id);
-
-        // Fetch user manually from project_owners table
         $user = DB::table('service_providers')->where('sprov_id', $sprov_id)->first();
 
         if (!$user) {
             return response()->json(['error' => 'User not found.'], 404);
         }
 
-        // Check current password
         if (!Hash::check($request->input('current_password'), $user->sprov_password)) {
             return response()->json(['error' => 'Current password is incorrect.'], 400);
         }
 
-        \Log::info('Current password verified for service provider ID: ' . $sprov_id);
-
-        // Update new password
         DB::table('service_providers')
             ->where('sprov_id', $sprov_id)
             ->update([
                 'sprov_password' => Hash::make($request->input('new_password'))
             ]);
-
-
-        \Log::info('Password changed successfully for service provider ID: ' . $sprov_id);
-
-        // return response()->json(['success' => 'Password changed successfully.']);
 
         return response()->json([
             'success' => true,
@@ -516,8 +467,6 @@ class ProfileController extends Controller
         if (!$user) {
             return redirect()->route('login');
         }
-
-        \Log::info('Profile options accessed for user ID: ', [$user]);
 
         return view('customer.profileoptions', ['user' => $user]);
     }

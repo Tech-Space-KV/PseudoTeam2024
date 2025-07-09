@@ -12,10 +12,6 @@ class CommentController extends Controller
     public function store(Request $request)
     {
 
-        \Log::info('CommentController store method called', [
-            'request_data' => $request->all(),
-        ]);
-
             $validated = $request->validate([
                 'pconv_comment' => 'required|string|max:1000',
                 'pconv_comment_by_cust_id' => 'required|integer',
@@ -31,38 +27,26 @@ class CommentController extends Controller
                 'pconv_comment_date_time' => DATE_FORMAT(NOW(), '%d-%m-%Y %H:%i:%s'),
             ]);
 
-        \Log::info('Comment stored!');
-
         return redirect()->back()->with('success', 'Comment posted successfully.');
     }
 
     public function spCommentStore()
     {
-        \Log::info('spCommentStore method called');
-
-        // You can add your logic here, similar to the store method.
         $validated = request()->validate([
             'tconv_comment' => 'required|string|max:1000',
             'tconv_comment_by_sp_id' => 'required|integer',
             'tconv_task_id' => 'required|integer',
         ]);
 
-        \Log::info('SP Comment validated', [
-            'validated_data' => $validated,
-        ]);
-
          $currentTime = Carbon::now('Asia/Kolkata');
 
-        // Store the validated comment
         SpComment::create([
             'tconv_comment' => $validated['tconv_comment'],
             'tconv_comment_by_sp_id' => $validated['tconv_comment_by_sp_id'],
             'tconv_task_id' => $validated['tconv_task_id'],
             'tconv_comment_date_time' => $currentTime->format('d-m-Y H:i:s'),
         ]);
-
-        \Log::info('SP Comment stored successfully');
-
+        
         return redirect()->back()->with('success', 'SP Comment stored successfully.');
         
     }

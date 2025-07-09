@@ -39,40 +39,8 @@ class OrderAddressController extends Controller
 
     }
 
-    // public function saveExistingAddress(Request $request)
-    // {
-
-    //     \Log::info('Request to save existing address: ', $request->all());
-    //     \Log::info('working till here!');
-
-    //     $request->validate([
-    //         'address_id' => 'required|exists:order_addresses,id',
-    //     ]);
-
-    //     \Log::info('working till here! 1');
-
-    //     $original = OrderAddress::find($request->address_id);
-
-    //     // Duplicate the address for a new record
-    //     $newAddress = OrderAddress::create([
-    //         'ordradrs_address' => $original->ordradrs_address,
-    //         'ordradrs_projectowner_id' => session('user_id'),
-    //     ]);
-
-    //     \Log::info('working till here! 2');
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'message' => 'Address selected and saved successfully!',
-    //     ]);
-    // }
-
     public function saveExistingAddress(Request $request)
     {
-
-        \Log::info('Request to save existing address: ', $request->all());
-        \Log::info('working till here!  1');
-
         try {
 
             $request->validate([
@@ -80,8 +48,6 @@ class OrderAddressController extends Controller
             ]);
 
             $original = OrderAddress::where('ordradrs_id' , $request->address_id)->first();
-
-            \Log::info('working till here! 2' , [$original]);
 
             $newAddress = OrderAddress::create([
                 'ordradrs_address' => $original->ordradrs_address,
@@ -94,8 +60,6 @@ class OrderAddressController extends Controller
             ]);
 
         } catch (\Exception $e) {
-            \Log::error('Error saving selected address: ' . $e->getMessage());
-
             return response()->json([
                 'success' => false,
                 'message' => 'Server error: ' . $e->getMessage(),

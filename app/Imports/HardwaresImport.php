@@ -22,8 +22,6 @@ class HardwaresImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
 
-        \Log::info('Row data:', ['row' => $row, 'service_provider_id' => $this->spId]);
-
         return new Hardware([
             'hrdws_sp_id' => $this->spId,
             'hrdws_serial_number' => $row['serial_number'],

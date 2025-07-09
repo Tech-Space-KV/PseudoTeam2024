@@ -24,9 +24,9 @@ Route::get('/', function () {
     return view('website/home');
 })->name('home');
 
-Route::get('/index', function () {
-    return view('service-partner/index');
-})->name('index');
+Route::get('/partner', function () {
+    return view('website/partner');
+})->name('partner');
 
 
 //kal krunga

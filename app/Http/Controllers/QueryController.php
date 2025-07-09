@@ -52,7 +52,7 @@ class QueryController extends Controller
            'query' => $request->input('query')
         ];
 
-        Mail::to('sanskarsharma0119@gmail.com')->send(new SupportQueryReceived($query));
+        Mail::to('info@pseudoteam.com')->send(new SupportQueryReceived($query));
 
         return redirect()->back()->with('success', 'Your query has been submitted.');
     }

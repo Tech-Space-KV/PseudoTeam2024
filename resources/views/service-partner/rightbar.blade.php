@@ -394,6 +394,9 @@
             modal.style.display = 'flex';
         }
 
+        //need to work on this
+        // This function deletes a task and updates the calendar immediately
+
         window.deleteTask = function(date, task) {
             if (!confirm('Delete this task?')) return;
 

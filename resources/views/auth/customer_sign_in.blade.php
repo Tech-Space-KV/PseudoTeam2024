@@ -26,7 +26,7 @@
         <main class="form-signin w-100 m-auto">
         <form method="POST" action="{{ route('login.post') }}">
     @csrf
-    <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
+    <img src="{{asset('images/logo_pt.png')}}" class="rounded-3" style="width: 180px;">
     <h1 class="h5 mb-3 ms-1 text-muted">Customer Sign In</h1>
     <hr>
     <div class="form-floating mb-3 mt-3">

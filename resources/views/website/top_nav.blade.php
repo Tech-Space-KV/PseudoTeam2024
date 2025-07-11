@@ -1,55 +1,42 @@
-<nav class="navbar navbar-expand-lg navbar-dark nav-height">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">
-        <img src="{{ asset('images/logo_pt3.png') }}" class="rounded-3" style="width: 120px">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#services">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contactus">Contact Us</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-            <a href="{{ url('/authentication/service-partner/sign-in') }}" class="btn btn-outline-light me-2" style="width: 180px" type="submit">Find Work <i class="material-icons" style="font-size:14px">work</i></a>  
-            <a href="{{ url('/authentication/customer/sign-in') }}" class="btn btn-light" style="width: 180px" type="submit">Sign In <i class="material-icons" style="font-size:14px">login</i></a>
-        </form>
-      </div>
-    </div>
-  </nav>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top px-2"
+        style="background-color: rgba(21, 21, 21, 0.812); backdrop-filter: blur(30px);">
+        <div class="container-fluid">
+            <img src="{{asset ('images/logopt.png')}}" class="me-2" style="width: 120px;" />
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active nav-text" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-text" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-text" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-text" href="#contactus">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="d-flex nav-link nav-text" role="search">
+                            <input class="form-control form-control-sm me-2" type="search"
+                                placeholder="Search a service here"; aria-label="Search" />
+                            <button class="btn btn-sm btn-outline-light" type="submit">&#128269;</button>
+                        </form>
+                    </li>
 
+                </ul>
 
-  {{-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="#">Home</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav> --}}
-
-
-
+                <span class="navbar-text">
+                    <a class="nav-link nav-text px-4 glow-text" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Ask for a Quote</a>
+                </span>
+                <span class="navbar-text">
+                    <a class="btn btn-outline-light px-4" onmouseover="this.style.color='black';"
+                        onmouseout="this.style.color='white';" href="{{ url('/authentication/service-partner/sign-in') }}">Manage Project</a>
+                </span>
+            </div>
+        </div>
+    </nav>

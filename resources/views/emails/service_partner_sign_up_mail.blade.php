@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Company Newsletter</title>
+    <title>Welcome to Pseudoteam - Service Partner</title>
     <style>
         body {
             margin: 0;
@@ -78,32 +78,29 @@
 
         <!-- Content Section -->
         <div class="content">
-            <h1>✅ Order Confirmed!</h1>
+            <h1>👷‍♂️ Welcome to Pseudoteam, Partner!</h1>
             <p>Hello {{ $name }},</p>
             <p>
-                Thank you for placing your order with <strong>Pseudoteam</strong>! We're excited to get started and
-                ensure everything goes smoothly for you.
+                We're excited to have you join Pseudoteam as a Service Partner! Your account has been successfully created, and you're now part of a growing network of professionals helping businesses succeed.
             </p>
-            <p>
-                Here are your order details:
-                <br><strong>Order No:</strong> {{ $orderNo }}
-                <br><strong>Order Date:</strong> {{ $date }}
-            </p>
-            <p>
-                Our team will begin processing your order shortly.  
-            </p>
-            <!-- <a href="[TRACKING_LINK]" class="button">Track Your Order</a> -->
+            <p>As a verified partner, you’ll be able to:</p>
+            <ul>
+                <li>⚙️ Get matched with client service requests</li>
+                <li>📈 Manage your profile and skill set</li>
+                <li>📅 Track assigned projects and timelines</li>
+                <li>💬 Communicate directly with clients and admins</li>
+            </ul>
+            <a href="{{ $verificationLink }}" class="button">Verify Your Account</a>
             <p style="margin-top: 20px;">
-                If you have any questions or need further assistance, just reply to this email or contact our support
-                team.
+                If you need help completing your profile or verifying your skills, feel free to reach out. We're always here to assist.
             </p>
-            <p>Thanks again,<br><strong>Pseudoteam</strong></p>
+            <p>Let’s build something great together!<br><strong>— Pseudoteam Support</strong></p>
         </div>
 
         <!-- Footer -->
         <div class="footer">
             © 2025 Pseudoteam. All rights reserved. <br>
-            You are receiving this email because you are a valued customer.
+            You are receiving this email as a registered Service Partner.
         </div>
     </div>
 </body>

@@ -116,7 +116,7 @@
         <div class="container">
             <h1>Work smart, not hard. Join PseudoTeam</h1>
             <p class="lead mt-3">and turn your skills into consistent income—minus the freelancing chaos.</p>
-            <button class="btn btn-signup btn-lg mt-3">Get Started</button>
+            <button class="btn btn-signup btn-lg mt-3">Become a Service Partner</button>
 
 
             <form class="search-bar mx-auto" style="max-width:600px;">

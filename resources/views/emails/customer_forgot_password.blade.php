@@ -89,7 +89,7 @@
                 secure.
             </p>
             <a href="{{ $resetLink }}" class="button">Reset Your Password</a>
-            <p>{{ $resetLink }}</p>
+            <!-- <p>{{ $resetLink }}</p> -->
             <p style="margin-top: 20px;">
                 For security reasons, this link will expire in 24 hours. If you need further assistance, feel free to
                 reach out to our support team.

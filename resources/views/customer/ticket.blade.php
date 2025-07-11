@@ -56,6 +56,26 @@
     @endif
     </div>
 
+    @if($readonly)
+    <div class="mb-3">
+      <label for="assignedManager" class="form-label">Assigned Manager</label>
+      <input type="text" class="form-control" id="assignedManager" name="assigned_manager"
+      placeholder="Assigned Manager" value="{{ $ticket->assigned_manager }}" readonly> <br>
+      <label for="manager_email" class="form-label">Manager Email</label>
+      <input type="text" class="form-control" name="manager_email" id="manager_email" placeholder="Manager Email"
+      value="{{ $ticket->manager_email }}" readonly>
+    </div>
+    @endif
+
+    <!-- 
+    <div class="mb-3">
+      <label for="assignedManager" class="form-label">Assigned Manager</label>
+      <input type="text" class="form-control" id="assignedManager" name="assigned_manager"
+      placeholder="Assigned Manager" value="{{ $readonly ? $ticket->assigned_manager : old('assigned_manager') }}" {{ $readonly ? 'readonly' : '' }}>
+      <input type="text" name="manager_email" id="manager_email" placeholder="Manager Email"
+      value="{{ $readonly ? $ticket->manager_email : old('manager_email') }}" {{ $readonly ? 'readonly' : '' }}>
+    </div> -->
+
     <!-- <div class="row">
       <label for="projectIs" class="form-label">Ticket type</label>
       <select class="form-select" id="tickettype" name="#">

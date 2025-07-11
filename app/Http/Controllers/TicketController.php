@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\TicketRaised;
+use App\Mail\TicketRaisedCopy;
 use App\Models\ProjectOwner;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -43,9 +44,18 @@ class TicketController extends Controller
             ]);
 
             $name = ProjectOwner::where('pown_id', $customerId)->value('pown_name');
+            $email = ProjectOwner::where('pown_id', $customerId)->value('pown_email');
+
+            Mail::to('sanskarsharma0119@gmail.com')->send(new TicketRaisedCopy(
+                $ticket->tckt_id,
+                $name,
+                $email,
+                $ticket->tckt_title,
+                $ticket->tckt_description
+            ));
 
             //need to change the reciever email address
-            Mail::to('sanskarsharma0119@gmail.com')->send(new TicketRaised(
+            Mail::to($email)->send(new TicketRaised(
                 $validated['tckt_title'],
                 $validated['tckt_description'],
                 $customerId,

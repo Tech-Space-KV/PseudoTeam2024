@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendQueryMailCopy;
 use App\Mail\SupportQueryReceived;
+use App\Models\Project;
+use App\Models\ProjectOwner;
 use Illuminate\Http\Request;
 use App\Mail\SendQueryMail; 
 use Mail;
@@ -52,7 +54,9 @@ class QueryController extends Controller
            'query' => $request->input('query')
         ];
 
-        Mail::to('info@pseudoteam.com')->send(new SupportQueryReceived($query));
+        $user = ProjectOwner::where('pown_email', session('user_id'))->first();
+
+        Mail::to($user->pown_email)->send(new SupportQueryReceived($query , $user->pown_name));
 
         return redirect()->back()->with('success', 'Your query has been submitted.');
     }

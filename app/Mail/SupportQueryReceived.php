@@ -15,15 +15,19 @@ class SupportQueryReceived extends Mailable
 
     public $query;
 
-    public function __construct($query)
+    public $name;
+
+    public function __construct($query , $name)
     {
         $this->query = $query;
+        $this->name = $name;
     }
 
     public function build()
     {
         return $this->subject('New Support Query')
         ->view('emails/support_query_mail')
-        ->with('query' , $this->query);
+        ->with('query' , $this->query)
+        ->with('name' , $this->name);
     }
 }

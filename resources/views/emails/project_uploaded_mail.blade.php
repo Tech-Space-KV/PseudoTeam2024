@@ -99,8 +99,6 @@
         </div>
 
 
-
-
         <!-- Footer -->
         <div class="footer">
             © 2025 Pseudoteam. All rights reserved. <br>

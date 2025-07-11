@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Company Newsletter</title>
+    <title>New Customer Signup - Notification</title>
     <style>
         body {
             margin: 0;
@@ -49,14 +49,12 @@
             line-height: 1.6;
         }
 
-        .button {
-            display: inline-block;
-            padding: 12px 20px;
-            background-color: #006EC4;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
+        .details-box {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #006EC4;
+            font-size: 15px;
         }
 
         .footer {
@@ -78,32 +76,25 @@
 
         <!-- Content Section -->
         <div class="content">
-            <h1>✅ Order Confirmed!</h1>
-            <p>Hello {{ $name }},</p>
+            <h1>📬 New Customer Registration</h1>
+            <p>Hello Team,</p>
             <p>
-                Thank you for placing your order with <strong>Pseudoteam</strong>! We're excited to get started and
-                ensure everything goes smoothly for you.
+                A new customer has just signed up on Pseudoteam. Here are the details:
             </p>
-            <p>
-                Here are your order details:
-                <br><strong>Order No:</strong> {{ $orderNo }}
-                <br><strong>Order Date:</strong> {{ $date }}
-            </p>
-            <p>
-                Our team will begin processing your order shortly.  
-            </p>
-            <!-- <a href="[TRACKING_LINK]" class="button">Track Your Order</a> -->
+            <div class="details-box">
+                <strong>Name:</strong> {{ $name }}<br>
+                <strong>Email:</strong> {{ $email }}<br>
+                <strong>Signup Date:</strong> {{ $date }}
+            </div>
             <p style="margin-top: 20px;">
-                If you have any questions or need further assistance, just reply to this email or contact our support
-                team.
+                Please review the account if any verification is required, or simply welcome them onboard.
             </p>
-            <p>Thanks again,<br><strong>Pseudoteam</strong></p>
+            <p>Best regards,<br><strong>Pseudoteam System</strong></p>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            © 2025 Pseudoteam. All rights reserved. <br>
-            You are receiving this email because you are a valued customer.
+            © 2025 Pseudoteam. Admin Notification Service.
         </div>
     </div>
 </body>

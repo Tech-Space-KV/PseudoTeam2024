@@ -79,15 +79,15 @@
         <!-- Content Section -->
         <div class="content">
             <h1>🛠️ We're Here to Help!</h1>
-            <p>Hello [Customer Name],</p>
+            <p>Hello {{ $name }},</p>
             <p>
                 Thank you for contacting <strong>Pseudoteam Support</strong>. We've received your request and our team
                 is already working on it.
             </p>
-            <p>
+            <!-- <p>
                 <strong>Support Ticket ID:</strong> [TICKET_ID]<br>
                 <strong>Submitted On:</strong> [DATE_TIME]
-            </p>
+            </p> -->
             <p>
                 One of our support agents will get back to you within the next 24 hours. We aim to resolve your issue as
                 quickly and efficiently as possible.

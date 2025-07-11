@@ -9,22 +9,22 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderPlacedMail extends Mailable
+class OrderReceivedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $orderNo;
-
     public $name; 
-    
+    public $email;
+    public $orderNo;
     public $date;
     /**
      * Create a new message instance.
      */
-    public function __construct($orderNo, $name, $date)
+    public function __construct($name, $email, $orderNo, $date)
     {
         $this->orderNo = $orderNo;
         $this->name = $name;
+        $this->email = $email;
         $this->date = $date;
 
     }
@@ -32,11 +32,13 @@ class OrderPlacedMail extends Mailable
     public function build()
     {
 
-        return $this->subject('Order Has Been Raised!')
-            ->view('emails/order_placed_mail')
+        return $this->subject('Order Received from Customer!')
+            ->view('emails/order_received_mail')
             ->with('data', $this->orderNo)
             ->with('name', $this->name)
+            ->with('email', $this->email)
             ->with('date', $this->date);
 
     }
+
 }

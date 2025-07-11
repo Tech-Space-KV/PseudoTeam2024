@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderPlacedMail;
+use App\Mail\OrderReceivedMail;
 use App\Models\Cart;
 use App\Models\Hardware;
 use App\Models\OrderAddress;
@@ -75,8 +76,10 @@ class OrderController extends Controller
             }
 
             $name = ProjectOwner::where('pown_id', $customerId)->value('pown_name');
+            $email = ProjectOwner::where('pown_email', $customerId)->value('pown_email');
 
-            Mail::to('sanskarsharma0119@gmail.com')->send(new OrderPlacedMail($orderNo, $name));
+            Mail::to($email)->send(new OrderPlacedMail($orderNo, $name, $orderDate));
+            Mail::to('sanskarsharma0119@gmail.com')->send(new OrderReceivedMail($name, $email,$orderNo, $orderDate)); 
 
             return response()->json([
                 'status' => 'success',

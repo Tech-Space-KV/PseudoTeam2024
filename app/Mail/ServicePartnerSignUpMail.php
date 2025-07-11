@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class CustomerSignUpMail extends Mailable
+class ServicePartnerSignUpMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -25,10 +25,10 @@ class CustomerSignUpMail extends Mailable
     public function build()
     {
         return $this->subject('Welcome to Pseudoteam - Verify Your Account')
-                    ->view('emails/customer_sign_up_mail')
-                    ->with([
-                        'verificationLink' => $this->verificationLink,
-                        'name' => $this->userName
-                    ]);
-    }           
+            ->view('emails/service_partner_sign_up_mail')
+            ->with([
+                'verificationLink' => $this->verificationLink,
+                'name' => $this->userName
+            ]);
+    }
 }

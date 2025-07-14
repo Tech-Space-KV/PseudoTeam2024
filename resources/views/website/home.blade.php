@@ -598,8 +598,8 @@
                     <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
                         <div class="col mb-3">
 
-                            <p class="text-body-secondary"><img src="{{ asset('images/logopt.png') }}"
-                                    class="rounded-3" style="width: 120px"></p>
+                            <p class="text-body-secondary"><img src="{{ asset('images/logopt.png') }}" class="rounded-3"
+                                    style="width: 120px"></p>
                             <p class="text-body-secondary">&copy; 2024 PseudoTeam</p>
                         </div>
 
@@ -610,17 +610,15 @@
                         <div class="col mb-3">
                             <h5>PseudoTeam</h5>
                             <ul class="nav flex-column">
-                                <li class="nav-item mb-2"><a href="#"
-                                        class="nav-link p-0 text-secondary">Home</a></li>
-                                <li class="nav-item mb-2"><a href="#"
-                                        class="nav-link p-0 text-secondary">Services</a></li>
-                                <li class="nav-item mb-2"><a href="#"
-                                        class="nav-link p-0 text-secondary">About</a></li>
-                                <li class="nav-item mb-2"><a href="#"
-                                        class="nav-link p-0 text-secondary">Contact Us</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Home</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Services</a>
+                                </li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">About</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Contact Us</a>
+                                </li>
                                 <li class="nav-item mb-2"><a href="{{ url('/partner') }}"
                                         class="nav-link p-0 text-secondary">Partner</a></li>
-                               
+
                             </ul>
                         </div>
 
@@ -641,12 +639,12 @@
                         <div class="col mb-3">
                             <h5>Terms</h5>
                             <ul class="nav flex-column">
-                                <li class="nav-item mb-2"><a href="#"
-                                        class="nav-link p-0 text-secondary">Privacy Policy</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Privacy
+                                        Policy</a></li>
                                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Terms
                                         and Conditions</a></li>
-                                <li class="nav-item mb-2"><a href="#"
-                                        class="nav-link p-0 text-secondary">Copyright Policy</a></li>
+                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Copyright
+                                        Policy</a></li>
                             </ul>
                         </div>
                     </footer>
@@ -658,8 +656,7 @@
     </div>
 
 
-    <div class="modal fade my-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade my-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
@@ -669,34 +666,37 @@
                 </div>
                 <div class="modal-body">
                     <div class="container text-primary">
-                        <form class="row g-3 needs-validation" novalidate>
-
+                        <form class="row g-3 needs-validation" action="{{ route('post.inquire.submit') }}" method="post" novalidate>
+                            @csrf
                             <div class="col-md-6">
                                 <label for="name" class="form-label">Your Name</label>
-                                <input type="text" class="form-control border-primary" id="name" required>
+                                <input type="text" class="form-control border-primary" id="name" name="name" required>
                                 <div class="invalid-feedback">Please enter your name.</div>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="tel" class="form-label">Contact No.</label>
-                                <input type="tel" class="form-control border-primary" id="tel" required>
+                                <input type="tel" class="form-control border-primary" id="tel" name="contact" required>
                                 <div class="invalid-feedback">Please enter a valid contact.</div>
                             </div>
 
                             <div class="col-12">
                                 <label for="email" class="form-label">Email ID</label>
-                                <input type="email" class="form-control border-primary" id="email" required>
-                                <div class="invalid-feedback">Please enter a valid contact.</div>
+                                <input type="email" class="form-control border-primary" id="email" name="email"
+                                    required>
+                                <div class="invalid-feedback">Please enter a valid email.</div>
                             </div>
 
                             <div class="col-12">
                                 <label for="message" class="form-label">Your Project Query</label>
-                                <textarea class="form-control border-primary" id="message" rows="6" required></textarea>
+                                <textarea class="form-control border-primary" id="message" rows="6" name="message"
+                                    required></textarea>
                                 <div class="invalid-feedback">Please enter your message.</div>
                             </div>
 
                             <div class="col-12 text-center">
-                                <button class="btn btn-primary px-5" type="submit">Submit</button>
+                                <!-- <button class="btn btn-primary px-5" type="submit">Submit</button> -->
+                                <input class="btn btn-primary px-5" type="submit" value="Submit">
                             </div>
                         </form>
                     </div>
@@ -718,7 +718,7 @@
         var myModal = document.getElementById('myModal')
         var myInput = document.getElementById('myInput')
 
-        myModal.addEventListener('shown.bs.modal', function() {
+        myModal.addEventListener('shown.bs.modal', function () {
             myInput.focus()
         })
     </script>

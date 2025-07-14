@@ -28,6 +28,7 @@ Route::get('/partner', function () {
     return view('website/partner');
 })->name('partner');
 
+Route::post('/post/inquire/submit', [QueryController::class, 'submitInquery'])->name('post.inquire.submit');
 
 //kal krunga
 

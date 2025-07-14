@@ -1,11 +1,5 @@
 
-.bg-gif3 {
-    background: url('../../../images/formbgr.png') no-repeat center center; 
-    background-size:cover;
-    position: relative;
-    min-height: 100vh;
-    z-index: 0;
-}
+
 
 .content {
     background: linear-gradient(to bottom, 

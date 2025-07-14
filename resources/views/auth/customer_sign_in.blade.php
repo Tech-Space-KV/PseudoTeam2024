@@ -14,8 +14,17 @@
   <link rel="stylesheet" href="{{ asset('css/web/customer_auth.css') }}">
   <title>PseudoTeam</title>
 
+  <style>
+        .bg-gif3 {
+            background: url('{{ asset('images/bg_pt4.png') }}') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            min-height: 100vh;
+            z-index: 0;
+        }
+    </style>
 
-</head>
+</head> 
 
 <body class="align-items-center bg-dark bg-gif3">
 
@@ -29,7 +38,7 @@
       <main class="form-signin w-100 m-auto">
         <form method="POST" action="{{ route('login.post') }}">
           @csrf
-          <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
+          <img src="{{asset('images/logo_pt.png')}}" class="rounded-3" style="width: 180px;">
           <h1 class="h5 mb-3 ms-1 text-muted">Customer Sign In</h1>
           <hr>
 

@@ -13,6 +13,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{ asset('css/web/customer_auth.css') }}">
   <title>PseudoTeam</title>
+
+  <style>
+        .bg-gif3 {
+            background: url('{{ asset('images/bg_pt4.png') }}') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            min-height: 100vh;
+            z-index: 0;
+        }
+    </style>
 </head>
 
 <body class="align-items-center bg-dark bg-gif3">

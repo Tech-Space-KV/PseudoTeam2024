@@ -12,7 +12,15 @@
     <link rel="stylesheet" href="{{ asset('css/web/service_auth.css') }}">
     <title>PseudoTeam</title>
 
-  
+   <style>
+        .bg-gif3 {
+            background: url('{{ asset('images/bg_pt5.png') }}') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            min-height: 100vh;
+            z-index: 0;
+        }
+    </style>
 
   </head>
   <body class="align-items-center bg-dark bg-gif3">

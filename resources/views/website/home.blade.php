@@ -214,7 +214,8 @@
                             single, streamlined experience with full visibility into progress, while we handle the
                             complexity.</p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                            <a type="button" class="btn btn-outline-light btn-lg px-4 me-md-2 fw-bold" href="{{ url('/authentication/service-partner/sign-in') }}">Begin
+                            <a type="button" class="btn btn-outline-light btn-lg px-4 me-md-2 fw-bold"
+                                href="{{ url('/authentication/service-partner/sign-in') }}">Begin
                                 Here<i class="bi bi-caret-right-fill"></i></a>
                             <!-- <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button> -->
                         </div>
@@ -239,7 +240,8 @@
                             gain access to a structured execution model where our dedicated project managers handle
                             every detail, coordinate with expert service partners, and ensure timely delivery.</p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                            <a type="button" class="btn btn-outline-light btn-lg px-4 me-md-2 fw-bold" href="{{ url('/authentication/service-partner/sign-in') }}">Begin
+                            <a type="button" class="btn btn-outline-light btn-lg px-4 me-md-2 fw-bold"
+                                href="{{ url('/authentication/service-partner/sign-in') }}">Begin
                                 Here<i class="bi bi-caret-right-fill"></i></a>
                             <!-- <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button> -->
                         </div>
@@ -261,7 +263,8 @@
                             service partners can focus on doing what they do best and together, we form a powerful
                             collaboration.</p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                            <a type="button" class="btn btn-outline-light btn-lg px-4 me-md-2 fw-bold" href="{{ url('/authentication/service-partner/sign-in') }}">Begin
+                            <a type="button" class="btn btn-outline-light btn-lg px-4 me-md-2 fw-bold"
+                                href="{{ url('/authentication/service-partner/sign-in') }}">Begin
                                 Here<i class="bi bi-caret-right-fill"></i></a>
                             <!-- <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button> -->
                         </div>
@@ -615,6 +618,9 @@
                                         class="nav-link p-0 text-secondary">About</a></li>
                                 <li class="nav-item mb-2"><a href="#"
                                         class="nav-link p-0 text-secondary">Contact Us</a></li>
+                                <li class="nav-item mb-2"><a href="{{ url('/partner') }}"
+                                        class="nav-link p-0 text-secondary">Partner</a></li>
+                               
                             </ul>
                         </div>
 
@@ -652,55 +658,57 @@
     </div>
 
 
-    <div class="modal fade my-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-dark">
-        <h5 class="modal-title text-light" id="exampleModalLabel">Inquire Here</h5>
-        <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-         <div class="container text-primary">
-            <form class="row g-3 needs-validation" novalidate>
+    <div class="modal fade my-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-light" id="exampleModalLabel">Inquire Here</h5>
+                    <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container text-primary">
+                        <form class="row g-3 needs-validation" novalidate>
 
-                <div class="col-md-6">
-                    <label for="name" class="form-label">Your Name</label>
-                    <input type="text" class="form-control border-primary" id="name" required>
-                    <div class="invalid-feedback">Please enter your name.</div>
-                </div>
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control border-primary" id="name" required>
+                                <div class="invalid-feedback">Please enter your name.</div>
+                            </div>
 
-                <div class="col-md-6">
-                    <label for="tel" class="form-label">Contact No.</label>
-                    <input type="tel" class="form-control border-primary" id="tel" required>
-                    <div class="invalid-feedback">Please enter a valid contact.</div>
-                </div>
-                
-                <div class="col-12">
-                    <label for="email" class="form-label">Email ID</label>
-                    <input type="email" class="form-control border-primary" id="email" required>
-                    <div class="invalid-feedback">Please enter a valid contact.</div>
-                </div>
+                            <div class="col-md-6">
+                                <label for="tel" class="form-label">Contact No.</label>
+                                <input type="tel" class="form-control border-primary" id="tel" required>
+                                <div class="invalid-feedback">Please enter a valid contact.</div>
+                            </div>
 
-                <div class="col-12">
-                    <label for="message" class="form-label">Your Project Query</label>
-                    <textarea class="form-control border-primary" id="message" rows="6" required></textarea>
-                    <div class="invalid-feedback">Please enter your message.</div>
-                </div>
+                            <div class="col-12">
+                                <label for="email" class="form-label">Email ID</label>
+                                <input type="email" class="form-control border-primary" id="email" required>
+                                <div class="invalid-feedback">Please enter a valid contact.</div>
+                            </div>
 
-                <div class="col-12 text-center">
-                    <button class="btn btn-primary px-5" type="submit">Submit</button>
+                            <div class="col-12">
+                                <label for="message" class="form-label">Your Project Query</label>
+                                <textarea class="form-control border-primary" id="message" rows="6" required></textarea>
+                                <div class="invalid-feedback">Please enter your message.</div>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <button class="btn btn-primary px-5" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
-            </form>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-
-      </div>
-      <div class="modal-footer bg-dark">
-        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-      </div>
     </div>
-  </div>
-</div>
-    
+
 
 
     <!-- Bootstrap JS -->

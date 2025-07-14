@@ -16,18 +16,21 @@ class SupportQueryReceived extends Mailable
     public $query;
 
     public $name;
+    public $email;
 
-    public function __construct($query , $name)
+    public function __construct($name , $email, $query)
     {
         $this->query = $query;
         $this->name = $name;
+        $this->email = $email;
     }
 
     public function build()
     {
-        return $this->subject('New Support Query')
+        return $this->subject('New Help Query Received')
         ->view('emails/support_query_mail')
         ->with('query' , $this->query)
-        ->with('name' , $this->name);
+        ->with('name' , $this->name)
+        ->with('email' , $this->email);
     }
 }

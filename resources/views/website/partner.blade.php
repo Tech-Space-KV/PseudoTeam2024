@@ -81,6 +81,17 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        .contact-us input,
+        .contact-us textarea {
+            border-radius: 0.5rem;
+            box-shadow: none;
+        }
+
+        .contact-us .btn {
+            background-color: var(--up-green);
+            border: none;
+        }
     </style>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
@@ -104,8 +115,8 @@
                     <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
                 </ul>
                 <div class="d-flex">
-                    <a href="#" class="nav-link me-3">Log in</a>
-                    <a href="#" class="btn btn-signup">Sign up</a>
+                    <a href="{{ route('auth.sp.sign_in') }}" class="nav-link me-3">Log in</a>
+                    <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-signup">Sign up</a>
                 </div>
             </div>
         </div>
@@ -153,6 +164,34 @@
             </div>
         </div>
     </section>
+
+
+    <section class="contact-us py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Contact Us</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Your Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Your Message</label>
+                            <textarea class="form-control" id="message" rows="5"
+                                placeholder="Type your message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg px-5">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 
     <section class="testimonial">

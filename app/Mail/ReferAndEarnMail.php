@@ -13,20 +13,22 @@ class ReferAndEarnMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-
     public $link;
+    public $referrerName;
 
   
-    public function __construct($link)
+    public function __construct($link , $referrerName = null)
     {
         $this->link = $link;
+        $this->referrerName = $referrerName;
     }
 
     public function build()
     {
         return $this->subject('PseudoTeam Referal Mail')
                     ->view('emails/send_referandearn_mail')
-                    ->with('data', $this->link);
+                    ->with('data', $this->link)
+                    ->with('referredName', $this->referrerName);
     }
 
 }

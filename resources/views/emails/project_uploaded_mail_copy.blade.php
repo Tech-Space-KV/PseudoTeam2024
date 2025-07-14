@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Help Query Received</title>
+    <title>New Project Uploaded</title>
     <style>
         body {
             margin: 0;
@@ -74,32 +74,28 @@
             <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo">
         </div>
 
-        <!-- Content Section -->
+        <!-- Main Content -->
         <div class="content">
-            <h1>📨 New Help Query Received</h1>
+            <h1>📩 New Project Uploaded</h1>
             <p>Hello Team,</p>
             <p>
-                A customer has submitted a new help query. Please review the details below:
+                A new project has been uploaded by a customer. Please find the project details below:
             </p>
-
             <div class="details-box">
-                <strong>Name:</strong> {{ $name }}<br>
+                <strong>Project Title:</strong> {{ $projectTitle }}<br>
+                <strong>Customer Name:</strong> {{ $name }}<br>
                 <strong>Email:</strong> {{ $email }}<br>
-                <strong>Message:</strong><br>
-                {{ $query}}
-                <br><strong>Submitted At:</strong> {{ date('Y-m-d H:i:s') }}
+                <strong>Uploaded On:</strong> {{ date('Y-m-d H:i:s') }}
             </div>
-
             <p style="margin-top: 20px;">
-                Please respond or assign the query to the appropriate team member.
+                Kindly review the project and assign it to the appropriate team or service partner.
             </p>
-
-            <p>Thanks,<br><strong>Pseudoteam System</strong></p>
+            <p>Regards,<br><strong>Pseudoteam System</strong></p>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            © 2025 Pseudoteam. Internal Notification Only. <br>
+            © 2025 Pseudoteam. Internal Notification.<br>
             This is an automated message from the system.
         </div>
     </div>

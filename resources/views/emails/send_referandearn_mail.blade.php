@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Company Newsletter</title>
+    <title>You’ve Been Invited to Pseudoteam</title>
     <style>
         body {
             margin: 0;
@@ -13,7 +13,6 @@
         }
 
         .container {
-            width: 100%;
             max-width: 600px;
             margin: 0 auto;
             background-color: #ffffff;
@@ -71,40 +70,32 @@
 
 <body>
     <div class="container">
-        <!-- Header with logo -->
+        <!-- Header -->
         <div class="header">
             <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo">
         </div>
 
-        <!-- Content Section -->
+        <!-- Content -->
         <div class="content">
-            <h1>📁 Project Uploaded Successfully!</h1>
-            <p>Hello [Customer Name],</p>
+            <h1>👋 You’ve Been Invited!</h1>
+            <p>Hello,</p>
             <p>
-                Great news! Your project <strong>[PROJECT_NAME]</strong> has been successfully uploaded to
-                <strong>Pseudoteam</strong>.
-            </p>
-            <p>
-                Our team has received all the details and will begin reviewing your project shortly. We’ll keep you
-                updated on every milestone, and you can monitor progress anytime from your dashboard.
+                Your friend <strong>{{ $referrerName }}</strong> thinks you'll love working with <strong>Pseudoteam</strong> — a platform where clients and service providers collaborate on real projects seamlessly.
             </p>
             <!-- <p>
-                If you need to add more details or communicate with our team, just click the button below:
+                As a special bonus, you’ll get a welcome reward when you sign up using the link below.
             </p> -->
-            <!-- <a href="[DASHBOARD_LINK]" class="button">View Project Dashboard</a> -->
+            <a href="{{ $link }}" class="button">Join Pseudoteam Now</a>
             <p style="margin-top: 20px;">
-                Thank you for choosing Pseudoteam. We’re excited to bring your project to life!
+                We’re excited to have you on board. Start your first project or explore services today!
             </p>
-            <p>Best regards,<br><strong>Pseudoteam</strong></p>
+            <p>Warm regards,<br><strong>Pseudoteam Team</strong></p>
         </div>
-
-
-
 
         <!-- Footer -->
         <div class="footer">
             © 2025 Pseudoteam. All rights reserved. <br>
-            You are receiving this email because you are a valued customer.
+            You’re receiving this because your friend referred you.
         </div>
     </div>
 </body>

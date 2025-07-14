@@ -17,7 +17,7 @@ class CustomerSignUpMailCopy extends Mailable
     public $userName;
     public $date;
 
-    public function __construct($email, $name, $date)
+    public function __construct($name, $email, $date)
     {
         $this->email = $email;
         $this->userName = $name;

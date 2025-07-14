@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ProjectsExport;
 use App\Mail\ProjectUploadedMail;
+use App\Mail\ProjectUploadedMailCopy;
 use App\Models\Comment;
 use App\Models\Notification;
 use App\Models\ProjectOwners;
@@ -161,6 +162,7 @@ class ProjectController extends Controller
                 $name = ProjectOwners::where('pown_id', session('user_id'))->value('pown_name');
 
                 mail::to($validated['plist_email'])->send(new ProjectUploadedMail($data, $name, $validated['plist_title']));
+                mail::to('sanskarsharma0119@gmail.com')->send(new ProjectUploadedMailCopy($validated['plist_title'], $name, $validated['plist_email']));
 
                 return redirect()->back()->with('success', 'Project has been uploaded successfully.');
             }

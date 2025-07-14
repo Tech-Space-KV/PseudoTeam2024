@@ -66,8 +66,9 @@
                     <div class="card p-3 w-100 cardbgylw">
                        Job Ratings
                        <span class="mt-2">
-                       <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
-                       <i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                       <!-- <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
+                       <i class="fa fa-star-o"></i><i class="fa fa-star-o"></i> -->
+                       @livewire('sp-job-rating')
                        </span>
                     </div>
                 </a>

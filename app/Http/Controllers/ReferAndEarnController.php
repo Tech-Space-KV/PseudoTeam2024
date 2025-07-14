@@ -27,7 +27,7 @@ class ReferAndEarnController extends Controller
 
         $link = 'Pseudoteam.com/referal-registration/'.$customer_id.'/'.$userName;
 
-        Mail::to($email)->send(new ReferAndEarnMail($link));
+        Mail::to($email)->send(new ReferAndEarnMail($link , $projectOwner->pown_name));
 
         return redirect()->back()->with('success', 'Invitation sent successfully!');
 

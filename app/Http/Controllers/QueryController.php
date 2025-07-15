@@ -80,7 +80,7 @@ class QueryController extends Controller
 
         \Log::info('Inquiry Data: ', $data);    
 
-        Mail::to('sanskarsharma0119@gmail.com')->send(new InquiryMail($data));
+        Mail::to('info@pseudoteam.com')->send(new InquiryMail($data));
 
         return redirect()->back()->with('success', 'Your inquiry has been submitted successfully!');
     

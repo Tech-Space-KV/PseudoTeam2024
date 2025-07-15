@@ -34,7 +34,8 @@
 
         .hero {
             padding: 4rem 0;
-            background: var(--up-gray);
+            /* background: var(--up-gray); */
+            background: var(--up-green);
         }
 
         .hero h1 {
@@ -100,34 +101,30 @@
 
 <body>
 
-
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top navbar-up shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#"><span>Pseudo</span>Team</a>
+            <a class="navbar-brand fw-bold" href="#"><span class="text-primary">Pseudo</span>Team</a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navCollapse">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-                </ul>
-                <div class="d-flex">
-                    <a href="{{ route('auth.sp.sign_in') }}" class="nav-link me-3">Log in</a>
-                    <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-signup">Sign up</a>
+                <div class="d-flex ms-auto align-items-center gap-2">
+                    <a href="{{ route('auth.sp.sign_in') }}" class="btn btn-outline-primary rounded-pill px-4">Sign
+                        in</a>
+                    <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-primary rounded-pill px-4">Sign up</a>
                 </div>
             </div>
         </div>
     </nav>
 
 
-    <section class="hero text-center">
+
+    <section class="hero text-center text-light">
         <div class="container">
             <h1>Work smart, not hard. Join PseudoTeam</h1>
             <p class="lead mt-3">and turn your skills into consistent income—minus the freelancing chaos.</p>
-            <button class="btn btn-signup btn-lg mt-3">Become a Service Partner</button>
+            <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-outline-light btn-lg mt-3">Become a Service
+                Partner</a>
 
 
             <form class="search-bar mx-auto" style="max-width:600px;">
@@ -303,6 +300,7 @@
                         <li><a href="#" class="text-decoration-none text-secondary">Services</a></li>
                         <li><a href="#" class="text-decoration-none text-secondary">About</a></li>
                         <li><a href="#" class="text-decoration-none text-secondary">Contact Us</a></li>
+                        <li><a href="{{ url('/') }}" class="text-decoration-none text-secondary">Customer</a></li>
                     </ul>
                 </div>
 

@@ -49,7 +49,7 @@ class AuthController extends Controller
 
         $date = date('Y-m-d H:i:s');
 
-        Mail::to('sanskarsharma0119@gmail.com')->send(new CustomerSignUpMailCopy( $user->name, $user->email, $date));
+        Mail::to('info@pseudoteam.com')->send(new CustomerSignUpMailCopy( $user->name, $user->email, $date));
         Mail::to($request->email)->send(new CustomerSignUpMail($verificationLink, $user->name));
 
         return redirect()->route('auth.customer.sign_in')->with('success', 'Signup successful! Check your email for verification link.');
@@ -75,7 +75,7 @@ class AuthController extends Controller
             $verificationLink = URL::to('authentication/service-partner/verify') . '?id=' . $user->id;
 
             Mail::to($request->email)->send(new ServicePartnerSignUpMail($verificationLink, $user->name));
-            Mail::to('sanskarsharma0119@gmail.com')->send(new ServicePartnerSignUpMailCopy($user->name, $user->email, date('Y-m-d H:i:s')));
+            Mail::to('info@pseudoteam.com')->send(new ServicePartnerSignUpMailCopy($user->name, $user->email, date('Y-m-d H:i:s')));
 
             return redirect()->route('auth.sp.sign_in')->with('success', 'Signup successful! Check your email for verification link.');
         } catch (\Exception $e) {

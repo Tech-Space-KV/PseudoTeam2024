@@ -79,7 +79,7 @@ class OrderController extends Controller
             $email = ProjectOwner::where('pown_email', $customerId)->value('pown_email');
 
             Mail::to($email)->send(new OrderPlacedMail($orderNo, $name, $orderDate));
-            Mail::to('sanskarsharma0119@gmail.com')->send(new OrderReceivedMail($name, $email,$orderNo, $orderDate)); 
+            Mail::to('info@pseudoteam.com')->send(new OrderReceivedMail($name, $email,$orderNo, $orderDate));
 
             return response()->json([
                 'status' => 'success',

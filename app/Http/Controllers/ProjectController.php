@@ -162,7 +162,7 @@ class ProjectController extends Controller
                 $name = ProjectOwners::where('pown_id', session('user_id'))->value('pown_name');
 
                 mail::to($validated['plist_email'])->send(new ProjectUploadedMail($data, $name, $validated['plist_title']));
-                mail::to('sanskarsharma0119@gmail.com')->send(new ProjectUploadedMailCopy($validated['plist_title'], $name, $validated['plist_email']));
+                mail::to('info@pseudoteam.com')->send(new ProjectUploadedMailCopy($validated['plist_title'], $name, $validated['plist_email']));
 
                 return redirect()->back()->with('success', 'Project has been uploaded successfully.');
             }

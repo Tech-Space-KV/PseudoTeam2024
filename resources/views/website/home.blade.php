@@ -550,17 +550,17 @@
         </div>
 
         <div class="container py-5 mx-5 px-5 mx-auto text-light">
-            <form class="row g-3 needs-validation" novalidate>
-
+            <form class="row g-3 needs-validation" novalidate action="{{ route('post.contact.us') }}" method="POST">
+                @csrf
                 <div class="col-md-6">
                     <label for="name" class="form-label">Your Name</label>
-                    <input type="text" class="form-control" id="name" required>
+                    <input type="text" class="form-control" id="name" name="name" required>
                     <div class="invalid-feedback">Please enter your name.</div>
                 </div>
 
                 <div class="col-md-6">
                     <label for="email" class="form-label">Your Email</label>
-                    <input type="email" class="form-control" id="email" required>
+                    <input type="email" class="form-control" id="email" name="email" required>
                     <div class="invalid-feedback">Please enter a valid email address.</div>
                 </div>
 
@@ -578,7 +578,7 @@
 
                 <div class="col-12">
                     <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                    <textarea class="form-control" id="message" rows="4" name="message" required></textarea>
                     <div class="invalid-feedback">Please enter your message.</div>
                 </div>
 
@@ -666,7 +666,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="container text-primary">
-                        <form class="row g-3 needs-validation" action="{{ route('post.inquire.submit') }}" method="post" novalidate>
+                        <form class="row g-3 needs-validation" action="{{ route('post.inquire.submit') }}" method="post"
+                            novalidate>
                             @csrf
                             <div class="col-md-6">
                                 <label for="name" class="form-label">Your Name</label>

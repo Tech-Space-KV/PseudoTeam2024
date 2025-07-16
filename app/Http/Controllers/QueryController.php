@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactUsMail;
 use App\Mail\InquiryMail;
 use App\Mail\SendQueryMailCopy;
 use App\Mail\SupportQueryReceived;
@@ -84,5 +85,44 @@ class QueryController extends Controller
 
         return redirect()->back()->with('success', 'Your inquiry has been submitted successfully!');
     
+    }
+
+    public function contactUs(Request $request)
+    {
+        \Log::info('Contact Us Request: ', $request->all());
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'message' => 'required|string|max:1000',
+        ]);
+
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'message' => $request->input('message'),
+        ];
+
+        Mail::to('info@pseudoteam.com')->send(new ContactUsMail($data));
+
+        return redirect()->back()->with('success', 'Your message has been sent successfully!');
+    }
+    public function spContactUs(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'message' => 'required|string|max:1000',
+        ]);
+
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'message' => $request->input('message'),
+        ];
+
+        Mail::to('info@pseudoteam.com')->send(new ContactUsMail($data));
+
+        return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
 }

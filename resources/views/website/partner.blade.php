@@ -168,18 +168,19 @@
             <h2 class="text-center mb-4">Contact Us</h2>
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <form>
+                    <form action="{{ route('sp.contact.us') }}" method="POST">
+                        @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Your Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Your Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label">Your Message</label>
-                            <textarea class="form-control" id="message" rows="5"
+                            <textarea class="form-control" id="message" name="message" rows="5"
                                 placeholder="Type your message"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg px-5">Send Message</button>

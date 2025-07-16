@@ -26,10 +26,10 @@
         <img src="http://127.0.0.1:8000/images/logopt.png" class="logo" alt="Logo">
       </a>
     </div>
-    <a type="button" class="btn btn-outline-danger position-relative mx-4 my-4"
+    <!-- <a type="button" class="btn btn-outline-danger position-relative mx-4 my-4"
       style="float: right; border: 1px solid #ccc;">
       Logout <i class="fa fa-sign-out"></i>
-    </a>
+    </a> -->
   </div>
 
   <!-- Welcome Message -->

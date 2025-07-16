@@ -30,6 +30,9 @@ Route::get('/partner', function () {
 
 Route::post('/post/inquire/submit', [QueryController::class, 'submitInquery'])->name('post.inquire.submit');
 
+Route::post('/post/contact/us', [QueryController::class, 'contactUs'])->name('post.contact.us');
+Route::post('/post/sp/contact/us', [QueryController::class, 'spContactUs'])->name('sp.contact.us');
+
 //kal krunga
 
 // Route::get('/forgot-password', function () {
@@ -500,6 +503,6 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
 
 });
 
- Route::post('/change-password', [ProfileController::class, 'spChangePassword'])->name('profileController.spChangePassword');
+Route::post('/change-password', [ProfileController::class, 'spChangePassword'])->name('profileController.spChangePassword');
 
 Route::get('/sp-chart-data', [ChartController::class, 'getSPData'])->name('chart.data');

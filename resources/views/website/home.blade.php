@@ -36,6 +36,20 @@
             text-align: center;
             overflow: hidden;
         }
+@media (max-width: 1425px) {
+    .hero-section {
+margin-top: 15%;
+        height: 50vh;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-section {
+      margin-top: 15%;
+        height: 30vh;
+    }
+  }
+
 
         .bg-video {
             position: absolute;

@@ -108,23 +108,26 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navCollapse">
-                <div class="d-flex ms-auto align-items-center gap-2">
-                    <a href="{{ route('auth.sp.sign_in') }}" class="btn btn-outline-primary rounded-pill px-4">Sign
-                        in</a>
-                    <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-primary rounded-pill px-4">Sign up</a>
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="{{ route('auth.sp.sign_in') }}" class="nav-link me-3">Log in</a>
+                    <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-signup">Sign up</a>
                 </div>
             </div>
         </div>
     </nav>
 
 
-
-    <section class="hero text-center text-light">
+    <section class="hero text-center">
         <div class="container">
             <h1>Work smart, not hard. Join PseudoTeam</h1>
             <p class="lead mt-3">and turn your skills into consistent income—minus the freelancing chaos.</p>
-            <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-outline-light btn-lg mt-3">Become a Service
-                Partner</a>
+            <button class="btn btn-signup btn-lg mt-3">Become a Service Partner</button>
 
 
             <form class="search-bar mx-auto" style="max-width:600px;">

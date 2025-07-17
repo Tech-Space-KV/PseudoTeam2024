@@ -16,7 +16,7 @@
 
   <style>
         .bg-gif3 {
-            background: url('{{ asset('images/bg_pt4.png') }}') no-repeat center center;
+            background: url('{{ asset('images/customer-sign-bg.png') }}') no-repeat center center;
             background-size: cover;
             position: relative;
             min-height: 100vh;

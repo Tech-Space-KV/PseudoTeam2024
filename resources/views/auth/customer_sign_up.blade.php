@@ -16,7 +16,7 @@
 
   <style>
         .bg-gif3 {
-            background: url('{{ asset('images/bg_pt4.png') }}') no-repeat center center;
+            background: url('{{ asset('images/customer-sign-bg.png') }}') no-repeat center center;
             background-size: cover;
             position: relative;
             min-height: 100vh;
@@ -37,7 +37,7 @@
       <main class="form-signin w-100 m-auto">
         <form action="{{ route('auth.customer.sign_up.post') }}" method="POST">
           @csrf
-          <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
+          <img src="{{asset('images/logo_pt.png')}}" class="rounded-3" style="width: 180px;">
           <h1 class="h5 mb-3 ms-1 text-muted">Customer Sign Up</h1>
           <hr>
 

@@ -78,9 +78,9 @@
       </li>
     @endforeach
     @else
-      <li class="list-group-item d-flex justify-content-between lh-sm">
+      <li class="list-group-item d-flex justify-content-between lh-sm bg-info">
       <div>
-      <h6 class="my-0">Your cart is empty</h6>
+      <h6 class="my-0 ">Your cart is empty</h6>
       </div>
       <span class="text-body-secondary">
       </span>

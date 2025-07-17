@@ -131,7 +131,7 @@
                     notificationText.addEventListener('click', function () {
                         const notificationId = this.getAttribute('data-id');
                         if (notificationId) {
-                            window.location.href = `/notification-details/${notificationId}`;
+                            window.location.href = window.location.origin + window.location.pathname +`/notification-details/${notificationId}`;
                         } else {
                             console.error('Notification ID not found!');
                         }

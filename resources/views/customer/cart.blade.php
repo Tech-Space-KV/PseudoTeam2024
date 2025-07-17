@@ -78,7 +78,7 @@
       </li>
     @endforeach
     @else
-      <li class="list-group-item d-flex justify-content-between lh-sm bg-info">
+      <li class="list-group-item d-flex justify-content-between lh-sm bg-warning">
       <div>
       <h6 class="my-0 ">Your cart is empty</h6>
       </div>
@@ -86,7 +86,6 @@
       </span>
       </li>
       @endif
-
       </ul>
 
       {{-- <div class="card p-2">

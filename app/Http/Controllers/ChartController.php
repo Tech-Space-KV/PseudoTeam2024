@@ -24,6 +24,8 @@ class ChartController extends Controller
     public function getData()
     {
 
+        \Log::info('Get data method called!');
+
         $customerId = session('user_id');
 
         $noSPAssignedCount = Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id' , $customerId)->count();

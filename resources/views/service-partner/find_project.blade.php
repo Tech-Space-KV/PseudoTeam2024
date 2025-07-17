@@ -18,6 +18,8 @@
     </div>
 @endforeach -->
 
+<!-- url('service-partner/session/manage_project_location/'.$project->plist_id) -->
+
 <div>
     @if($projects->isNotEmpty())
         @foreach($projects as $project)
@@ -27,7 +29,7 @@
                 <p><strong>Description: </strong> {{ $project->plist_description }}</p>
                 <p><strong>Manager Name:</strong> {{ $project->manager->username }}</p>
                 <p><strong>Manager Email:</strong> {{ $project->manager->email }}</p>
-                <a href="{{  url('service-partner/session/manage_project_location/'.$project->plist_id)  }}"
+                <a href="{{  url('service-partner/session/find-project-details/' . $project->plist_id)  }}"
                   class="btn btn-sm btn-outline-primary" title="Track Progress">
                   <i class="fa fa-folder-open"></i> Open Project
                 </a>

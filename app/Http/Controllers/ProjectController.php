@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Exports\ProjectsExport;
 use App\Mail\ProjectUploadedMail;
 use App\Mail\ProjectUploadedMailCopy;
+use App\Mail\SPInterestMail;
 use App\Models\Comment;
 use App\Models\Notification;
 use App\Models\ProjectOwners;
 use App\Models\ProjectPlanner;
 use App\Models\ProjectPlannerTask;
 use App\Models\ProjectScope;
+use App\Models\ServiceProvider;
 use App\Models\SpComment;
 use Barryvdh\DomPDF\Facade\Pdf;
 use DB;
@@ -725,5 +727,37 @@ class ProjectController extends Controller
         $projects = Project::where('plist_status', 'No SP Assigned')->get();
 
         return view('service-partner/find_project', compact('projects'));
+    }
+
+    public function showProjectDetails($id)
+    {
+        $project = Project::where('plist_id', $id)
+            ->where('plist_status', 'No SP Assigned')
+            ->first();
+
+        return view('service-partner/find_project_details', compact('project'));
+    }
+
+    public function showInterest($id , Request $request)
+    {
+        $serviceProvider = ServiceProvider::where('sprov_id', session('sp_user_id'))->first();
+
+        $project = Project::where('plist_id', $id)
+            ->where('plist_status', 'No SP Assigned')
+            ->first();
+
+        if ($project && $serviceProvider) {
+
+            $request->validate([
+                'sp_interest_reason' => 'required|string|max:255',
+            ]);
+
+            $reason = $request->input('sp_interest_reason');
+
+            Mail::to('info@pseudoteam.com')->send(new SPInterestMail($serviceProvider, $project, $reason));
+            return back()->with('success', 'Your interest has been sent to the project manager.');
+        }
+
+        return back()->with('error', 'Project not found or already assigned.');
     }
 }

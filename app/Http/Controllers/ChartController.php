@@ -10,9 +10,32 @@ use Illuminate\Http\Request;
 class ChartController extends Controller
 {
 
-    public function index()
-    {
-        return view('/customer/reports');
+    // public function index()
+    // {
+    //     return view('/customer/reports');
+    // }
+
+    public function index(){
+
+        $customerId = session('user_id');
+
+        $noSPAssignedCount = Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id' , $customerId)->count();
+        $deliveredCount = Project::where('plist_status', 'Delivered')->where('plist_customer_id' , $customerId)->count();
+        $inProgressCount = Project::where('plist_status', 'In Progress')->where('plist_customer_id' , $customerId)->count();
+        $overdueCount = DB::table('project_list')
+            ->whereRaw("STR_TO_DATE(plist_enddate, '%d-%m-%Y') < CURDATE()")
+            ->where('plist_status', 'No SP Assigned')
+            ->where('plist_customer_id' , $customerId)
+            ->count();
+
+        $statuses = [
+            'pending' => $noSPAssignedCount,
+            'delivered' => $deliveredCount,
+            'in_progress' => $inProgressCount,
+            'overdue' => $overdueCount,
+        ];
+
+        return view('/customer/reports', compact('statuses'));
     }
 
     public function spIndex(){

@@ -32,25 +32,36 @@
     <input type="hidden" id="selectedAddressId" name="selected_address_id">
 
     <div class="mb-2">
+      @if (!empty($userAddresses))
       <select class="form-select form-select-sm" id="existingAddressSelect" aria-label=".form-select-sm example">
       <option selected disabled>Select delivery address</option>
       @foreach($userAddresses as $address)
       <option value="{{ $address->ordradrs_id }}">{{ $address->ordradrs_address }}</option>
     @endforeach
       </select>
+      @endif
     </div>
 
     <!-- <div class="mb-4">
       <a class="text-decoration-none" href="">+ add new adress</a>
     </div> -->
-
+    @if (!empty($hardwareDetails) && !empty($userAddresses))
     <div class="mb-4">
       <a class="text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#addressModal">+ Add new
       address</a>
     </div>
+    @endif
 
     <div class="order-md-last">
       <ul class="list-group mb-3">
+      @if (!empty($hardwareDetails))
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+        <h6 class="my-0">Your cart is empty</h6>
+        </div>
+        <span class="text-body-secondary">
+        </span>
+        </li>
       @foreach($hardwareDetails as $detail)
       <li class="list-group-item d-flex justify-content-between lh-sm"
       id="cart-item-{{ $detail['hardware']->hrdws_id }}">
@@ -66,6 +77,15 @@
       </span>
       </li>
     @endforeach
+    @else
+      <li class="list-group-item d-flex justify-content-between lh-sm">
+      <div>
+      <h6 class="my-0">Your cart is empty</h6>
+      </div>
+      <span class="text-body-secondary">
+      </span>
+      </li>
+      @endif
 
       </ul>
 
@@ -76,8 +96,9 @@
       </div>
       </div> --}}
 
-      <button type="submit" class="btn btn-primary w-100 mt-2" id="place-order-btn">Place order</button>
-
+      @if (!empty($hardwareDetails) && !empty($userAddresses))
+        <button type="submit" class="btn btn-primary w-100 mt-2" id="place-order-btn">Place order</button>
+      @endif
 
     </div>
 

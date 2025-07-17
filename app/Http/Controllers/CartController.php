@@ -72,9 +72,13 @@ class CartController extends Controller
 
         $cartItems = Cart::where('cart_customer_id', $customerId)->get();
 
+        $hardwareDetails = [];
+
+        $userAddresses = [];
+
         if ($cartItems->isNotEmpty()) {
 
-            $hardwareDetails = [];
+            // $hardwareDetails = [];
 
             foreach ($cartItems as $cartItem) {
                 $hardware = Hardware::where('hrdws_id', $cartItem->cart_hw_id)->first();
@@ -93,7 +97,10 @@ class CartController extends Controller
             return view('customer.cart', compact('hardwareDetails', 'userAddresses'));
         }
 
-        return back()->with('error', 'Problem while fetching hardwares');
+        // return back()->with('error', 'Problem while fetching hardwares');
+
+        return view('customer.cart', compact('hardwareDetails', 'userAddresses'));
+
     }
 
     public function removeFromCart($id)

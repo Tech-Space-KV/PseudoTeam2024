@@ -75,7 +75,7 @@
 
 <script>
     // Fetch data dynamically from Laravel route
-    fetch('/chart-data')
+    fetch('/PseudoTeam2024/public/chart-data')
         .then(response => response.json())
         .then(data => {
             // Parse the data into Chart.js format

@@ -293,7 +293,7 @@ Route::post('/submit-query', [QueryController::class, 'submitQuery'])->name('sub
 
 // Chart Routes
 Route::get('/customer/session/reports', [ChartController::class, 'index'])->name('customer.reports');
-Route::get('/PseudoTeam2024/public/chart-data', [ChartController::class, 'getData'])->name('chart.data');
+Route::get('/chart-data', [ChartController::class, 'getData'])->name('chart.data');
 
 
 

@@ -15,17 +15,18 @@ class ChartController extends Controller
     //     return view('/customer/reports');
     // }
 
-    public function index(){
+    public function index()
+    {
 
         $customerId = session('user_id');
 
-        $noSPAssignedCount = Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id' , $customerId)->count();
-        $deliveredCount = Project::where('plist_status', 'Delivered')->where('plist_customer_id' , $customerId)->count();
-        $inProgressCount = Project::where('plist_status', 'In Progress')->where('plist_customer_id' , $customerId)->count();
+        $noSPAssignedCount = Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id', $customerId)->count();
+        $deliveredCount = Project::where('plist_status', 'Delivered')->where('plist_customer_id', $customerId)->count();
+        $inProgressCount = Project::where('plist_status', 'In Progress')->where('plist_customer_id', $customerId)->count();
         $overdueCount = DB::table('project_list')
             ->whereRaw("STR_TO_DATE(plist_enddate, '%d-%m-%Y') < CURDATE()")
             ->where('plist_status', 'No SP Assigned')
-            ->where('plist_customer_id' , $customerId)
+            ->where('plist_customer_id', $customerId)
             ->count();
 
         $statuses = [
@@ -38,9 +39,28 @@ class ChartController extends Controller
         return view('/customer/reports', compact('statuses'));
     }
 
-    public function spIndex(){
-        
-        return view('/service-partner/reports');
+    public function spIndex()
+    {
+
+        \Log::info('working till here!');
+
+        $serviceProviderId = session('sp_user_id');
+
+        $notStartedCount = ProjectPlannerTask::where('pptasks_sp_id', $serviceProviderId)->where('pptasks_sp_status', 'Not Started')->count();
+        $fullfilledCount = ProjectPlannerTask::where('pptasks_sp_id', $serviceProviderId)->where('pptasks_sp_status', 'Fullfilled')->count();
+        $onGoingCount = ProjectPlannerTask::where('pptasks_sp_id', $serviceProviderId)->where('pptasks_sp_status', 'On Going')->count();
+        $scrappedCount = ProjectPlannerTask::where('pptasks_sp_id', $serviceProviderId)->where('pptasks_sp_status', 'Scrapped')->count();
+
+        \Log::info('working till here! 1');
+
+        $statuses = [
+            'not_started' => $notStartedCount,
+            'fullfilled' => $fullfilledCount,
+            'on_going' => $onGoingCount,
+            'scrapped' => $scrappedCount,
+        ];
+
+        return view('/service-partner/reports' , compact('statuses'));
 
     }
 
@@ -51,13 +71,13 @@ class ChartController extends Controller
 
         $customerId = session('user_id');
 
-        $noSPAssignedCount = Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id' , $customerId)->count();
-        $deliveredCount = Project::where('plist_status', 'Delivered')->where('plist_customer_id' , $customerId)->count();
-        $inProgressCount = Project::where('plist_status', 'In Progress')->where('plist_customer_id' , $customerId)->count();
+        $noSPAssignedCount = Project::where('plist_status', 'No SP Assigned')->where('plist_customer_id', $customerId)->count();
+        $deliveredCount = Project::where('plist_status', 'Delivered')->where('plist_customer_id', $customerId)->count();
+        $inProgressCount = Project::where('plist_status', 'In Progress')->where('plist_customer_id', $customerId)->count();
         $overdueCount = DB::table('project_list')
             ->whereRaw("STR_TO_DATE(plist_enddate, '%d-%m-%Y') < CURDATE()")
             ->where('plist_status', 'No SP Assigned')
-            ->where('plist_customer_id' , $customerId)
+            ->where('plist_customer_id', $customerId)
             ->count();
 
         $statuses = [
@@ -75,10 +95,10 @@ class ChartController extends Controller
 
         //need to make changes here 
 
-        $serviceProviderId = session('sp_user_id'); 
+        $serviceProviderId = session('sp_user_id');
 
         $notStartedCount = ProjectPlannerTask::where('pptasks_sp_id', $serviceProviderId)->where('pptasks_sp_status', 'Not Started')->count();
-        $fullfilledCount = ProjectPlannerTask::where('pptasks_sp_id', $serviceProviderId)->where('pptasks_sp_status', 'Fullfilled')->count();  
+        $fullfilledCount = ProjectPlannerTask::where('pptasks_sp_id', $serviceProviderId)->where('pptasks_sp_status', 'Fullfilled')->count();
         $onGoingCount = ProjectPlannerTask::where('pptasks_sp_id', $serviceProviderId)->where('pptasks_sp_status', 'On Going')->count();
         $scrappedCount = ProjectPlannerTask::where('pptasks_sp_id', $serviceProviderId)->where('pptasks_sp_status', 'Scrapped')->count();
 
@@ -90,7 +110,7 @@ class ChartController extends Controller
         ];
 
         return response()->json($statuses);
-    
+
     }
 
 }

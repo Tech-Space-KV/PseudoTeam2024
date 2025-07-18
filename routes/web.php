@@ -447,9 +447,9 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
         return view('/service-partner/help');
     });
 
-    Route::get('/reports', function () {
-        return view('/service-partner/reports');
-    });
+    // Route::get('/reports', function () {
+    //     return view('/service-partner/reports');
+    // });
 
     Route::get('/referandearn', function () {
         return view('/service-partner/referandearn');

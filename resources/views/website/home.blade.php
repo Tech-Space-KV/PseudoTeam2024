@@ -371,7 +371,6 @@ margin-top: 15%;
      -->
         </div>
         <br>
-        <span id="services"></span>
         <div class="marquee-container py-2 mt-5">
             <div class="marquee-track">
                 <!-- Repeated content twice to create seamless effect -->
@@ -395,7 +394,7 @@ margin-top: 15%;
                 </div>
             </div>
         </div>
-
+ <span id="services"></span>
     </section>
 
 
@@ -525,7 +524,7 @@ margin-top: 15%;
         </div>
 
         <br>
-
+ <span id="about"></span>
     </section>
 
     <section class="content-section s3" style="background-color: black;">
@@ -551,7 +550,7 @@ margin-top: 15%;
             </div>
         </div>
 
-
+ <span id="contactus"></span>
     </section>
 
 
@@ -675,8 +674,8 @@ margin-top: 15%;
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title text-light" id="exampleModalLabel">Inquire Here</h5>
-                    <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal"
+                        aria-label="Close">x</button>
                 </div>
                 <div class="modal-body">
                     <div class="container text-primary">

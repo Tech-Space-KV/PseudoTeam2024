@@ -88,9 +88,9 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
     Route::post('/customer/profile/save', [AuthController::class, 'completeProfileCustomer'])->name('customer.profile.save');
 
-    Route::get('/reports', function () {
-        return (new AuthController)->dashboard('customer/reports');
-    });
+    // Route::get('/reports', function () {
+    //     return (new AuthController)->dashboard('customer/reports');
+    // });
 
     // Route::get('/forgot-password', function () {
     //     return (new AuthController)->dashboard('customer/forgot_password');
@@ -293,7 +293,7 @@ Route::post('/submit-query', [QueryController::class, 'submitQuery'])->name('sub
 
 // Chart Routes
 Route::get('/customer/session/reports', [ChartController::class, 'index'])->name('customer.reports');
-Route::get('https://test.pseudoteam.com/PseudoTeam2024/public/customer/session/reports', [ChartController::class, 'getData'])->name('chart.data');
+Route::get('/chart-data', [ChartController::class, 'getData'])->name('chart.data');
 
 
 
@@ -480,7 +480,9 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
     Route::get('/find-project', [ProjectController::class, 'findProjects']);
 
 
-    Route::get('/find-project-details', [ProjectController::class, 'showProjectDetails']);
+    Route::get('/find-project-details/{id}', [ProjectController::class, 'showProjectDetails']);
+
+    Route::post('/show-interest/{id}', [ProjectController::class, 'showInterest']);
 
     Route::post('/submitSupportQuery', [QueryController::class, 'submitSupportQuery'])->name('spSubmitSupportQuery');
 

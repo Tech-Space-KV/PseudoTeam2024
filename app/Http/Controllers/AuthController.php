@@ -614,7 +614,7 @@ class AuthController extends Controller
         setcookie(session_name(), '', 0, '/');
 
         $response = response()
-            ->redirectToRoute('auth.customer.sign_in')
+            ->redirectToRoute('home')
             ->with('success', 'You have been logged out.');
 
         $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');

@@ -94,6 +94,19 @@
             border: none;
         }
     </style>
+    <style>
+        .btn-signup {
+            background-color: #006EC4;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .btn-signup:hover {
+            background-color: #005bb5;
+            color: #fff;
+        }
+    </style>
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -101,33 +114,33 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top navbar-up shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#"><span class="text-primary">Pseudo</span>Team</a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navCollapse">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navCollapse">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-                </ul>
-                <div class="d-flex">
-                    <a href="{{ route('auth.sp.sign_in') }}" class="nav-link me-3">Log in</a>
-                    <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-signup">Sign up</a>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navCollapse">
+                <div class="d-flex align-items-center gap-2">
+                    <a href="{{ route('auth.sp.sign_in') }}" class="btn btn-outline-primary btn-sm rounded-pill">
+                        Log In
+                    </a>
+                    <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-primary btn-sm rounded-pill">
+                        Sign Up
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
 
-
     <section class="hero text-center">
         <div class="container">
             <h1>Work smart, not hard. Join PseudoTeam</h1>
             <p class="lead mt-3">and turn your skills into consistent income—minus the freelancing chaos.</p>
-            <button class="btn btn-signup btn-lg mt-3">Become a Service Partner</button>
+            <!-- <button class="btn btn-signup btn-lg mt-3">Become a Service Partner</button> -->
+            <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-signup btn-lg mt-3">Become a Service Partner</a>
 
 
             <form class="search-bar mx-auto" style="max-width:600px;">
@@ -179,7 +192,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Your Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Enter your email">
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label">Your Message</label>
@@ -237,7 +251,8 @@
     <section class="cta-banner">
         <div class="container">
             <h2>Work in a Safe, Protected Environment</h2>
-            <button class="btn btn-light btn-lg mt-3">Join Today</button>
+            <!-- <button class="btn btn-light btn-lg mt-3">Join Today</button> -->
+            <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-light btn-lg mt-3">Join Today</a>
         </div>
     </section>
 

@@ -44,7 +44,7 @@
       <i class="fa fa-upload me-1"></i> Import File
       </button>
 
-      <a href="{{ asset('samplecsv.csv') }}" class="btn btn-sm btn-outline-secondary" title="Download Sample CSV"
+      <a href="{{ asset('sample-hardware.csv') }}" class="btn btn-sm btn-outline-secondary" title="Download Sample CSV"
       download="sample-hardware.csv">
       <i class="fa fa-download me-1"></i> Download Sample CSV
       </a>

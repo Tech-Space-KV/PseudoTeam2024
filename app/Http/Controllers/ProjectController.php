@@ -175,6 +175,8 @@ class ProjectController extends Controller
             }
         } catch (\Exception $e) {
 
+            \Log::info('Testing sow error.  ' . $e);
+
             return redirect()->back()->with('error', 'There was an error creating or updating the project.');
         }
     }

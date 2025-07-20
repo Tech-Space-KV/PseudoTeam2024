@@ -58,7 +58,7 @@ class QueryController extends Controller
 
         $user = ProjectOwner::where('pown_id', session('user_id'))->first();
 
-        Mail::to($user->pown_email)->send(new SupportQueryReceived($user->pown_name, $user->pown_email, $query['query']));
+        Mail::to('info@pseudoteam.com')->send(new SupportQueryReceived($user->pown_name, $user->pown_email, $query['query']));
 
         return redirect()->back()->with('success', 'Your query has been submitted.');
     }

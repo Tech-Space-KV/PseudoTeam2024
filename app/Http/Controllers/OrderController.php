@@ -75,11 +75,15 @@ class OrderController extends Controller
                 }
             }
 
+            \Log::info('Place order working till here !');
+
             $name = ProjectOwner::where('pown_id', $customerId)->value('pown_name');
             $email = ProjectOwner::where('pown_email', $customerId)->value('pown_email');
 
-            Mail::to($email)->send(new OrderPlacedMail($orderNo, $name, $orderDate));
-            Mail::to('info@pseudoteam.com')->send(new OrderReceivedMail($name, $email,$orderNo, $orderDate));
+            // Mail::to($email)->send(new OrderPlacedMail($orderNo, $name, $orderDate));
+            // Mail::to('info@pseudoteam.com')->send(new OrderReceivedMail($name, $email,$orderNo, $orderDate));
+
+            \Log::info('sending mail working till here !');
 
             return response()->json([
                 'status' => 'success',
@@ -88,6 +92,8 @@ class OrderController extends Controller
             ]);
 
         } catch (\Exception $e) {
+
+            \Log::info('Error occured' . $e);
 
             return response()->json([
                 'status' => 'error',

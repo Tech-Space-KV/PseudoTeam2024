@@ -123,7 +123,7 @@
       <h1>Work Smart, Not Hard</h1>
       <h1>Join PseudoTeam</h1>
       <p class="lead mt-3">Skip proposals. Focus on delivery. Get paid reliably.</p>
-      <a href="#" class="btn btn-signup btn-lg mt-3">Become a Partner</a>
+      <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-signup btn-lg mt-3">Become a Partner</a>
       <form class="search-bar mx-auto mt-4" style="max-width:600px;">
         <div class="input-group shadow-sm">
           <input type="text" class="form-control" placeholder="Search for projects">

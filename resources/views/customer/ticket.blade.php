@@ -19,7 +19,7 @@
     @endif
     </div>
 
-    <form action="/customer/session/ticket/storeticket" method="POST" enctype="multipart/form-data" @if($readonly)
+    <form action="PseudoTeam2024/public/customer/session/ticket/storeticket" method="POST" enctype="multipart/form-data" @if($readonly)
   disabled @endif>
     @csrf
     <h5 class="mt-4 mb-4 text-pseudo">

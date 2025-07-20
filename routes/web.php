@@ -281,7 +281,7 @@ Route::post('/save-existing-address', [OrderAddressController::class, 'saveExist
 
 // Route::post('/storeticket' , [TicketController::class , 'storeTicket']);
 
-Route::post('/customer/session/ticket/storeticket', [TicketController::class, 'storeTicket']);
+Route::post('PseudoTeam2024/public/customer/session/ticket/storeticket', [TicketController::class, 'storeTicket']);
 
 Route::delete('/remove-from-cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 

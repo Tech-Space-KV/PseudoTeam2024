@@ -14,13 +14,13 @@
     <div class="alert alert-success" role="alert">
       {{ session('success') }}
     </div>
-  @endif
+    @endif
 
     @if(session('error'))
     <div class="alert alert-danger" role="alert">
       {{ session('error') }}
     </div>
-  @endif
+    @endif
     </div>
 
 
@@ -39,7 +39,7 @@
       <option value="{{ $address->ordradrs_id }}">{{ $address->ordradrs_address }}</option>
     @endforeach
       </select>
-      @endif
+    @endif
     </div>
 
     <!-- <div class="mb-4">
@@ -55,13 +55,13 @@
     <div class="order-md-last">
       <ul class="list-group mb-3">
       @if (!empty($hardwareDetails))
-        <li class="list-group-item d-flex justify-content-between lh-sm">
+      <!-- <li class="list-group-item d-flex justify-content-between lh-sm">
         <div>
         <h6 class="my-0">Your cart is empty</h6>
         </div>
         <span class="text-body-secondary">
         </span>
-        </li>
+      </li> -->
       @foreach($hardwareDetails as $detail)
       <li class="list-group-item d-flex justify-content-between lh-sm"
       id="cart-item-{{ $detail['hardware']->hrdws_id }}">
@@ -76,7 +76,7 @@
         data-cart-item-id="{{ $detail['hardware']->hrdws_id }}"></i>
       </span>
       </li>
-    @endforeach
+      @endforeach
     @else
       <li class="list-group-item d-flex justify-content-between lh-sm bg-warning">
       <div>
@@ -85,7 +85,7 @@
       <span class="text-body-secondary">
       </span>
       </li>
-      @endif
+    @endif
       </ul>
 
       {{-- <div class="card p-2">
@@ -96,8 +96,8 @@
       </div> --}}
 
       @if (!empty($hardwareDetails) && !empty($userAddresses))
-        <button type="submit" class="btn btn-primary w-100 mt-2" id="place-order-btn">Place order</button>
-      @endif
+      <button type="submit" class="btn btn-primary w-100 mt-2" id="place-order-btn">Place order</button>
+    @endif
 
     </div>
 
@@ -191,7 +191,7 @@
       Select a delivery address to proceed with your order.
       </div>
     `);
-      return; 
+      return;
       }
 
       $('#place-order-btn').prop('disabled', true).text('Processing...');

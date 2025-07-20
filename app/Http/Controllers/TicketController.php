@@ -46,7 +46,7 @@ class TicketController extends Controller
             $name = ProjectOwner::where('pown_id', $customerId)->value('pown_name');
             $email = ProjectOwner::where('pown_id', $customerId)->value('pown_email');
 
-            Mail::to('sanskarsharma0119@gmail.com')->send(new TicketRaisedCopy(
+            Mail::to('info@pseudoteam.com')->send(new TicketRaisedCopy(
                 $ticket->tckt_id,
                 $name,
                 $email,

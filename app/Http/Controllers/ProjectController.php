@@ -461,7 +461,7 @@ class ProjectController extends Controller
 
         $projectPlannerTasks = optional(optional($task->projectPlanner)->projectScope)->project;
 
-        $currentDate = Carbon::now()->format('Y-m-d');
+        $currentDate = Carbon::now()->format('d-m-Y');
 
         if (!$projectPlannerTasks) {
 
@@ -500,7 +500,13 @@ class ProjectController extends Controller
 
         }
 
-        $task->pptasks_date_of_completion = Carbon::now()->format('Y-m-d');
+        $currentTime = Carbon::now('Asia/Kolkata');
+
+        $up = $currentTime->format('d-m-Y H:i:s'); // 20-07-2025 15:17:03
+
+        // $task->pptasks_date_of_completion = $currentTime->format('d-m-y'); // e.g., 20-07-25
+        $task->updated_at = $up; 
+
         $task->save();
 
         return redirect()->back()->with('success', 'Task updated successfully!');
@@ -738,7 +744,7 @@ class ProjectController extends Controller
         return view('service-partner/find_project_details', compact('project'));
     }
 
-    public function showInterest($id , Request $request)
+    public function showInterest($id, Request $request)
     {
         $serviceProvider = ServiceProvider::where('sprov_id', session('sp_user_id'))->first();
 

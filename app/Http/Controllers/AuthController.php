@@ -49,7 +49,7 @@ class AuthController extends Controller
 
         $date = date('Y-m-d H:i:s');
 
-        Mail::to('info@pseudoteam.com')->send(new CustomerSignUpMailCopy( $user->name, $user->email, $date));
+        Mail::to('info@pseudoteam.com')->send(new CustomerSignUpMailCopy($user->name, $user->email, $date));
         Mail::to($request->email)->send(new CustomerSignUpMail($verificationLink, $user->name));
 
         return redirect()->route('auth.customer.sign_in')->with('success', 'Signup successful! Check your email for verification link.');
@@ -461,6 +461,10 @@ class AuthController extends Controller
 
                     }
 
+                } else {
+
+                    return redirect()->route('auth.sp.sign_in')->with('error', 'The provided credentials are incorrect.');
+
                 }
 
             }
@@ -608,7 +612,7 @@ class AuthController extends Controller
         clearstatcache();
 
         session_unset();
- 
+
         session_write_close();
 
         setcookie(session_name(), '', 0, '/');

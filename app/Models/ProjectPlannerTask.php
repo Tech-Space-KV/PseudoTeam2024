@@ -9,16 +9,17 @@ class ProjectPlannerTask extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
 
     protected $table = 'project_planner_tasks';
 
     protected $primaryKey = 'pptasks_id';
 
     protected $fillable = [
-        '',
         'pptasks_task_title',
         'pptasks_pt_status',
         'pptasks_date_of_completion',
+        'updated_at',
     ];
 
     public function projectPlanner()

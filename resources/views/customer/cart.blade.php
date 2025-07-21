@@ -198,7 +198,8 @@
 
       $.ajax({
 
-      url: '/place-order',
+      // url: '/place-order',
+      url: '{{ route('placeOrder') }}',
       method: 'POST',
       data: {
         _token: $('meta[name="csrf-token"]').attr('content'),

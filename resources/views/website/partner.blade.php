@@ -193,6 +193,7 @@
   <section class="steps bg-light" data-aos="fade-up">
     <div class="container text-center">
       <h2>How It Works</h2>
+      <br>
       <div class="row mt-4">
         <div class="col-md-3">
           <div class="step-icon"><i class="bi bi-pencil-square"></i></div>
@@ -226,18 +227,18 @@
       <div class="row mt-4 justify-content-center">
         <div class="col-md-2 col-6 mb-4">
           <img src="https://via.placeholder.com/100" alt="Alex" class="member-photo mx-auto shadow">
-          <h6>Alex</h6>
+          <h6>Manish Manocha</h6>
           <p>Founder & CEO</p>
         </div>
         <div class="col-md-2 col-6 mb-4">
           <img src="https://via.placeholder.com/100" alt="Priya" class="member-photo mx-auto shadow">
-          <h6>Priya</h6>
-          <p>Head of Operations</p>
+          <h6>Sunil Gupta</h6>
+          <p>Director</p>
         </div>
         <div class="col-md-2 col-6 mb-4">
           <img src="https://via.placeholder.com/100" alt="Ravi" class="member-photo mx-auto shadow">
-          <h6>Ravi</h6>
-          <p>Project Lead</p>
+          <h6>Pankaj Sharma</h6>
+          <p>Business head</p>
         </div>
       </div>
     </div>
@@ -358,7 +359,7 @@
   <section class="cta-banner text-center" style="padding:6rem 1rem; background:var(--primary); color:#fff;" data-aos="fade-up">
     <div class="container">
       <h2>Ready to grow your freelance career with support and clarity?</h2>
-      <a href="#" class="btn btn-light btn-lg mt-3">Join Today</a>
+      <a href="{{ route('auth.sp.sign_in') }}" class="btn btn-light btn-lg mt-3">Join Today</a>
     </div>
   </section>
 

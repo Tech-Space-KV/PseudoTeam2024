@@ -440,7 +440,7 @@
             'X-CSRF-TOKEN': "{{ csrf_token() }}"
           },
           success: function (response) {
-            alert(response.success || 'Password updated successfully!');
+            alert(response.message || 'Password updated successfully!');
             window.location.href = response.redirect_url;
           },
           error: function (xhr) {

@@ -123,7 +123,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
     Route::get('/track-project-report', function () {
         return (new ProjectController)->trackProjects();
-    });
+    })->name('project.track');
 
     Route::get('/track-project-report-location/{projectid}', function ($projectid) {
         return (new ProjectController)->trackProjectReportLocation($projectid);

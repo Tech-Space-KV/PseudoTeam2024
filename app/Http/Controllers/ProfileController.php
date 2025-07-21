@@ -27,7 +27,7 @@ class ProfileController extends Controller
 
             $imageData = file_get_contents($file);
 
-            DB::table('project_owners') 
+            DB::table('project_owners')
                 ->where('pown_id', $pown_id)
                 ->update(['pown_dp' => $imageData]);
 
@@ -54,7 +54,7 @@ class ProfileController extends Controller
 
             $imageData = file_get_contents($file);
 
-            DB::table('service_providers')  
+            DB::table('service_providers')
                 ->where('sprov_id', $sprov_id)
                 ->update(['sprov_dp' => $imageData]);
 
@@ -69,14 +69,14 @@ class ProfileController extends Controller
         $pown_id = session('user_id');
 
         if (!$pown_id) {
-            abort(404); 
+            abort(404);
         }
 
         $user = DB::table('project_owners')->where('pown_id', $pown_id)->first();
 
         if (!$user || !$user->pown_dp) {
 
-            $path = public_path('images/logo_icon.png'); 
+            $path = public_path('images/logo_icon.png');
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -84,23 +84,23 @@ class ProfileController extends Controller
         }
 
         $response = Response::make($user->pown_dp);
-        $response->header('Content-Type', 'image/jpeg'); 
+        $response->header('Content-Type', 'image/jpeg');
 
         return $response;
     }
 
     public function spGetProfilePicture()
     {
-        $sprov_id = session('sp_user_id'); 
+        $sprov_id = session('sp_user_id');
 
         if (!$sprov_id) {
-            abort(404); 
+            abort(404);
         }
 
         $user = DB::table('service_providers')->where('sprov_id', $sprov_id)->first();
 
         if (!$user || !$user->sprov_dp) {
-            $path = public_path('images/logo_icon.png'); 
+            $path = public_path('images/logo_icon.png');
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -108,7 +108,7 @@ class ProfileController extends Controller
         }
 
         $response = Response::make($user->sprov_dp);
-        $response->header('Content-Type', 'image/jpeg'); 
+        $response->header('Content-Type', 'image/jpeg');
 
         return $response;
     }
@@ -237,7 +237,7 @@ class ProfileController extends Controller
 
         if ($request->hasFile('govtID')) {
             $fileData = file_get_contents($request->file('govtID'));
-            $dataToUpdate['pown_adhaarfile'] = $fileData; 
+            $dataToUpdate['pown_adhaarfile'] = $fileData;
         }
 
         DB::table('project_owners')
@@ -279,7 +279,7 @@ class ProfileController extends Controller
 
         if ($request->hasFile('govtID')) {
             $fileData = file_get_contents($request->file('govtID'));
-            $dataToUpdate['pown_adhaarfile'] = $fileData; 
+            $dataToUpdate['pown_adhaarfile'] = $fileData;
         }
 
         DB::table('service_providers')
@@ -296,11 +296,11 @@ class ProfileController extends Controller
         if (!$pown_id) {
             return response()->json([
                 'about' => '',
-                'type' => 'Organization', 
+                'type' => 'Organization',
                 'orgName' => '',
                 'cin' => '',
                 'gst' => '',
-                'govtIdUrl' => '',          
+                'govtIdUrl' => '',
             ]);
         }
 
@@ -319,7 +319,7 @@ class ProfileController extends Controller
 
         $response = [
             'about' => $userData->pown_about ?? '',
-            'type' => $userData->pown_type ?? 'Organization', 
+            'type' => $userData->pown_type ?? 'Organization',
             'orgName' => $userData->pown_organisation_name ?? '',
             'cin' => $userData->pown_cin ?? '',
             'gst' => $userData->pown_gstpin ?? '',
@@ -343,11 +343,11 @@ class ProfileController extends Controller
         if (!$sprov_id) {
             return response()->json([
                 'about' => '',
-                'type' => 'Organization',  
+                'type' => 'Organization',
                 'orgName' => '',
                 'cin' => '',
                 'gst' => '',
-                'govtIdUrl' => '',         
+                'govtIdUrl' => '',
             ]);
         }
 
@@ -366,7 +366,7 @@ class ProfileController extends Controller
 
         $response = [
             'about' => $userData->sprov_about ?? '',
-            'type' => $userData->sprov_type ?? 'Organization', 
+            'type' => $userData->sprov_type ?? 'Organization',
             'orgName' => $userData->sprov_organisation_name ?? '',
             'cin' => $userData->sprov_cin ?? '',
             'gst' => $userData->sprov_gstpin ?? '',
@@ -409,6 +409,7 @@ class ProfileController extends Controller
             ->update([
                 'pown_password' => Hash::make($request->input('new_password'))
             ]);
+
 
         return response()->json([
             'success' => true,

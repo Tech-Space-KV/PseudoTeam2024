@@ -79,7 +79,7 @@ class QueryController extends Controller
             'message' => $request->input('message'),
         ];
 
-        \Log::info('Inquiry Data: ', $data);    
+        // \Log::info('Inquiry Data: ', $data);    
 
         Mail::to('info@pseudoteam.com')->send(new InquiryMail($data));
 

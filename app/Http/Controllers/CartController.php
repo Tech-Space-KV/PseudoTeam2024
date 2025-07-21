@@ -106,6 +106,8 @@ class CartController extends Controller
     public function removeFromCart($id)
     {
 
+
+        \Log::info('Working till here!');
         $customerId = session('user_id');
 
         $cartItem = Cart::where('cart_customer_id', $customerId)->where('cart_hw_id', $id)->first();

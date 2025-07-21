@@ -63,12 +63,12 @@
     <i class="fa fa-edit"></i>
     </a>
     <button class="btn btn-sm btn-outline-danger" 
-        title="Delete H/W Details" 
-        onclick="confirmDelete(this)">
+      title="Delete H/W Details" 
+      onclick="confirmDelete(this)">
     <i class="fa fa-trash"></i>
     </button>
-  </td>
-  </tr>
+    </td>
+    </tr>
       <tr>
       <th scope="row">124</th>
       <td>aq1</td>
@@ -85,11 +85,11 @@
     <i class="fa fa-edit"></i>
     </a>
     <button class="btn btn-sm btn-outline-danger" 
-        title="Delete H/W Details" 
-        onclick="confirmDelete(this)">
+      title="Delete H/W Details" 
+      onclick="confirmDelete(this)">
     <i class="fa fa-trash"></i>
     </button>
-  </td>      </tr>
+    </td>      </tr>
       <tr>
       <th scope="row">127</th>
       <td>aq1</td>
@@ -106,11 +106,11 @@
     <i class="fa fa-edit"></i>
     </a>
     <button class="btn btn-sm btn-outline-danger" 
-        title="Delete H/W Details" 
-        onclick="confirmDelete(this)">
+      title="Delete H/W Details" 
+      onclick="confirmDelete(this)">
     <i class="fa fa-trash"></i>
     </button>
-  </td>   </tr>
+    </td>   </tr>
       <tr>
       <th scope="row">123</th>
       <td>aq1</td>
@@ -127,11 +127,11 @@
     <i class="fa fa-edit"></i>
     </a>
     <button class="btn btn-sm btn-outline-danger" 
-        title="Delete H/W Details" 
-        onclick="confirmDelete(this)">
+      title="Delete H/W Details" 
+      onclick="confirmDelete(this)">
     <i class="fa fa-trash"></i>
     </button>
-  </td>   </tr>
+    </td>   </tr>
       <tr>
       <th scope="row">124</th>
       <td>aq1</td>
@@ -148,11 +148,11 @@
     <i class="fa fa-edit"></i>
     </a>
     <button class="btn btn-sm btn-outline-danger" 
-        title="Delete H/W Details" 
-        onclick="confirmDelete(this)">
+      title="Delete H/W Details" 
+      onclick="confirmDelete(this)">
     <i class="fa fa-trash"></i>
     </button>
-  </td>     </tr>
+    </td>     </tr>
       <tr>
       <th scope="row">127</th>
       <td>aq1</td>
@@ -169,43 +169,40 @@
     <i class="fa fa-edit"></i>
     </a>
     <button class="btn btn-sm btn-outline-danger" 
-        title="Delete H/W Details" 
-        onclick="confirmDelete(this)">
+      title="Delete H/W Details" 
+      onclick="confirmDelete(this)">
     <i class="fa fa-trash"></i>
     </button>
-  </td>   </tr> -->
+    </td>   </tr> -->
 
-  @if($hardwares->isNotEmpty())
-  @foreach ($hardwares as $hardware)
-  <tr>
-    <th scope="row">{{ $hardware->hrdws_serial_number }}</th>
-    <td>{{ $hardware->hrdws_hw_identifier }}</td>
-    <td>{{ $hardware->hrdws_model_number }}</td>
-    <td>{{ $hardware->hrdws_qty }}</td>
-    <td>{{ $hardware->hrdws_family }}</td>
-    <td>{{ $hardware->hrdws_city }}</td>
-    <td>{{ $hardware->hrdws_state }}</td>
-    <td>{{ $hardware->hrdws_price }}</td>
-    <td>
-      <a href="{{ url('/service-partner/session/hardware-details/'.$hardware->hrdws_id) }}" 
-        class="btn btn-sm btn-outline-primary me-2" 
-        title="Edit H/W Details">
-        <i class="fa fa-edit"></i>
+      @if($hardwares->isNotEmpty())
+      @foreach ($hardwares as $hardware)
+      <tr>
+      <th scope="row">{{ $hardware->hrdws_serial_number }}</th>
+      <td>{{ $hardware->hrdws_hw_identifier }}</td>
+      <td>{{ $hardware->hrdws_model_number }}</td>
+      <td>{{ $hardware->hrdws_qty }}</td>
+      <td>{{ $hardware->hrdws_family }}</td>
+      <td>{{ $hardware->hrdws_city }}</td>
+      <td>{{ $hardware->hrdws_state }}</td>
+      <td>{{ $hardware->hrdws_price }}</td>
+      <td>
+      <a href="{{ url('/service-partner/session/hardware-details/' . $hardware->hrdws_id) }}"
+      class="btn btn-sm btn-outline-primary me-2" title="Edit H/W Details">
+      <i class="fa fa-edit"></i>
       </a>
-      <button class="btn btn-sm btn-outline-danger" 
-        title="Delete H/W Details" 
-        onclick="confirmDelete(this)">
-        <i class="fa fa-trash"></i>
+      <button class="btn btn-sm btn-outline-danger" title="Delete H/W Details" onclick="confirmDelete(this) data-id="{{ $hardware->hrdws_id }}">
+      <i class="fa fa-trash"></i>
       </button>
-    </td>
-  </tr>
-  
-  @endforeach
-  @else
-  <tr>
-    <td colspan="9" class="text-center">No hardware found!</td>
-  </tr>
-  @endif
+      </td>
+      </tr>
+
+    @endforeach
+    @else
+      <tr>
+      <td colspan="9" class="text-center">No hardware found!</td>
+      </tr>
+    @endif
 
     </tbody>
     </table>
@@ -327,19 +324,50 @@
     // Initial rendering
     renderTable();
 
-    function confirmDelete(button) {
-    const row = button.closest("tr"); // Get the row containing the button
-    const serialNo = row.cells[0].textContent; // Get the Serial No from the first column
+    // function confirmDelete(button) {
+    // const row = button.closest("tr"); // Get the row containing the button
+    // const serialNo = row.cells[0].textContent; // Get the Serial No from the first column
 
 
-    alert(`Hardware with Serial No: ${serialNo} has been deleted.`);
-    // Optionally, remove the row from the table
-    row.remove();
+    // alert(`Hardware with Serial No: ${serialNo} has been deleted.`);
+    // // Optionally, remove the row from the table
+    // row.remove();
 
-    }
+    // }
 
 
   </script>
+
+  <script>
+  function confirmDelete(button) {
+    if (!confirm("Are you sure you want to delete this hardware?")) return;
+
+    const row = button.closest("tr");
+    const serialNo = row.cells[0].textContent;
+    const hardwareId = button.getAttribute("data-id");
+
+    fetch(`/service-partner/session/hardware-details/${hardwareId}`, {
+      method: 'DELETE',
+      headers: {
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not OK');
+      }
+      alert(`Hardware with Serial No: ${serialNo} has been deleted.`);
+      row.remove();
+    })
+    .catch(error => {
+      console.error('Error deleting hardware:', error);
+      alert('Failed to delete hardware.');
+    });
+  }
+</script>
+
 
 
 @endsection

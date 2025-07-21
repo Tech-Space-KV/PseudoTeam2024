@@ -242,7 +242,7 @@
       var cartItemId = $(this).data('cart-item-id');
 
       $.ajax({
-      url: '/remove-from-cart/' + cartItemId,
+      url: '{{ route("cart.remove", ":id") }}'.replace(':id', cartItemId),
       method: 'DELETE',
       data: {
         _token: $('meta[name="csrf-token"]').attr('content')

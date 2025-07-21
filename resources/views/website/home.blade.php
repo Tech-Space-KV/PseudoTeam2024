@@ -36,19 +36,20 @@
             text-align: center;
             overflow: hidden;
         }
-@media (max-width: 1425px) {
-    .hero-section {
-margin-top: 15%;
-        height: 50vh;
-    }
-  }
 
-  @media (max-width: 480px) {
-    .hero-section {
-      margin-top: 15%;
-        height: 30vh;
-    }
-  }
+        @media (max-width: 1425px) {
+            .hero-section {
+                margin-top: 15%;
+                height: 50vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                margin-top: 15%;
+                height: 30vh;
+            }
+        }
 
 
         .bg-video {
@@ -184,8 +185,27 @@ margin-top: 15%;
 
 <body style="background-color: black;">
 
-
     @include('website.top_nav')
+
+     @if(session('success'))
+            <!-- <div class="alert alert-success w-100" role="alert">
+                {{ session('success') }}
+            </div> -->
+
+            <?php
+            echo "<script>alert('Inquiry Sent');</script>";
+            ?>
+
+        @endif
+
+        @if(session('error'))
+            <!-- <div class="alert alert-danger w-100" role="alert">
+                {{ session('error') }}
+            </div> -->
+            <?php
+            echo "<script>alert('Failed! Please try again.');</script>";
+            ?>
+        @endif
 
     <!-- Section 1: Fullscreen Hero with Background Video -->
     <section class="hero-section s0">
@@ -394,7 +414,7 @@ margin-top: 15%;
                 </div>
             </div>
         </div>
- <span id="services"></span>
+        <span id="services"></span>
     </section>
 
 
@@ -524,7 +544,7 @@ margin-top: 15%;
         </div>
 
         <br>
- <span id="about"></span>
+        <span id="about"></span>
     </section>
 
     <section class="content-section s3" style="background-color: black;">
@@ -550,7 +570,7 @@ margin-top: 15%;
             </div>
         </div>
 
- <span id="contactus"></span>
+        <span id="contactus"></span>
     </section>
 
 
@@ -676,7 +696,9 @@ margin-top: 15%;
                     <h5 class="modal-title text-light" id="exampleModalLabel">Inquire Here</h5>
                     <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal"
                         aria-label="Close">x</button>
+
                 </div>
+
                 <div class="modal-body">
                     <div class="container text-primary">
                         <form class="row g-3 needs-validation" action="{{ route('post.inquire.submit') }}" method="post"

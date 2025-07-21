@@ -216,7 +216,7 @@
     `);
 
         setTimeout(function () {
-        window.location.href = 'customer/session/marketplace/hardwares-orders';
+        window.reload();
         }, 2000);
 
         // // Optionally, redirect to order confirmation page

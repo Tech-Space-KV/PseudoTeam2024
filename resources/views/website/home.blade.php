@@ -20,15 +20,52 @@
     <link rel="stylesheet" href="{{ asset('css/web/website_home2.css') }}">
     <!-- Bootstrap Icons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    .navbar {
+      /* background-color: white; */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      color: #ffffff
+    }
+    .navbar-brand img {
+      height: 40px;
+    }
+    .nav-item {
+      padding: 0 15px;
+      text-align: center;
+    }
+    .nav-item .title {
+      font-weight: 600;
+      /* font-size: 14px; */
+    }
+    .nav-item .subtitle {
+      font-size: 12px;
+      color: gray;
+    }
+    .nav-icon {
+      font-size: 20px;
+      margin-bottom: 3px;
+    }
+    .nav-divider {
+      border-left: 1px solid #ddd;
+      height: 40px;
+      margin: 0 10px;
+    }
+    @media (max-width: 991.98px) {
+      .nav-item {
+        padding: 10px 0;
+        text-align: left;
+      }
+    }
+  </style>
 
     <!-- Custom CSS -->
     <style>
         /* SECTION 1: HERO with video background */
         .hero-section {
             position: relative;
-            height: 100vh;
+            height: 75vh;
             color: white;
             display: flex;
             justify-content: center;
@@ -177,6 +214,13 @@
         .glow-line {
             transition: background 0.5s ease, box-shadow 0.5s ease;
         }
+
+
+         @media (max-width: 1000px) {
+    .navhide {
+      display: none;
+    }
+  }
     </style>
 
 
@@ -207,10 +251,12 @@
             ?>
         @endif
 
+
+
     <!-- Section 1: Fullscreen Hero with Background Video -->
+    
+    
     <section class="hero-section s0">
-
-
 
         <video autoplay muted loop playsinline class="bg-video">
             <source src="{{ asset('images/bgrd6.mp4') }}" type="video/mp4">
@@ -554,9 +600,9 @@
             </center>
         </div>
 
-        <div class="my-5">
-            <div class="p-5 text-center bg-body-tertiary">
-                <div class="container py-5">
+        <div class="my-5" >
+            <div class="p-5 text-center bg-body-tertiary"  style="background-color: black;">
+                <div class="container py-5"  style="background-color: black;">
                     <p class="col-lg-8 mx-auto lead text-light">
                         At PseudoTeam, we simplify project execution for businesses by taking complete ownership from
                         start to finish. We assign a dedicated pseudo-manager who oversees your entire project—breaking
@@ -643,13 +689,13 @@
                         <div class="col mb-3">
                             <h5>PseudoTeam</h5>
                             <ul class="nav flex-column">
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Home</a></li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Services</a>
+                                <li class=" mb-2"><a href="#" class="nav-link p-0 text-secondary">Home</a></li>
+                                <li class=" mb-2"><a href="#" class="nav-link p-0 text-secondary">Services</a>
                                 </li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">About</a></li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Contact Us</a>
+                                <li class="mb-2"><a href="#" class="nav-link p-0 text-secondary">About</a></li>
+                                <li class=" mb-2"><a href="#" class="nav-link p-0 text-secondary">Contact Us</a>
                                 </li>
-                                <li class="nav-item mb-2"><a href="{{ url('/partner') }}"
+                                <li class=" mb-2"><a href="{{ url('/partner') }}"
                                         class="nav-link p-0 text-secondary">Partner</a></li>
 
                             </ul>
@@ -658,25 +704,25 @@
                         <div class="col mb-3">
                             <h5>Social</h5>
                             <ul class="nav flex-column">
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary"><i
-                                            class="fa fa-instagram"></i> Instagram</a></li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary"><i
-                                            class="fa fa-facebook"></i> Facebook</a></li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary"><i
-                                            class="fa fa-twitter"></i> Twitter</a></li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary"><i
-                                            class="fa fa-linkedin"></i> Linked In</a></li>
+                                <li class=" mb-2"><a href="#" class="nav-link p-0 text-secondary"><i
+                                            class="fa-brands fa-instagram"></i> Instagram</a></li>
+                                <li class=" mb-2"><a href="#" class="nav-link p-0 text-secondary"><i
+                                            class="fa-brands fa-facebook"></i> Facebook</a></li>
+                                <li class=" mb-2"><a href="#" class="nav-link p-0 text-secondary"><i
+                                            class="fa-brands fa-twitter"></i> Twitter</a></li>
+                                <li class=" mb-2"><a href="#" class="nav-link p-0 text-secondary"><i
+                                            class="fa-brands fa-linkedin"></i> Linked In</a></li>
                             </ul>
                         </div>
 
                         <div class="col mb-3">
                             <h5>Terms</h5>
                             <ul class="nav flex-column">
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Privacy
+                                <li class=" mb-2"><a href="#" class="nav-link p-0 text-secondary">Privacy
                                         Policy</a></li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Terms
+                                <li class=" mb-2"><a href="#" class="nav-link p-0 text-secondary">Terms
                                         and Conditions</a></li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Copyright
+                                <li class=" mb-2"><a href="#" class="nav-link p-0 text-secondary">Copyright
                                         Policy</a></li>
                             </ul>
                         </div>
@@ -693,7 +739,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
-                    <h5 class="modal-title text-light" id="exampleModalLabel">Inquire Here</h5>
+                    <h5 class="modal-title text-light" id="exampleModalLabel">Search here</h5>
                     <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal"
                         aria-label="Close">x</button>
 
@@ -724,7 +770,7 @@
                             </div>
 
                             <div class="col-12">
-                                <label for="message" class="form-label">Your Project Query</label>
+                                <label for="message" class="form-label">Your Query</label>
                                 <textarea class="form-control border-primary" id="message" rows="6" name="message"
                                     required></textarea>
                                 <div class="invalid-feedback">Please enter your message.</div>
@@ -791,6 +837,9 @@
             }
         });
     </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

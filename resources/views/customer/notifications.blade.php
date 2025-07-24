@@ -132,7 +132,7 @@
                         const notificationId = this.getAttribute('data-id');
                         if (notificationId) {
                             // window.location.href = `/customer/session/notification-details/${notificationId}`;
-                            window.location.href = `https://test.pseudoteam.com/PseudoTeam2024/public/customer/session/notification-details/${notificationId}`;
+                            window.location.href = `https://pseudoteam.com/PseudoTeam2024/public/customer/session/notification-details/${notificationId}`;
                         } else {
                             console.error('Notification ID not found!');
                         }

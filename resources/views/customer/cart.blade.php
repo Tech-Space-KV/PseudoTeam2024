@@ -56,11 +56,11 @@
       <ul class="list-group mb-3">
       @if (!empty($hardwareDetails))
       <!-- <li class="list-group-item d-flex justify-content-between lh-sm">
-        <div>
-        <h6 class="my-0">Your cart is empty</h6>
-        </div>
-        <span class="text-body-secondary">
-        </span>
+      <div>
+      <h6 class="my-0">Your cart is empty</h6>
+      </div>
+      <span class="text-body-secondary">
+      </span>
       </li> -->
       @foreach($hardwareDetails as $detail)
       <li class="list-group-item d-flex justify-content-between lh-sm"
@@ -215,9 +215,16 @@
       </div>
     `);
 
+
         setTimeout(function () {
-        window.location.href = 'customer/session/marketplace/hardwares-orders';
+        window.location.href = "{{ url('customer/session/marketplace/hardwares-orders') }}";
         }, 2000);
+
+	
+		setTimeout(function () {
+        window.location.href = "{{ url('customer/session/marketplace/hardwares-orders') }}";
+    }, 2000);
+
 
         // // Optionally, redirect to order confirmation page
         // window.location.href = '/order-confirmation';  // Redirect to order confirmation page, for example

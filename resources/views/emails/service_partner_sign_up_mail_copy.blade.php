@@ -77,7 +77,7 @@
         <!-- Content Section -->
         <div class="content">
             <h1>🔔 New Service Partner Registered</h1>
-            <p>Hello,</p>
+            <p>Hello Team,</p>
             <p>
                 A new Service Partner has just signed up. Please find the details below for your review:
             </p>
@@ -86,9 +86,9 @@
                 <strong>Email:</strong> {{ $email }}<br>
                 <strong>Signup Date:</strong> {{ $date }}
             </div>
-            <p style="margin-top: 20px;">
+            <!-- <p style="margin-top: 20px;">
                 You may now proceed with the verification and approval process.
-            </p>
+            </p> -->
             <p>Regards,<br><strong>Pseudoteam System</strong></p>
         </div>
 

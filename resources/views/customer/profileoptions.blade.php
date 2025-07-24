@@ -38,11 +38,11 @@
         <!-- <p><span class="fs-1 fw-bold">Hi, </span><span class="fs-3">{{ session('user_id') }}</span></p> -->
         <div class="text-center">
           <img id="profilePreview" src="{{ route('profileController.get.dp') }}" class="img-thumbnail mb-3"
-            alt="Profile Preview" style="border: 0;">
+            alt="Profile Preview" style="border: 0; width: 200px; height: 200px; object-fit: cover;">
 
           <div class="d-flex justify-content-center align-items-center mb-3">
             <label for="profilePicture" class="me-2" style="font-weight: bold;">Upload DP</label>
-            <input type="file" id="profilePicture" class="form-control" style="max-width: 300px;" accept="image/*">
+            <input type="file" id="profilePicture" class="form-control" name="profilePicture" style="max-width: 300px;" accept="image/*">
           </div>
           <button id="submitButton" type="button" class="btn btn-primary mx-2 fw-bold"
             style="max-width: 150px;">Submit</button>

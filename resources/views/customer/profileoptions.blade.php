@@ -42,7 +42,7 @@
 
           <div class="d-flex justify-content-center align-items-center mb-3">
             <label for="profilePicture" class="me-2" style="font-weight: bold;">Upload DP</label>
-            <input type="file" id="profilePicture" class="form-control" style="max-width: 300px;" accept="image/*">
+            <input type="file" id="profilePicture" class="form-control" name="profilePicture" style="max-width: 300px;" accept="image/*">
           </div>
           <button id="submitButton" type="button" class="btn btn-primary mx-2 fw-bold"
             style="max-width: 150px;">Submit</button>

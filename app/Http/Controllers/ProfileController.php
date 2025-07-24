@@ -14,25 +14,36 @@ class ProfileController extends Controller
     {
         $pown_id = session('user_id');
 
+	\Log::info('working till here! 1');
+
         if (!$pown_id) {
             return response()->json(['error' => 'User not authenticated'], 401);
         }
 
         if ($request->hasFile('profilePicture')) {
             $file = $request->file('profilePicture');
+			
+				\Log::info('working till here! 2');
 
             $request->validate([
                 'profilePicture' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
             ]);
+			
+				\Log::info('working till here! 3');
 
             $imageData = file_get_contents($file);
 
             DB::table('project_owners')
                 ->where('pown_id', $pown_id)
                 ->update(['pown_dp' => $imageData]);
+				
+					\Log::info('working till here! 4');
 
             return response()->json(['success' => 'Profile picture updated successfully']);
         } else {
+			
+				\Log::info('working till here! else 5');
+			
             return response()->json(['error' => 'No file uploaded'], 400);
         }
     }

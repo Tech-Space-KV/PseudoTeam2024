@@ -494,4 +494,3 @@ class ProfileController extends Controller
         return view('service-partner.profileoptions', ['user' => $user]);
     }
 }
-}

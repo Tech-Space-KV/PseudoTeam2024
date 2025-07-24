@@ -7,14 +7,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Hash;
 
-
 class ProfileController extends Controller
 {
     public function uploadProfilePicture(Request $request)
     {
         $pown_id = session('user_id');
 
-	\Log::info('working till here! 1');
+        \Log::info('working till here! 1');
 
         if (!$pown_id) {
             return response()->json(['error' => 'User not authenticated'], 401);
@@ -22,25 +21,28 @@ class ProfileController extends Controller
 
         try {
 
-        if ($request->hasFile('profilePicture')) {
-            $file = $request->file('profilePicture');
+            if ($request->hasFile('profilePicture')) {
+                $file = $request->file('profilePicture');
 
-            $request->validate([
-                'profilePicture' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
-            ]);
+                $request->validate([
+                    'profilePicture' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
+                ]);
 
                 $imageData = file_get_contents($file);
 
-            DB::table('project_owners')
-                ->where('pown_id', $pown_id)
-                ->update(['pown_dp' => $imageData]);
+                DB::table('project_owners')
+                    ->where('pown_id', $pown_id)
+                    ->update(['pown_dp' => $imageData]);
 
-            return response()->json(['success' => 'Profile picture updated successfully']);
-        } else {
-            return response()->json(['error' => 'No file uploaded'], 400);
+                return response()->json(['success' => 'Profile picture updated successfully']);
+            } else {
+                return response()->json(['error' => 'No file uploaded'], 400);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Error uploading profile picture: ' . $e->getMessage());
+            return response()->json(['error' => 'Failed to upload profile picture'], 500);
         }
     }
-}
 
     public function spUploadProfilePicture(Request $request)
     {

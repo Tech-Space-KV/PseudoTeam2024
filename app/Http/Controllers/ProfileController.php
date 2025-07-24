@@ -18,21 +18,25 @@ class ProfileController extends Controller
             return response()->json(['error' => 'User not authenticated'], 401);
         }
 
-        if ($request->hasFile('profilePicture')) {
-            $file = $request->file('profilePicture');
+        try {
 
-            $request->validate([
-                'profilePicture' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
-            ]);
+            if ($request->hasFile('profilePicture')) {
+                $file = $request->file('profilePicture');
 
-            $imageData = file_get_contents($file);
+                $request->validate([
+                    'profilePicture' => 'image|mimes:jpeg,png,jpg,gif|max:10240',
+                ]);
 
-            DB::table('project_owners')
-                ->where('pown_id', $pown_id)
-                ->update(['pown_dp' => $imageData]);
+                $imageData = file_get_contents($file);
 
-            return response()->json(['success' => 'Profile picture updated successfully']);
-        } else {
+                DB::table('project_owners')
+                    ->where('pown_id', $pown_id)
+                    ->update(['pown_dp' => $imageData]);
+
+                return response()->json(['success' => 'Profile picture updated successfully']);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Profile picture upload failed: ' . $e->getMessage());
             return response()->json(['error' => 'No file uploaded'], 400);
         }
     }
@@ -49,7 +53,7 @@ class ProfileController extends Controller
             $file = $request->file('profilePicture');
 
             $request->validate([
-                'profilePicture' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
+                'profilePicture' => 'image|mimes:jpeg,png,jpg,gif|max:10240',
             ]);
 
             $imageData = file_get_contents($file);

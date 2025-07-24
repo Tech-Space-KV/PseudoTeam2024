@@ -8,8 +8,9 @@ use App\Mail\SendQueryMailCopy;
 use App\Mail\SupportQueryReceived;
 use App\Models\Project;
 use App\Models\ProjectOwner;
+use App\Models\ServiceProvider;
 use Illuminate\Http\Request;
-use App\Mail\SendQueryMail; 
+use App\Mail\SendQueryMail;
 use Mail;
 
 //Implemented by sanskar
@@ -27,7 +28,7 @@ class QueryController extends Controller
             'contact' => 'nullable'
         ]);
 
-        $queryRefId = $request->firstName. '-' . time();
+        $queryRefId = $request->firstName . '-' . time();
 
         $data = [
             'firstName' => $request->firstName,
@@ -52,13 +53,26 @@ class QueryController extends Controller
             'query' => 'required|string|max:1000',
         ]);
 
-        $query = [ 
-           'query' => $request->input('query')
+        $query = [
+            'query' => $request->input('query')
         ];
 
-        $user = ProjectOwner::where('pown_id', session('user_id'))->first();
+        if (session('user_id')) {
+            $user = ProjectOwner::where('pown_id', session('user_id'))->first();
 
-        Mail::to('info@pseudoteam.com')->send(new SupportQueryReceived($user->pown_name, $user->pown_email, $query['query']));
+            if ($user) {
+                Mail::to('info@pseudoteam.com')->send(new SupportQueryReceived($user->pown_name, $user->pown_email, $query['query']));
+            }
+        } elseif (session('sp_user_id')) {
+            $sp = ServiceProvider::where('sprov_id', session('sp_user_id'))->first();
+
+            if ($sp) {
+                Mail::to('info@pseudoteam.com')->send(new SupportQueryReceived($sp->sprov_name, $sp->sprov_email, $query['query']));
+            }
+        } else {
+            \Log::warning('Support query submitted without authenticated user or service provider.');
+            return redirect()->back()->with('error', 'You must be logged in to submit a support query.');
+        }
 
         return redirect()->back()->with('success', 'Your query has been submitted.');
     }
@@ -84,7 +98,7 @@ class QueryController extends Controller
         Mail::to('info@pseudoteam.com')->send(new InquiryMail($data));
 
         return redirect()->back()->with('success', 'Your inquiry has been submitted successfully!');
-    
+
     }
 
     public function contactUs(Request $request)

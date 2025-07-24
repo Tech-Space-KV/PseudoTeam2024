@@ -371,7 +371,7 @@
         data: formData,
         headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
         success: res => {
-          alert(res.success || 'Password updated!');
+          alert(res.message || 'Password updated!');
           window.location.href = res.redirect_url;
         },
         error: xhr => {

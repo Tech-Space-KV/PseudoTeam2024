@@ -215,9 +215,16 @@
       </div>
     `);
 
+
         setTimeout(function () {
         window.location.href = "{{ url('customer/session/marketplace/hardwares-orders') }}";
         }, 2000);
+
+	
+		setTimeout(function () {
+        window.location.href = "{{ url('customer/session/marketplace/hardwares-orders') }}";
+    }, 2000);
+
 
         // // Optionally, redirect to order confirmation page
         // window.location.href = '/order-confirmation';  // Redirect to order confirmation page, for example

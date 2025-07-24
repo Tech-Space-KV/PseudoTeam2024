@@ -14,32 +14,33 @@ class ProfileController extends Controller
     {
         $pown_id = session('user_id');
 
+	\Log::info('working till here! 1');
+
         if (!$pown_id) {
             return response()->json(['error' => 'User not authenticated'], 401);
         }
 
         try {
 
-            if ($request->hasFile('profilePicture')) {
-                $file = $request->file('profilePicture');
+        if ($request->hasFile('profilePicture')) {
+            $file = $request->file('profilePicture');
 
-                $request->validate([
-                    'profilePicture' => 'image|mimes:jpeg,png,jpg,gif|max:10240',
-                ]);
+            $request->validate([
+                'profilePicture' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
+            ]);
 
                 $imageData = file_get_contents($file);
 
-                DB::table('project_owners')
-                    ->where('pown_id', $pown_id)
-                    ->update(['pown_dp' => $imageData]);
+            DB::table('project_owners')
+                ->where('pown_id', $pown_id)
+                ->update(['pown_dp' => $imageData]);
 
-                return response()->json(['success' => 'Profile picture updated successfully']);
-            }
-        } catch (\Exception $e) {
-            \Log::error('Profile picture upload failed: ' . $e->getMessage());
+            return response()->json(['success' => 'Profile picture updated successfully']);
+        } else {
             return response()->json(['error' => 'No file uploaded'], 400);
         }
     }
+}
 
     public function spUploadProfilePicture(Request $request)
     {
@@ -492,4 +493,5 @@ class ProfileController extends Controller
 
         return view('service-partner.profileoptions', ['user' => $user]);
     }
+}
 }

@@ -211,6 +211,8 @@
 
     <br>
 
+    <div class="px-5">
+
     <div class="flex-cards">
         <!-- Clients Card -->
         <div class="card">
@@ -223,14 +225,14 @@
                     <thead>
                         <tr>
                             <th>Sku No.</th>
-                            <th>Name</th>
+                            <th>MARC/Active Passive Services</th>
                             <th>Mark</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($services as $service)
-                            <tr>
+                            <tr class="border">
                                 <td>{{ $service['no'] }}</td>
                                 <td>{{ $service['description'] }}</td>
                                 <td><input type="checkbox" name="spares[]" value="{{ $service['no'] }}"></td>
@@ -259,7 +261,7 @@
                     </thead>
                     <tbody>
                         @foreach($hardwares as $hardware)
-                            <tr>
+                            <tr class="border">
                                 <td>{{ $hardware['hw_identifier'] }}</td>
                                 <td>{{ $hardware['model_description'] }}</td>
                                 <td><input type="checkbox" name="spares[]" value="{{ $hardware['hw_identifier'] }}"></td>
@@ -335,11 +337,12 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit"
-                style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">
+            <button class="btn btn-primary" type="submit">
                 Submit
             </button>
         </form>
+    </div>
+
     </div>
 
     <!-- JavaScript to collect selected checkboxes -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\HardwareImport;
 use App\Imports\HardwaresImport;
 use App\Models\Hardware;
 use Illuminate\Http\Request;
@@ -98,4 +99,25 @@ class HardwareController extends Controller
 
         return view('service-partner.hardware', compact('hardwares'));
     }
+
+    // public function showHardware()
+    // {
+    //     $filePath = storage_path('app/public/hardwares/sample-hardware');
+
+    //     $file = null;
+
+    //     if (file_exists($filePath . '.xlsx')) {
+    //         $file = $filePath . '.xlsx';
+    //     } elseif (file_exists($filePath . '.csv')) {
+    //         $file = $filePath . '.csv';
+    //     } else {
+    //         return back()->with('error', 'No data file found.');
+    //     }
+
+    //     $hardwares = Excel::toArray(new HardwareImport, $file);
+
+    //     $hardwares = $hardwares[0];
+
+    //     return view('/website/ask_for_quote', compact('hardwares'));
+    // }
 }

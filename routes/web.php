@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\HardwareController;
 use App\Http\Controllers\NotificationController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\ReferAndEarnController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TicketController;
 use Dom\Comment;
+use FontLib\Table\Type\post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\QueryController;
@@ -32,6 +34,14 @@ Route::post('/post/inquire/submit', [QueryController::class, 'submitInquery'])->
 
 Route::post('/post/contact/us', [QueryController::class, 'contactUs'])->name('post.contact.us');
 Route::post('/post/sp/contact/us', [QueryController::class, 'spContactUs'])->name('sp.contact.us');
+
+// Route::get('/ask_for_quote' , function () {
+//     return view('website/ask_for_quote');
+// })->name('ask_for_quote');
+
+Route::get('ask/for/quote' , [QuoteController::class, 'show'])->name('ask_for_quote');
+
+Route::post('ask/for/quote' , [QuoteController::class, 'sendQuoteMail'])->name('post.ask_for_quote');
 
 //kal krunga
 

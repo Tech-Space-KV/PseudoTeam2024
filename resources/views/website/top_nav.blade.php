@@ -116,7 +116,7 @@
                 </ul>
 
                 <span class="navbar-text">
-                    <a class="nav-link nav-text px-4 glow-text" href="#" {{--data-bs-toggle="modal" data-bs-target="#exampleModal"--}}>Get Critical Spares & IT Services</a>
+                    <a class="nav-link nav-text px-4 glow-text" href="{{ route('ask_for_quote') }}" {{--data-bs-toggle="modal" data-bs-target="#exampleModal"--}}>Get Critical Spares & IT Services</a>
                 </span>
                 <span class="navbar-text">
                     <a class="btn btn-outline-light px-4" onmouseover="this.style.color='black';"

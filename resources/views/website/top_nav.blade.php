@@ -88,20 +88,20 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0" >
-                    <li class="nav-item" id="menubar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
                         <a class="nav-link nav-text" aria-current="page" href="#">Home</a>
                     </li>
-                    <li class="nav-item" id="menubar">
+                    <li class="nav-item">
                         <a class="nav-link nav-text" href="#services">Services</a>
                     </li>
-                    <li class="nav-item" id="menubar">
+                    <li class="nav-item">
                         <a class="nav-link nav-text" href="#about">About</a>
                     </li>
-                    <li class="nav-item" id="menubar">
+                    <li class="nav-item">
                         <a class="nav-link nav-text" href="#contactus">Contact Us</a>
                     </li>
-                    <li class="nav-item" id="menubar">
+                    <li class="nav-item">
                         <a class="nav-link nav-text" href="#contactus">Our Products</a>
                     </li>
                     {{-- <a href="" style="text-decoration: none"><li class="nav-item">

@@ -82,13 +82,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark px-2 sticky-top px-4"
         style="background-color: rgba(21, 21, 21, 0.812); backdrop-filter: blur(30px);">
         <div class="container-fluid">
-            <img src="{{asset ('images/logopt.png')}}" class="me-2" style="width: 120px;" /> 
+            <a href="{{ route('home') }}"><img src="{{asset ('images/logopt.png')}}" class="me-2" style="width: 120px;" /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0" id="menubar">
                     <li class="nav-item">
                         <a class="nav-link nav-text" aria-current="page" href="#">Home</a>
                     </li>
@@ -125,3 +125,9 @@
             </div>
         </div>
     </nav>
+
+    <script>
+      window.onload = function() {
+        document.getElementById('menubar').style.display = 'none';
+      };
+    </script>

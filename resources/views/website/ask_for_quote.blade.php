@@ -318,7 +318,7 @@
                             <tr class="border">
                                 <td>{{ $service['no'] }}</td>
                                 <td>{{ $service['description'] }}</td>
-                                <td><input type="checkbox" name="spares[]" value="{{ $service['no'] }}"></td>
+                                <td><input type="checkbox" name="services[]" value="{{ $service['no'] }}"></td>
                             </tr>
                         @endforeach
                     </tbody>

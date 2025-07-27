@@ -132,7 +132,7 @@
 
 <script>
   window.onload = function () {
-    if (window.location.hostname != "https://pseudoteam.com/PseudoTeam2024/public/") {
+    if (window.location.hostname === "https://pseudoteam.com/PseudoTeam2024/public/ask/for/quote") {
       const menuItems = document.querySelectorAll("#menubar li");
 
       menuItems.forEach(function (item) {

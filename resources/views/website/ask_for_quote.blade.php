@@ -20,66 +20,150 @@
     <link rel="stylesheet" href="{{ asset('css/web/website_home2.css') }}">
     <!-- Bootstrap Icons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    .navbar {
+      /* background-color: white; */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      color: #ffffff
+    }
+    .navbar-brand img {
+      height: 40px;
+    }
+    .nav-item {
+      padding: 0 15px;
+      text-align: center;
+    }
+    .nav-item .title {
+      font-weight: 600;
+      /* font-size: 14px; */
+    }
+    .nav-item .subtitle {
+      font-size: 12px;
+      color: gray;
+    }
+    .nav-icon {
+      font-size: 20px;
+      margin-bottom: 3px;
+    }
+    .nav-divider {
+      border-left: 1px solid #ddd;
+      height: 40px;
+      margin: 0 10px;
+    }
+    @media (max-width: 991.98px) {
+      .nav-item {
+        padding: 10px 0;
+        text-align: left;
+      }
+    }
+  </style>
+
+    <!-- Custom CSS -->
+    <style>
+        /* SECTION 1: HERO with video background */
+        .hero-section {
+            position: relative;
+            height: 75vh;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        @media (max-width: 1425px) {
+            .hero-section {
+                margin-top: 15%;
+                height: 50vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                margin-top: 15%;
+                height: 30vh;
+            }
+        }
+
+
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .nav-masthead .nav-link {
+            color: rgba(255, 255, 255, 0.75);
+            border-bottom: 0.25rem solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-masthead .nav-link:hover {
+            color: #fff;
+            border-bottom-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* SECTION 2: scrollable content */
+        .content-section {
+            padding: 4rem 1rem;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .nav-masthead img {
+            width: 150px;
+        }
+    </style>
 
     <style>
-        :root {
-            --dark-bg: #111;
-            --panel-bg: #1c1c1c;
-            --card-bg: #fff;
-            --text-dark: #111;
-            --text-light: #fff;
-            --border-light: #444;
+        .card-glass {
+            color: #fff;
+            background-color: rgba(188, 205, 255, 0.149);
+            backdrop-filter: blur(50px);
+        }
+    </style>
+
+
+    <style>
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            background: #000000;
+            border-top: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+            position: relative;
         }
 
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Nunito', sans-serif;
+        .marquee-track {
+            display: flex;
+            animation: scroll-left 20s linear infinite;
+            width: fit-content;
         }
 
-        .navbar {
-            /* background-color: white; */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            color: #ffffff
+        .feature-item {
+            margin: 0 1.5rem;
+            font-weight: bold;
+            color: #5c5c5c;
+            background-color: #dbdbdb;
+            padding: 5px 15px;
+            border-radius: 20px;
+            white-space: nowrap;
         }
 
-        .navbar-brand img {
-            height: 40px;
-        }
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
+            }
 
-        .nav-item {
-            padding: 0 15px;
-            text-align: center;
-        }
-
-        .nav-item .title {
-            font-weight: 600;
-            /* font-size: 14px; */
-        }
-
-        .nav-item .subtitle {
-            font-size: 12px;
-            color: gray;
-        }
-
-        .nav-icon {
-            font-size: 20px;
-            margin-bottom: 3px;
-        }
-
-        .nav-divider {
-            border-left: 1px solid #ddd;
-            height: 40px;
-            margin: 0 10px;
-        }
-
-        @media (max-width: 991.98px) {
-            .nav-item {
-                padding: 10px 0;
-                text-align: left;
+            100% {
+                transform: translateX(-50%);
             }
         }
     </style>
@@ -132,14 +216,13 @@
         }
 
 
-        @media (max-width: 1000px) {
-            .navhide {
-                display: none;
-            }
-        }
+         @media (max-width: 1000px) {
+    .navhide {
+      display: none;
+    }
+  }
     </style>
-
-    <style>
+  <style>
         .card h3 {
             margin-bottom: 15px;
             font-size: 22px;
@@ -205,7 +288,7 @@
 </head>
 
 
-<body style="background-color: black; font-family: Arial, sans-serif;">
+<body style="background-color: black;">
 
     @include('website.top_nav')
 
@@ -215,14 +298,14 @@
 
     <div class="flex-cards">
         <!-- Clients Card -->
-        <div class="card">
+        <div class="card bg-light">
             <h3>
                 Services
                 <button class="search-icon" onclick="openModal('client')">🔍</button>
             </h3>
             <div class="table-container">
                 <table>
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th>Sku No.</th>
                             <th>MARC/Active Passive Services</th>
@@ -244,14 +327,14 @@
         </div>
 
         <!-- Suppliers Card -->
-        <div class="card">
+        <div class="card bg-light">
             <h3>
                 Critical spares & IT Services
                 <button class="search-icon" onclick="openModal('supplier')">🔍</button>
             </h3>
             <div class="table-container">
                 <table>
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th>Sku No.</th>
                             <th>Spare Name</th>
@@ -300,7 +383,7 @@
     <div
         style="margin: 40px auto; width: 80%; padding: 20px; background-color: #1c1c1c; border-radius: 8px; box-sizing: border-box;">
         <h2 style="color: #fff;">Ask for a Quote</h2>
-        <form action="{{ route('post.ask_for_quote') }}" method="post" style="width: 100%;">
+        <form action="{{ route('post.ask_for_quote') }}" method="post" style="width: 100%;" class="text-light">
             @csrf
 
             <input type="hidden" name="selected_services" id="selected_services">

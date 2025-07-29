@@ -191,9 +191,16 @@
       class="btn btn-sm btn-outline-primary me-2" title="Edit H/W Details">
       <i class="fa fa-edit"></i>
       </a>
-      <button class="btn btn-sm btn-outline-danger" title="Delete H/W Details" onclick="confirmDelete(this) data-id="{{ $hardware->hrdws_id }}">
+      <!-- <button class="btn btn-sm btn-outline-danger" title="Delete H/W Details" onclick="confirmDelete(this) data-id="{{ $hardware->hrdws_id }}">
+      <i class="fa fa-trash"></i>
+      </button> -->
+      <button class="btn btn-sm btn-outline-danger delete-hardware" title="Delete H/W Details"
+      data-hardware-id="{{ $hardware->hrdws_id }}">
       <i class="fa fa-trash"></i>
       </button>
+
+
+
       </td>
       </tr>
 
@@ -338,35 +345,99 @@
 
   </script>
 
-  <script>
-  function confirmDelete(button) {
+  <!-- <script>
+    function confirmDelete(button) {
     if (!confirm("Are you sure you want to delete this hardware?")) return;
 
     const row = button.closest("tr");
     const serialNo = row.cells[0].textContent;
     const hardwareId = button.getAttribute("data-id");
+    const url = button.getAttribute('data-url');
 
-    fetch(`/service-partner/session/hardware-details/${hardwareId}`, {
+    fetch(url, {
       method: 'DELETE',
       headers: {
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
       }
     })
-    .then(response => {
+      .then(response => {
       if (!response.ok) {
-        throw new Error('Network response was not OK');
+      throw new Error('Network response was not OK');
       }
       alert(`Hardware with Serial No: ${serialNo} has been deleted.`);
       row.remove();
-    })
-    .catch(error => {
+      })
+      .catch(error => {
       console.error('Error deleting hardware:', error);
       alert('Failed to delete hardware.');
+      });
+    }
+    </script> -->
+
+
+  <!-- <script>
+    function confirmDelete(button) {
+    if (!confirm("Are you sure you want to delete this hardware? This action cannot be undone.")) return;
+
+    const row = button.closest("tr");
+    const serialNo = row.cells[0].textContent;
+    const url = button.getAttribute("data-url");
+
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+      if (!response.ok) {
+      return response.json().then(data => {
+      throw new Error(data.message || "Delete failed.");
+      });
+      }
+      alert(`Hardware with Serial No: ${serialNo} has been deleted.`);
+      row.remove();
+      })
+      .catch(error => {
+      console.error('Error deleting hardware:', error);
+      alert('Failed to delete hardware. ' + error.message);
+      });
+    }
+    </script> -->
+
+    <script>
+$(document).ready(function () {
+  $('.delete-hardware').on('click', function () {
+    if (!confirm("Are you sure you want to delete this hardware?")) return;
+
+    var hardwareId = $(this).data('hardware-id');
+    var url = '{{ route("hardware.destroy", ":id") }}'.replace(':id', hardwareId);
+    var button = $(this);
+    var row = button.closest("tr");
+
+    $.ajax({
+      url: url,
+      method: 'DELETE',
+      data: {
+        _token: $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response) {
+        alert(response.message || 'Hardware removed successfully.');
+        row.remove(); // Remove the row from the table
+      },
+      error: function (xhr, status, error) {
+        console.error('Error:', error);
+        alert('Failed to remove hardware.');
+      }
     });
-  }
+  });
+});
 </script>
+
 
 
 

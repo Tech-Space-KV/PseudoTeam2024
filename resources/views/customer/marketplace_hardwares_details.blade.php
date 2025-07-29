@@ -4,20 +4,29 @@
   </br>
   <div class="container">
     <div class="mb-4" id="message-container">
-      
+
     <h2 style="font-size: 24px; font-weight: bold; color: #333;">Hardware Details</h2>
 
-          @if(session('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('success') }}
-                </div>
-          @endif
+    @if(session('success'))
+    <div class="alert alert-success" role="alert">
+      {{ session('success') }}
+    </div>
 
-          @if(session('error'))
-                <div class="alert alert-danger" role="alert">
-                    {{ session('error') }}
-                </div>
-          @endif
+    <script>
+
+      setTimeout(function () {
+      window.location.href = "{{ route('project.track') }}";
+      }, 1500);
+
+    </script>
+
+    @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger" role="alert">
+      {{ session('error') }}
+    </div>
+    @endif
 
     </div>
     <div class="container w-100 mb-4">
@@ -25,9 +34,9 @@
     <form id="hardware-form" action="addToCart" method="POST"
       style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
       @csrf
- 
-     <!-- code added by sanskar on 24/02/2025 -->
-      <input type="hidden" id="hrdws_id" name="cart_hw_id" value="{{ $hardware->hrdws_id }}"/>
+
+      <!-- code added by sanskar on 24/02/2025 -->
+      <input type="hidden" id="hrdws_id" name="cart_hw_id" value="{{ $hardware->hrdws_id }}" />
 
       <div style="margin-bottom: 20px;">
       <label for="serialNumber" style="font-weight: bold; font-size: 16px; color: #555;">Serial Number</label><br>
@@ -62,7 +71,8 @@
       <input type="number" id="quantity" required name="cart_qty"
         style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;"
         placeholder="{{ $hardware->hrdws_qty }}" min="1" max="{{ $hardware->hrdws_qty }}">
-      <small style="display: block; margin-top: 5px; font-size: 14px; color: #777;">Quantity available: <span id="availableQuantity" style="font-weight: bold;">{{ $hardware->hrdws_qty }}</span></small>
+      <small style="display: block; margin-top: 5px; font-size: 14px; color: #777;">Quantity available: <span
+        id="availableQuantity" style="font-weight: bold;">{{ $hardware->hrdws_qty }}</span></small>
       </div>
 
       <div style="margin-bottom: 20px;">
@@ -87,7 +97,7 @@
       </div>
 
       <input type="submit" onclick="submitForm()" value="Add To Cart"
-      style="width: 20%;  padding: 12px; background-color: #007bff; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;"/>
+      style="width: 20%;  padding: 12px; background-color: #007bff; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;" />
     </form>
     </div>
   </div>
@@ -107,9 +117,9 @@
       // alert("Please enter a valid quantity.");
 
       document.getElementById('message-container').innerHTML = `
-        <div class="alert alert-warning" role="alert">
-          Please enter a valid quantity.
-        </div>
+      <div class="alert alert-warning" role="alert">
+        Please enter a valid quantity.
+      </div>
       `;
 
       document.getElementById('message-container').scrollIntoView({ behavior: 'smooth' });
@@ -124,9 +134,9 @@
       // alert(`Quantity cannot exceed the available quantity (${availableQuantity}).`);
 
       document.getElementById('message-container').innerHTML = `
-        <div class="alert alert-warning" role="alert">
-          Quantity cannot exceed the available quantity (${availableQuantity}).
-        </div>
+      <div class="alert alert-warning" role="alert">
+        Quantity cannot exceed the available quantity (${availableQuantity}).
+      </div>
       `;
 
       quantityInput.focus();
@@ -140,13 +150,13 @@
 
       document.getElementById('hardware-form').submit();
       // alert('Item added to cart successfully!');
-      
+
     } else {
       // alert('Please fill in all required fields.');
       document.getElementById('message-container').innerHTML = `
-        <div class="alert alert-warning" role="alert">
-        Please fill in all required fields.
-        </div>
+      <div class="alert alert-warning" role="alert">
+      Please fill in all required fields.
+      </div>
       `;
 
       document.getElementById('message-container').scrollIntoView({ behavior: 'smooth' });

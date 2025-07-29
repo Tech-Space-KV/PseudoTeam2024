@@ -39,9 +39,9 @@ Route::post('/post/sp/contact/us', [QueryController::class, 'spContactUs'])->nam
 //     return view('website/ask_for_quote');
 // })->name('ask_for_quote');
 
-Route::get('ask/for/quote' , [QuoteController::class, 'show'])->name('ask_for_quote');
+Route::get('ask/for/quote', [QuoteController::class, 'show'])->name('ask_for_quote');
 
-Route::post('ask/for/quote' , [QuoteController::class, 'sendQuoteMail'])->name('post.ask_for_quote');
+Route::post('ask/for/quote', [QuoteController::class, 'sendQuoteMail'])->name('post.ask_for_quote');
 
 //kal krunga
 
@@ -408,9 +408,18 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
     Route::get('/hardware-orders', function () {
         return view('/service-partner/marketplace_hardwares_orders');
     });
-    Route::get('/hardware-details', function () {
-        return view('/service-partner/marketplace_hardwares_details');
+    // Route::get('/hardware-details', function () {
+    //     return view('/service-partner/marketplace_hardwares_details');
+    // });
+
+    Route::get('/hardware-details/{hrdws_id}', function ($hrdws_id) {
+        return (new HardwareController)->editHardwareDetails($hrdws_id);
     });
+
+    Route::put('/hardware/update/{hrdws_id}', [HardwareController::class, 'updateHardware'])->name('hardware.update');
+
+    Route::delete('/hardware-details/{id}', [HardwareController::class, 'destroy'])->name('hardware.destroy');
+
     // Route::get('service-partner/session/reports', function () {
     //     return view('/service-partner/reports');
     // });

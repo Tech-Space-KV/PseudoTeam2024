@@ -120,4 +120,92 @@ class HardwareController extends Controller
 
     //     return view('/website/ask_for_quote', compact('hardwares'));
     // }
+
+    public function editHardwareDetails($hrdws_id)
+    {
+
+        \Log::info('Editing hardware details for ID: ' . $hrdws_id);
+
+        $hardware = Hardware::where('hrdws_id', $hrdws_id)->first();
+
+
+        if ($hardware) {
+            return view('service-partner.marketplace_hardwares_details', compact('hardware'))->with('editMode', true);
+        }
+
+        return back()->with('error', 'Problem while fetching hardware details');
+    }
+
+    // public function updateHardware(Request $request, $hrdws_id){
+
+    //     \Log::info('Updating hardware details for ID: ' . $hrdws_id);
+
+    //     $hardware = Hardware::where('hrdws_id', $hrdws_id)->first();
+
+    //     if (!$hardware) {
+
+    //         return back()->with('error', 'Hardware not found');
+
+    //     }
+
+    //     $hardware->update($request->all());
+
+    //     return back()->with('success', 'Hardware updated successfully');
+    // }
+
+    public function updateHardware(Request $request, $hrdws_id)
+    {
+        \Log::info('Updating hardware details for ID: ' . $hrdws_id);
+        \Log::info('Request Data:', $request->all());
+
+        $hardware = Hardware::where('hrdws_id', $hrdws_id)->first();
+
+        if (!$hardware) {
+            return back()->with('error', 'Hardware not found');
+        }
+
+        // Optional: Validation
+        $request->validate([
+            'serialNumber' => 'required|string',
+            'hardwareIdentifier' => 'required|string',
+            'modelNumber' => 'required|string',
+            'modelDescription' => 'required|string',
+            'quantity' => 'required|integer|min:1',
+            'family' => 'nullable|string',
+            'city' => 'nullable|string',
+            'state' => 'nullable|string',
+        ]);
+
+        // Manually assign values
+        $hardware->hrdws_serial_number = $request->serialNumber;
+        $hardware->hrdws_hw_identifier = $request->hardwareIdentifier;
+        $hardware->hrdws_model_number = $request->modelNumber;
+        $hardware->hrdws_model_description = $request->modelDescription;
+        $hardware->hrdws_qty = $request->quantity;
+        $hardware->hrdws_family = $request->family;
+        $hardware->hrdws_city = $request->city;
+        $hardware->hrdws_state = $request->state;
+
+        $hardware->save();
+
+        return back()->with('success', 'Hardware updated successfully');
+    }
+
+    public function destroy($id)
+    {
+        \Log::info('Deleting hardware with ID: ' . $id);
+
+        $hardware = Hardware::find($id);
+
+        if (!$hardware) {
+            return response()->json(['message' => 'Hardware not found.'], 404);
+        }
+
+        $hardware->delete();
+
+        \Log::info('Hardware deleted successfully.');
+
+        return response()->json(['message' => 'Hardware deleted successfully.']);
+    }
+
 }

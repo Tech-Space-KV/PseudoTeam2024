@@ -33,18 +33,18 @@
       <main class="form-signin w-100 m-auto">
         <form method="POST" action="{{ route('sp.set-password') }}">
           @csrf
-          <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
+          <img src="{{asset('images/logo_pt.png')}}" class="rounded-3" style="width: 180px;">
           <h1 class="h5 mb-3 ms-1 text-muted">Set Password</h1>
           <hr>
           <input type="hidden" name="user_id" value="{{ $id }}">
           <div class="form-floating mb-3 mt-3">
-            <input type="password" class="form-control" id="floatingInput" name="password" placeholder="name@example.com"
-              required>
+            <input type="password" class="form-control" id="floatingInput" name="password"
+              placeholder="name@example.com" required>
             <label for="floatingInput">New Password</label>
           </div>
           <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" name="password_confirmation" placeholder="Password"
-              required>
+            <input type="password" class="form-control" id="floatingPassword" name="password_confirmation"
+              placeholder="Password" required>
             <label for="floatingPassword">Confirm Password</label>
           </div>
 
@@ -72,7 +72,7 @@
       <ul>
         @foreach ($errors->all() as $error)
       <li>{{ $error }}</li>
-    @endforeach
+      @endforeach
       </ul>
       </div>
     @endif

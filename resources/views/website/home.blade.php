@@ -65,7 +65,7 @@
         /* SECTION 1: HERO with video background */
         .hero-section {
             position: relative;
-            height: 75vh;
+            height: 80vh;
             color: white;
             display: flex;
             justify-content: center;
@@ -269,6 +269,30 @@
 
             </main>
         </div>
+            <!-- <div class="my-5" style="background-color: rgba(255, 255, 255, 1); backdrop-filter: blur(30px);">
+                <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3  shadow-lg mb-4">
+                    <div class="col-lg-6 p-3 p-lg-5 pt-lg-3">
+                        <h3><img src="{{asset('images/logo_pt.png')}}" /></h3>
+                        <h3 class="display-5 fw-bold lh-1 text-pt">A Marketplace That Delivers,</h3>
+                        <h3 class="display-5 fw-bold lh-1 text-pt">Not Just Connects</h3>
+                        <p class="lead text-pt fw-bold">
+                            Your Project Marketplace with Built-In Management
+                        </p>
+                        <a href="resources/views/website/top_nav.blade.php"><div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                            <div class="input-group mb-3"><input id="searchInput" type="text" class="form-control border border-primary border-2 fw-bold" placeholder="Search critical spares here..." aria-label="Recipient's username" aria-describedby="button-addon2">
+  <button class="btn  border border-primary border-2 btn-outline-primary" type="button" id="button-addon2">Search</button>
+</div></a>
+              </div>
+                    </div>
+                    <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden ">
+                         <video autoplay muted loop playsinline class=""  width="500">
+                            <source src="{{ asset('images/bgrd6.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div> -->
+
     </section>
 
 
@@ -837,6 +861,47 @@
             }
         });
     </script>
+
+<script>
+  const phrases = [
+    "Search critical spares here...",
+    "Search IT Services here...",
+    "Search your requirement here..."
+  ];
+
+  const input = document.getElementById("searchInput");
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function typeEffect() {
+    const currentPhrase = phrases[phraseIndex];
+    
+    if (isDeleting) {
+      charIndex--;
+      input.placeholder = currentPhrase.substring(0, charIndex);
+    } else {
+      charIndex++;
+      input.placeholder = currentPhrase.substring(0, charIndex);
+    }
+
+    let delay = isDeleting ? 20 : 50;
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      delay = 1300; // Wait before deleting
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      delay = 500;
+    }
+
+    setTimeout(typeEffect, delay);
+  }
+
+  // Start the effect
+  typeEffect();
+</script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

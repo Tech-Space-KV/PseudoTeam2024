@@ -251,7 +251,7 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, .15);
             position: relative;
             overflow: hidden;
-            max-height: 300px;
+            max-height: 450px;
             /* Optional: Limit total card height */
             display: flex;
             flex-direction: column;
@@ -290,17 +290,44 @@
 
 <body style="background-color: black;">
 
-    @include('website.top_nav')
+   <nav class="navbar navbar-expand-lg navbar-dark px-2 sticky-top px-4"
+  style="background-color: rgba(21, 21, 21, 0.812); backdrop-filter: blur(30px);">
+  <div class="container-fluid">
+    <a href="{{ route('home') }}"><img src="{{asset('images/logo_pt3.png')}}" class="me-2" style="width: 120px;" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+        
+      </ul>
+      <span class="navbar-text d-flex flex-column align-items-center me-3">
+  <span style="color: #fff; font-size: 0.9rem;">📞Contact us: +91-9876543210</span>
+  <a class="nav-link nav-text px-4 glow-text" href="{{ route('ask_for_quote') }}">
+    Get Critical Spares & IT Services
+  </a>
+</span>
+
+      <span class="navbar-text">
+        <a class="btn btn-outline-light px-4" onmouseover="this.style.color='black';"
+          onmouseout="this.style.color='white';" href="{{ url('/authentication/customer/sign-in') }}">Manage Project</a>
+      </span>
+    </div>
+  </div>
+</nav>
 
     <br>
-
-    <div class="px-5">
+    <center>
+<h3 class="text-secondary display-5">Ask For a Quote</h3>
+<p class="text-secondary">Get IT Services and Critical Spares</p>
+    </center>    
+<div class="px-5 mt-5">
 
     <div class="flex-cards">
         <!-- Clients Card -->
         <div class="card bg-light">
             <h3>
-                Services
+                Select Services
                 <button class="search-icon" onclick="openModal('client')">🔍</button>
             </h3>
             <div class="table-container">
@@ -329,7 +356,7 @@
         <!-- Suppliers Card -->
         <div class="card bg-light">
             <h3>
-                Critical spares & IT Services
+                Select Critical spares
                 <button class="search-icon" onclick="openModal('supplier')">🔍</button>
             </h3>
             <div class="table-container">
@@ -382,7 +409,7 @@
 
     <div
         style="margin: 40px auto; width: 80%; padding: 20px; background-color: #1c1c1c; border-radius: 8px; box-sizing: border-box;">
-        <h2 style="color: #fff;">Ask for a Quote</h2>
+        <h2 style="color: #fff;" class="mb-3">Complete your request</h2>
         <form action="{{ route('post.ask_for_quote') }}" method="post" style="width: 100%;" class="text-light">
             @csrf
 
@@ -427,6 +454,7 @@
     </div>
 
     </div>
+    <br>
 
     <!-- JavaScript to collect selected checkboxes -->
     <script>

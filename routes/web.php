@@ -521,6 +521,15 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
     Route::get('/cinid', [ProfileController::class, 'spGetCinGovId'])->name('profileController.get.cinid.sp');
     Route::post('/change-password', [ProfileController::class, 'spChangePassword'])->name('profileController.changePassword.sp');
 
+    Route::get('/tickets', [TicketController::class, 'spFetchTickets'])->name('service-partner.tickets');
+
+    Route::get('/ticketdetails/{tckt_id}', function ($tckt_id) {
+        return (new TicketController)->spTicketDetails($tckt_id);
+    });
+
+    Route::put('/ticket/update/{tckt_id}', [TicketController::class, 'updateTicket'])->name('sp.ticket.update');
+
+    Route::get('/ticket/{id}/email', [TicketController::class, 'spSendTicketEmail'])->name('ticket.cancellation.mail');
 
 });
 

@@ -1,0 +1,143 @@
+@extends('service-partner.base_layout')
+
+@section('content')
+
+    </br>
+    <div class="container">
+        <div class="">
+            <h2>Tickets</h2>
+            @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+
+        <form action="#" method="POST" enctype="multipart/form-data" @if($readonly) disabled @endif>
+            @csrf
+            <h5 class="mt-4 mb-4 text-pseudo">
+                <span class="fa fa-bars"></span> Details of support ticket
+            </h5>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="tckt_title" placeholder="Issue"
+                    value="{{ $readonly ? $ticket->tckt_title : old('tckt_title') }}" {{ $readonly ? 'readonly' : '' }}>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <!-- <input type="textarea" class="form-control" id="description" placeholder="About project"> -->
+                <textarea id="description" name="tckt_description" class="form-control"
+                    placeholder="Please elaborate your issue" {{ $readonly ? 'readonly' : '' }}>{{ $readonly ? $ticket->tckt_description : old('tckt_description') }}</textarea>
+            </div>
+
+            @if($readonly)
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <input type="text" id="ticketStatus" name="tckt_status" class="form-control"
+                        value="{{ $ticket->tckt_status }}" readonly>
+                </div>
+            @endif
+
+
+            <div class="mb-3">
+                <label for="sow" class="form-label">Add Attachment</label>
+                <input type="file" class="form-control" id="screenshot" name="tckt_attachment" placeholder="Add Attachment"
+                    {{ $readonly ? 'disabled' : '' }}>
+                @if($readonly && $ticket->tckt_attachment)
+                    <a href="{{ route('ticket.attachment', $ticket->tckt_id) }}" target="_blank">View Attachment</a>
+                @endif
+            </div>
+
+            @if($readonly)
+                <div class="mb-3">
+                    <label for="assignedManager" class="form-label">Assigned Manager</label>
+                    <input type="text" class="form-control" id="assignedManager" name="assigned_manager"
+                        placeholder="Assigned Manager" value="{{ $assignedManager['username'] ?? ' ' }}" readonly> <br>
+                    <label for="manager_email" class="form-label">Manager Email</label>
+                    <input type="text" class="form-control" name="manager_email" id="manager_email" placeholder="Manager Email"
+                        value="{{ $assignedManager['email'] ?? ' ' }}" readonly>
+                </div>
+            @endif
+
+            <!-- 
+        <div class="mb-3">
+          <label for="assignedManager" class="form-label">Assigned Manager</label>
+          <input type="text" class="form-control" id="assignedManager" name="assigned_manager"
+          placeholder="Assigned Manager" value="{{ $readonly ? $ticket->assigned_manager : old('assigned_manager') }}" {{ $readonly ? 'readonly' : '' }}>
+          <input type="text" name="manager_email" id="manager_email" placeholder="Manager Email"
+          value="{{ $readonly ? $ticket->manager_email : old('manager_email') }}" {{ $readonly ? 'readonly' : '' }}>
+        </div> -->
+
+            <!-- <div class="row">
+          <label for="projectIs" class="form-label">Ticket type</label>
+          <select class="form-select" id="tickettype" name="#">
+          <option selected>--Select type--</option>
+          <option value="t1">On Site</option>
+          <option value="t2">On Remote</option>
+          <option value="t3">t3</option>
+          </select>
+
+        </div>
+
+        <h5 class="mt-4 mb-4 text-pseudo">
+          <span class="fa fa-bars"></span> Define interval
+        </h5>
+
+        <div class="row">
+
+          <label for="startDate" class="form-label">Start date</label>
+          <input type="date" class="form-control" id="startDate" placeholder="Start date">
+
+
+        </div>
+
+
+        <h5 class="mt-4 mb-4 text-pseudo">
+          <span class="fa fa-bars"></span> Details of the person to be contacted by PseudoTeam
+        </h5>
+
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="title" placeholder="Name of the authorised person">
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="title" placeholder="Email of the authorised person">
+        </div>
+
+        <div class="mb-3">
+          <label for="contact" class="form-label">Contact</label>
+          <input type="text" class="form-control" id="title" placeholder="Contact no. of authorised person">
+        </div>
+
+
+        <h5 class="mt-4 mb-4 text-pseudo">
+          <span class="fa fa-bars"></span> Apply coupons/promo code <sup>(Optional)</sup>
+        </h5>
+
+        <div class="mb-3">
+          <label for="coupon" class="form-label">Coupon/Promo Code</label>
+          <input type="text" class="form-control" id="title" placeholder="Add your coupon or promocode here">
+        </div> -->
+
+            <!-- <button type="submit" class="btn btn-primary">Upload</button> -->
+
+            <!-- @if(!$readonly)
+        <button type="submit" class="btn btn-primary">Upload</button>
+        @endif -->
+
+            <a href="{{ route('ticket.cancellation.mail') }}"><button class="btn btn-primary">Request Cancellation</button></a>
+
+        </form>
+    </div>
+
+@endsection

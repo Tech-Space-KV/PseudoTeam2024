@@ -59,10 +59,10 @@
     <div class="mb-3">
       <label for="assignedManager" class="form-label">Assigned Manager</label>
       <input type="text" class="form-control" id="assignedManager" name="assigned_manager"
-      placeholder="Assigned Manager" value="{{ $ticket->assigned_manager }}" readonly> <br>
+      placeholder="Assigned Manager" value="{{ $assignedManager['username'] ?? ' ' }}" readonly> <br>
       <label for="manager_email" class="form-label">Manager Email</label>
       <input type="text" class="form-control" name="manager_email" id="manager_email" placeholder="Manager Email"
-      value="{{ $ticket->manager_email }}" readonly>
+      value="{{ $assignedManager['email'] ?? ' ' }}" readonly>
     </div>
     @endif
 

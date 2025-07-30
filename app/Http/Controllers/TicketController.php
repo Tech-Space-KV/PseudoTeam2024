@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TicketCancellationMail;
 use App\Mail\TicketRaised;
 use App\Mail\TicketRaisedCopy;
 use App\Models\ProjectOwner;
+use App\Models\ServiceProvider;
 use App\Models\Ticket;
+use App\Models\WeUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -93,7 +96,11 @@ class TicketController extends Controller
     {
         $ticket = Ticket::where('tckt_id', $tckt_id)->first();
 
-        return view('customer.ticket', ['ticket' => $ticket, 'readonly' => true]);
+        $assignedManager = $ticket->tckt_asgnd_to_pt_id ? WeUsers::where('id', $ticket->tckt_asgnd_to_pt_id)->first()->only('username', 'email') : null;
+
+        \Log::info('assignedManager', ['assignedManager' => $assignedManager]);
+
+        return view('customer.ticket', ['ticket' => $ticket, 'readonly' => true , 'assignedManager' => $assignedManager]);
     }
 
     public function viewAttachment($id)
@@ -111,6 +118,41 @@ class TicketController extends Controller
         return response($ticket->tckt_attachment)
             ->header('Content-Type', $mime ?? 'application/octet-stream')
             ->header('Content-Disposition', 'inline; filename="attachment"');
+    }
+
+    public function spFetchTickets()
+    {
+        \Log::info('Fetching tickets for service provider');
+
+        $spId = session('sp_user_id');
+
+        if (!$spId) {
+            return redirect()->back()->with('error', 'Service Provider ID not found!');
+        }
+
+        $tickets = Ticket::where('tckt_asgnd_to_sp_id', $spId)->get();
+
+        return view('service-partner.tickets', compact('tickets'));
+    }
+
+     public function spTicketDetails($tckt_id)
+    {
+        $ticket = Ticket::where('tckt_id', $tckt_id)->first();
+
+        $assignedManager = $ticket->tckt_asgnd_to_pt_id ? WeUsers::where('id', $ticket->tckt_asgnd_to_pt_id)->first()->only('username', 'email') : null;
+
+        \Log::info('assignedManager', ['assignedManager' => $assignedManager]);
+
+        return view('service-partner.ticket-details', ['ticket' => $ticket, 'readonly' => true , 'assignedManager' => $assignedManager]);
+    }
+
+    public function spSendTicketEmail($id)
+    {
+        \Log::info('Sending cancellation email for ticket ID: ' . $id);
+
+        Mail::to('info@pseudoteam.com')->send(new TicketCancellationMail($id , session('sp_user_id')));
+
+        return redirect()->back()->with('success', 'Cancellation email has been sent successfully.');
     }
 
 }

@@ -220,7 +220,7 @@
     <div class="divider-bottom"></div>
   </section>
 
-  <!-- TEAM -->
+  <!-- TEAM
   <section class="team text-center" data-aos="fade-up">
     <div class="container">
       <h2>Meet the Team</h2>
@@ -243,7 +243,7 @@
       </div>
     </div>
     <div class="divider-bottom"></div>
-  </section>
+  </section> -->
 
   <!-- TESTIMONIALS -->
   <section class="testimonials bg-light" data-aos="fade-up">

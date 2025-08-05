@@ -8,6 +8,7 @@ use App\Mail\ServicePartnerSignUpMail;
 use App\Mail\ServicePartnerSignUpMailCopy;
 use App\Models\Cart;
 use App\Models\ProjectOwners;
+use App\Models\ReferralTable;
 use App\Models\ServiceProvider;
 use Carbon\Carbon;
 use DB;
@@ -36,12 +37,25 @@ class AuthController extends Controller
             'email' => 'required|email',
             // 'contact' => ['required', 'regex:/^\+?[0-9]{10,15}$/', 'unique:users,contact'],
             'contact' => ['required', 'regex:/^\+?[0-9]{10,15}$/'],
+            'promo_code' => 'nullable|string|max:255',
         ]);
+
+        if ($validated['promo_code']) {
+
+            $flag = ReferralTable::where('rfrls_promo_code', $validated['promo_code'])->exists();
+            if (!$flag) {
+                return redirect()->back()->withErrors(['promo_code_error' => 'Invalid promo code.']);
+            } else {
+                $flag->rfrls_onboard_flag = true;
+                $flag->save();
+            }
+        }
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'contact' => $validated['contact'],
+            'promo_code' => $validated['promo_code'] ?? null,
             'user_type' => 'customer',
         ]);
 
@@ -63,12 +77,25 @@ class AuthController extends Controller
                 'email' => 'required|email',
                 // 'contact' => ['required', 'regex:/^\+?[0-9]{10,15}$/', 'unique:users,contact'],
                 'contact' => ['required', 'regex:/^\+?[0-9]{10,15}$/'],
+                'promo_code' => 'nullable|string|max:255',
             ]);
+
+            if ($validated['promo_code']) {
+
+                $flag = ReferralTable::where('rfrls_promo_code', $validated['promo_code'])->exists();
+                if (!$flag) {
+                    return redirect()->back()->withErrors(['promo_code_error' => 'Invalid promo code.']);
+                } else {
+                    $flag->rfrls_onboard_flag = true;
+                    $flag->save();
+                }
+            }
 
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'contact' => $validated['contact'],
+                'promo_code' => $validated['promo_code'] ?? null,
                 'user_type' => 'SP',
             ]);
 
@@ -619,7 +646,7 @@ class AuthController extends Controller
 
         $response = response()
             ->redirectToRoute('home')
-            ->with('success', 'You have been logged out.');
+            ->with('success_logout', 'You have been logged out.');
 
         $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
         $response->header('Pragma', 'no-cache');

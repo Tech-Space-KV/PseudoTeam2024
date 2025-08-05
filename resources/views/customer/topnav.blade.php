@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light mb-4">
     <div class="container-fluid">
-        <a class="navbar-brand ms-2 text-primary" onclick="showleftbar()">
+        <!-- <a class="navbar-brand ms-2 text-primary" onclick="showleftbar()">
             <span class="navbar-toggler-icon"></span>
-        </a>
+        </a> -->
         <div class="mx-auto w-75">
             <form class="d-flex" action="/customer/session/search_project" method="GET">
                 <input class="form-control form-control-sm me-2 rounded-pill" type="search" name="query"
@@ -15,8 +15,8 @@
 
         </div>
 
-        <a class="navbar-brand ms-2 text-primary">
+        <!-- <a class="navbar-brand ms-2 text-primary">
             <span class="navbar-toggler-icon"></span>
-        </a>
+        </a> -->
     </div>
 </nav>

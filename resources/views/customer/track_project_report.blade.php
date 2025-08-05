@@ -6,7 +6,7 @@
 </br>
 <div class="container">
 <div class="mb-4">
-    <h2>Track your project</h2>
+    <h2 class="fw-bold">Track Your Project</h2>
 </div>
 <div class="d-flex justify-content-end">
   <div class="btn-toolbar mb-2 mb-md-0">

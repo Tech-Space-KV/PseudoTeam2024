@@ -7,7 +7,7 @@
 <div class="container  " style="height: 100vh;">
 
   <div class="mb-4 ">
-    <h2>Manage Account</h2>
+    <h2 class="fw-bold">Manage Account</h2>
   </div>
   <div class="row " style="height: 100%;">
 

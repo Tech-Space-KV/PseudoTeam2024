@@ -5,7 +5,7 @@
   </br>
   <div class="container">
     <div class="mb-4">
-    <h2>Order No: {{ $ordplcd_order_no }}</h2>
+    <h2 class="fw-bold">Order No: {{ $ordplcd_order_no }}</h2>
     </div>
     </br>
 

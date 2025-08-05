@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Company Newsletter</title>
+    <title>Your Quote Request Received</title>
     <style>
         body {
             margin: 0;
@@ -40,7 +40,7 @@
 
         .content h1 {
             color: #006EC4;
-            font-size: 24px;
+            font-size: 22px;
             margin-bottom: 10px;
         }
 
@@ -71,23 +71,22 @@
 
 <body>
     <div class="container">
-        <!-- Header with logo -->
+        <!-- Header -->
         <div class="header">
-            <img src="{{asset('images/logo_pt3.png')}}"  alt="Pseudoteam Logo">
+            <img  src="{{asset('images/logo_pt3.png')}}" alt="Pseudoteam Logo">
         </div>
 
-        <!-- Content Section -->
+        <!-- Content -->
         <div class="content">
-            <h1>Quote Request</h1>
-            <p>Hello {{ $formData['name'] }},</p>
-            <p>
-                You have received a new quote request from <strong>{{ $formData['name'] }}</strong>.
-            </p>
+            <h1>Thank you, {{ $formData['name'] }}!</h1>
+            <p>We’ve received your quote request. Our team will review your query and get back to you shortly.</p>
+
+            <p><strong>Here’s a summary of your request:</strong></p>
 
             <p><strong>Email:</strong> {{ $formData['email'] }}</p>
             <p><strong>Contact:</strong> {{ $formData['contact'] }}</p>
             <p><strong>Company:</strong> {{ $formData['company'] ?? 'N/A' }}</p>
-            <p><strong>Query:</strong><br>{{ $formData['query'] }}</p>
+            <p><strong>Your Message:</strong><br>{{ $formData['query'] }}</p>
 
             <h3>Selected Services:</h3>
             <ul>
@@ -107,15 +106,14 @@
                 @endforelse
             </ul>
 
-            <p style="margin-top: 20px;">Please respond to the client promptly.</p>
+            <p>We appreciate your interest in Pseudoteam.</p>
 
             <p>Best regards,<br><strong>Pseudoteam</strong></p>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            © 2025 Pseudoteam. All rights reserved.<br>
-            You are receiving this email because you are an administrator of the quote system.
+            © 2025 Pseudoteam. This email confirms we’ve received your request.
         </div>
     </div>
 </body>

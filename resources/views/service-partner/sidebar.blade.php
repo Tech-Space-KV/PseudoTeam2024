@@ -1,5 +1,5 @@
 <div class="sidebar" id="sidebar">
-    <a class="navbar-brand mx-auto" href="/">
+    <a class="navbar-brand mx-auto" href="#">
         <img src="{{ asset('images/logopt.png') }}" id="set-img-logo" class="rounded-3 mx-auto"
             style="width: 150px; margin-bottom:-30px; margin-top:-20px;">
     </a>

@@ -7,7 +7,7 @@
   </br>
   <div class="container">
 
-    <h2>Your Cart</h2>
+    <h2 class="fw-bold">Your Cart</h2>
 
     <div class="mb-4" id="message-container">
     @if(session('success'))

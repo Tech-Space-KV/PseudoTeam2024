@@ -15,16 +15,16 @@
   <title>PseudoTeam</title>
 
   <style>
-        .bg-gif3 {
-            background: url('{{ asset('images/customer-sign-bg.png') }}') no-repeat center center;
-            background-size: cover;
-            position: relative;
-            min-height: 100vh;
-            z-index: 0;
-        }
-    </style>
+    .bg-gif3 {
+      background: url('{{ asset('images/customer-sign-bg.png') }}') no-repeat center center;
+      background-size: cover;
+      position: relative;
+      min-height: 100vh;
+      z-index: 0;
+    }
+  </style>
 
-</head> 
+</head>
 
 <body class="align-items-center bg-dark bg-gif3">
 
@@ -43,9 +43,9 @@
           <hr>
 
           <div class="">
-            @if(session('success'))
+            @if(session('success_logout'))
         <div class="alert alert-success" role="alert">
-          {{ session('success') }}
+          {{ session('success_logout') }}
         </div>
       @endif
 
@@ -88,7 +88,13 @@
 
             <a href="{{ route('customer.forgot-password') }}" class="text-decoration-none">Forgot Password?</a>
           </div>
-          <button class="btn btn-primary w-100 py-2" type="submit">Sign In</button>
+          <!-- <button class="btn btn-primary w-100 py-2" type="submit">Sign In</button> -->
+
+          <div class="text-center mt-3">
+            <button class="btn btn-primary py-2 px-4 rounded-pill" type="submit" style="width: 180px;">
+              Sign In
+            </button>
+          </div>
 
           <p class="mt-3 text-center">New user? <a href="{{ url('/authentication/customer/sign-up') }}"
               class="text-decoration-none">Sign Up</a></p>

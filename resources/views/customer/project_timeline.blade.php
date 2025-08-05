@@ -7,7 +7,7 @@
     <!-- Project Timeline Section -->
     <div>
         <!-- <h2 class="mb-0">Project Timeline: &lt;Project ID : {{ $projectTimeline->first()->pptasks_planner_id }}&gt;</h2> -->
-             <h2>Track your project - Task timeline</h2>
+             <h2 class="fw-bold">Track your project - Task timeline</h2>
     </div>
 
     <!-- Share Invite Section -->

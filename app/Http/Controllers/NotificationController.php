@@ -11,8 +11,8 @@ class NotificationController extends Controller
     {
         $customerId = session('user_id');
 
-        $notifications = Notification::orderBy('ntfn_id' , 'desc')->where('ntfn_forUserId' , $customerId)
-        ->where('ntfn_type' , 'cust')->get();
+        $notifications = Notification::orderBy('ntfn_id', 'desc')->where('ntfn_forUserId', $customerId)
+            ->where('ntfn_type', 'cust')->get();
 
         if ($notifications) {
             return view('customer.notifications', compact('notifications'));
@@ -47,8 +47,8 @@ class NotificationController extends Controller
     {
         $spId = session('sp_user_id');
 
-        $notifications = Notification::orderBy('ntfn_id' , 'desc')->where('ntfn_forUserId' , $spId)
-        ->where('ntfn_type' , 'sp')->get();
+        $notifications = Notification::orderBy('ntfn_id', 'desc')->where('ntfn_forUserId', $spId)
+            ->where('ntfn_type', 'sp')->get();
 
         if ($notifications) {
             return view('service-partner.notifications', compact('notifications'));
@@ -56,4 +56,29 @@ class NotificationController extends Controller
 
         return back()->with('error', 'No notification found!');
     }
+
+    public function destroyNotification($id)
+    {
+        \Log::info("Delete request received for notification ID: {$id}");
+
+        $notification = Notification::find($id);
+
+        if (!$notification) {
+            Log::warning("Notification ID {$id} not found.");
+            return response()->json(['success' => false, 'error' => 'Notification not found'], 404);
+        }
+
+        // Optional: Check user ownership
+        // if ($notification->user_id !== auth()->id()) {
+        //     Log::warning("Unauthorized attempt to delete notification ID: {$id}");
+        //     return response()->json(['success' => false, 'error' => 'Unauthorized'], 403);
+        // }
+
+        $notification->delete();
+
+        \Log::info("Notification ID {$id} deleted successfully.");
+        return response()->json(['success' => true]);
+    }
+
+
 }

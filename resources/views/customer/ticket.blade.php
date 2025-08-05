@@ -22,7 +22,7 @@
     <form action="{{ route('post.ticket') }}" method="POST" enctype="multipart/form-data" @if($readonly) disabled @endif>
     @csrf
     <h5 class="mt-4 mb-4 text-pseudo">
-      <span class="fa fa-bars"></span> Details of support ticket
+      <span  class="fw-bold"></span> Details Of Support Ticket
     </h5>
 
     <div class="mb-3">

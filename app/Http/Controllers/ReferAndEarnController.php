@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ReferAndEarnMail;
 use App\Models\ProjectOwners;
+use App\Models\ReferralTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,9 +24,16 @@ class ReferAndEarnController extends Controller
 
         $email = $request->input('friend_email');
         $message = $request->input('message');
-        $userName = 'sanskar';
+        $userName = $projectOwner->pown_name;
 
-        $link = 'Pseudoteam.com/referal-registration/'.$customer_id.'/'.$userName;
+        $link = 'Pseudoteam.com/public/referal-registration/'.$customer_id.'/'.$userName;
+
+        ReferralTable::create([
+            'rfrls_user_id' => session('user_id'),
+            'rfrls_email_id' => $request->input('friend_email'),
+            'rfrls_promo_code' => $projectOwner->pown_username,
+            'rfrls_user_type'=> 'customer',
+        ]);
 
         Mail::to($email)->send(new ReferAndEarnMail($link , $projectOwner->pown_name));
 
@@ -46,7 +54,15 @@ class ReferAndEarnController extends Controller
 
         $email = $request->input('friend_email');
         $message = $request->input('message');
-        $userName = 'sanskar';
+        $userName = $projectOwner->pown_name;
+
+
+        ReferralTable::create([
+            'rfrls_user_id' => session('sp_user_id'),
+            'rfrls_email_id' => $request->input('frend_email'),
+            'rfrls_user_type'=> 'SP',
+        ]);
+
 
         $link = 'Pseudoteam.com/referal-registration/'.$servicePartner.'/'.$userName;
 

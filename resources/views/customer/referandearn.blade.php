@@ -4,7 +4,7 @@
 <br>
 <div class="container" style="height: calc(100vh - 200px); overflow: scrollable; max-height: 100%;">
 
-  <h2>Refer a friend</h2>
+  <h2 class="fw-bold">Refer a friend</h2>
   <div class="mb-4" id="message-container">
     @if(session('success'))
     <div class="alert alert-success" role="alert">

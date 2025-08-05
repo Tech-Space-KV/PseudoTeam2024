@@ -5,7 +5,7 @@
     </br>
     <div class="container">
         <div class="">
-            <h2>Upload a project</h2>
+            <h2 class="fw-bold">Upload a Project</h2>
 
             @if(session('success'))
                 <div class="alert alert-success" role="alert">

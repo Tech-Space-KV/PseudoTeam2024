@@ -6,10 +6,10 @@
 <div class="container">
 
   <div class="mb-4">
-    <h2>Track ticket</h2>
+    <h2 class="fw-bold">Track Ticket</h2>
   </div>
   </br>
-  <div class="d-flex justify-content-end">
+  <div class="d-flex justify-content-start">
     <a href="{{ url('customer/session/ticket') }}"
       class="btn btn-sm btn-outline-primary me-3"
       title="Import Hardware List">
@@ -33,11 +33,11 @@
         <tr class="text-pseudo">
           {{-- <th scope="col">Proj. ID.</th>
         <th scope="col">Title</th> --}}
-          <th scope="col">Project ID</th>
+          <th scope="col">Ticket ID</th>
           <th scope="col">Title</th>
           <th scope="col">Description</th>
           <th scope="col">Status</th>
-          <th scope="col">DateTime</th>
+          <th scope="col">Date Time</th>
           <th scope="col"></th>
         </tr>
       </thead>

@@ -20,45 +20,53 @@
     <link rel="stylesheet" href="{{ asset('css/web/website_home2.css') }}">
     <!-- Bootstrap Icons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
-  <style>
-    .navbar {
-      /* background-color: white; */
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      color: #ffffff
-    }
-    .navbar-brand img {
-      height: 40px;
-    }
-    .nav-item {
-      padding: 0 15px;
-      text-align: center;
-    }
-    .nav-item .title {
-      font-weight: 600;
-      /* font-size: 14px; */
-    }
-    .nav-item .subtitle {
-      font-size: 12px;
-      color: gray;
-    }
-    .nav-icon {
-      font-size: 20px;
-      margin-bottom: 3px;
-    }
-    .nav-divider {
-      border-left: 1px solid #ddd;
-      height: 40px;
-      margin: 0 10px;
-    }
-    @media (max-width: 991.98px) {
-      .nav-item {
-        padding: 10px 0;
-        text-align: left;
-      }
-    }
-  </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        .navbar {
+            /* background-color: white; */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            color: #ffffff
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            width: 160px;
+        }
+
+        .nav-item {
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        .nav-item .title {
+            font-weight: 600;
+            /* font-size: 14px; */
+        }
+
+        .nav-item .subtitle {
+            font-size: 12px;
+            color: gray;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+
+        .nav-divider {
+            border-left: 1px solid #ddd;
+            height: 40px;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 991.98px) {
+            .nav-item {
+                padding: 10px 0;
+                text-align: left;
+            }
+        }
+    </style>
 
     <!-- Custom CSS -->
     <style>
@@ -216,13 +224,13 @@
         }
 
 
-         @media (max-width: 1000px) {
-    .navhide {
-      display: none;
-    }
-  }
+        @media (max-width: 1000px) {
+            .navhide {
+                display: none;
+            }
+        }
     </style>
-  <style>
+    <style>
         .card h3 {
             margin-bottom: 15px;
             font-size: 22px;
@@ -290,101 +298,106 @@
 
 <body style="background-color: black;">
 
-   <nav class="navbar navbar-expand-lg navbar-dark px-2 sticky-top px-4"
-  style="background-color: rgba(21, 21, 21, 0.812); backdrop-filter: blur(30px);">
-  <div class="container-fluid">
-    <a href="{{ route('home') }}"><img src="{{asset('images/logo_pt3.png')}}" class="me-2" style="width: 120px;" /></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
-        
-      </ul>
-      <span class="navbar-text d-flex flex-column align-items-center me-3">
-  <span style="color: #fff; font-size: 0.9rem;">📞Contact us: +91-9876543210</span>
-  <a class="nav-link nav-text px-4 glow-text" href="{{ route('ask_for_quote') }}">
-    Get Critical Spares & IT Services
-  </a>
-</span>
+    <nav class="navbar navbar-expand-lg navbar-dark px-2 sticky-top px-4"
+        style="background-color: rgba(21, 21, 21, 0.812); backdrop-filter: blur(30px);">
+        <div class="container-fluid">
+            <a href="{{ route('home') }}"><img src="{{asset('images/logo_pt3.png')}}" class="me-2"
+                    style="width: 120px;" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
 
-      <span class="navbar-text">
-        <a class="btn btn-outline-light px-4" onmouseover="this.style.color='black';"
-          onmouseout="this.style.color='white';" href="{{ url('/authentication/customer/sign-in') }}">Manage Project</a>
-      </span>
-    </div>
-  </div>
-</nav>
+                </ul>
+                <span class="navbar-text d-flex flex-column align-items-center me-3">
+                    <span style="color: #fff; font-size: 0.9rem;">📞Contact us: +91-9876543210</span>
+                    <a class="nav-link nav-text px-4 glow-text" href="{{ route('ask_for_quote') }}">
+                        Get Critical Spares & IT Services
+                    </a>
+                </span>
+
+                <span class="navbar-text">
+                    <a class="btn btn-outline-light px-4" onmouseover="this.style.color='black';"
+                        onmouseout="this.style.color='white';"
+                        href="{{ url('/authentication/customer/sign-in') }}">Manage Project</a>
+                </span>
+            </div>
+        </div>
+    </nav>
 
     <br>
     <center>
-<h3 class="text-secondary display-5">Ask For a Quote</h3>
-<p class="text-secondary">Get IT Services and Critical Spares</p>
-    </center>    
-<div class="px-5 mt-5">
+        <h3 class="text-secondary display-5">Ask For a Quote</h3>
+        <p class="text-secondary">Get IT Services and Critical Spares</p>
+    </center>
+    <div class="px-5 mt-5">
 
-    <div class="flex-cards">
-        <!-- Clients Card -->
-        <div class="card bg-light">
-            <h3>
-                Select Services
-                <button class="search-icon" onclick="openModal('client')">🔍</button>
-            </h3>
-            <div class="table-container">
-                <table>
-                    <thead class="bg-light">
-                        <tr>
-                            <th>Sku No.</th>
-                            <th>MARC/Active Passive Services</th>
-                            <th>Mark</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($services as $service)
-                            <tr class="border">
-                                <td>{{ $service['no'] }}</td>
-                                <td>{{ $service['description'] }}</td>
-                                <td><input type="checkbox" name="services[]" value="{{ $service['no'] }}"></td>
+        <div class="flex-cards">
+            <!-- Clients Card -->
+            <div class="card bg-light">
+                <h3>
+                    Select Services
+                    <button class="search-icon" onclick="openModal('client')">🔍</button>
+                </h3>
+                <div class="table-container">
+                    <table>
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Sku No.</th>
+                                <th>Description of services</th>
+                                <th>Mark</th>
+                                <th></th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($services as $service)
+                                <tr class="border">
+                                    <td>{{ $service['no'] }}</td>
+                                    <td>{{ $service['description'] }}</td>
+                                    <td><input type="checkbox" name="services[]" value="{{ $service['no'] }}"></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Suppliers Card -->
+            <div class="card bg-light">
+                <h3>
+                    Select Critical spares
+                    <button class="search-icon" onclick="openModal('supplier')">🔍</button>
+                </h3>
+                <div class="table-container">
+                    <table>
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Sku No.</th>
+                                <th>Spare Name</th>
+                                <th>Mark</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($hardwares as $hardware)
+                                <tr class="border">
+                                    <td>{{ $hardware['hw_identifier'] }}</td>
+                                    <td>{{ $hardware['model_description'] }}</td>
+                                    <td><input type="checkbox" name="spares[]" value="{{ $hardware['hw_identifier'] }}">
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- Suppliers Card -->
-        <div class="card bg-light">
-            <h3>
-                Select Critical spares
-                <button class="search-icon" onclick="openModal('supplier')">🔍</button>
-            </h3>
-            <div class="table-container">
-                <table>
-                    <thead class="bg-light">
-                        <tr>
-                            <th>Sku No.</th>
-                            <th>Spare Name</th>
-                            <th>Mark</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($hardwares as $hardware)
-                            <tr class="border">
-                                <td>{{ $hardware['hw_identifier'] }}</td>
-                                <td>{{ $hardware['model_description'] }}</td>
-                                <td><input type="checkbox" name="spares[]" value="{{ $hardware['hw_identifier'] }}"></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Form -->
-    <!-- <div style="margin: 40px auto; max-width: 600px; padding: 20px; background-color: #1c1c1c; border-radius: 8px;">
+        <!-- Contact Form -->
+        <!-- <div style="margin: 40px auto; max-width: 600px; padding: 20px; background-color: #1c1c1c; border-radius: 8px;">
         <h2 style="color: #fff;">Contact Us</h2>
         <form action="/submit-query" method="post">
             <div style="margin-bottom: 15px;">
@@ -407,51 +420,51 @@
         </form>
     </div> -->
 
-    <div
-        style="margin: 40px auto; width: 80%; padding: 20px; background-color: #1c1c1c; border-radius: 8px; box-sizing: border-box;">
-        <h2 style="color: #fff;" class="mb-3">Complete your request</h2>
-        <form action="{{ route('post.ask_for_quote') }}" method="post" style="width: 100%;" class="text-light">
-            @csrf
+        <div
+            style="margin: 40px auto; width: 80%; padding: 20px; background-color: #1c1c1c; border-radius: 8px; box-sizing: border-box;">
+            <h2 style="color: #fff; " class="mb-3">Complete your request</h2>
+            <form action="{{ route('post.ask_for_quote') }}" method="post" style="width: 100%;" class="text-light">
+                @csrf
 
-            <input type="hidden" name="selected_services" id="selected_services">
-            <input type="hidden" name="selected_spares" id="selected_spares">
+                <input type="hidden" name="selected_`services" id="selected_services">
+                <input type="hidden" name="selected_spares" id="selected_spares">
 
-            <!-- Row 1: Name & Email -->
-            <div style="display: flex; gap: 20px; margin-bottom: 15px;">
-                <div style="flex: 1;">
-                    <label for="name">Name:</label><br>
-                    <input type="text" id="name" name="name" required style="width: 100%; padding: 8px;">
+                <!-- Row 1: Name & Email -->
+                <div style="display: flex; gap: 20px; margin-bottom: 15px;">
+                    <div style="flex: 1;">
+                        <label for="name">Name:</label><br>
+                        <input type="text" id="name" name="name" required style="width: 100%; padding: 8px;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="email">Email:</label><br>
+                        <input type="email" id="email" name="email" required style="width: 100%; padding: 8px;">
+                    </div>
                 </div>
-                <div style="flex: 1;">
-                    <label for="email">Email:</label><br>
-                    <input type="email" id="email" name="email" required style="width: 100%; padding: 8px;">
-                </div>
-            </div>
 
-            <!-- Row 2: Contact & Company -->
-            <div style="display: flex; gap: 20px; margin-bottom: 15px;">
-                <div style="flex: 1;">
-                    <label for="contact">Contact:</label><br>
-                    <input type="text" id="contact" name="contact" required style="width: 100%; padding: 8px;">
+                <!-- Row 2: Contact & Company -->
+                <div style="display: flex; gap: 20px; margin-bottom: 15px;">
+                    <div style="flex: 1;">
+                        <label for="contact">Contact:</label><br>
+                        <input type="text" id="contact" name="contact" required style="width: 100%; padding: 8px;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="company">Company:</label><br>
+                        <input type="text" id="company" name="company" style="width: 100%; padding: 8px;">
+                    </div>
                 </div>
-                <div style="flex: 1;">
-                    <label for="company">Company:</label><br>
-                    <input type="text" id="company" name="company" style="width: 100%; padding: 8px;">
+
+                <!-- Row 3: Full-width Query Box -->
+                <div style="margin-bottom: 15px;">
+                    <label for="query">Your Query:</label><br>
+                    <textarea id="query" name="query" rows="5" required style="width: 100%; padding: 8px;"></textarea>
                 </div>
-            </div>
 
-            <!-- Row 3: Full-width Query Box -->
-            <div style="margin-bottom: 15px;">
-                <label for="query">Your Query:</label><br>
-                <textarea id="query" name="query" rows="5" required style="width: 100%; padding: 8px;"></textarea>
-            </div>
-
-            <!-- Submit Button -->
-            <button class="btn btn-primary" type="submit">
-                Submit
-            </button>
-        </form>
-    </div>
+                <!-- Submit Button -->
+                <button class="btn btn-primary" type="submit">
+                    Get a Quote & Callback
+                </button>
+            </form>
+        </div>
 
     </div>
     <br>

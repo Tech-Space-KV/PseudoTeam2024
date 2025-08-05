@@ -6,7 +6,7 @@
 </br>
 <div class="container">
 <div class="mb-4">
-    <h2>Track your project - Locations</h2>
+    <h2 class="fw-bold">Track Your Project - Locations</h2>
 </div>
 </br> 
 <div class="search-box-container w-100 mb-4">

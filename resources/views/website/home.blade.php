@@ -20,45 +20,52 @@
     <link rel="stylesheet" href="{{ asset('css/web/website_home2.css') }}">
     <!-- Bootstrap Icons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
-  <style>
-    .navbar {
-      /* background-color: white; */
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      color: #ffffff
-    }
-    .navbar-brand img {
-      height: 40px;
-    }
-    .nav-item {
-      padding: 0 15px;
-      text-align: center;
-    }
-    .nav-item .title {
-      font-weight: 600;
-      /* font-size: 14px; */
-    }
-    .nav-item .subtitle {
-      font-size: 12px;
-      color: gray;
-    }
-    .nav-icon {
-      font-size: 20px;
-      margin-bottom: 3px;
-    }
-    .nav-divider {
-      border-left: 1px solid #ddd;
-      height: 40px;
-      margin: 0 10px;
-    }
-    @media (max-width: 991.98px) {
-      .nav-item {
-        padding: 10px 0;
-        text-align: left;
-      }
-    }
-  </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        .navbar {
+            /* background-color: white; */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            color: #ffffff
+        }
+
+        .navbar-brand img {
+            height: 40px;
+        }
+
+        .nav-item {
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        .nav-item .title {
+            font-weight: 600;
+            /* font-size: 14px; */
+        }
+
+        .nav-item .subtitle {
+            font-size: 12px;
+            color: gray;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+
+        .nav-divider {
+            border-left: 1px solid #ddd;
+            height: 40px;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 991.98px) {
+            .nav-item {
+                padding: 10px 0;
+                text-align: left;
+            }
+        }
+    </style>
 
     <!-- Custom CSS -->
     <style>
@@ -183,11 +190,13 @@
             50% {
                 text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff, 0 0 30px #00f7ff;
                 color: #fff;
+
             }
 
             100% {
                 text-shadow: 0 0 0px #00f7ff;
                 color: #ccc;
+
             }
         }
     </style>
@@ -216,11 +225,11 @@
         }
 
 
-         @media (max-width: 1000px) {
-    .navhide {
-      display: none;
-    }
-  }
+        @media (max-width: 1000px) {
+            .navhide {
+                display: none;
+            }
+        }
     </style>
 
 
@@ -231,31 +240,31 @@
 
     @include('website.top_nav')
 
-     @if(session('success'))
-            <!-- <div class="alert alert-success w-100" role="alert">
-                {{ session('success') }}
-            </div> -->
+    @if(session('success'))
+        <!-- <div class="alert alert-success w-100" role="alert">
+                            {{ session('success') }}
+                        </div> -->
 
-            <?php
-            echo "<script>alert('Inquiry Sent');</script>";
-            ?>
+        <?php
+        echo "<script>alert('Inquiry Sent');</script>";
+                        ?>
 
-        @endif
+    @endif
 
-        @if(session('error'))
-            <!-- <div class="alert alert-danger w-100" role="alert">
-                {{ session('error') }}
-            </div> -->
-            <?php
-            echo "<script>alert('Failed! Please try again.');</script>";
-            ?>
-        @endif
+    @if(session('error'))
+        <!-- <div class="alert alert-danger w-100" role="alert">
+                            {{ session('error') }}
+                        </div> -->
+        <?php
+        echo "<script>alert('Failed! Please try again.');</script>";
+                        ?>
+    @endif
 
 
 
     <!-- Section 1: Fullscreen Hero with Background Video -->
-    
-    
+
+
     <section class="hero-section s0">
 
         <video autoplay muted loop playsinline class="bg-video">
@@ -269,7 +278,7 @@
 
             </main>
         </div>
-            <!-- <div class="my-5" style="background-color: rgba(255, 255, 255, 1); backdrop-filter: blur(30px);">
+        <!-- <div class="my-5" style="background-color: rgba(255, 255, 255, 1); backdrop-filter: blur(30px);">
                 <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3  shadow-lg mb-4">
                     <div class="col-lg-6 p-3 p-lg-5 pt-lg-3">
                         <h3><img src="{{asset('images/logo_pt.png')}}" /></h3>
@@ -506,7 +515,7 @@
                                 and reliability.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="loginpage" class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}"class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -524,7 +533,7 @@
                                 digital success.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="loginpage" class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}" class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -542,7 +551,7 @@
                                 efficient.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="loginpage" class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}" class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -561,7 +570,7 @@
                                 productivity.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="loginpage" class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}" class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -579,7 +588,7 @@
                                 business.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="loginpage" class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}" class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -597,7 +606,7 @@
                                 tailored to your needs.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="loginpage" class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}" class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -608,9 +617,9 @@
 
 
             </div>
-            <center>
+            <!-- <center>
                 <a class="btn btn-outline-light">View More <i class="bi bi-caret-right-fill"></i> </a>
-            </center>
+            </center> -->
         </div>
 
         <br>
@@ -624,7 +633,7 @@
             </center>
         </div>
 
-        <div class="my-5" >
+        <!-- <div class="my-5" >
             <div class="p-5 text-center bg-body-tertiary"  style="background-color: black;">
                 <div class="container py-5"  style="background-color: black;">
                     <p class="col-lg-8 mx-auto lead text-light">
@@ -638,7 +647,24 @@
                     </p>
                 </div>
             </div>
+        </div> -->
+
+        <div class="my-5" style="border: 5px solid #ccc; border-radius: 8px;">
+            <div class="p-5 text-center" style="background-color: #000;">
+                <div class="container py-5">
+                    <p class="col-lg-8 mx-auto lead text-light">
+                        At PseudoTeam, we simplify project execution for businesses by taking complete ownership from
+                        start to finish. We assign a dedicated pseudo-manager who oversees your entire project—breaking
+                        it down into clear milestones, managing vetted service partners, and ensuring timely delivery
+                        with verified proof at every stage. Our mission is to remove the stress of freelancer
+                        coordination, provide real-time progress tracking, and guarantee quality outcomes so you can
+                        focus on growing your business while we handle the execution. With PseudoTeam, your project is
+                        always in safe, accountable hands.
+                    </p>
+                </div>
+            </div>
         </div>
+
 
         <span id="contactus"></span>
     </section>
@@ -686,7 +712,7 @@
                 </div>
 
                 <div class="col-12 text-center">
-                    <button class="btn btn-light px-5" type="submit">Submit</button>
+                    <button class="btn btn-light px-5" type="submit">Get a Callback</button>
                 </div>
             </form>
         </div>
@@ -862,46 +888,46 @@
         });
     </script>
 
-<script>
-  const phrases = [
-    "Search critical spares here...",
-    "Search IT Services here...",
-    "Search your requirement here..."
-  ];
+    <script>
+        const phrases = [
+            "Search critical spares here...",
+            "Search IT Services here...",
+            "Search your requirement here..."
+        ];
 
-  const input = document.getElementById("searchInput");
-  let phraseIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
+        const input = document.getElementById("searchInput");
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
 
-  function typeEffect() {
-    const currentPhrase = phrases[phraseIndex];
-    
-    if (isDeleting) {
-      charIndex--;
-      input.placeholder = currentPhrase.substring(0, charIndex);
-    } else {
-      charIndex++;
-      input.placeholder = currentPhrase.substring(0, charIndex);
-    }
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
 
-    let delay = isDeleting ? 20 : 50;
+            if (isDeleting) {
+                charIndex--;
+                input.placeholder = currentPhrase.substring(0, charIndex);
+            } else {
+                charIndex++;
+                input.placeholder = currentPhrase.substring(0, charIndex);
+            }
 
-    if (!isDeleting && charIndex === currentPhrase.length) {
-      delay = 1300; // Wait before deleting
-      isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      delay = 500;
-    }
+            let delay = isDeleting ? 20 : 50;
 
-    setTimeout(typeEffect, delay);
-  }
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                delay = 1300; // Wait before deleting
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                delay = 500;
+            }
 
-  // Start the effect
-  typeEffect();
-</script>
+            setTimeout(typeEffect, delay);
+        }
+
+        // Start the effect
+        typeEffect();
+    </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

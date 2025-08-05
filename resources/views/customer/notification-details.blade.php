@@ -6,7 +6,7 @@
     <div class="container  " style="height: 100vh;">
 
         <div class="mb-4 ">
-            <h2>Notification-details</h2>
+            <h2 class="fw-bold">Notification-details</h2>
         </div>
 
         <!-- Notification Card -->

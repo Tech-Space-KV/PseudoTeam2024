@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\HardwareImport;
 use App\Imports\ServicesImport;
+use App\Mail\QuoteMailUser;
 use App\Mail\QuoteRequestMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -76,8 +77,16 @@ class QuoteController extends Controller
             ? explode(',', $request->input('selected_spares'))
             : [];
 
-        Mail::to($request->input('email'))->send(
+        Mail::to('info@pseudoteam.com')->send(
             new QuoteRequestMail(
+                $request->only(['name', 'email', 'contact', 'company', 'query']),
+                $selectedServices,
+                $selectedSpares
+            )
+        );
+
+        Mail::to($request->input('email'))->send(
+            new QuoteMailUser(
                 $request->only(['name', 'email', 'contact', 'company', 'query']),
                 $selectedServices,
                 $selectedSpares

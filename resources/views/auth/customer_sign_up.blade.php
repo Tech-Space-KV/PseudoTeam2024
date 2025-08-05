@@ -15,14 +15,14 @@
   <title>PseudoTeam</title>
 
   <style>
-        .bg-gif3 {
-            background: url('{{ asset('images/customer-sign-bg.png') }}') no-repeat center center;
-            background-size: cover;
-            position: relative;
-            min-height: 100vh;
-            z-index: 0;
-        }
-    </style>
+    .bg-gif3 {
+      background: url('{{ asset('images/customer-sign-bg.png') }}') no-repeat center center;
+      background-size: cover;
+      position: relative;
+      min-height: 100vh;
+      z-index: 0;
+    }
+  </style>
 </head>
 
 <body class="align-items-center bg-dark bg-gif3">
@@ -80,6 +80,18 @@
               required>
             <label for="floatingPassword">Contact</label>
           </div>
+
+          <div class="mt-3">
+            <a href="javascript:void(0);" onclick="togglePromoCode()" class="text-primary text-decoration-none">
+              <i class="fa fa-gift"></i> Have a promo code?
+            </a>
+          </div>
+
+          <div id="promoCodeField" class="form-floating mt-3" style="display: none;">
+            <input type="text" class="form-control" id="promoCode" name="promo_code" placeholder="Enter Promo Code">
+            <label for="promoCode">Promo Code</label>
+          </div>
+
           <button class="btn btn-primary mt-3 w-100 py-2" type="submit">Sign Up</button>
 
           <p class="mt-3 text-center">Already a user? <a href="{{ url('/authentication/customer/sign-in') }}"
@@ -100,6 +112,14 @@
 
 
   <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function togglePromoCode() {
+      const promoField = document.getElementById("promoCodeField");
+      promoField.style.display = promoField.style.display === "none" ? "block" : "none";
+    }
+  </script>
+
 
 </body>
 

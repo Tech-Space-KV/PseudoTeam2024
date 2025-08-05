@@ -7,7 +7,7 @@
 
     <div class="mb-4">
     <!-- <h2>Track project: &lt;Project ID: {{ $project_planner->first()->pplnr_scope_id }}&gt;</h2> -->
-    <h2>Track your project - Milestones</h2>
+    <h2 class="fw-bold">Track Your Project - Milestones</h2>
     </div>
     </br>
 

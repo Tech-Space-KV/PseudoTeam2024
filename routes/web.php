@@ -43,6 +43,10 @@ Route::get('ask/for/quote', [QuoteController::class, 'show'])->name('ask_for_quo
 
 Route::post('ask/for/quote', [QuoteController::class, 'sendQuoteMail'])->name('post.ask_for_quote');
 
+Route::get('referal-registration/{customer_id}/{userName}', function ($customer_id, $userName) {
+    return view('website/home', compact('customer_id', 'userName'));
+})->name('referal.registration');
+
 //kal krunga
 
 // Route::get('/forgot-password', function () {
@@ -266,6 +270,9 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/project/{id}/sow', [ProjectController::class, 'viewSow'])->name('project.sow');
 
     Route::post('/project/comment', [CommentController::class, 'store'])->name('comment.store');
+
+    Route::delete('/notifications/{id}', [NotificationController::class, 'destroyNotification'])
+        ->name('customer.notifications.destroy');
 
 });
 

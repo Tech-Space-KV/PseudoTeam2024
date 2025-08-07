@@ -46,7 +46,7 @@ class ReferAndEarnController extends Controller
     {
         $servicePartner = session('sp_user_id');
 
-        \Log::info('working till here!' , $servicePartner);
+        \Log::info('working till here!' . $servicePartner);
 
 
         if(!$servicePartner)

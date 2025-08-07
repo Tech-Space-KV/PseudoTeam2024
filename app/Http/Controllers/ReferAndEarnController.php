@@ -46,6 +46,9 @@ class ReferAndEarnController extends Controller
     {
         $servicePartner = session('sp_user_id');
 
+        \Log::info('working till here!' , $servicePartner);
+
+
         if(!$servicePartner)
         {
             return redirect()->back()->with('error', 'Customer id not found!');
@@ -57,6 +60,8 @@ class ReferAndEarnController extends Controller
         $message = $request->input('message');
         $userName = $servicePartner->sprov_name;
 
+
+        \Log::info('working till here 2!');
 
         // ReferralTable::create([
         //     'rfrls_user_id' => session('sp_user_id'),

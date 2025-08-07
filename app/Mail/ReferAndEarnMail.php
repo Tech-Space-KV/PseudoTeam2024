@@ -25,6 +25,9 @@ class ReferAndEarnMail extends Mailable
 
     public function build()
     {
+
+        \Log::info('working till here in mail class!');
+
         return $this->subject('PseudoTeam Referal Mail')
                     ->view('emails/send_referandearn_mail')
                     ->with('data', $this->link)

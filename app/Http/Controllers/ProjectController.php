@@ -19,6 +19,8 @@ use DB;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use Mail;
 
@@ -41,24 +43,54 @@ class ProjectController extends Controller
             return redirect()->back()->with('success', 'Project is already saved and no changes were made.');
         }
 
-        $validated = $request->validate([
-            'plist_title' => 'required|string|max:255',
-            'plist_description' => 'required|string',
-            'plist_sow' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv|max:5120',
-            'plist_type' => 'required|string',
-            'plist_startdate' => 'required|string',
-            'plist_enddate' => 'required|string',
-            'plist_currency' => 'required|string',
-            'plist_budget' => 'required|numeric',
-            'plist_checkrcv' => 'nullable|string',
-            'plist_name' => 'required|string|max:255',
-            'plist_email' => 'required|email|max:255',
-            'plist_contact' => 'required|string|max:255',
-            'plist_ongnew' => 'required|string',
-            'plist_category' => 'required|string',
-            'plist_coupon' => 'nullable|string',
-            'plist_customeremail' => 'nullable|string',
-        ]);
+        // $validated = $request->validate([
+        //     'plist_title' => 'required|string|max:255',
+        //     'plist_description' => 'required|string',
+        //     'plist_sow' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv|max:5120',
+        //     'plist_type' => 'required|string',
+        //     'plist_startdate' => 'required|string',
+        //     'plist_enddate' => 'required|string',
+        //     'plist_currency' => 'required|string',
+        //     'plist_budget' => 'required|numeric',
+        //     'plist_checkrcv' => 'nullable|string',
+        //     'plist_name' => 'required|string|max:255',
+        //     'plist_email' => 'required|email|max:255',
+        //     'plist_contact' => 'required|string|max:255',
+        //     'plist_ongnew' => 'required|string',
+        //     'plist_category' => 'required|string',
+        //     'plist_coupon' => 'nullable|string',
+        //     'plist_customeremail' => 'nullable|string',
+        // ]);
+
+        try {
+            $validated = $request->validate([
+                'plist_title' => 'required|string|max:255',
+                'plist_description' => 'required|string',
+                'plist_sow' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv|max:20420',
+                'plist_type' => 'required|string',
+                'plist_startdate' => 'required|string',
+                'plist_enddate' => 'required|string',
+                'plist_currency' => 'required|string',
+                'plist_budget' => 'required|numeric',
+                'plist_checkrcv' => 'nullable|string',
+                'plist_name' => 'required|string|max:255',
+                'plist_email' => 'required|email|max:255',
+                'plist_contact' => 'required|string|max:255',
+                'plist_ongnew' => 'required|string',
+                'plist_category' => 'required|string',
+                'plist_coupon' => 'nullable|string',
+                'plist_customeremail' => 'nullable|string',
+            ]);
+        } catch (ValidationException $e) {
+            // Log the validation errors
+            Log::error('Validation failed', [
+                'errors' => $e->errors(),
+                'input' => $request->all(),
+            ]);
+
+            // Optionally re-throw to let Laravel handle it as usual (redirect back with errors)
+            throw $e;
+        }
 
         $currentTime = Carbon::now('Asia/Kolkata');
 
@@ -780,4 +812,40 @@ class ProjectController extends Controller
 
         return back()->with('error', 'Project not found or already assigned.');
     }
+
+
+    // public function downloadSow($id)
+    // {
+    //     $project = Project::findOrFail($id);
+
+    //     if (empty($project->plist_sow)) {
+    //         abort(404, 'Scope of Work file not found.');
+    //     }
+
+    //     return response($project->plist_sow)
+    //         ->header('Content-Type', 'application/octet-stream') // Generic file type
+    //         ->header('Content-Disposition', 'attachment; filename="scope_of_work.pdf"') // Set a default filename
+    //         ->header('Content-Length', strlen($project->plist_sow));
+    // }
+
+    public function downloadSow($id)
+    {
+        $project = Project::findOrFail($id);
+
+        if (empty($project->plist_sow)) {
+            abort(404, 'Scope of Work file not found.');
+        }
+
+        // Try to guess MIME type
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_buffer($finfo, $project->plist_sow);
+        finfo_close($finfo);
+
+        return response($project->plist_sow)
+            ->header('Content-Type', $mime ?: 'application/octet-stream')
+            ->header('Content-Disposition', 'attachment; filename="scope_of_work"')
+            ->header('Content-Length', strlen($project->plist_sow));
+    }
+
+
 }

@@ -55,14 +55,32 @@
             </div>
 
             <!-- Scope of Work -->
+        
+
             <div class="mb-3">
-                <label for="sow" class="form-label">Scope of work</label>
-                <input type="file" class="form-control" id="sow" name="plist_sow" placeholder="Scope of work" accept=""
-                    value="{{ old('plist_sow', $project->plist_sow ?? '') }}" {{ $readonly ? 'readonly' : '' }}>
-                @if($readonly && $project->plist_sow)
-                        <a href="{{ route('project.sow', $project->plist_id) }}" target="_blank">View Scope of Work</a>
-                @endif
-            </div>
+    <label for="sow" class="form-label">Scope of Work</label>
+    <input 
+        type="file" 
+        class="form-control" 
+        id="sow" 
+        name="plist_sow" 
+        placeholder="Scope of work" 
+        accept="" 
+        {{ $readonly ? 'readonly' : '' }}
+    >
+
+    {{-- Show download button only if file exists and either in readonly or editing existing project --}}
+    @if(!empty($project->plist_sow) && ($readonly || !empty($project->plist_id)))
+        <div class="mt-2">
+            <a href="{{ route('project.download.sow', $project->plist_id) }}" 
+               class="btn btn-outline-success btn-sm" 
+               target="_blank">
+                <i class="fa fa-download"></i> Download Scope of Work
+            </a>
+        </div>
+    @endif
+</div>
+
 
             <!-- Project Type -->
             <div class="row">

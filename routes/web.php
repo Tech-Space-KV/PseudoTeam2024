@@ -26,6 +26,10 @@ Route::get('/', function () {
     return view('website/home');
 })->name('home');
 
+// Route::get('/', function () {
+//     return view('loadertest');
+// })->name('home');
+
 Route::get('/partner', function () {
     return view('website/partner');
 })->name('partner');
@@ -124,6 +128,9 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
 
     Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm'])->name('customer.password.reset');
+
+   Route::get('/projects/{id}/download-sow', [ProjectController::class, 'downloadSow'])->name('project.download.sow');
+
 
 
     Route::get('/customer/session/reset-password', [AuthController::class, 'showPasswordResetForm']);
@@ -273,6 +280,9 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/project-details/{plist_id}', function ($plist_id) {
         return (new ProjectController)->fetchProject($plist_id);
     });
+
+    Route::get('/project/{id}/download-attachment', [ProjectController::class, 'downloadAttachment'])->name('project.download.attachment');
+
 
     Route::get('/ticket/{id}/attachment', [TicketController::class, 'viewAttachment'])->name('ticket.attachment');
 

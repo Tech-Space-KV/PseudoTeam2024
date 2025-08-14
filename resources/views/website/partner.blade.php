@@ -288,7 +288,7 @@
       <div class="row g-4">
         <div class="col-md-4">
           <div class="card h-100 shadow-sm">
-            <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 1">
+            <!-- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 1"> -->
             <div class="card-body">
               <h5 class="card-title">5 Tips for Freelance Consistency</h5>
               <p class="card-text">Best practices to stay steady and grow month over month.</p>
@@ -298,7 +298,7 @@
         </div>
         <div class="col-md-4">
           <div class="card h-100 shadow-sm">
-            <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 2">
+            <!-- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 2"> -->
             <div class="card-body">
               <h5 class="card-title">How Project Managers Boost Your Output</h5>
               <p class="card-text">Why dedicated PMs matter in large-scale freelance delivery.</p>
@@ -308,7 +308,7 @@
         </div>
         <div class="col-md-4">
           <div class="card h-100 shadow-sm">
-            <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 3">
+            <!-- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 3"> -->
             <div class="card-body">
               <h5 class="card-title">Milestone Payments Done Right</h5>
               <p class="card-text">A transparent view into how we guarantee your payouts.</p>
@@ -378,6 +378,7 @@
             <li><a href="#">Services</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
+            <li><a href="{{ route('home') }}">Customer</a></li>
           </ul>
         </div>
         <div class="col-md-3">

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="mb-4">
             {{-- <h2>Project Timeline: <Project ID: {{ $projectPlannerTasks->plist_projectid }}> </h2> --}}
-            <h2>Project Timeline: {{ $projectPlannerTasks->plist_projectid }}</h2>
+            <h2 class="fw-bold">Project Timeline: {{ $projectPlannerTasks->plist_projectid }}</h2>
         </div>
         </br>
 
@@ -35,25 +35,42 @@
                 </h4>
 
                 <!-- Status -->
+                <!-- <div class="mb-3 row align-items-center">
+                            <label for="status" class="col-sm-2 col-form-label fw-bold">Status:</label>
+                            <div class="col-sm-10">
+                                <select class="form-select form-select-sm" id="status" name="pptasks_sp_status" required>
+                                    <option value="" selected>Select Status</option>
+                                    <option value="Not Started">Not Started</option>
+                                    <option value="On Going">On Going</option>
+                                    <option value="Fullfilled">Fullfilled</option>
+                                    <option value="Scrapped">Scrapped</option>
+                                </select>
+                            </div>
+                        </div> -->
+
                 <div class="mb-3 row align-items-center">
                     <label for="status" class="col-sm-2 col-form-label fw-bold">Status:</label>
                     <div class="col-sm-10">
                         <select class="form-select form-select-sm" id="status" name="pptasks_sp_status" required>
-                            <option value="" selected>Select Status</option>
-                            <option value="Not Started">Not Started</option>
-                            <option value="On Going">On Going</option>
-                            <option value="Fullfilled">Fullfilled</option>
-                            <option value="Scrapped">Scrapped</option>
+                            <option value="" {{ $task->pptasks_sp_status == '' ? 'selected' : '' }}>Select Status</option>
+                            <option value="Not Started" {{ $task->pptasks_sp_status == 'Not Started' ? 'selected' : '' }}>Not
+                                Started</option>
+                            <option value="On Going" {{ $task->pptasks_sp_status == 'On Going' ? 'selected' : '' }}>On Going
+                            </option>
+                            <option value="Fullfilled" {{ $task->pptasks_sp_status == 'Fullfilled' ? 'selected' : '' }}>
+                                Fullfilled</option>
+                            <option value="Scrapped" {{ $task->pptasks_sp_status == 'Scrapped' ? 'selected' : '' }}>Scrapped
+                            </option>
                         </select>
                     </div>
                 </div>
+
 
                 <!-- File Upload -->
                 <div class="mb-3 row align-items-center">
                     <label for="file" class="col-sm-2 col-form-label fw-bold">Proof of Completion:</label>
                     <div class="col-sm-7">
-                        <input type="file" class="form-control" name="pptasks_proof_of_completion" id="fileUpload"
-                            accept=".pdf,.csv,.xlsx" />
+                        <input type="file" class="form-control" name="pptasks_proof_of_completion" id="fileUpload" />
                     </div>
                     <div class="col-sm-3">
                         <button type="button" class="btn btn-outline-secondary btn-sm" id="viewFileBtn">
@@ -104,44 +121,44 @@
 
             @foreach ($SpComments as $comment)
                 <div class="card p-2 mb-2">
-                    <p class="fw-bold">{{ $comment->tconv_comment_by_sp_id }} :</p>
+                    <p class="fw-bold">{{ $comment->tconv_sp_name }} :</p>
                     <p class="fw-bold">{{ $comment->tconv_comment_date_time }}</p>
                     <p>{{ $comment->tconv_comment }}</p>
                 </div>
             @endforeach
 
             <!-- <div class="card p-2 mb-2">
-                    <p class="fw-bold">username :</p>
-                    <p>Dummy content line 1</p>
-                </div>
-                <div class="card p-2 mb-2">
-                    <p class="fw-bold">username :</p>
-                    <p>Dummy content line 1</p>
-                </div>
-                <div class="card p-2 mb-2">
-                    <p class="fw-bold">username :</p>
-                    <p>Dummy content line 1</p>
-                </div>
-                <div class="card p-2 mb-2">
-                    <p class="fw-bold">username :</p>
-                    <p>Dummy content line 1</p>
-                </div>
-                <div class="card p-2 mb-2">
-                    <p class="fw-bold">username :</p>
-                    <p>Dummy content line 1</p>
-                </div>
-                <div class="card p-2 mb-2">
-                    <p class="fw-bold">username :</p>
-                    <p>Dummy content line 1</p>
-                </div>
-                <div class="card p-2 mb-2">
-                    <p class="fw-bold">username :</p>
-                    <p>Dummy content line 1</p>
-                </div>
-                <div class="card p-2 mb-2">
-                    <p class="fw-bold">username :</p>
-                    <p>Dummy content line 1</p>
-                </div> -->
+                            <p class="fw-bold">username :</p>
+                            <p>Dummy content line 1</p>
+                        </div>
+                        <div class="card p-2 mb-2">
+                            <p class="fw-bold">username :</p>
+                            <p>Dummy content line 1</p>
+                        </div>
+                        <div class="card p-2 mb-2">
+                            <p class="fw-bold">username :</p>
+                            <p>Dummy content line 1</p>
+                        </div>
+                        <div class="card p-2 mb-2">
+                            <p class="fw-bold">username :</p>
+                            <p>Dummy content line 1</p>
+                        </div>
+                        <div class="card p-2 mb-2">
+                            <p class="fw-bold">username :</p>
+                            <p>Dummy content line 1</p>
+                        </div>
+                        <div class="card p-2 mb-2">
+                            <p class="fw-bold">username :</p>
+                            <p>Dummy content line 1</p>
+                        </div>
+                        <div class="card p-2 mb-2">
+                            <p class="fw-bold">username :</p>
+                            <p>Dummy content line 1</p>
+                        </div>
+                        <div class="card p-2 mb-2">
+                            <p class="fw-bold">username :</p>
+                            <p>Dummy content line 1</p>
+                        </div> -->
 
         </div>
 
@@ -184,6 +201,103 @@
         </style>
 
         <!-- File Preview Logic -->
+        <!-- <script>
+                document.getElementById('viewFileBtn').addEventListener('click', function () {
+                    const fileInput = document.getElementById('fileUpload');
+                    const previewArea = document.getElementById('filePreviewArea');
+                    const file = fileInput.files[0];
+
+                    previewArea.innerHTML = '';
+
+                    if (!file) {
+                        previewArea.style.display = 'none';
+                        previewArea.innerHTML = '<p class="text-danger fw-bold">No file has been uploaded. Please upload a file.</p>';
+                        return;
+                    }
+
+                    previewArea.style.display = 'block';
+
+                    const fileType = file.type;
+                    const fileName = file.name.toLowerCase();
+
+                    if (fileType === 'application/pdf') {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const iframe = document.createElement('iframe');
+                            iframe.src = e.target.result;
+                            previewArea.appendChild(iframe);
+                        };
+                        reader.readAsDataURL(file);
+
+                    } else if (fileName.endsWith('.csv')) {
+                        Papa.parse(file, {
+                            header: true,
+                            complete: function (results) {
+                                if (results.data.length === 0) {
+                                    previewArea.innerHTML = '<p class="text-muted">CSV is empty.</p>';
+                                    return;
+                                }
+
+                                let table = '<table class="table table-bordered table-sm"><thead><tr>';
+                                const headers = Object.keys(results.data[0]);
+
+                                headers.forEach(header => {
+                                    table += `<th>${header}</th>`;
+                                });
+                                table += '</tr></thead><tbody>';
+
+                                results.data.slice(0, 10).forEach(row => {
+                                    table += '<tr>';
+                                    headers.forEach(header => {
+                                        table += `<td>${row[header] ?? ''}</td>`;
+                                    });
+                                    table += '</tr>';
+                                });
+
+                                table += '</tbody></table>';
+                                previewArea.innerHTML = table;
+                            }
+                        });
+
+                    } else if (fileName.endsWith('.xlsx')) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const data = new Uint8Array(e.target.result);
+                            const workbook = XLSX.read(data, { type: 'array' });
+                            const sheetName = workbook.SheetNames[0];
+                            const sheet = workbook.Sheets[sheetName];
+                            const json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+                            if (json.length === 0) {
+                                previewArea.innerHTML = '<p class="text-muted">XLSX is empty.</p>';
+                                return;
+                            }
+
+                            let table = '<table class="table table-bordered table-sm"><thead><tr>';
+                            json[0].forEach(header => {
+                                table += `<th>${header}</th>`;
+                            });
+                            table += '</tr></thead><tbody>';
+
+                            json.slice(1, 11).forEach(row => {
+                                table += '<tr>';
+                                row.forEach(cell => {
+                                    table += `<td>${cell ?? ''}</td>`;
+                                });
+                                table += '</tr>';
+                            });
+
+                            table += '</tbody></table>';
+                            previewArea.innerHTML = table;
+                        };
+                        reader.readAsArrayBuffer(file);
+
+                    } else {
+                        previewArea.innerHTML = '<p class="text-warning">Unsupported file type.</p>';
+                    }
+                });
+            </script> -->
+
         <script>
             document.getElementById('viewFileBtn').addEventListener('click', function () {
                 const fileInput = document.getElementById('fileUpload');
@@ -193,7 +307,7 @@
                 previewArea.innerHTML = '';
 
                 if (!file) {
-                    previewArea.style.display = 'none';
+                    previewArea.style.display = 'block';
                     previewArea.innerHTML = '<p class="text-danger fw-bold">No file has been uploaded. Please upload a file.</p>';
                     return;
                 }
@@ -203,6 +317,7 @@
                 const fileType = file.type;
                 const fileName = file.name.toLowerCase();
 
+                // PDF
                 if (fileType === 'application/pdf') {
                     const reader = new FileReader();
                     reader.onload = function (e) {
@@ -211,8 +326,10 @@
                         previewArea.appendChild(iframe);
                     };
                     reader.readAsDataURL(file);
+                }
 
-                } else if (fileName.endsWith('.csv')) {
+                // CSV
+                else if (fileName.endsWith('.csv')) {
                     Papa.parse(file, {
                         header: true,
                         complete: function (results) {
@@ -241,8 +358,10 @@
                             previewArea.innerHTML = table;
                         }
                     });
+                }
 
-                } else if (fileName.endsWith('.xlsx')) {
+                // XLSX
+                else if (fileName.endsWith('.xlsx')) {
                     const reader = new FileReader();
                     reader.onload = function (e) {
                         const data = new Uint8Array(e.target.result);
@@ -274,9 +393,29 @@
                         previewArea.innerHTML = table;
                     };
                     reader.readAsArrayBuffer(file);
+                }
 
-                } else {
-                    previewArea.innerHTML = '<p class="text-warning">Unsupported file type.</p>';
+                // Image types
+                else if (fileType.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.maxWidth = '100%';
+                        img.style.maxHeight = '500px';
+                        img.alt = 'Image Preview';
+                        previewArea.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+
+                // Fallback
+                else {
+                    previewArea.innerHTML = `
+                    <p class="text-muted">File cannot be previewed, but will be uploaded successfully.</p>
+                    <p><strong>File Name:</strong> ${file.name}</p>
+                    <p><strong>File Type:</strong> ${file.type || 'Unknown'}</p>
+                `;
                 }
             });
         </script>

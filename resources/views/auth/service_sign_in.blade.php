@@ -28,9 +28,11 @@
 
 <body class="align-items-center bg-dark bg-gif3">
 
+<br><br>
+
   <!-- Home link, centered horizontally -->
   <div class="center-link">
-    <a class="btn btn-sm px-4 mt-4 btn-outline-primary" aria-current="page" href="/"><i class="fa fa-home"></i> Home</a>
+    <a class="btn btn-sm px-4 mt-4 btn-outline-primary" aria-current="page" href="{{ route('partner') }}"><i class="fa fa-home"></i> Home</a>
   </div>
 
   <div class="d-flex justify-content-center align-items-center mt-4">
@@ -86,7 +88,7 @@
 
             <a href="#" class="text-decoration-none">Forgot Password?</a>
           </div>
-          <button class="btn btn-primary w-100 py-2" type="submit">Sign In</button>
+          <button class="btn btn-primary w-120 py-2" type="submit">Sign In</button>
 
           <p class="mt-3 text-center">New user? <a href="{{ url('/authentication/service-partner/sign-up') }}"
               class="text-decoration-none">Sign Up</a></p>

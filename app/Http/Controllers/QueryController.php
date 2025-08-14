@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\ContactUsMail;
 use App\Mail\InquiryMail;
+use App\Mail\InquiryReceived;
+use App\Mail\InquirySent;
 use App\Mail\SendQueryMailCopy;
 use App\Mail\SupportQueryReceived;
 use App\Models\Project;
@@ -138,5 +140,20 @@ class QueryController extends Controller
         Mail::to('info@pseudoteam.com')->send(new ContactUsMail($data));
 
         return redirect()->back()->with('success', 'Your message has been sent successfully!');
+    }
+
+    public function raiseInquiry(Request $request){
+        
+       $data = $request->validate([
+            'inquiry_summary' => 'required|string|max:255',
+            'inquiry_description' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+        ]);
+
+        $user = ProjectOwner::where('pown_id' , session('user_id'))->first();
+
+        Mail::to($user->pown_email)->send(new InquirySent($user , $data));
+        Mail::to('info@pseudoteam.com')->send(new InquiryReceived($user , $data));
+
     }
 }

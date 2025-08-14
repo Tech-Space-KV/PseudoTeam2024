@@ -26,7 +26,7 @@
   <div class="container  " style="height: 100vh;">
 
     <div class="mb-4 ">
-    <h2>Manage Account</h2>
+    <h2 class="fw-bold">Manage Account</h2>
     </div>
     <div class="row " style="height: 100%;">
 
@@ -147,12 +147,16 @@
           <i class="fa fa-pencil" style="font-size: 1.2rem; color: #007bff; cursor: pointer;"></i>
           </button>
         </div>
+
+        <div>
+          <p>Skills: {{ $user->sprov_skill1 }}, {{ $user->sprov_skill2 }}, {{ $user->sprov_skill3 }}</p>
+        </div>
+
         <div id="skillsWrapper" class="d-flex flex-wrap"></div>
 
         <input type="hidden" name="skill1" id="skill1">
         <input type="hidden" name="skill2" id="skill2">
         <input type="hidden" name="skill3" id="skill3">
-
 
         <br>
 

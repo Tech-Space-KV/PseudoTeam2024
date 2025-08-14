@@ -15,9 +15,21 @@
   <title>PseudoTeam</title>
 
 
+  <style>
+    .bg-gif3 {
+      background: url('{{ asset('images/customer-sign-bg.png') }}') no-repeat center center;
+      background-size: cover;
+      position: relative;
+      min-height: 100vh;
+      z-index: 0;
+    }
+  </style>
+
 </head>
 
 <body class="align-items-center bg-dark bg-gif3">
+
+  <br><br>
 
   <!-- Home link, centered horizontally -->
   <div class="center-link">
@@ -31,14 +43,14 @@
           @csrf
 
           @if ($errors->any())
-          <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-          @endforeach
-          </ul>
-          </div>
-          @endif
+        <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+        </ul>
+        </div>
+      @endif
 
           <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
           <h1 class="h5 mb-3 ms-1 text-muted">Forgot Password</h1>
@@ -64,7 +76,13 @@
 
             <a href="{{ route('customer.forgot-password') }}" class="text-decoration-none">Forgot Password?</a>
           </div> -->
-          <button class="btn btn-primary w-100 py-2" type="submit">Submit</button>
+          <!-- <button class="btn btn-primary w-120 rounded-pill py-2" type="submit">Submit</button> -->
+
+          <div class="text-center mt-3">
+            <button class="btn btn-primary py-2 px-4 rounded-pill w-120" type="submit">
+              Reset
+            </button>
+          </div>
 
           <!-- <p class="mt-3 text-center">New user? <a href="{{ url('/authentication/customer/sign-up') }}"
               class="text-decoration-none">Sign Up</a></p> -->

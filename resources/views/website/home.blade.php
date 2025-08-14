@@ -328,7 +328,7 @@
                             complexity.</p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
                             <a type="button" class="btn btn-outline-light btn-lg px-4 me-md-2 fw-bold"
-                                href="{{ url('/authentication/service-partner/sign-in') }}">Begin
+                                href="{{ route('auth.customer.sign_up') }}">Begin
                                 Here<i class="bi bi-caret-right-fill"></i></a>
                             <!-- <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button> -->
                         </div>
@@ -354,7 +354,7 @@
                             every detail, coordinate with expert service partners, and ensure timely delivery.</p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
                             <a type="button" class="btn btn-outline-light btn-lg px-4 me-md-2 fw-bold"
-                                href="{{ url('/authentication/service-partner/sign-in') }}">Begin
+                                href="{{ route('auth.customer.sign_up')  }}">Begin
                                 Here<i class="bi bi-caret-right-fill"></i></a>
                             <!-- <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button> -->
                         </div>
@@ -377,7 +377,7 @@
                             collaboration.</p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
                             <a type="button" class="btn btn-outline-light btn-lg px-4 me-md-2 fw-bold"
-                                href="{{ url('/authentication/service-partner/sign-in') }}">Begin
+                                href="{{ route('auth.customer.sign_up')  }}">Begin
                                 Here<i class="bi bi-caret-right-fill"></i></a>
                             <!-- <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button> -->
                         </div>

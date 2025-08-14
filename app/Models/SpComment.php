@@ -15,6 +15,7 @@ class SpComment extends Model
 
     protected $fillable = [
         'tconv_comment',
+        'tconv_sp_name',
         'tconv_comment_by_sp_id',
         'tconv_task_id',
         'tconv_comment_date_time',

@@ -16,11 +16,14 @@ class ReferAndEarnMail extends Mailable
     public $link;
     public $referrerName;
 
+    public $referralCode;
+
   
-    public function __construct($link , $referrerName = null)
+    public function __construct($link , $referrerName = null , $referralCode)
     {
         $this->link = $link;
         $this->referrerName = $referrerName;
+        $this->promoCode = $referralCode;
     }
 
     public function build()
@@ -31,7 +34,8 @@ class ReferAndEarnMail extends Mailable
         return $this->subject('PseudoTeam Referal Mail')
                     ->view('emails/send_referandearn_mail')
                     ->with('data', $this->link)
-                    ->with('referredName', $this->referrerName);
+                    ->with('referredName', $this->referrerName)
+                    ->with('promo_code' , $this->referralCode);
     }
 
 }

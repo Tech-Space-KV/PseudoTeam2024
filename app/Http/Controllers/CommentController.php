@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\ServiceProvider;
 use App\Models\SpComment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,10 +39,13 @@ class CommentController extends Controller
             'tconv_task_id' => 'required|integer',
         ]);
 
-         $currentTime = Carbon::now('Asia/Kolkata');
+        $currentTime = Carbon::now('Asia/Kolkata');
+
+        $name = ServiceProvider::where('sprov_id' , $validated['tconv_comment_by_sp_id'])->value('sprov_name');
 
         SpComment::create([
             'tconv_comment' => $validated['tconv_comment'],
+            'tconv_sp_name' => $name,
             'tconv_comment_by_sp_id' => $validated['tconv_comment_by_sp_id'],
             'tconv_task_id' => $validated['tconv_task_id'],
             'tconv_comment_date_time' => $currentTime->format('d-m-Y H:i:s'),

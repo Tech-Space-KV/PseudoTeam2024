@@ -80,17 +80,20 @@
             <h1>👋 You’ve Been Invited!</h1>
             <p>Hello,</p>
             <p>
-                Your friend <strong>{{ $referrerName }}</strong> thinks you'll love working with <strong>Pseudoteam</strong> — a platform where clients and service providers collaborate on real projects seamlessly.
+                Your friend <strong>{{ $referrerName }}</strong> thinks you'll love working with
+                <strong>Pseudoteam</strong> — a platform where clients and service providers collaborate on real
+                projects seamlessly.
             </p>
-            <!-- <p>
-                As a special bonus, you’ll get a welcome reward when you sign up using the link below.
-            </p> -->
+            <p>
+                Use this referral code while signing up: <strong>{{ $referralCode }}</strong>
+            </p>
             <a href="{{ $link }}" class="button">Join Pseudoteam Now</a>
             <p style="margin-top: 20px;">
                 We’re excited to have you on board. Start your first project or explore services today!
             </p>
             <p>Warm regards,<br><strong>Pseudoteam Team</strong></p>
         </div>
+
 
         <!-- Footer -->
         <div class="footer">

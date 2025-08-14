@@ -77,7 +77,7 @@ class QuoteController extends Controller
             ? explode(',', $request->input('selected_spares'))
             : [];
 
-        Mail::to('info@pseudoteam.com')->send(
+        Mail::to('sanskarsharma0119@gmail.com')->send(
             new QuoteRequestMail(
                 $request->only(['name', 'email', 'contact', 'company', 'query']),
                 $selectedServices,

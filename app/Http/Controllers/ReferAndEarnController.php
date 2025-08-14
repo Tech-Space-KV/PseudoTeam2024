@@ -27,7 +27,8 @@ class ReferAndEarnController extends Controller
         $message = $request->input('message');
         $userName = $projectOwner->pown_name;
 
-        $link = 'Pseudoteam.com/public/referal-registration/'.$customer_id.'/'.$userName;
+        // $link = 'Pseudoteam.com/public/referal-registration/'.$customer_id.'/'.$userName;
+        $link = 'Pseudoteam.com';
 
         // ReferralTable::create([
         //     'rfrls_user_id' => session('user_id'),
@@ -36,7 +37,9 @@ class ReferAndEarnController extends Controller
         //     'rfrls_user_type'=> 'customer',
         // ]);
 
-        Mail::to($email)->send(new ReferAndEarnMail($link , $projectOwner->pown_name));
+        \Log::info('Working till here! ' . $projectOwner->pown_promo_code);
+
+        Mail::to($email)->send(new ReferAndEarnMail($link , $projectOwner->pown_name , $projectOwner->pown_promo_code));
 
         return redirect()->back()->with('success', 'Invitation sent successfully!');
 
@@ -45,9 +48,6 @@ class ReferAndEarnController extends Controller
     public function spSendMail(Request $request) 
     {
         $servicePartner = session('sp_user_id');
-
-        \Log::info('working till here!' . $servicePartner);
-
 
         if(!$servicePartner)
         {
@@ -66,9 +66,9 @@ class ReferAndEarnController extends Controller
         //     'rfrls_user_type'=> 'SP',
         // ]);
 
-        $link = 'Pseudoteam.com/referal-registration/13/sanskar';
+        $link = 'Pseudoteam.com';
 
-        Mail::to($email)->send(new ReferAndEarnMail($link));    
+        Mail::to($email)->send(new ReferAndEarnMail($link ,$servicePartner->sprov_name , $servicePartner->pown_promo_code));    
 
         return redirect()->back()->with('success', 'Invitation sent successfully!');
 

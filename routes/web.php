@@ -43,8 +43,12 @@ Route::get('ask/for/quote', [QuoteController::class, 'show'])->name('ask_for_quo
 
 Route::post('ask/for/quote', [QuoteController::class, 'sendQuoteMail'])->name('post.ask_for_quote');
 
-Route::get('referal-registration/{customer_id}/{userName}', function ($customer_id, $userName) {
-    return view('website/home', compact('customer_id', 'userName'));
+// Route::get('referal-registration/{customer_id}/{userName}', function ($customer_id, $userName) {
+//     return view('website/home', compact('customer_id', 'userName'));
+// })->name('referal.registration');
+
+Route::get('referal-registration/', function () {
+    return view('website/home');
 })->name('referal.registration');
 
 //kal krunga
@@ -93,6 +97,12 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
     // Route::post('/customer/session/todo/delete', [TodoController::class, 'delete'])->name('todo.delete');
     // Route::get('/customer/session/todo/fetch', [TodoController::class, 'fetchTodos'])->name('todo.fetch');
+
+    Route::get('/inquire' , function () {
+        return view('customer/inquire_now');
+    })->name('inquire.now');
+
+    Route::post('/inquire' , [QueryController::class , 'raiseInquiry'])->name('inquire.now');
 
     Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store');
 

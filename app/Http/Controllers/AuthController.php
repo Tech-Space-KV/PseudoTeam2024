@@ -300,6 +300,8 @@ class AuthController extends Controller
                 'pown_email' => $user->email,
                 'pown_password' => Hash::make($request->password),
                 'pown_profile_completion_flag' => false,
+                'pown_promo_code' => str_replace(' ', '', $user->name) . '_' . date('Ymd_His'),
+
             ]);
 
             return redirect()->route('auth.customer.sign_in')->with('success', 'Verification successful! Please sign in.');
@@ -349,6 +351,8 @@ class AuthController extends Controller
                 'sprov_password' => Hash::make($request->password),
                 // 'sprov_user_type' => 'SP',
                 'sprov_profile_completion_flag' => false,
+                'sprov_promo_code' => str_replace(' ', '', $user->name) . '_' . date('Ymd_His'),
+
             ]);
 
             return redirect()->route('auth.sp.sign_in')->with('success', 'Password set successfully! Please log in.');

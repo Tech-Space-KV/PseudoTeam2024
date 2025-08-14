@@ -24,9 +24,55 @@
     }
   </style>
 
+  <style>
+    /* Loader wrapper - fullscreen overlay */
+    #loader-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      /* Background color */
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Simple Git-style loader (spinner) */
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #333;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    /* Spinner animation */
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
 </head>
 
 <body class="align-items-center bg-dark bg-gif3">
+
+  <br><br>
+
+  <!-- Loader Wrapper -->
+  <div id="loader-wrapper">
+    <div class="loader"></div>
+  </div>
+
 
   <!-- Home link, centered horizontally -->
   <div class="center-link">
@@ -91,7 +137,7 @@
           <!-- <button class="btn btn-primary w-100 py-2" type="submit">Sign In</button> -->
 
           <div class="text-center mt-3">
-            <button class="btn btn-primary py-2 px-4 rounded-pill" type="submit" style="width: 180px;">
+            <button class="btn btn-primary py-2 px-4 rounded-pill w-120" type="submit">
               Sign In
             </button>
           </div>
@@ -116,6 +162,17 @@
 
 
   <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Hide loader when page is fully loaded
+    window.addEventListener("load", function () {
+      const loaderWrapper = document.getElementById("loader-wrapper");
+      if (loaderWrapper) {
+        loaderWrapper.style.display = "none";
+      }
+    });
+  </script>
+
 
 </body>
 

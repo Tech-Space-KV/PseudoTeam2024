@@ -9,7 +9,7 @@
 
   <p><span class="fs-1 fw-bold">Hi, </span><span class="fs-3">{{ session('pown_name') }}</span></p>
   <div class="alert alert-primary" role="alert">
-    Want to get a job done? <a href="session/upload-project" class="btn btn-sm btn-outline-primary">Upload project</a>
+    Your questions matter to us? <a href="{{ route('inquire.now') }}" class="btn btn-sm btn-outline-primary rounded-pill">Inquire Now</a>
   </div>
 
 <!-- 

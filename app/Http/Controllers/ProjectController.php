@@ -164,7 +164,7 @@ class ProjectController extends Controller
                 $name = ProjectOwners::where('pown_id', session('user_id'))->value('pown_name');
 
 
-                $email = ProjectOwners::where('pown_id' , session('user_id'))->value('pown_email');
+                $email = ProjectOwners::where('pown_id', session('user_id'))->value('pown_email');
 
                 \Log::info('Email' . $email);
 
@@ -491,10 +491,17 @@ class ProjectController extends Controller
     public function updateTask(Request $request)
     {
 
+        ini_set('upload_max_filesize', '100M');
+        ini_set('post_max_size', '100M');
+        ini_set('memory_limit', '256M');
+        ini_set('max_execution_time', '300');
+        ini_set('max_input_time', '300');
+
         $request->validate([
             'pptasks_id' => 'required|exists:project_planner_tasks,pptasks_id',
             'pptasks_sp_status' => 'required|string',
-            'pptasks_proof_of_completion' => 'nullable|file|mimes:pdf,csv,xlsx|max:20480',
+            // 'pptasks_proof_of_completion' => 'nullable|file|mimes:pdf,csv,xlsx|max:20480',
+            'pptasks_proof_of_completion' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv|max:20480',
         ]);
 
         $task = ProjectPlannerTask::find($request->pptasks_id);
@@ -512,7 +519,7 @@ class ProjectController extends Controller
         $up = $currentTime->format('d-m-Y H:i:s'); // 20-07-2025 15:17:03
 
         // $task->pptasks_date_of_completion = $currentTime->format('d-m-y'); // e.g., 20-07-25
-        $task->updated_at = $up; 
+        $task->updated_at = $up;
 
         $task->save();
 

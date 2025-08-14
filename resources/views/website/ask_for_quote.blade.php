@@ -230,68 +230,160 @@
             }
         }
     </style>
+
     <style>
-        .card h3 {
-            margin-bottom: 15px;
-            font-size: 22px;
+        /* Card Heading - Blue Background */
+        .card-modern h3 {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border-radius: 10px 10px 0 0;
+            margin: -30px -30px 20px -30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-
-        .flex-cards {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+        /* Icon style inside heading */
+        .card-modern h3 button {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: none;
         }
 
-        .flex-cards .card {
-            flex: 1 1 48%;
+        /* Add more attractive card body */
+        .card-modern {
+            background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.6), rgba(0, 51, 102, 0.6));
+            border-radius: 16px;
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            color: white;
+            box-shadow: 0 8px 24px rgba(0, 123, 255, 0.15);
         }
 
-        .card {
-            background: var(--card-bg);
-            color: var(--text-dark);
-            border-radius: 10px;
-            padding: 25px 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, .15);
-            position: relative;
-            overflow: hidden;
-            max-height: 450px;
-            /* Optional: Limit total card height */
+        /* Scrollbar styling inside card */
+        .scrollable-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 123, 255, 0.5);
+            border-radius: 3px;
+        }
+
+        /* Form Heading */
+        /* .form-modern h2 {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3);
+            text-align: center;
+        } */
+    </style>
+
+
+    <style>
+        .fixed-card {
+            height: 500px;
+            /* You can adjust this as needed */
             display: flex;
             flex-direction: column;
         }
 
-        .table-container {
+        .scrollable-content {
+            flex-grow: 1;
             overflow-y: auto;
-            margin-top: 15px;
-            flex: 1;
+            margin-top: 10px;
+            padding-right: 5px;
         }
 
-        .table-container table {
+        .scrollable-content table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .table-container thead {
+        .scrollable-content thead {
             position: sticky;
             top: 0;
-            background: var(--card-bg);
-        }
-
-        .table-container th,
-        .table-container td {
-            padding: 8px 10px;
-            text-align: left;
-        }
-
-        label {
-            color: var(--text-light);
+            background: rgba(0, 0, 0, 0.5);
+            /* Keeps header visible on scroll */
+            backdrop-filter: blur(10px);
         }
     </style>
+
+    <style>
+        .card-modern {
+            padding: 20px;
+        }
+
+        /* .form-modern input,
+        .form-modern textarea {
+            background-color: #f8f9fa;
+            color: #000;
+        }
+
+        .form-modern .form-control:focus {
+            box-shadow: 0 0 5px #007bff;
+            border-color: #007bff;
+        } */
+
+        @media (max-width: 767px) {
+            .fixed-card {
+                height: auto;
+            }
+
+            .scrollable-content {
+                max-height: 300px;
+            }
+        }
+
+        .card-modern table {
+            background-color: transparent !important;
+            color: #fff;
+        }
+
+        .card-modern thead,
+        .card-modern tbody,
+        .card-modern th,
+        .card-modern td {
+            background-color: transparent !important;
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-modern input,
+        .form-modern textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            backdrop-filter: blur(10px);
+            border-radius: 6px;
+        }
+
+        .form-modern input::placeholder,
+        .form-modern textarea::placeholder {
+            color: #ccc;
+        }
+
+        .form-modern input:focus,
+        .form-modern textarea:focus {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+            border-color: #007bff;
+            color: #fff;
+            outline: none;
+        }
+
+        .form-modern label {
+            color: #ccc;
+            font-weight: 500;
+        }
+    </style>
+
+
 
 </head>
 
@@ -302,7 +394,7 @@
         style="background-color: rgba(21, 21, 21, 0.812); backdrop-filter: blur(30px);">
         <div class="container-fluid">
             <a href="{{ route('home') }}"><img src="{{asset('images/logo_pt3.png')}}" class="me-2"
-                    style="width: 120px;" /></a>
+                    style="width: 160px;" /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -312,12 +404,12 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
 
                 </ul>
-                <span class="navbar-text d-flex flex-column align-items-center me-3">
+                <!-- <span class="navbar-text d-flex flex-column align-items-center me-3">
                     <span style="color: #fff; font-size: 0.9rem;">📞Contact us: +91-9876543210</span>
                     <a class="nav-link nav-text px-4 glow-text" href="{{ route('ask_for_quote') }}">
                         Get Critical Spares & IT Services
                     </a>
-                </span>
+                </span> -->
 
                 <span class="navbar-text">
                     <a class="btn btn-outline-light px-4" onmouseover="this.style.color='black';"
@@ -335,136 +427,261 @@
     </center>
     <div class="px-5 mt-5">
 
-        <div class="flex-cards">
-            <!-- Clients Card -->
-            <div class="card bg-light">
-                <h3>
-                    Select Services
-                    <button class="search-icon" onclick="openModal('client')">🔍</button>
-                </h3>
-                <div class="table-container">
-                    <table>
-                        <thead class="bg-light">
-                            <tr>
-                                <th>Sku No.</th>
-                                <th>Description of services</th>
-                                <th>Mark</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($services as $service)
-                                <tr class="border">
-                                    <td>{{ $service['no'] }}</td>
-                                    <td>{{ $service['description'] }}</td>
-                                    <td><input type="checkbox" name="services[]" value="{{ $service['no'] }}"></td>
+        <div class="row g-5 mb-5">
+            <!-- Services Card -->
+            <div class="col-md-6">
+                <div class="card-modern fixed-card p-4">
+                    <h3 class="mb-3">
+                        <i class="fas fa-tools me-2"></i> Select Services
+                        <button class="search-icon btn btn-sm btn-outline-light"
+                            onclick="openModal('client')">🔍</button>
+                    </h3>
+
+                    <div class="scrollable-content">
+
+                        <input type="text" class="w-100 px-2 rounded-pill mx-auto mb-4" id="tableSearch1"
+                            placeholder="Search..." onkeyup="searchTable1()" />
+
+                        <table class="table table-bordered table-hover table-sm text-white" id="dataTable1">
+                            <thead>
+                                <tr>
+                                    <th>SKU No.</th>
+                                    <th>Description</th>
+                                    <th>Mark</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($services as $service)
+                                    <tr>
+                                        <td>{{ $service['no'] }}</td>
+                                        <td>{{ $service['description'] }}</td>
+                                        <td><input type="checkbox" name="services[]" value="{{ $service['no'] }}"></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <!-- Suppliers Card -->
-            <div class="card bg-light">
-                <h3>
-                    Select Critical spares
-                    <button class="search-icon" onclick="openModal('supplier')">🔍</button>
-                </h3>
-                <div class="table-container">
-                    <table>
-                        <thead class="bg-light">
-                            <tr>
-                                <th>Sku No.</th>
-                                <th>Spare Name</th>
-                                <th>Mark</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($hardwares as $hardware)
-                                <tr class="border">
-                                    <td>{{ $hardware['hw_identifier'] }}</td>
-                                    <td>{{ $hardware['model_description'] }}</td>
-                                    <td><input type="checkbox" name="spares[]" value="{{ $hardware['hw_identifier'] }}">
-                                    </td>
+            <!-- Spares Card -->
+            <div class="col-md-6">
+                <div class="card-modern fixed-card p-4">
+                    <h3 class="mb-3">
+                        <i class="fas fa-microchip me-2"></i> Select Critical Spares
+                        <button class="search-icon btn btn-sm btn-outline-light"
+                            onclick="openModal('supplier')">🔍</button>
+                    </h3>
+
+                    <div class="scrollable-content">
+
+                        <input type="text" class="w-100 px-2 rounded-pill mx-auto mb-4" id="tableSearch2"
+                            placeholder="Search..." onkeyup="searchTable2()" />
+
+                        <table class="table table-bordered table-hover table-sm text-white" id="dataTable2">
+                            <thead>
+                                <tr>
+                                    <th>SKU No.</th>
+                                    <th>Spare Name</th>
+                                    <th>Mark</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach($hardwares as $hardware)
+                                    <tr>
+                                        <td>{{ $hardware['hw_identifier'] }}</td>
+                                        <td>{{ $hardware['model_description'] }}</td>
+                                        <td><input type="checkbox" name="spares[]" value="{{ $hardware['hw_identifier'] }}">
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Contact Form -->
-        <!-- <div style="margin: 40px auto; max-width: 600px; padding: 20px; background-color: #1c1c1c; border-radius: 8px;">
-        <h2 style="color: #fff;">Contact Us</h2>
-        <form action="/submit-query" method="post">
-            <div style="margin-bottom: 15px;">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name" required style="width: 100%; padding: 8px;">
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email" required style="width: 100%; padding: 8px;">
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label for="company">Company:</label><br>
-                <input type="text" id="company" name="company" style="width: 100%; padding: 8px;">
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label for="query">Your Query:</label><br>
-                <textarea id="query" name="query" rows="5" required style="width: 100%; padding: 8px;"></textarea>
-            </div>
-            <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Submit</button>
-        </form>
-    </div> -->
-
-        <div
-            style="margin: 40px auto; width: 80%; padding: 20px; background-color: #1c1c1c; border-radius: 8px; box-sizing: border-box;">
-            <h2 style="color: #fff; " class="mb-3">Complete your request</h2>
-            <form action="{{ route('post.ask_for_quote') }}" method="post" style="width: 100%;" class="text-light">
+        <!-- <div class="form-modern p-4">
+            <h2 class="mb-4">Complete Your Request</h2>
+            <form action="{{ route('post.ask_for_quote') }}" method="post">
                 @csrf
 
-                <input type="hidden" name="selected_`services" id="selected_services">
+                <input type="hidden" name="selected_services" id="selected_services">
                 <input type="hidden" name="selected_spares" id="selected_spares">
 
-                <!-- Row 1: Name & Email -->
-                <div style="display: flex; gap: 20px; margin-bottom: 15px;">
-                    <div style="flex: 1;">
-                        <label for="name">Name:</label><br>
-                        <input type="text" id="name" name="name" required style="width: 100%; padding: 8px;">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label text-white">Name</label>
+                        <input type="text" name="name" id="name" class="form-control" required>
                     </div>
-                    <div style="flex: 1;">
-                        <label for="email">Email:</label><br>
-                        <input type="email" id="email" name="email" required style="width: 100%; padding: 8px;">
-                    </div>
-                </div>
-
-                <!-- Row 2: Contact & Company -->
-                <div style="display: flex; gap: 20px; margin-bottom: 15px;">
-                    <div style="flex: 1;">
-                        <label for="contact">Contact:</label><br>
-                        <input type="text" id="contact" name="contact" required style="width: 100%; padding: 8px;">
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="company">Company:</label><br>
-                        <input type="text" id="company" name="company" style="width: 100%; padding: 8px;">
+                    <div class="col-md-6">
+                        <label for="email" class="form-label text-white">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
                     </div>
                 </div>
 
-                <!-- Row 3: Full-width Query Box -->
-                <div style="margin-bottom: 15px;">
-                    <label for="query">Your Query:</label><br>
-                    <textarea id="query" name="query" rows="5" required style="width: 100%; padding: 8px;"></textarea>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="contact" class="form-label text-white">Contact</label>
+                        <input type="text" name="contact" id="contact" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="company" class="form-label text-white">Company</label>
+                        <input type="text" name="company" id="company" class="form-control">
+                    </div>
                 </div>
 
-                <!-- Submit Button -->
-                <button class="btn btn-primary" type="submit">
-                    Get a Quote & Callback
-                </button>
+                <div class="mb-3">
+                    <label fo r="query" class="form-label text-white">Your Query</label>
+                    <textarea name="query" id="query" rows="5" class="form-control" required></textarea>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary px-5">Get a Quote & Callback</button>
+                </div>
             </form>
+        </div> -->
+
+        <!-- <div class="form-modern mt-5">
+            <h2 class="mb-4">Complete Your Request</h2>
+            <form action="{{ route('post.ask_for_quote') }}" method="post">
+                @csrf
+
+                <input type="hidden" name="selected_services" id="selected_services">
+                <input type="hidden" name="selected_spares" id="selected_spares">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="contact">Contact</label>
+                        <input type="text" name="contact" id="contact" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="company">Company</label>
+                        <input type="text" name="company" id="company">
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <label for="query">Your Query</label>
+                    <textarea name="query" id="query" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="mt-3">Get a Quote & Callback</button>
+            </form>
+        </div> -->
+
+        <!-- 
+        <div class="d-flex justify-content-center mt-5">
+            <div class="form-modern p-4 shadow-lg rounded"
+                style="background: rgba(255,255,255,0.05); width: 100%; max-width: 600px;">
+                <h2 class="mb-4 text-center glow-text">Request a Quote</h2>
+                <form action="{{ route('post.ask_for_quote') }}" method="post">
+                    @csrf
+
+                    <input type="hidden" name="selected_services" id="selected_services">
+                    <input type="hidden" name="selected_spares" id="selected_spares">
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label text-white">Name</label>
+                            <input type="text" class="form-control form-control-sm" name="name" id="name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label text-white">Email</label>
+                            <input type="email" class="form-control form-control-sm" name="email" id="email" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="contact" class="form-label text-white">Contact</label>
+                            <input type="text" class="form-control form-control-sm" name="contact" id="contact"
+                                required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="company" class="form-label text-white">Company</label>
+                            <input type="text" class="form-control form-control-sm" name="company" id="company">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="query" class="form-label text-white">Your Query</label>
+                        <textarea class="form-control form-control-sm" name="query" id="query" rows="4"
+                            required></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill mt-2">
+                            <i class="fas fa-paper-plane me-2"></i>Submit Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div> -->
+
+        <div class="d-flex justify-content-center mt-5">
+            <div class="form-modern card-modern shadow-lg p-4 rounded" style="width: 100%; max-width: 650px;">
+                <h2 class="mb-5 text-center">Your Details Here...</h2>
+                <form action="{{ route('post.ask_for_quote') }}" method="post">
+                    @csrf
+
+                    <input type="hidden" name="selected_services" id="selected_services">
+                    <input type="hidden" name="selected_spares" id="selected_spares">
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label text-white">Name</label>
+                            <input type="text" class="form-control form-control-sm" name="name" id="name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label text-white">Email</label>
+                            <input type="email" class="form-control form-control-sm" name="email" id="email" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="contact" class="form-label text-white">Contact</label>
+                            <input type="text" class="form-control form-control-sm" name="contact" id="contact"
+                                required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="company" class="form-label text-white">Company</label>
+                            <input type="text" class="form-control form-control-sm" name="company" id="company">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="query" class="form-label text-white">Your Query</label>
+                        <textarea class="form-control form-control-sm" name="query" id="query" rows="4"
+                            required></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill mt-2">
+                            <i class="fas fa-paper-plane me-2"></i>Request For Quote
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
+
+
+
+    </div>
 
     </div>
     <br>
@@ -490,6 +707,71 @@
             document.getElementById('selected_spares').value = selectedSpares.join(',');
         });
     </script>
+
+    <script>
+        function searchTable1() {
+            let input = document.getElementById("tableSearch1").value.toLowerCase();
+            let table = document.getElementById("dataTable1");
+            let rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+                let cells = rows[i].getElementsByTagName("td");
+                let rowContainsSearchTerm = false;
+
+                for (let cell of cells) {
+                    if (cell.innerText.toLowerCase().includes(input)) {
+                        rowContainsSearchTerm = true;
+                        break;
+                    }
+                }
+
+                rows[i].style.display = rowContainsSearchTerm ? "" : "none";
+            }
+        }
+
+        function searchTable2() {
+            let input = document.getElementById("tableSearch2").value.toLowerCase();
+            let table = document.getElementById("dataTable2");
+            let rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+                let cells = rows[i].getElementsByTagName("td");
+                let rowContainsSearchTerm = false;
+
+                for (let cell of cells) {
+                    if (cell.innerText.toLowerCase().includes(input)) {
+                        rowContainsSearchTerm = true;
+                        break;
+                    }
+                }
+
+                rows[i].style.display = rowContainsSearchTerm ? "" : "none";
+            }
+        }
+    </script>
+
+    <script>
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('search');
+
+
+        if (searchQuery) {
+            document.getElementById('tableSearch1').value = searchQuery;
+
+            searchTable1(); 
+        }
+
+
+        if (searchQuery) {
+            document.getElementById('tableSearch2').value = searchQuery;
+
+            searchTable2(); 
+        }
+
+    </script>
+
+
 
 </body>
 

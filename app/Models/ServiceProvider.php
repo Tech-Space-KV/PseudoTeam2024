@@ -24,5 +24,6 @@ class ServiceProvider extends Model
         'sprov_pincode',
         'sprov_address',
         'sprov_profile_completion_flag',
+        'sprov_promo_code', 
     ];
 }

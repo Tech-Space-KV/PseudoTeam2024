@@ -5,7 +5,7 @@
 </br>
 <div class="container">
     <div class="mb-4">
-        <h2>Available projects</h2>
+        <h2 class="fw-bold">Available projects</h2>
     </div>
 
     <!-- @foreach($projects as $project)

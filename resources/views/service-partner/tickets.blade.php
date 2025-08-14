@@ -6,7 +6,7 @@
 <div class="container">
 
   <div class="mb-4">
-    <h2>Tickets</h2>
+    <h2 class="fw-bold">Tickets</h2>
   </div>
   </br>
   <!-- <div class="d-flex justify-content-end">

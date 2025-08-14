@@ -19,7 +19,8 @@ class ProjectOwner extends Model
         'pown_state', 'pown_address', 'pown_pincode', 'pown_contact', 'pown_email',
         'pown_date_of_registration', 'pown_about', 'pown_organisation_name', 'pown_cin',
         'pown_gstpin', 'pown_adhaar', 'pown_body', 'pown_password', 'pown_login_flag',
-        'pown_adhaarfile', 'pown_profile_completion_flag', 'pown_dp', 'pown_refered_by'
+        'pown_adhaarfile', 'pown_profile_completion_flag', 'pown_dp', 'pown_refered_by', 
+        'pown_promo_code'
     ];
 }
 

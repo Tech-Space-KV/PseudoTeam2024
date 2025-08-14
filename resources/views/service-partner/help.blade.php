@@ -22,7 +22,7 @@
     </div> -->
 
   <div class="container ">
-    <h2>Support</h2>
+    <h2 class="fw-bold">Support</h2>
     <div class="mb-4" id="message-container">
     @if(session('success'))
     <div class="alert alert-success" role="alert">

@@ -6,7 +6,7 @@
     <div class="container  " style="height: 100vh;">
 
         <div class="mb-4 ">
-            <h2>Notifications</h2>
+            <h2 class="fw-bold">Notifications</h2>
         </div>
         <table class="table table-hover" id="notificationsTable"
             style="background-color: #fff; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">

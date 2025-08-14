@@ -17,5 +17,6 @@ class ProjectOwners extends Model
         'pown_email',
         'pown_password',
         'pown_profile_completion_flag',
+        'pown_promo_code',
     ];
 }

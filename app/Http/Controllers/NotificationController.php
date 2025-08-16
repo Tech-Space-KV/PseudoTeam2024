@@ -64,7 +64,7 @@ class NotificationController extends Controller
         $notification = Notification::find($id);
 
         if (!$notification) {
-            Log::warning("Notification ID {$id} not found.");
+            \Log::warning("Notification ID {$id} not found.");
             return response()->json(['success' => false, 'error' => 'Notification not found'], 404);
         }
 

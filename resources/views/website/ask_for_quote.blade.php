@@ -655,7 +655,7 @@
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label for="contact" class="form-label text-white">Contact</label>
-                            <input type="text" class="form-control form-control-sm" name="contact" id="contact"
+                            <input type="tel" class="form-control form-control-sm" name="contact" id="contact"
                                 required>
                         </div>
                         <div class="col-md-6">

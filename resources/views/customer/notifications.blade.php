@@ -26,7 +26,7 @@
                         <tr class="notification-row" data-id="{{ $notification->ntfn_id }}" style="background-color: #fafafa;">
                             <td style="padding: 15px; font-size: 0.9rem; color: #333;">{{ $notification->ntfn_date_time }}</td>
                             <td class="notification-text" data-id="{{ $notification->ntfn_id }}" style="padding: 15px; font-size: 0.9rem; color: #333; line-height: 1.5; cursor: pointer;
-                                            @if(!$notification->ntfn_readflag) font-weight: bold; @endif">
+                                                        @if(!$notification->ntfn_readflag) font-weight: bold; @endif">
                                 Notification #: {{ $notification->ntfn_notification }}
                             </td>
                             <td style="text-align: center; padding: 15px;">
@@ -110,14 +110,18 @@
                     notificationText.addEventListener('click', function () {
                         const notificationId = this.getAttribute('data-id');
                         if (notificationId) {
-                            // window.location.href = `/customer/session/notification-details/${notificationId}`;
-                             window.location.href = '{{ route('ntfn.details' , 'id') }}'.replace(':id' , notificationId);
+                            // Use a Blade variable with a placeholder token
+                            const urlTemplate = '{{ route("ntfn.details", ":id") }}';
+                            const finalUrl = urlTemplate.replace(':id', notificationId);
+
+                            window.location.href = finalUrl;
                         } else {
                             console.error('Notification ID not found!');
                         }
                     });
                 });
             }
+
 
             // function attachDeleteListeners() {
             //     document.querySelectorAll('.delete-notification').forEach(button => {

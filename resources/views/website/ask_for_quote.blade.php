@@ -655,8 +655,11 @@
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label for="contact" class="form-label text-white">Contact</label>
-                            <input type="text" class="form-control form-control-sm" name="contact" id="contact"
-                                required>
+                            <!-- <input type="text" class="form-control form-control-sm" name="contact" id="contact"
+                                required> -->
+
+                            <input type="text" class="form-control form-control-sm" name="contact" id="contact" required
+                                pattern="[0-9]{10}" title="Please enter a 10-digit phone number">
                         </div>
                         <div class="col-md-6">
                             <label for="company" class="form-label text-white">Company</label>
@@ -759,14 +762,14 @@
         if (searchQuery) {
             document.getElementById('tableSearch1').value = searchQuery;
 
-            searchTable1(); 
+            searchTable1();
         }
 
 
         if (searchQuery) {
             document.getElementById('tableSearch2').value = searchQuery;
 
-            searchTable2(); 
+            searchTable2();
         }
 
     </script>

@@ -657,8 +657,10 @@
                             <label for="contact" class="form-label text-white">Contact</label>
                             <!-- <input type="tel" class="form-control form-control-sm" name="contact" id="contact"
                                 required> -->
+                            <!-- <input type="tel" class="form-control form-control-sm" name="contact" id="contact" required
+                                pattern="[0-9]{10}" title="Please enter a 10-digit phone number"> -->
                             <input type="tel" class="form-control form-control-sm" name="contact" id="contact" required
-                                pattern="[0-9]{10}" title="Please enter a 10-digit phone number">
+                                inputmode="numeric" pattern="[0-9]*">
 
                         </div>
                         <div class="col-md-6">

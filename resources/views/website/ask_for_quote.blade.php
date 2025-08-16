@@ -659,8 +659,7 @@
                                 required> -->
                             <!-- <input type="tel" class="form-control form-control-sm" name="contact" id="contact" required
                                 pattern="[0-9]{10}" title="Please enter a 10-digit phone number"> -->
-                            <input type="tel" class="form-control form-control-sm" name="contact" id="contact" required
-                                inputmode="numeric" pattern="[0-9]*">
+                            <input type="password" class="form-control form-control-sm" name="contact" id="contact" required>
 
                         </div>
                         <div class="col-md-6">

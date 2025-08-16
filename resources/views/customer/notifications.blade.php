@@ -110,7 +110,8 @@
                     notificationText.addEventListener('click', function () {
                         const notificationId = this.getAttribute('data-id');
                         if (notificationId) {
-                            window.location.href = `/customer/session/notification-details/${notificationId}`;
+                            // window.location.href = `/customer/session/notification-details/${notificationId}`;
+                             window.location.href = '{{ route('ntfn.details' , 'id') }}'.replace(':id' , notificationId);
                         } else {
                             console.error('Notification ID not found!');
                         }

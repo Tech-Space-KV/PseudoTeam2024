@@ -273,7 +273,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
     Route::get('/notification-details/{notificationId}', function ($notificationId) {
         return (new NotificationController)->fetchNotificationDetails($notificationId);
-    });
+    })->name('ntfn.details');
 
     Route::post('/submitSupportQuery', [QueryController::class, 'submitSupportQuery'])->name('submitSupportQuery');
 

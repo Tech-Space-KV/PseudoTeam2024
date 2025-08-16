@@ -71,7 +71,8 @@
     <div class="container">
         <!-- Header with logo -->
         <div class="header">
-            <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo">
+            <!-- <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo"> -->
+            <img src="https://pseudoteam.com/PseudoTeam2024/public/images/logopt.png" alt="Pseudoteam Logo">
         </div>
 
         <!-- Content Section -->
@@ -79,7 +80,8 @@
             <h1>📦 New Order Received</h1>
             <p>Hello Pseudoteam,</p>
             <p>
-                A new customer order has been received. Please find the details below and initiate the necessary process.
+                A new customer order has been received. Please find the details below and initiate the necessary
+                process.
             </p>
             <div class="details-box">
                 <strong>Order No:</strong> {{ $orderNo }}<br>

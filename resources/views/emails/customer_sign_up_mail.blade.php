@@ -73,7 +73,8 @@
     <div class="container">
         <!-- Header with logo -->
         <div class="header">
-            <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo">
+            <!-- <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo"> -->
+            <img src="https://pseudoteam.com/PseudoTeam2024/public/images/logopt.png" alt="Pseudoteam Logo">
         </div>
 
         <!-- Content Section -->
@@ -92,7 +93,8 @@
                 <li>💬 Connect directly with our team</li>
             </ul>
             </p>
-            <a href="{{ $verificationLink }}" class="button" style="color: white; text-decoration: none;">Complete Verification</a>
+            <a href="{{ $verificationLink }}" class="button" style="color: white; text-decoration: none;">Complete
+                Verification</a>
             <p style="margin-top: 20px;">
                 If you have any questions or need help getting started, feel free to reach out—we're always here to
                 help.

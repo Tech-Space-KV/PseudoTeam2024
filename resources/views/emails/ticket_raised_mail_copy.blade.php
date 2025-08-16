@@ -71,7 +71,8 @@
     <div class="container">
         <!-- Header with logo -->
         <div class="header">
-            <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo">
+            <!-- <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo"> -->
+            <img src="https://pseudoteam.com/PseudoTeam2024/public/images/logopt.png" alt="Pseudoteam Logo">
         </div>
 
         <!-- Content Section -->
@@ -79,7 +80,8 @@
             <h1>📥 New Support Ticket Submitted</h1>
             <p>Hello Team,</p>
             <p>
-                A new support ticket has been raised by a customer. Please review the details below and take appropriate action.
+                A new support ticket has been raised by a customer. Please review the details below and take appropriate
+                action.
             </p>
             <div class="details-box">
                 <strong>Ticket ID:</strong> {{ $ticketId }}<br>

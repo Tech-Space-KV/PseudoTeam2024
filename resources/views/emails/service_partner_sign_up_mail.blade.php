@@ -73,7 +73,8 @@
     <div class="container">
         <!-- Header with logo -->
         <div class="header">
-            <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo">
+            <!-- <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo"> -->
+            <img src="https://pseudoteam.com/PseudoTeam2024/public/images/logopt.png" alt="Pseudoteam Logo">
         </div>
 
         <!-- Content Section -->
@@ -81,7 +82,8 @@
             <h1>👷‍♂️ Welcome to Pseudoteam, Partner!</h1>
             <p>Hello {{ $name }},</p>
             <p>
-                We're excited to have you join Pseudoteam as a Service Partner! Your account has been successfully created, and you're now part of a growing network of professionals helping businesses succeed.
+                We're excited to have you join Pseudoteam as a Service Partner! Your account has been successfully
+                created, and you're now part of a growing network of professionals helping businesses succeed.
             </p>
             <p>As a verified partner, you’ll be able to:</p>
             <ul>
@@ -92,7 +94,8 @@
             </ul>
             <a href="{{ $verificationLink }}" class="button">Verify Your Account</a>
             <p style="margin-top: 20px;">
-                If you need help completing your profile or verifying your skills, feel free to reach out. We're always here to assist.
+                If you need help completing your profile or verifying your skills, feel free to reach out. We're always
+                here to assist.
             </p>
             <p>Let’s build something great together!<br><strong>— Pseudoteam Support</strong></p>
         </div>

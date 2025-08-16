@@ -69,7 +69,7 @@
 
         <!-- Header -->
         <div class="header">
-            <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo">
+            <!-- <img src="https://pseudoteam.com/homepage/home/logo.png" alt="Pseudoteam Logo"> -->
         </div>
 
         <!-- Content -->

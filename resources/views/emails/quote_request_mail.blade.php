@@ -73,7 +73,8 @@
     <div class="container">
         <!-- Header with logo -->
         <div class="header">
-            <img src="{{asset('images/logo_pt3.png')}}"  alt="Pseudoteam Logo">
+            <!-- <img src="{{asset('images/logo_pt3.png')}}"  alt="Pseudoteam Logo"> -->
+            <img src="https://pseudoteam.com/PseudoTeam2024/public/images/logopt.png" alt="Pseudoteam Logo">
         </div>
 
         <!-- Content Section -->

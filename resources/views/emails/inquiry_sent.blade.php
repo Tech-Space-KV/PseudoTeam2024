@@ -75,7 +75,8 @@
         <!-- Content -->
         <div class="content">
             <h1>✅ Your Inquiry Has Been Successfully Submitted!</h1>
-            <p>Thank you for reaching out to <strong>PseudoTeam</strong>. We've received your inquiry and our team will review it shortly.</p>
+            <p>Thank you for reaching out to <strong>PseudoTeam</strong>. We've received your inquiry and our team will
+                review it shortly.</p>
 
             <p>Here’s a summary of what you submitted:</p>
 
@@ -84,17 +85,25 @@
                     <td><strong>Name:</strong></td>
                     <td>{{ $user['pown_name'] }}</td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td><strong>Email:</strong></td>
-                    <td>{{ $data['pown_email'] }}</td>
+                    <td>{{ $user['pown_email'] }}</td>
                 </tr>
                 <tr>
                     <td><strong>Contact:</strong></td>
-                    <td>{{ $data['pown_contact'] }}</td>
-                </tr>
+                    <td>{{ $user['pown_contact'] }}</td>
+                </tr> -->
                 <tr>
                     <td><strong>Message:</strong></td>
                     <td>{{ $data['inquiry_summary'] }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Inquiry Description:</strong></td>
+                    <td>{{ $user['inquiry_description'] }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Category:</strong></td>
+                    <td>{{ $user['category'] }}</td>
                 </tr>
                 <tr>
                     <td><strong>Submitted On:</strong></td>
@@ -102,7 +111,8 @@
                 </tr>
             </table>
 
-            <p>One of our team members will get back to you as soon as possible. If your inquiry is urgent, feel free to contact us directly at <a href="mailto:support@pseudoteam.com">support@pseudoteam.com</a>.</p>
+            <p>One of our team members will get back to you as soon as possible. If your inquiry is urgent, feel free to
+                contact us directly at <a href="mailto:support@pseudoteam.com">support@pseudoteam.com</a>.</p>
 
             <p>We’re excited to help you bring your project to life! 🚀</p>
 

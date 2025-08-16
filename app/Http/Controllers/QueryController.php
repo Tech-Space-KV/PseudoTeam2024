@@ -155,5 +155,7 @@ class QueryController extends Controller
         Mail::to($user->pown_email)->send(new InquirySent($user , $data));
         Mail::to('info@pseudoteam.com')->send(new InquiryReceived($user , $data));
 
+        return redirect()->back()->with('success', 'Your inquiry has been raised successfully!');
+
     }
 }

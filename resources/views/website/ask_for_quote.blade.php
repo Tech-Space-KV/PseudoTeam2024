@@ -635,6 +635,22 @@
         <div class="d-flex justify-content-center mt-5">
             <div class="form-modern card-modern shadow-lg p-4 rounded" style="width: 100%; max-width: 650px;">
                 <h2 class="mb-5 text-center">Your Details Here...</h2>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form action="{{ route('post.ask_for_quote') }}" method="post">
                     @csrf
 

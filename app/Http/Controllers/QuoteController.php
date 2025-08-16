@@ -56,10 +56,11 @@ class QuoteController extends Controller
         \Log::info('SendQuoteMail method called!');
 
         // Validate incoming form data
-        $request->validate([
+       $validator =  $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'contact' => 'required|string|max:50',
+            // 'contact' => 'required|string|max:50',
+            'contact' => ['required', 'regex:/^\d{10,15}$/'],
             'company' => 'nullable|string|max:255',
             'query' => 'required|string',
             'selected_services' => 'nullable|string',

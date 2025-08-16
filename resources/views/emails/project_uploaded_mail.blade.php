@@ -23,7 +23,7 @@
         }
 
         .header {
-            background-color: #006EC4;
+            background-color: #ffffffff;
             padding: 20px;
             text-align: center;
         }

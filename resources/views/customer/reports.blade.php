@@ -75,7 +75,7 @@
 <!-- Chart.js Script -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const labels = ['Pending', 'Delivered', 'In Progress', 'Overdue'];
+    const labels = ['No SP Assigned', 'Delivered', 'In Progress', 'Overdue'];
     const chartData = [
         {{ $statuses['pending'] ?? 0 }},
         {{ $statuses['delivered'] ?? 0 }},

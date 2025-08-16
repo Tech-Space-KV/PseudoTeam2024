@@ -11,14 +11,6 @@
                 <div class="alert alert-success" role="alert">
                     {{ session('success') }}
                 </div>
-
-                <script>
-
-                    setTimeout(function () {
-                        window.location.href = "{{ route('project.track') }}";
-                    }, 1500);
-
-                </script>
             @endif
 
             @if(session('error'))

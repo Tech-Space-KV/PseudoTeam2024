@@ -828,6 +828,25 @@ class ProjectController extends Controller
     //         ->header('Content-Length', strlen($project->plist_sow));
     // }
 
+    // public function downloadSow($id)
+    // {
+    //     $project = Project::findOrFail($id);
+
+    //     if (empty($project->plist_sow)) {
+    //         abort(404, 'Scope of Work file not found.');
+    //     }
+
+    //     // Try to guess MIME type
+    //     $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    //     $mime = finfo_buffer($finfo, $project->plist_sow);
+    //     finfo_close($finfo);
+
+    //     return response($project->plist_sow)
+    //         ->header('Content-Type', $mime ?: 'application/octet-stream')
+    //         ->header('Content-Disposition', 'attachment; filename="scope_of_work"')
+    //         ->header('Content-Length', strlen($project->plist_sow));
+    // }
+
     public function downloadSow($id)
     {
         $project = Project::findOrFail($id);
@@ -836,16 +855,30 @@ class ProjectController extends Controller
             abort(404, 'Scope of Work file not found.');
         }
 
-        // Try to guess MIME type
+        // Guess MIME type
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime = finfo_buffer($finfo, $project->plist_sow);
         finfo_close($finfo);
 
+        // Map MIME to file extension
+        $mimeToExt = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'application/pdf' => 'pdf',
+            'application/msword' => 'doc',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'docx',
+            'application/vnd.ms-excel' => 'xls',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'xlsx',
+            'text/csv' => 'csv',
+        ];
+
+        $extension = $mimeToExt[$mime] ?? 'bin'; // fallback to .bin if unknown
+        $downloadFilename = 'scope_of_work.' . $extension;
+
         return response($project->plist_sow)
             ->header('Content-Type', $mime ?: 'application/octet-stream')
-            ->header('Content-Disposition', 'attachment; filename="scope_of_work"')
+            ->header('Content-Disposition', 'attachment; filename="' . $downloadFilename . '"')
             ->header('Content-Length', strlen($project->plist_sow));
     }
-
 
 }

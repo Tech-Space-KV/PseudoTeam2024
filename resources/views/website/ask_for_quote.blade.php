@@ -447,7 +447,7 @@
                                 <tr>
                                     <th>SKU No.</th>
                                     <th>Description</th>
-                                    <th>Mark</th>
+                                    <th>Select</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -483,7 +483,7 @@
                                 <tr>
                                     <th>SKU No.</th>
                                     <th>Spare Name</th>
-                                    <th>Mark</th>
+                                    <th>Select</th>
                                 </tr>
                             </thead>
                             <tbody>

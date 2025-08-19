@@ -412,10 +412,9 @@
                 </span> -->
 
                 <span class="navbar-text">
-                    <a class="btn px-4 rounded-pill border border-primary border-2 btn-outline-primary ms-2"
-                        onmouseover="this.style.color='black';" onmouseout="this.style.color='white';"
-                        href="{{ url('/authentication/customer/sign-in') }}">Manage Project</a>
-                </span>
+        <a class="btn px-4 rounded-pill  btn-primary ms-2"
+          onmouseout="this.style.color='white';" href="{{ url('/authentication/customer/sign-in') }}">Manage Project</a>
+      </span>
             </div>
         </div>
     </nav>

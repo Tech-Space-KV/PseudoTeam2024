@@ -738,7 +738,7 @@
                       
                             setTimeout(function () {
                                 window.location.href = "{{ route('home') }}";
-                            }, 2000);
+                            }, 3000);
                         });
                     </script>
 

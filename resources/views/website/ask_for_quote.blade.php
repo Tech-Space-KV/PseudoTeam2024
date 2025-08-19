@@ -433,8 +433,8 @@
                 <div class="card-modern fixed-card p-4">
                     <h3 class="mb-3">
                         <i class="fas fa-tools me-2"></i> Select Services
-                        <!-- <button class="search-icon btn btn-sm btn-outline-light"
-                            onclick="openModal('client')">🔍</button> -->
+                        <button class="search-icon btn btn-sm btn-outline-light"
+                            onclick="openModal('client')"></button>
                     </h3>
 
                     <div class="scrollable-content">
@@ -481,8 +481,8 @@
                 <div class="card-modern fixed-card p-4">
                     <h3 class="mb-3">
                         <i class="fas fa-microchip me-2"></i> Select Critical Spares
-                        <!-- <button class="search-icon btn btn-sm btn-outline-light"
-                            onclick="openModal('supplier')">🔍</button> -->
+                        <button class="search-icon btn btn-sm btn-outline-light"
+                            onclick="openModal('supplier')"></button>
                     </h3>
 
                     <div class="scrollable-content">

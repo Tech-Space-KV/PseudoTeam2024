@@ -412,8 +412,8 @@
                 </span> -->
 
                 <span class="navbar-text">
-                    <a class="btn btn-outline-light px-4" onmouseover="this.style.color='black';"
-                        onmouseout="this.style.color='white';"
+                    <a class="btn px-4 rounded-pill border border-primary border-2 btn-outline-primary ms-2"
+                        onmouseover="this.style.color='black';" onmouseout="this.style.color='white';"
                         href="{{ url('/authentication/customer/sign-in') }}">Manage Project</a>
                 </span>
             </div>
@@ -452,12 +452,24 @@
                             </thead>
                             <tbody>
                                 @foreach ($services as $service)
+
+                                    <!-- <tr id="noDataRow1" style="display: none;">
+                                                                        <td colspan="3" class="text-center text-danger">No records found.</td>
+                                                                    </tr> -->
+
+                                    <!-- <tr id="noDataRow1" style="display: none;">
+                                                                    <td colspan="3" class="text-center text-danger">No records found.</td>
+                                                                </tr> -->
+
                                     <tr>
                                         <td>{{ $service['no'] }}</td>
                                         <td>{{ $service['description'] }}</td>
                                         <td><input type="checkbox" name="services[]" value="{{ $service['no'] }}"></td>
                                     </tr>
                                 @endforeach
+                                <tr id="noDataRow1" style="display: none;">
+                                    <td colspan="3" class="text-center text-danger">No records found.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -488,6 +500,11 @@
                             </thead>
                             <tbody>
                                 @foreach($hardwares as $hardware)
+
+                                    <!-- <tr id="noDataRow2" style="display: none;">
+                                                                        <td colspan="3" class="text-center text-danger">No records found.</td>
+                                                                    </tr> -->
+
                                     <tr>
                                         <td>{{ $hardware['hw_identifier'] }}</td>
                                         <td>{{ $hardware['model_description'] }}</td>
@@ -495,6 +512,10 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                <tr id="noDataRow2" style="display: none;">
+                                    <td colspan="3" class="text-center text-danger">No records found.</td>
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -639,6 +660,88 @@
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
+
+                    <!-- <script>
+                                    setTimeout(function () {
+                                        document.getElementById('success-alert').style.opacity = '0';
+                                    }, 1000); // start fade out at 1s
+
+                                    setTimeout(function () {
+                                        window.location.href = "{{ route('home') }}";
+                                    }, 1500);
+                                </script> -->
+
+                    <!-- <script>
+
+                                window.onload = function () {
+                                    const alert = document.getElementById('success-alert');
+                                    if (alert) {
+                                        alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    }
+
+
+                                    setTimeout(function () {
+                                        alert.style.opacity = '0';
+                                    }, 1000); // fade after 1 sec
+
+                                    setTimeout(function () {
+                                        window.location.href = "{{ route('home') }}"; 
+                                    }, 3000);
+                                };
+                            </script> -->
+
+                    <!-- <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const alert = document.getElementById('success-alert');
+
+                                if (alert) {
+
+                                    setTimeout(function () {
+                                        alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    }, 100); 
+
+
+                                    setTimeout(function () {
+                                        alert.style.transition = 'opacity 0.5s ease';
+                                        alert.style.opacity = '0';
+                                    }, 1000); 
+
+
+                                    setTimeout(function () {
+                                        window.location.href = "{{ route('home') }}"; // or url('/')
+                                    }, 3000);
+                                }
+                            });
+                        </script> -->
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                   
+                            const anchor = document.getElementById('quote-form-anchor');
+
+                            if (anchor) {
+                         
+                                setTimeout(function () {
+                                    anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }, 200); 
+                            }
+
+                       
+                            const alert = document.getElementById('success-alert');
+                            if (alert) {
+                                setTimeout(() => {
+                                    alert.style.transition = 'opacity 0.5s ease';
+                                    alert.style.opacity = '0';
+                                }, 1000);
+                            }
+
+                      
+                            setTimeout(function () {
+                                window.location.href = "{{ route('home') }}";
+                            }, 2000);
+                        });
+                    </script>
+
                 @endif
 
                 @if($errors->any())
@@ -650,6 +753,8 @@
                         </ul>
                     </div>
                 @endif
+
+                <div id="quote-form-anchor"></div>
 
                 <form action="{{ route('post.ask_for_quote') }}" method="post">
                     @csrf
@@ -698,8 +803,6 @@
             </div>
         </div>
 
-
-
     </div>
 
     </div>
@@ -728,45 +831,255 @@
     </script>
 
     <script>
+        // function searchTable1() {
+        //     let input = document.getElementById("tableSearch1").value.toLowerCase();
+        //     let table = document.getElementById("dataTable1");
+        //     let rows = table.getElementsByTagName("tr");
+
+        //     for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+        //         let cells = rows[i].getElementsByTagName("td");
+        //         let rowContainsSearchTerm = false;
+
+        //         for (let cell of cells) {
+        //             if (cell.innerText.toLowerCase().includes(input)) {
+        //                 rowContainsSearchTerm = true;
+        //                 break;
+        //             }
+        //         }
+
+        //         rows[i].style.display = rowContainsSearchTerm ? "" : "none";
+        //     }
+        // }
+
+        // function searchTable1() {
+        //     let input = document.getElementById("tableSearch1").value.toLowerCase();
+        //     let table = document.getElementById("dataTable1");
+        //     let rows = table.getElementsByTagName("tr");
+        //     let visibleCount = 0;
+
+        //     for (let i = 1; i < rows.length; i++) {
+        //         if (rows[i].id === "noDataRow1") continue;
+
+        //         let cells = rows[i].getElementsByTagName("td");
+        //         let rowContainsSearchTerm = false;
+
+        //         for (let cell of cells) {
+        //             if (cell.innerText.toLowerCase().includes(input)) {
+        //                 rowContainsSearchTerm = true;
+        //                 break;
+        //             }
+        //         }
+
+        //         rows[i].style.display = rowContainsSearchTerm ? "" : "none";
+        //         if (rowContainsSearchTerm) visibleCount++;
+        //     }
+
+        //     // Show or hide the "No records found" row
+        //     document.getElementById("noDataRow1").style.display = visibleCount === 0 ? "" : "none";
+        // }
+
+        // let noDataTimeout1;
+
+        // function searchTable1() {
+        //     let input = document.getElementById("tableSearch1").value.toLowerCase();
+        //     let table = document.getElementById("dataTable1");
+        //     let rows = table.getElementsByTagName("tr");
+        //     let visibleCount = 0;
+
+        //     clearTimeout(noDataTimeout1); // Clear previous timer if any
+
+        //     for (let i = 1; i < rows.length; i++) {
+        //         if (rows[i].id === "noDataRow1") continue;
+
+        //         let cells = rows[i].getElementsByTagName("td");
+        //         let match = Array.from(cells).some(cell =>
+        //             cell.innerText.toLowerCase().includes(input)
+        //         );
+
+        //         rows[i].style.display = match ? "" : "none";
+        //         if (match) visibleCount++;
+        //     }
+
+        //     const noDataRow = document.getElementById("noDataRow1");
+
+        //     if (visibleCount === 0) {
+        //         noDataRow.style.display = "";
+
+        //         noDataTimeout1 = setTimeout(() => {
+        //             // Reset search and show all rows
+        //             document.getElementById("tableSearch1").value = "";
+        //             for (let i = 1; i < rows.length; i++) {
+        //                 rows[i].style.display = "";
+        //             }
+        //             noDataRow.style.display = "none";
+        //         }, 3000); // 3 seconds
+        //     } else {
+        //         noDataRow.style.display = "none";
+        //     }
+        // }
+
+        let noDataTimeout1;
+
         function searchTable1() {
-            let input = document.getElementById("tableSearch1").value.toLowerCase();
-            let table = document.getElementById("dataTable1");
-            let rows = table.getElementsByTagName("tr");
+            const input = document.getElementById("tableSearch1").value.toLowerCase();
+            const table = document.getElementById("dataTable1");
+            const rows = table.querySelectorAll("tbody tr");
+            const noDataRow = document.getElementById("noDataRow1");
+            let visibleCount = 0;
 
-            for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
-                let cells = rows[i].getElementsByTagName("td");
-                let rowContainsSearchTerm = false;
+            clearTimeout(noDataTimeout1);
 
-                for (let cell of cells) {
-                    if (cell.innerText.toLowerCase().includes(input)) {
-                        rowContainsSearchTerm = true;
-                        break;
-                    }
-                }
+            rows.forEach(row => {
+                if (row.id === "noDataRow1") return;
 
-                rows[i].style.display = rowContainsSearchTerm ? "" : "none";
+                const cells = row.querySelectorAll("td");
+                const match = Array.from(cells).some(cell =>
+                    cell.innerText.toLowerCase().includes(input)
+                );
+
+                row.style.display = match ? "" : "none";
+                if (match) visibleCount++;
+            });
+
+            if (visibleCount === 0) {
+                noDataRow.style.display = "";
+                noDataTimeout1 = setTimeout(() => {
+                    document.getElementById("tableSearch1").value = "";
+                    rows.forEach(row => row.style.display = "");
+                    noDataRow.style.display = "none";
+                }, 1500);
+            } else {
+                noDataRow.style.display = "none";
             }
         }
+
+
+
+
+        // function searchTable2() {
+        //     let input = document.getElementById("tableSearch2").value.toLowerCase();
+        //     let table = document.getElementById("dataTable2");
+        //     let rows = table.getElementsByTagName("tr");
+
+        //     for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+        //         let cells = rows[i].getElementsByTagName("td");
+        //         let rowContainsSearchTerm = false;
+
+        //         for (let cell of cells) {
+        //             if (cell.innerText.toLowerCase().includes(input)) {
+        //                 rowContainsSearchTerm = true;
+        //                 break;
+        //             }
+        //         }
+
+        //         rows[i].style.display = rowContainsSearchTerm ? "" : "none";
+        //     }
+        // }
+
+        // function searchTable2() {
+        //     let input = document.getElementById("tableSearch2").value.toLowerCase();
+        //     let table = document.getElementById("dataTable2");
+        //     let rows = table.getElementsByTagName("tr");
+        //     let visibleCount = 0;
+
+        //     for (let i = 1; i < rows.length; i++) {
+        //         if (rows[i].id === "noDataRow2") continue;
+
+        //         let cells = rows[i].getElementsByTagName("td");
+        //         let rowContainsSearchTerm = false;
+
+        //         for (let cell of cells) {
+        //             if (cell.innerText.toLowerCase().includes(input)) {
+        //                 rowContainsSearchTerm = true;
+        //                 break;
+        //             }
+        //         }
+
+        //         rows[i].style.display = rowContainsSearchTerm ? "" : "none";
+        //         if (rowContainsSearchTerm) visibleCount++;
+        //     }
+
+        //     // Show or hide the "No records found" row
+        //     document.getElementById("noDataRow2").style.display = visibleCount === 0 ? "" : "none";
+        // }
+
+        // let noDataTimeout2;
+
+        // function searchTable2() {
+        //     let input = document.getElementById("tableSearch2").value.toLowerCase();
+        //     let table = document.getElementById("dataTable2");
+        //     let rows = table.getElementsByTagName("tr");
+        //     let visibleCount = 0;
+
+        //     clearTimeout(noDataTimeout2); // Clear previous timer if any
+
+        //     for (let i = 1; i < rows.length; i++) {
+        //         if (rows[i].id === "noDataRow2") continue;
+
+        //         let cells = rows[i].getElementsByTagName("td");
+        //         let match = Array.from(cells).some(cell =>
+        //             cell.innerText.toLowerCase().includes(input)
+        //         );
+
+        //         rows[i].style.display = match ? "" : "none";
+        //         if (match) visibleCount++;
+        //     }
+
+        //     const noDataRow = document.getElementById("noDataRow2");
+
+        //     if (visibleCount === 0) {
+        //         noDataRow.style.display = "";
+
+        //         noDataTimeout2 = setTimeout(() => {
+        //             // Reset search and show all rows
+        //             document.getElementById("tableSearch2").value = "";
+        //             for (let i = 1; i < rows.length; i++) {
+        //                 rows[i].style.display = "";
+        //             }
+        //             noDataRow.style.display = "none";
+        //         }, 3000); // 3 seconds
+        //     } else {
+        //         noDataRow.style.display = "none";
+        //     }
+        // }
+
+        let noDataTimeout2;
 
         function searchTable2() {
-            let input = document.getElementById("tableSearch2").value.toLowerCase();
-            let table = document.getElementById("dataTable2");
-            let rows = table.getElementsByTagName("tr");
+            const input = document.getElementById("tableSearch2").value.toLowerCase();
+            const table = document.getElementById("dataTable2");
+            const rows = table.querySelectorAll("tbody tr");
+            const noDataRow = document.getElementById("noDataRow2");
+            let visibleCount = 0;
 
-            for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
-                let cells = rows[i].getElementsByTagName("td");
-                let rowContainsSearchTerm = false;
+            clearTimeout(noDataTimeout2);
 
-                for (let cell of cells) {
-                    if (cell.innerText.toLowerCase().includes(input)) {
-                        rowContainsSearchTerm = true;
-                        break;
-                    }
-                }
+            rows.forEach(row => {
+                if (row.id === "noDataRow2") return;
 
-                rows[i].style.display = rowContainsSearchTerm ? "" : "none";
+                const cells = row.querySelectorAll("td");
+                const match = Array.from(cells).some(cell =>
+                    cell.innerText.toLowerCase().includes(input)
+                );
+
+                row.style.display = match ? "" : "none";
+                if (match) visibleCount++;
+            });
+
+            if (visibleCount === 0) {
+                noDataRow.style.display = "";
+                noDataTimeout2 = setTimeout(() => {
+                    document.getElementById("tableSearch2").value = "";
+                    rows.forEach(row => row.style.display = "");
+                    noDataRow.style.display = "none";
+                }, 1500);
+            } else {
+                noDataRow.style.display = "none";
             }
         }
+
+
+
     </script>
 
     <script>

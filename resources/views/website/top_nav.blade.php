@@ -61,7 +61,8 @@
         <form action="{{ route('ask_for_quote') }}" method="GET" class="d-flex w-100">
           <input type="text" name="search"
           class="form-control border border-primary border-2 fw-bold rounded-pill"
-          placeholder="Search IT Services & Critical Spares..."
+          placeholder=""
+          id="searchInput"
           aria-label="Search"/>
           <button type="submit" class="btn px-4 rounded-pill border border-primary border-2 btn-outline-primary ms-2"
             id="button-addon2">
@@ -73,3 +74,28 @@
 
   </div>
 </nav>
+
+
+
+<script>
+  const input = document.getElementById("searchInput");
+  const text = "Search IT Services & Critical Spares...";
+  let i = 0;
+
+  function typeEffect() {
+    if (i < text.length) {
+      input.setAttribute("placeholder", text.substring(0, i + 1));
+      i++;
+      setTimeout(typeEffect, 20); // typing speed (100ms per character)
+    } else {
+      // Restart effect after a pause
+      setTimeout(() => {
+        i = 0;
+        input.setAttribute("placeholder", "");
+        typeEffect();
+      }, 2000); // wait 2s before restarting
+    }
+  }
+
+  typeEffect();
+</script>

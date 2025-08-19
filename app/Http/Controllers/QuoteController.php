@@ -31,7 +31,7 @@ class QuoteController extends Controller
 
         $services = $services[0];
 
-        $filePath = storage_path('app/public/hardwares/sample-hardware');
+        $filePath = storage_path('app/public/hardwares/list-hardware');
 
         $file = null;
 

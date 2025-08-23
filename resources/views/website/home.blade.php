@@ -69,8 +69,62 @@
 
     <!-- Custom CSS -->
     <style>
-        /* SECTION 1: HERO with video background */
-        .hero-section {
+
+.hero-section {
+    position: relative;
+    min-height: 80vh;       /* use min-height instead of fixed height */
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Make video background cover screen */
+.bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* ensures video covers entire area */
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+/* Responsive container inside */
+.hero-section .container {
+    max-width: 1200px;
+    width: 90%;             /* relative width for different screens */
+    padding: 20px;
+    z-index: 1;             /* above the video */
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 1024px) {
+    .hero-section {
+        min-height: 35vh;
+    }
+    .contactnumber{
+        display:none;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 25vh;
+        padding: 40px 10px;
+    }
+    .contactnumber{
+        display:none;
+    }
+}
+
+
+/* SECTION 1: HERO with video background */
+        /* .hero-section {
             position: relative;
             height: 80vh;
             color: white;
@@ -104,7 +158,7 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
-        }
+        } */
 
         .nav-masthead .nav-link {
             color: rgba(255, 255, 255, 0.75);
@@ -567,7 +621,7 @@
                     <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg card-glass">
                         <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
                             <i class="bi bi-code-square" style="font-size:50px;"></i>
-                            <h3 class="pt-5 mb-4 display-6 lh-1 fw-bold">Software Development</h3>
+                            <h3 class="pt-5 mb-4 display-6 lh-1 fw-bold">Software Solution</h3>
                             <p>We develop custom software solutions that address specific business needs, enhancing
                                 efficiency and
                                 productivity.</p>

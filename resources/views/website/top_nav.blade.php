@@ -35,8 +35,8 @@
       </span>
 
       <span class="navbar-text">
-        <a class="btn px-4 rounded-pill  btn-primary ms-2"
-          onmouseout="this.style.color='white';" href="{{ url('/authentication/customer/sign-in') }}">Manage Project</a>
+        <a class="btn px-4 rounded-pill  btn-primary ms-2" onmouseout="this.style.color='white';"
+          href="{{ url('/authentication/customer/sign-in') }}">Manage Project</a>
       </span>
     </div>
   </div>
@@ -44,6 +44,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark px-2 px-4 xs-hide"
   style="background-color: rgba(21, 21, 21, 0.812); backdrop-filter: blur(30px);">
+  
   <div class="container-fluid">
     <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3 mx-auto w-50">
       <a href="{{ route('ask_for_quote') }}" class="w-100" style="text-decoration:none;">
@@ -59,11 +60,8 @@
     <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3 mx-auto w-50">
       <div class="input-group mb-3">
         <form action="{{ route('ask_for_quote') }}" method="GET" class="d-flex w-100">
-          <input type="text" name="search"
-          class="form-control border border-primary border-2 fw-bold rounded-pill"
-          placeholder=""
-          id="searchInput"
-          aria-label="Search"/>
+          <input type="text" name="search" class="form-control border border-primary border-2 fw-bold rounded-pill"
+            placeholder="" id="searchInput" aria-label="Search" />
           <button type="submit" class="btn px-4 rounded-pill border border-primary border-2 btn-outline-primary ms-2"
             id="button-addon2">
             <i class="fa fa-search" aria-hidden="true"></i>
@@ -99,3 +97,21 @@
 
   typeEffect();
 </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const navbarCollapse = document.getElementById("navbarSupportedContent");
+    const links = navbarCollapse.querySelectorAll(".nav-link");
+
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        if (navbarCollapse.classList.contains("show")) {
+          const collapseInstance = bootstrap.Collapse.getOrCreateInstance(navbarCollapse);
+          collapseInstance.hide();
+        }
+      });
+    });
+  });
+</script>
+
+

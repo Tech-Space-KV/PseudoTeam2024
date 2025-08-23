@@ -242,22 +242,22 @@
 
     @if(session('success'))
         <!-- <div class="alert alert-success w-100" role="alert">
-                            {{ session('success') }}
-                        </div> -->
+                                            {{ session('success') }}
+                                        </div> -->
 
         <?php
         echo "<script>alert('Inquiry Sent');</script>";
-                        ?>
+                                        ?>
 
     @endif
 
     @if(session('error'))
         <!-- <div class="alert alert-danger w-100" role="alert">
-                            {{ session('error') }}
-                        </div> -->
+                                            {{ session('error') }}
+                                        </div> -->
         <?php
         echo "<script>alert('Failed! Please try again.');</script>";
-                        ?>
+                                        ?>
     @endif
 
 
@@ -515,7 +515,8 @@
                                 and reliability.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="{{ route('ask_for_quote') }}"class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}"
+                                            class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -533,7 +534,8 @@
                                 digital success.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="{{ route('ask_for_quote') }}" class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}"
+                                            class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -551,7 +553,8 @@
                                 efficient.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="{{ route('ask_for_quote') }}" class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}"
+                                            class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -570,7 +573,8 @@
                                 productivity.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="{{ route('ask_for_quote') }}" class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}"
+                                            class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -588,7 +592,8 @@
                                 business.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="{{ route('ask_for_quote') }}" class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}"
+                                            class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -606,7 +611,8 @@
                                 tailored to your needs.</p>
                             <ul class="d-flex list-unstyled mt-auto">
                                 <li class="me-auto">
-                                    <small><a href="{{ route('ask_for_quote') }}" class="btn btn-sm btn-outline-light">Get Service <i
+                                    <small><a href="{{ route('ask_for_quote') }}"
+                                            class="btn btn-sm btn-outline-light">Get Service <i
                                                 class="bi bi-arrow-right-circle"></i></a></small>
                                 </li>
                             </ul>
@@ -671,53 +677,111 @@
 
 
 
-    <section class="content-section s4" style="background-color: #006EC4;">
-        <div class="container px-4 pt-5">
-            <center>
-                <h2 class="pb-2 border-bottom text-light display-2">Contact Us</h2>
-            </center>
+    <!-- <section class="content-section s4 py-5" style="background-color: #006EC4;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="pb-2 border-bottom text-light display-4">Contact Us</h2>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <form class="row g-4 needs-validation text-light" novalidate action="{{ route('post.contact.us') }}"
+                        method="POST">
+                        @csrf
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                            <div class="invalid-feedback">Please enter your name.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Your Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}" required>
+                            <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
+                        </div>
+
+                        <!-Uncomment if needed -->
+    <!--
+                    <div class="col-md-6">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" required>
+                        <div class="invalid-feedback">Please enter the subject.</div>
+                    </div>
+                    --
+
+                        <div class="col-12">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                            <div class="invalid-feedback">Please enter your message.</div>
+                        </div>
+
+                        <div class="col-12 text-center mt-4">
+                            <button class="btn btn-light px-5 py-2" type="submit">Get a Callback</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+    </section> -->
 
-        <div class="container py-5 mx-5 px-5 mx-auto text-light">
-            <form class="row g-3 needs-validation" novalidate action="{{ route('post.contact.us') }}" method="POST">
-                @csrf
-                <div class="col-md-6">
-                    <label for="name" class="form-label">Your Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
-                    <div class="invalid-feedback">Please enter your name.</div>
+    <section class="content-section s4 py-5" style="background-color: #006EC4;">
+        <div class="container">
+            <!-- Section Title -->
+            <div class="text-center mb-5">
+                <h2 class="pb-2 border-bottom text-light display-4">Contact Us</h2>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <form class="needs-validation text-light" novalidate action="{{ route('post.contact.us') }}"
+                        method="POST">
+                        @csrf
+                        <!-- Row with Name, Email, Phone -->
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                                <div class="invalid-feedback">Please enter your name.</div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="email" class="form-label">Your Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}"
+                                    required>
+                                <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
+                            </div>
+                        </div>
+
+                        <!-- Message Field -->
+                        <div class="mt-4">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                            <div class="invalid-feedback">Please enter your message.</div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center mt-4">
+                            <button class="btn btn-light px-5 py-2" type="submit">Get a Callback</button>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="col-md-6">
-                    <label for="email" class="form-label">Your Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                    <div class="invalid-feedback">Please enter a valid email address.</div>
-                </div>
-
-                <!-- <div class="col-md-6">
-      <label for="phone" class="form-label">Phone Number</label>
-      <input type="tel" class="form-control" id="phone" pattern="[0-9]{10}" required>
-      <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
-    </div>
-
-    <div class="col-md-6">
-      <label for="subject" class="form-label">Subject</label>
-      <input type="text" class="form-control" id="subject" required>
-      <div class="invalid-feedback">Please enter the subject.</div>
-    </div> -->
-
-                <div class="col-12">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" rows="4" name="message" required></textarea>
-                    <div class="invalid-feedback">Please enter your message.</div>
-                </div>
-
-                <div class="col-12 text-center">
-                    <button class="btn btn-light px-5" type="submit">Get a Callback</button>
-                </div>
-            </form>
+            </div>
         </div>
-
     </section>
+
 
 
     <div style="background-color:#e6e6e6;">

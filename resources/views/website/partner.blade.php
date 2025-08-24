@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,15 +17,27 @@
       --text: #0a0a0a;
       --font-main: 'Inter', sans-serif;
     }
-    html { scroll-behavior: smooth; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: var(--font-main);
       padding-top: 72px;
       background-color: #fff;
       color: var(--text);
     }
-    section { position: relative; padding: 6rem 0; }
-    section + section { padding-top: 3rem; }
+
+    section {
+      position: relative;
+      padding: 6rem 0;
+    }
+
+    section+section {
+      padding-top: 3rem;
+    }
+
     .divider-bottom {
       position: absolute;
       bottom: 0;
@@ -33,42 +46,68 @@
       background: var(--light-bg);
       z-index: -1;
     }
-    h1,h2,h3,h5 { font-weight: 700; line-height: 1.2; }
+
+    h1,
+    h2,
+    h3,
+    h5 {
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
     .btn-signup {
       background-color: var(--primary);
       color: white;
       font-weight: 600;
       border-radius: 50px;
       padding: .75rem 2rem;
-      box-shadow: 0 6px 16px rgba(0,123,255,0.25);
+      box-shadow: 0 6px 16px rgba(0, 123, 255, 0.25);
       transition: .3s;
     }
-    .btn-signup:hover { background-color: var(--dark); transform: translateY(-2px); }
+
+    .btn-signup:hover {
+      background-color: var(--dark);
+      transform: translateY(-2px);
+    }
+
     .hero {
-      background: linear-gradient(135deg,var(--primary),var(--dark));
+      background: linear-gradient(135deg, var(--primary), var(--dark));
       color: white;
       text-align: center;
     }
-    .hero h1 { font-size: 3.4rem; }
+
+    .hero h1 {
+      font-size: 3.4rem;
+    }
+
     .features .card {
       border: none;
       border-radius: 16px;
       padding: 2rem;
       background: white;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
       transition: .3s;
     }
-    .features .card:hover { transform: translateY(-8px); }
+
+    .features .card:hover {
+      transform: translateY(-8px);
+    }
+
     .features .card i {
       font-size: 2.5rem;
       color: var(--primary);
       transition: .3s;
     }
-    .features .card:hover i { transform: scale(1.2); }
+
+    .features .card:hover i {
+      transform: scale(1.2);
+    }
+
     .stats .stat-number {
       font-size: 2.5rem;
       color: var(--primary);
     }
+
     .steps .step-icon {
       font-size: 2rem;
       background: var(--primary);
@@ -81,6 +120,7 @@
       border-radius: 50%;
       margin-bottom: 1rem;
     }
+
     .team .member-photo {
       width: 100px;
       height: 100px;
@@ -88,19 +128,29 @@
       object-fit: cover;
       margin-bottom: .5rem;
     }
+
     .faq .card {
       border: none;
       border-bottom: 1px solid #ddd;
       border-radius: 0;
     }
+
     .footer {
       background: var(--light-bg);
       padding: 3rem 0;
     }
-    .footer a { color: #333; text-decoration: none; }
-    .footer a:hover { color: var(--primary); }
+
+    .footer a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: var(--primary);
+    }
   </style>
 </head>
+
 <body>
 
   <!-- NAVBAR -->
@@ -124,12 +174,12 @@
       <h1>Join PseudoTeam</h1>
       <p class="lead mt-3">Skip proposals. Focus on delivery. Get paid reliably.</p>
       <a href="{{ route('auth.sp.sign_up') }}" class="btn btn-signup btn-lg mt-3">Become a Partner</a>
-      <form class="search-bar mx-auto mt-4" style="max-width:600px;">
+      <!-- <form class="search-bar mx-auto mt-4" style="max-width:600px;">
         <div class="input-group shadow-sm">
           <input type="text" class="form-control" placeholder="Search for projects">
           <button class="btn btn-light px-4" type="submit"><i class="bi bi-search"></i></button>
         </div>
-      </form>
+      </form> -->
     </div>
     <div class="divider-bottom"></div>
   </section>
@@ -197,7 +247,7 @@
       <div class="row mt-4">
         <div class="col-md-3">
           <div class="step-icon"><i class="bi bi-pencil-square"></i></div>
-          <h5>Apply to Join</h5>
+          <h5>Sign Up to Join</h5>
           <p>Submit your skills and portfolio for vetting.</p>
         </div>
         <div class="col-md-3">
@@ -282,15 +332,15 @@
   </section>
 
   <!-- BLOG & RESOURCES -->
-  <section class="blog" data-aos="fade-up">
+  <!-- <section class="blog" data-aos="fade-up">
     <div class="container">
       <h2 class="text-center mb-4">Insights & Resources</h2>
       <div class="row g-4">
         <div class="col-md-4">
           <div class="card h-100 shadow-sm">
-            <!-- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 1"> -->
+            <!- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 1"> --
             <div class="card-body">
-              <h5 class="card-title">5 Tips for Freelance Consistency</h5>
+              <h5 class="card-title">5 Tips for Gigs Consistency</h5>
               <p class="card-text">Best practices to stay steady and grow month over month.</p>
               <a href="#" class="stretched-link text-primary">Read more</a>
             </div>
@@ -298,7 +348,7 @@
         </div>
         <div class="col-md-4">
           <div class="card h-100 shadow-sm">
-            <!-- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 2"> -->
+            <!- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 2"> --
             <div class="card-body">
               <h5 class="card-title">How Project Managers Boost Your Output</h5>
               <p class="card-text">Why dedicated PMs matter in large-scale freelance delivery.</p>
@@ -308,7 +358,7 @@
         </div>
         <div class="col-md-4">
           <div class="card h-100 shadow-sm">
-            <!-- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 3"> -->
+            <!- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 3"> --
             <div class="card-body">
               <h5 class="card-title">Milestone Payments Done Right</h5>
               <p class="card-text">A transparent view into how we guarantee your payouts.</p>
@@ -319,7 +369,58 @@
       </div>
     </div>
     <div class="divider-bottom"></div>
+  </section> -->
+
+  <section class="blog" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center mb-4">Insights & Resources</h2>
+      <div class="row g-4">
+        <!-- Blog Card 1 -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <!-- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 1"> -->
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">5 Tips for Gigs Consistency</h5>
+              <p class="card-text">Best practices to stay steady and grow month over month.</p>
+              <div class="mt-auto">
+                <a href="#" class="stretched-link text-primary">Read more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Card 2 -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <!-- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 2"> -->
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">How Project Managers Boost Your Output</h5>
+              <p class="card-text">Why dedicated PMs matter in large-scale freelance delivery.</p>
+              <div class="mt-auto">
+                <a href="#" class="stretched-link text-primary">Read more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Card 3 -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <!-- <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Blog 3"> -->
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Milestone Payments Done Right</h5>
+              <p class="card-text">A transparent view into how we guarantee your payouts.</p>
+              <div class="mt-auto">
+                <a href="#" class="stretched-link text-primary">Read more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="divider-bottom"></div>
   </section>
+
 
   <!-- FAQ -->
   <section class="faq bg-light" data-aos="fade-up">
@@ -328,26 +429,32 @@
       <div class="accordion" id="faqAccordion">
         <div class="accordion-item faq">
           <h3 class="accordion-header" id="faq1">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">What kind of work is available?</button>
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapse1">What kind of work is available?</button>
           </h3>
           <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-            <div class="accordion-body">We offer tasks across design, development, writing, marketing, and more—each scoped per milestone.</div>
+            <div class="accordion-body">We offer tasks across design, development, writing, marketing, and more—each
+              scoped per milestone.</div>
           </div>
         </div>
         <div class="accordion-item faq">
           <h3 class="accordion-header" id="faq2">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">How are milestone payments handled?</button>
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapse2">How are milestone payments handled?</button>
           </h3>
           <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-            <div class="accordion-body">Once a milestone is approved by your manager, we release funds immediately—guaranteed.</div>
+            <div class="accordion-body">Once a milestone is approved by your manager, we release funds
+              immediately—guaranteed.</div>
           </div>
         </div>
         <div class="accordion-item faq">
           <h3 class="accordion-header" id="faq3">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">Can I choose my projects?</button>
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapse3">Can I choose my projects?</button>
           </h3>
           <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-            <div class="accordion-body">Managers typically assign based on your expertise—though you're free to express preferences.</div>
+            <div class="accordion-body">Managers typically assign based on your expertise—though you're free to express
+              preferences.</div>
           </div>
         </div>
       </div>
@@ -356,7 +463,8 @@
   </section>
 
   <!-- FINAL CTA -->
-  <section class="cta-banner text-center" style="padding:6rem 1rem; background:var(--primary); color:#fff;" data-aos="fade-up">
+  <section class="cta-banner text-center" style="padding:6rem 1rem; background:var(--primary); color:#fff;"
+    data-aos="fade-up">
     <div class="container">
       <h2>Ready to grow your freelance career with support and clarity?</h2>
       <a href="{{ route('auth.sp.sign_in') }}" class="btn btn-light btn-lg mt-3">Join Today</a>
@@ -421,4 +529,5 @@
     });
   </script>
 </body>
+
 </html>

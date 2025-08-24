@@ -32,7 +32,7 @@
 
   <!-- Home link, centered horizontally -->
   <div class="center-link">
-    <a class="btn btn-sm px-4 mt-4 btn-outline-primary" aria-current="page" href="/"><i class="fa fa-home"></i> Home</a>
+    <a class="btn btn-sm px-4 mt-4 btn-outline-primary" aria-current="page" href="{{ route('partner') }}"><i class="fa fa-home"></i> Home</a>
   </div>
 
   <div class="d-flex justify-content-center align-items-center mt-4">
@@ -67,7 +67,12 @@
             <label for="promoCode">Promo Code</label>
           </div>
 
-          <button class="btn btn-primary mt-3 w-120 py-2" type="submit">Sign Up</button>
+          <!-- <button class="btn btn-primary mt-3 w-120 py-2" type="submit">Sign Up</button> -->
+           <div class="text-center mt-3">
+            <button class="btn btn-primary py-2 px-4 rounded-pill w-120" type="submit">
+              Sign Up
+            </button>
+          </div>
 
           <p class="mt-3 text-center">Already a user? <a href="{{ url('/authentication/service-partner/sign-in') }}"
               class="text-decoration-none">Sign In</a></p>

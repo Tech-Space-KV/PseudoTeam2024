@@ -4,7 +4,7 @@
             <span class="navbar-toggler-icon"></span>
         </a> -->
         <div class="mx-auto w-75">
-            <form class="d-flex" action="/customer/session/search_project" method="GET">
+            <form class="d-flex" action="{{ route('customer.search-project') }}" method="GET">
                 <input class="form-control form-control-sm me-2 rounded-pill" type="search" name="query"
                     placeholder="Search project id or title" value="{{ request('query') }}" 
                     aria-label="Search">

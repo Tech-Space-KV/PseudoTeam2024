@@ -54,6 +54,7 @@ class OrderController extends Controller
                     $order->ordplcd_qty_placed = $cartItem->cart_qty;
                     $order->ordplcd_no_of_items = $cartItems->count();
                     $order->ordplcd_hw_id = $cartItem->cart_hw_id;
+                    $order->ordplcd_sp_id = $hardware->hrdws_sp_id; 
                     $order->ordplcd_amt = $hardware->hrdws_price * $cartItem->cart_qty;
                     $order->ordplcd_status = 'Pending';
                     $order->ordplcd_order_date = $orderDate;
@@ -136,6 +137,17 @@ class OrderController extends Controller
         }
 
         return view('customer.marketplace_hardwares_order_details', compact('hardwareDetails', 'ordplcd_order_no'));
+    }
+
+    public function spFetchHardwareOrders(){
+
+        \Log::info('SP Hardware Orders function called ' . session('sp_user_id'));
+
+        $spId = session('sp_user_id');
+
+        $hardwareOrders = OrderPlaced::where('ordplcd_sp_id', $spId)->orderBy('ordplcd_id', 'desc')->get();
+
+        return view('service-partner.marketplace_hardwares_orders', compact('hardwareOrders'));
     }
 
 }

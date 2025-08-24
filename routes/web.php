@@ -146,9 +146,10 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new AuthController)->dashboard('customer/forgot_password');
     })->name('customer.customer-verification');
 
-    Route::get('/search_project', [ProjectController::class, 'searchProject']);
+    Route::get('/search_project', [ProjectController::class, 'searchProject'])->name('customer.search-project');
 
     Route::get('/upload-project', function () {
+
         return (new AuthController)->dashboard('customer/project_upload_form');
     });
 
@@ -350,7 +351,7 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
         return view('/service-partner/dashboard');
     });
 
-    Route::get('/sp_search_project', [ProjectController::class, 'spSearchProject']);
+    Route::get('/sp_search_project', [ProjectController::class, 'spSearchProject'])->name('sp.search-project');
 
     // Route::get('service-partner/session/manage_project', function () {
     //     return view('/service-partner/manage_project');
@@ -432,9 +433,14 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
     Route::get('/find-project-details', function () {
         return view('/service-partner/find_project_details');
     });
+    // Route::get('/hardware-orders', function () {
+    //     return view('/service-partner/marketplace_hardwares_orders');
+    // });
+
     Route::get('/hardware-orders', function () {
-        return view('/service-partner/marketplace_hardwares_orders');
-    });
+        return (new OrderController)->spFetchHardwareOrders();
+    })->name('hardware.orders');
+
     // Route::get('/hardware-details', function () {
     //     return view('/service-partner/marketplace_hardwares_details');
     // });

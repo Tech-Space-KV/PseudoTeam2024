@@ -36,8 +36,8 @@
 
       <span class="navbar-text">
 
-        <a class="btn px-4 rounded-pill  btn-primary ms-2" onmouseout="this.style.color='white';"
-          href="{{ url('/authentication/customer/sign-in') }}">Manage Project</a>
+        <!-- <a class="btn px-4 rounded-pill  btn-primary ms-2" onmouseout="this.style.color='white';"
+          href="{{ url('/authentication/customer/sign-in') }}">Manage Project</a> -->
 
         <a class="btn px-4 rounded-pill  btn-primary "
           onmouseout="this.style.color='white';" href="{{ url('/authentication/customer/sign-in') }}">Manage Project</a>
@@ -63,7 +63,7 @@
     </div> -->
 
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3 mx-auto w-50">
+    <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3 mx-auto w-50">
       <div class="input-group mb-3">
         <form action="{{ route('ask_for_quote') }}" method="GET" class="d-flex w-100">
           <input type="text" name="search" class="form-control border border-primary border-2 fw-bold rounded-pill"
@@ -73,7 +73,7 @@
             <i class="fa fa-search" aria-hidden="true"></i>
           </button>
         </form>
-      </div>
+      </div> -->
 
     <div class="d-grid gap-2 mb-4 mb-lg-3 mx-auto col-12 col-lg-7 col-md-12 col-sm-12">
   <form action="{{ route('ask_for_quote') }}" method="GET" class="row g-2 w-100">

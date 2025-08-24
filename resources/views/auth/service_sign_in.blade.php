@@ -88,7 +88,12 @@
 
             <a href="#" class="text-decoration-none">Forgot Password?</a>
           </div>
-          <button class="btn btn-primary w-120 py-2" type="submit">Sign In</button>
+          <!-- <button class="btn btn-primary w-120 py-2" type="submit">Sign In</button> -->
+           <div class="text-center mt-3">
+            <button class="btn btn-primary py-2 px-4 rounded-pill w-120" type="submit">
+              Sign In
+            </button>
+          </div>
 
           <p class="mt-3 text-center">New user? <a href="{{ url('/authentication/service-partner/sign-up') }}"
               class="text-decoration-none">Sign Up</a></p>

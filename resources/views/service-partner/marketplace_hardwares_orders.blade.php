@@ -92,7 +92,7 @@
               <td>{{ $order->ordplcd_order_date }}</td>
               <td>{{ $order->ordplcd_status }}</td>
               <td>{{ $order->ordplcd_amt }}</td>
-              <td><a href="{{ url('/service-partner/session/hardware-details') }}" class="btn btn-sm btn-outline-primary"
+              <td><a href="{{ url('/service-partner/session/hardware-details-sp/' . $order->ordplcd_hw_id) }}" class="btn btn-sm btn-outline-primary"
                   title="View H/W Details">View</a></td>
             </tr>
           @endforeach

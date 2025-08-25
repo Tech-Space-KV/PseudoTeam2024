@@ -102,11 +102,11 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     // Route::post('/customer/session/todo/delete', [TodoController::class, 'delete'])->name('todo.delete');
     // Route::get('/customer/session/todo/fetch', [TodoController::class, 'fetchTodos'])->name('todo.fetch');
 
-    Route::get('/inquire' , function () {
+    Route::get('/inquire', function () {
         return view('customer/inquire_now');
     })->name('inquire.now');
 
-    Route::post('/inquire' , [QueryController::class , 'raiseInquiry'])->name('inquire.now');
+    Route::post('/inquire', [QueryController::class, 'raiseInquiry'])->name('inquire.now');
 
     Route::post('/project/store', [ProjectController::class, 'store'])->name('project.store');
 
@@ -129,7 +129,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
     Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm'])->name('customer.password.reset');
 
-   Route::get('/projects/{id}/download-sow', [ProjectController::class, 'downloadSow'])->name('project.download.sow');
+    Route::get('/projects/{id}/download-sow', [ProjectController::class, 'downloadSow'])->name('project.download.sow');
 
 
 
@@ -447,6 +447,10 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
 
     Route::get('/hardware-details/{hrdws_id}', function ($hrdws_id) {
         return (new HardwareController)->editHardwareDetails($hrdws_id);
+    });
+
+    Route::get('/hardware-details-sp/{hrdws_id}', function ($hrdws_id) {
+        return (new HardwareController)->hardwareDetails($hrdws_id);
     });
 
     Route::put('/hardware/update/{hrdws_id}', [HardwareController::class, 'updateHardware'])->name('hardware.update');

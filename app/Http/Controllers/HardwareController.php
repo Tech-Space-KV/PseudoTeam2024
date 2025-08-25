@@ -136,6 +136,19 @@ class HardwareController extends Controller
         return back()->with('error', 'Problem while fetching hardware details');
     }
 
+    public function hardwareDetails($hrdws_id){
+
+        \Log::info('Fetching hardware details for ID:  Wth' . $hrdws_id);
+
+        $hardware = Hardware::where('hrdws_id', $hrdws_id)->first();
+
+        if ($hardware) {
+            return view('service-partner.hardware_details', compact('hardware'));
+        }
+
+        return back()->with('error', 'Problem while fetching hardware details');
+    }
+
     // public function updateHardware(Request $request, $hrdws_id){
 
     //     \Log::info('Updating hardware details for ID: ' . $hrdws_id);

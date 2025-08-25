@@ -73,7 +73,7 @@
         style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;"
         placeholder="Quantity" min="1">
       <small style="display: block; margin-top: 5px; font-size: 14px; color: #777;">Quantity available: <span
-        id="availableQuantity" style="font-weight: bold;">{{ $hardware->hrdws_quantity }}</span></small>
+        id="availableQuantity" style="font-weight: bold;">{{ $hardware->hrdws_qty }}</span></small>
       <small style="display: block; margin-top: 5px; font-size: 14px; color: #777;"><span id="availableQuantity"
         style="font-weight: bold; color: red;">Note: Provide actual quantity, this will not merge with the available
         quantity</span></small>

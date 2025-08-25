@@ -13,54 +13,54 @@
       <!-- Serial Number -->
       <div class="form-group mb-3">
         <label for="serialNumber" class="form-label">Serial Number</label>
-        <input type="text" id="serialNumber" class="form-control" value="13243546">
+        <input type="text" id="serialNumber" class="form-control" value="{{ $hardware->hrdws_serial_number }}">
       </div>
       <!-- Hardware Identifier -->
       <div class="form-group mb-3">
         <label for="hardwareIdentifier" class="form-label">Hardware Identifier</label>
-        <input type="text" id="hardwareIdentifier" name="hardwareIdentifier" class="form-control" value="BRCASS1950L00D">
+        <input type="text" id="hardwareIdentifier" name="hardwareIdentifier" class="form-control" value="{{ $hardware->hrdws_hw_identifier }}">
       </div>
       <!-- Model Number -->
       <div class="form-group mb-3">
         <label for="modelNumber" class="form-label">Model Number</label>
-        <input type="text" id="modelNumber" name="modelNumber" class="form-control" value="MP-7800B-FV-CF">
+        <input type="text" id="modelNumber" name="modelNumber" class="form-control" value="{{ $hardware->hrdws_model_number }}">
       </div>
       <!-- Model Description -->
       <div class="form-group mb-3">
         <label for="modelDescription" class="form-label">Model Description</label>
-        <textarea id="modelDescription" name="modelDescription" class="form-control">MP-7800B FABRIC VISION LICENSE =MA</textarea>
+        <textarea id="modelDescription" name="modelDescription" class="form-control">{{ $hardware->hrdws_model_description }}</textarea>
       </div>
       <!-- Add/Reduce Quantity -->
-      <div class="form-group mb-3">
+      <!-- <div class="form-group mb-3">
         <label for="quantity" class="form-label">Add/Reduce Quantity</label>
         <input type="number" id="quantity" name="quantity" class="form-control" value="0">
-      </div>
+      </div> -->
       <!-- Total Quantity Details -->
       <div class="form-group mb-3">
         <label class="form-label">Quantity Details</label>
-        <p>Total Qty: 1</p>
-        <p>Available Qty: 1</p>
-        <p>Booked Qty: 0</p>
+        <p>Total Qty: {{ $hardware->hrdws_qty }}</p>
+        <p>Available Qty: {{ $hardware->hrdws_qty - $hardware->hrdws_booked_qty }}</p>
+        <p>Booked Qty: {{ $hardware->hrdws_booked_qty }}</p>
       </div>
       <!-- Family -->
       <div class="form-group mb-3">
         <label for="family" class="form-label">Family</label>
-        <input type="text" id="family" name="family" class="form-control" value="CONNECTRIX">
+        <input type="text" id="family" name="family" class="form-control" value="{{ $hardware->hrdws_family }}">
       </div>
       <!-- City -->
       <div class="form-group mb-3">
         <label for="city" class="form-label">City</label>
-        <input type="text" id="city" name="city" class="form-control" value="BANGALORE">
+        <input type="text" id="city" name="city" class="form-control" value="{{ $hardware->hrdws_city }}">
       </div>
       <!-- State -->
       <div class="form-group mb-3">
         <label for="state" class="form-label">State</label>
-        <input type="text" id="state" name="state" class="form-control" value="KARNATAKA">
+        <input type="text" id="state" name="state" class="form-control" value="{{ $hardware->hrdws_state }}">
       </div>
       <!-- Price Per Unit -->
       <div class="form-group mb-3">
         <label for="pricePerUnit" class="form-label">Price per unit</label>
-        <input type="text" id="pricePerUnit" name="pricePerUnit" class="form-control" value="200000">
+        <input type="text" id="pricePerUnit" name="pricePerUnit" class="form-control" value="{{ $hardware->hrdws_price }}">
       </div>
       <!-- Submit Button -->
       <div class="form-group">

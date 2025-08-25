@@ -23,7 +23,7 @@ class ReferAndEarnMail extends Mailable
     {
         $this->link = $link;
         $this->referrerName = $referrerName;
-        $this->promoCode = $referralCode;
+        $this->referralCode = $referralCode;
     }
 
     public function build()

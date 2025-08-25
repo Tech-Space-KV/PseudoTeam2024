@@ -86,7 +86,7 @@
                 projects seamlessly.
             </p>
             <p>
-                Use this referral code while signing up: <strong>{{ $referralCode }}</strong>
+                Use this promo code while signing up: <strong>{{ $referralCode }}</strong>
             </p>
             <a href="{{ $link }}" class="button">Join Pseudoteam Now</a>
             <p style="margin-top: 20px;">

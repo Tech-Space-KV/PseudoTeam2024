@@ -16,6 +16,7 @@ class ReferralTable extends Model
     protected $fillable = [
         'rfrls_user_id',
         'rfrls_email_id',
+        'rfrls_promo_code',
         'rfrls_user_type',
     ];
 }

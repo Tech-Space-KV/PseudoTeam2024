@@ -135,7 +135,6 @@
         <button type="submit" class="btn btn-primary">Upload</button>
         @endif -->
 
-            <a href="{{ route('ticket.cancellation.mail') }}"><button class="btn btn-primary">Request Cancellation</button></a>
 
         </form>
     </div>

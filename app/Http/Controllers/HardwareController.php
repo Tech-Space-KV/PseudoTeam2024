@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Imports\HardwareImport;
 use App\Imports\HardwaresImport;
 use App\Models\Hardware;
+use App\Models\OrderPlaced;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
@@ -136,14 +137,18 @@ class HardwareController extends Controller
         return back()->with('error', 'Problem while fetching hardware details');
     }
 
-    public function hardwareDetails($hrdws_id){
+    public function hardwareDetails($hrdws_id, $ordplcd_id){
 
         \Log::info('Fetching hardware details for ID:  Wth' . $hrdws_id);
+
+        // OrderPlaced::where('ordplcd_hw_id', $hrdws_id)->first();
+
+        $ordplcd = OrderPlaced::where('ordplcd_hw_id', $hrdws_id)->first();
 
         $hardware = Hardware::where('hrdws_id', $hrdws_id)->first();
 
         if ($hardware) {
-            return view('service-partner.hardware_details', compact('hardware'));
+            return view('service-partner.hardware_details', compact('hardware', 'ordplcd'));
         }
 
         return back()->with('error', 'Problem while fetching hardware details');

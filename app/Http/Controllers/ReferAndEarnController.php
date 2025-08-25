@@ -30,12 +30,12 @@ class ReferAndEarnController extends Controller
         // $link = 'Pseudoteam.com/public/referal-registration/'.$customer_id.'/'.$userName;
         $link = 'Pseudoteam.com';
 
-        // ReferralTable::create([
-        //     'rfrls_user_id' => session('user_id'),
-        //     'rfrls_email_id' => $request->input('friend_email'),
-        //     'rfrls_promo_code' => $projectOwner->pown_username,
-        //     'rfrls_user_type'=> 'customer',
-        // ]);
+        ReferralTable::create([
+            'rfrls_user_id' => session('user_id'),
+            'rfrls_email_id' => $request->input('friend_email'),
+            'rfrls_promo_code' => $projectOwner->pown_username,
+            'rfrls_user_type'=> 'customer',
+        ]);
 
         \Log::info('Working till here! ' . $projectOwner->pown_promo_code);
 
@@ -60,11 +60,11 @@ class ReferAndEarnController extends Controller
         $message = $request->input('message');
         $userName = $servicePartner->sprov_name;
 
-        // ReferralTable::create([
-        //     'rfrls_user_id' => session('sp_user_id'),
-        //     'rfrls_email_id' => $request->input('frend_email'),
-        //     'rfrls_user_type'=> 'SP',
-        // ]);
+        ReferralTable::create([
+            'rfrls_user_id' => session('sp_user_id'),
+            'rfrls_email_id' => $request->input('frend_email'),
+            'rfrls_user_type'=> 'SP',
+        ]);
 
         $link = 'Pseudoteam.com';
 

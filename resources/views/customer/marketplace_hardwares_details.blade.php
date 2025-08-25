@@ -15,7 +15,7 @@
     <script>
 
       setTimeout(function () {
-      window.location.href = "{{ route('project.track') }}";
+      window.location.href = "{{ route('hardware.fetch') }}";
       }, 1500);
 
     </script>

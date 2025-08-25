@@ -175,7 +175,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
 
     Route::get('/marketplace/hardwares', function () {
         return (new HardwareController)->fetchHardware();
-    });
+    })->name('hardware.fetch');
 
     // Route::get('/marketplace/hardwares-orders', function () {
     //     return (new AuthController)->dashboard('customer/marketplace_hardwares_orders');
@@ -449,8 +449,8 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
         return (new HardwareController)->editHardwareDetails($hrdws_id);
     });
 
-    Route::get('/hardware-details-sp/{hrdws_id}', function ($hrdws_id) {
-        return (new HardwareController)->hardwareDetails($hrdws_id);
+    Route::get('/hardware-details-sp/{hrdws_id}/{ordplcd_id}', function ($hrdws_id, $ordplcd_id) {
+        return (new HardwareController)->hardwareDetails($hrdws_id, $ordplcd_id);
     });
 
     Route::put('/hardware/update/{hrdws_id}', [HardwareController::class, 'updateHardware'])->name('hardware.update');

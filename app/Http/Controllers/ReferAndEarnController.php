@@ -62,7 +62,7 @@ class ReferAndEarnController extends Controller
 
         ReferralTable::create([
             'rfrls_user_id' => session('sp_user_id'),
-            'rfrls_email_id' => $request->input('frend_email'),
+            'rfrls_email_id' => $request->input('friend_email'),
             'rfrls_user_type'=> 'SP',
         ]);
 

@@ -20,11 +20,11 @@
             <div style="font-size: 0.9rem; color: #777; margin-top: 10px;">Date: {{ $notification->ntfn_date_time }}</div>
 
             <!-- Delete Button -->
-            <div style="text-align: right; margin-top: 20px;">
+            <!-- <div style="text-align: right; margin-top: 20px;">
                 <button class="btn btn-danger btn-sm" id="deleteNotificationBtn" style="cursor: pointer;">
                     <i class="bi bi-trash"></i> Delete
                 </button>
-            </div>
+            </div> -->
         </div>
 
         <div class="pagination" id="pagination" style="float: right; margin-top: 20px;"></div>

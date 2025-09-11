@@ -568,6 +568,9 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
 
     Route::get('/ticket/{id}/email', [TicketController::class, 'spSendTicketEmail'])->name('ticket.cancellation.mail');
 
+    Route::get('/tasks/{id}/proof', [ProjectController::class, 'getProofOfCompletion'])->name('task.proof');
+
+
 });
 
 Route::post('/change-password', [ProfileController::class, 'spChangePassword'])->name('profileController.spChangePassword');

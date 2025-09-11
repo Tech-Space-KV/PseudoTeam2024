@@ -442,52 +442,137 @@ class ProjectController extends Controller
 
     }
 
-    public function manageprojectLocation($projectId)
+    // public function manageprojectLocation($projectId)
+    // {
+
+    //     $project_scope = ProjectScope::where('pscope_project_id', $projectId)->get();
+
+    //     \Log::info('log : ' . print_r($project_scope->toArray(), true));
+
+    //     if (!$project_scope) {
+    //         return redirect()->route('service-partner.dashboard')->with('error', 'Project not found.');
+    //     }
+
+    //     return view('service-partner.manage_project_location', compact('project_scope'));
+
+    // }
+
+    public function manageProjectLocation($projectId)
     {
+        $serviceProviderId = session('sp_user_id');
 
-        $project_scope = ProjectScope::where('pscope_project_id', $projectId)->get();
+        // Fetch tasks associated with the service provider
+        $projectScopes = ProjectPlannerTask::with([
+            'projectPlanner.projectScope' // get the projectScope linked through planner
+        ])
+            ->where('pptasks_sp_id', $serviceProviderId)
+            ->get()
+            // Map to the related projectScope
+            ->map(function ($task) {
+                return optional($task->projectPlanner)->projectScope;
+            })
+            // Filter out nulls
+            ->filter()
+            // Only keep scopes related to the requested project
+            ->filter(function ($scope) use ($projectId) {
+                return $scope && $scope->pscope_project_id == $projectId;
+            })
+            // Remove duplicates and reindex
+            ->unique('pscope_id')
+            ->values();
 
-        \Log::info('log : ' . print_r($project_scope->toArray(), true));
-
-        if (!$project_scope) {
-            return redirect()->route('service-partner.dashboard')->with('error', 'Project not found.');
+        if ($projectScopes->isEmpty()) {
+            return redirect()->route('service-partner.dashboard')->with('error', 'Project not found or not accessible.');
         }
 
-        return view('service-partner.manage_project_location', compact('project_scope'));
-
+        return view('service-partner.manage_project_location', [
+            'project_scope' => $projectScopes
+        ]);
     }
+
+
+    // public function manageProjectdetails($pscopeId)
+    // {
+
+    //     $projectPlanner = ProjectPlanner::where('pplnr_scope_id', $pscopeId)->get();
+
+    //     if (!$projectPlanner) {
+
+    //         return redirect()->back()->with('error', 'Not found!');
+
+    //     }
+
+    //     \Log::info('pplnr' . $projectPlanner);
+
+    //     return view('/service-partner/manage_project_details', compact('projectPlanner'));
+
+    // }
 
     public function manageProjectdetails($pscopeId)
     {
+        $serviceProviderId = session('sp_user_id');
 
-        $projectPlanner = ProjectPlanner::where('pplnr_scope_id', $pscopeId)->get();
+        // Start from ProjectPlannerTask and backtrack to ProjectPlanner
+        $projectPlanners = ProjectPlannerTask::with('projectPlanner')
+            ->where('pptasks_sp_id', $serviceProviderId)
+            ->get()
+            // Map to related projectPlanner
+            ->map(function ($task) {
+                return $task->projectPlanner;
+            })
+            // Filter out nulls
+            ->filter()
+            // Filter only planners matching the given scope ID
+            ->filter(function ($planner) use ($pscopeId) {
+                return $planner && $planner->pplnr_scope_id == $pscopeId;
+            })
+            // Remove duplicates and reindex
+            ->unique('pplnr_id')
+            ->values();
 
-        if (!$projectPlanner) {
-
-            return redirect()->back()->with('error', 'Not found!');
-
+        if ($projectPlanners->isEmpty()) {
+            return redirect()->back()->with('error', 'Project planner not found or not accessible.');
         }
 
-        \Log::info('pplnr' . $projectPlanner);
+        \Log::info('Filtered Project Planners: ' . print_r($projectPlanners->toArray(), true));
 
-        return view('/service-partner/manage_project_details', compact('projectPlanner'));
-
+        return view('service-partner.manage_project_details', [
+            'projectPlanner' => $projectPlanners
+        ]);
     }
+
+
+    // public function manageProjectViewTasks($plannerId)
+    // {
+
+    //     $projectPlannerTasks = ProjectPlannerTask::where('pptasks_planner_id', $plannerId)->get();
+
+    //     if (!$projectPlannerTasks) {
+
+    //         return redirect()->back()->with('error', 'Project Planner Tasks Not Found!');
+
+    //     }
+
+    //     return view('service-partner/manage_project_view_tasks', compact('projectPlannerTasks'));
+
+    // }
 
     public function manageProjectViewTasks($plannerId)
     {
+        $serviceProviderId = session('sp_user_id');
 
-        $projectPlannerTasks = ProjectPlannerTask::where('pptasks_planner_id', $plannerId)->get();
+        // Fetch tasks that belong to the given planner AND the logged-in SP
+        $projectPlannerTasks = ProjectPlannerTask::where('pptasks_sp_id', $serviceProviderId)
+            ->where('pptasks_planner_id', $plannerId)
+            ->get();
 
-        if (!$projectPlannerTasks) {
-
-            return redirect()->back()->with('error', 'Project Planner Tasks Not Found!');
-
+        if ($projectPlannerTasks->isEmpty()) {
+            return redirect()->back()->with('error', 'Project Planner Tasks Not Found or Not Accessible!');
         }
 
-        return view('service-partner/manage_project_view_tasks', compact('projectPlannerTasks'));
-
+        return view('service-partner.manage_project_view_tasks', compact('projectPlannerTasks'));
     }
+
 
     public function manageProjectEditTasks($ppTaskId)
     {
@@ -520,40 +605,91 @@ class ProjectController extends Controller
 
     }
 
+    // public function updateTask(Request $request)
+    // {
+
+    //     \Log::info('Request Data: ' . print_r($request->all(), true));
+
+    //     ini_set('upload_max_filesize', '100M');
+    //     ini_set('post_max_size', '100M');
+    //     ini_set('memory_limit', '256M');
+    //     ini_set('max_execution_time', '300');
+    //     ini_set('max_input_time', '300');
+
+    //     $request->validate([
+    //         'pptasks_id' => 'required|exists:project_planner_tasks,pptasks_id',
+    //         'pptasks_sp_status' => 'required|string',
+    //         // 'pptasks_proof_of_completion' => 'nullable|file|mimes:pdf,csv,xlsx|max:20480',
+    //         'pptasks_proof_of_completion' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv|max:20480',
+    //     ]);
+
+    //     $task = ProjectPlannerTask::find($request->pptasks_id);
+    //     $task->pptasks_sp_status = $request->pptasks_sp_status;
+
+    //     if ($request->hasFile('pptasks_proof_of_completion')) {
+
+    //         $file = $request->file('pptasks_proof_of_completion');
+    //         $task->pptasks_proof_of_completion = file_get_contents($file->getRealPath());
+
+    //     }
+
+    //     \Log::info('Request Data: ' . print_r($request->all(), true));
+
+    //     $currentTime = Carbon::now('Asia/Kolkata');
+
+    //     $up = $currentTime->format('d-m-Y H:i:s'); // 20-07-2025 15:17:03
+
+    //     // $task->pptasks_date_of_completion = $currentTime->format('d-m-y'); // e.g., 20-07-25
+    //     $task->updated_at = $up;
+
+    //     $task->save();
+
+    //     return redirect()->back()->with('success', 'Task updated successfully!');
+    // }
+
     public function updateTask(Request $request)
     {
+        // Log request data except file to avoid large logs
+        Log::info('Request Data: ' . print_r($request->except('pptasks_proof_of_completion'), true));
 
+        // Increase PHP limits for large uploads (make sure php.ini matches these as well)
         ini_set('upload_max_filesize', '100M');
         ini_set('post_max_size', '100M');
         ini_set('memory_limit', '256M');
         ini_set('max_execution_time', '300');
         ini_set('max_input_time', '300');
 
+        // Validate inputs and file
         $request->validate([
             'pptasks_id' => 'required|exists:project_planner_tasks,pptasks_id',
             'pptasks_sp_status' => 'required|string',
-            // 'pptasks_proof_of_completion' => 'nullable|file|mimes:pdf,csv,xlsx|max:20480',
-            'pptasks_proof_of_completion' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv|max:20480',
+            'pptasks_proof_of_completion' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv|max:20480', // max 20MB
         ]);
 
+        // Find task
         $task = ProjectPlannerTask::find($request->pptasks_id);
+
+        // Update status
         $task->pptasks_sp_status = $request->pptasks_sp_status;
 
+        // If file uploaded, read contents as binary and save in BLOB column
         if ($request->hasFile('pptasks_proof_of_completion')) {
-
             $file = $request->file('pptasks_proof_of_completion');
-            $task->pptasks_proof_of_completion = file_get_contents($file->getRealPath());
 
+            // Read file content
+            $fileContent = file_get_contents($file->getRealPath());
+
+            // Log file content size for debugging
+            Log::info('File content size in bytes: ' . strlen($fileContent));
+
+            // Save raw binary data to DB
+            $task->pptasks_proof_of_completion = $fileContent;
         }
 
-        $currentTime = Carbon::now('Asia/Kolkata');
-
-        $up = $currentTime->format('d-m-Y H:i:s'); // 20-07-2025 15:17:03
-
-        // $task->pptasks_date_of_completion = $currentTime->format('d-m-y'); // e.g., 20-07-25
-        $task->updated_at = $up;
-
+        // Save task, Laravel handles timestamps automatically
         $task->save();
+
+        Log::info('Task updated successfully with ID: ' . $task->pptasks_id);
 
         return redirect()->back()->with('success', 'Task updated successfully!');
     }
@@ -880,5 +1016,22 @@ class ProjectController extends Controller
             ->header('Content-Disposition', 'attachment; filename="' . $downloadFilename . '"')
             ->header('Content-Length', strlen($project->plist_sow));
     }
+
+    public function getProofOfCompletion($taskId)
+    {
+        $task = ProjectPlannerTask::findOrFail($taskId);
+
+        if (!$task->pptasks_proof_of_completion) {
+            return response('No file found', 404);
+        }
+
+        // Detect MIME using finfo
+        $finfo = new \finfo(FILEINFO_MIME_TYPE);
+        $mime = $finfo->buffer($task->pptasks_proof_of_completion) ?? 'application/octet-stream';
+
+        return response($task->pptasks_proof_of_completion)
+            ->header('Content-Type', $mime);
+    }
+
 
 }

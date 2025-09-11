@@ -19,6 +19,7 @@ class ProjectPlannerTask extends Model
         'pptasks_task_title',
         'pptasks_pt_status',
         'pptasks_date_of_completion',
+        'pptasks_proof_of_completion',
         'updated_at',
     ];
 

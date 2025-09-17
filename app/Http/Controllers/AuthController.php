@@ -524,6 +524,9 @@ class AuthController extends Controller
             $projectOwner = ProjectOwners::where('pown_email', $email)->first();
 
             if (!$projectOwner) {
+
+                \Log::warning('Password reset requested for non-existent email: ' . $email);
+
                 return redirect()->back()->withErrors(['email' => 'No account found with the provided email.']);
             }
 
@@ -537,7 +540,9 @@ class AuthController extends Controller
                 'created_at' => Carbon::now(),
             ]);
 
-            $resetLink = URL::to('/customer/session/reset-password') . '?token=' . urlencode($token) . '&email=' . urlencode($email);
+            $resetLink = URL::to('/reset-password') . '?token=' . urlencode($token) . '&email=' . urlencode($email);
+
+            \Log::info('Password reset link generated for email: ' . $email . ' Link: ' . $resetLink);
 
             // Send email
             Mail::to($email)->send(new CustomerForgotPasswordMail($resetLink, $projectOwner->pown_name));
@@ -552,24 +557,37 @@ class AuthController extends Controller
     public function showPasswordResetForm(Request $request)
     {
 
+        \Log::info('Accessing password reset form with token: ' . $request->query('token') . ' and email: ' . $request->query('email'));
+
         $token = $request->query('token');
         $email = $request->query('email');
 
         $reset = DB::table('password_resets')->where('email', $email)->first();
 
         if (!$reset || !Hash::check($token, $reset->token)) {
+
+            \Log::warning('Invalid or expired password reset token for email: ' . $email);
+
             return redirect()->route('login')->withErrors(['token' => 'Invalid or expired token.']);
         }
 
         if (Carbon::parse($reset->created_at)->addMinutes(60)->isPast()) {
+
+            \Log::warning('Expired password reset token for email: ' . $email);
+
             return redirect()->route('login')->withErrors(['token' => 'Token has expired.']);
         }
+
+        \Log::info('Valid password reset token for email: ' . $email . '. Displaying reset form.');
 
         return view('customer/reset_password_form', compact('token', 'email'));
     }
 
     public function resetPassword(Request $request)
     {
+
+        \Log::info('Attempting to reset password for email: ' . $request->input('email'));
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|string|min:8|confirmed',
@@ -578,6 +596,8 @@ class AuthController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
         $passwordConfirmation = $request->input('password_confirmation');
+
+        \Log::info('Password reset request details - Email: ' . $email . ', Password: ' . $password . ', Confirmation: ' . $passwordConfirmation);
 
         $user = ProjectOwners::where('pown_email', $email)->first();
 
@@ -589,6 +609,8 @@ class AuthController extends Controller
         $user->save();
 
         DB::table('password_resets')->where('email', $email)->delete();
+
+        \Log::info('Password reset successful for email: ' . $email);
 
         return redirect()->route('auth.customer.sign_in')->with('status', 'Password reset successful. Please log in.');
     }

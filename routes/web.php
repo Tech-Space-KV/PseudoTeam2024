@@ -127,14 +127,14 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     // Route::post('/forgot-password', [AuthController::class, 'customerForgotPassword'])->name('customer.forgot-password.post');
 
 
-    Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm'])->name('customer.password.reset');
+    // Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm'])->name('customer.password.reset');
 
     Route::get('/projects/{id}/download-sow', [ProjectController::class, 'downloadSow'])->name('project.download.sow');
 
 
 
-    Route::get('/customer/session/reset-password', [AuthController::class, 'showPasswordResetForm']);
-    Route::post('/customer/session/reset-password', [AuthController::class, 'resetPassword']);
+    // Route::get('/customer/session/reset-password', [AuthController::class, 'showPasswordResetForm']);
+    // Route::post('/customer/session/reset-password', [AuthController::class, 'resetPassword']);
 
     Route::post('/customer/session/reset-password', [AuthController::class, 'resetPassword'])->name('customer.reset-password.post');
 
@@ -576,3 +576,7 @@ Route::middleware(['auth'])->prefix('service-partner/session')->group(function (
 Route::post('/change-password', [ProfileController::class, 'spChangePassword'])->name('profileController.spChangePassword');
 
 Route::get('/sp-chart-data', [ChartController::class, 'getSPData'])->name('chart.data');
+
+Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm'])->name('customer.password.reset');
+Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm']);
+Route::post('/reset-password', [AuthController::class, 'resetPassword']);

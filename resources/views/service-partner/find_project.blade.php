@@ -27,8 +27,6 @@
                 <h5><strong>Project ID: </strong>{{ $project->plist_projectid }}</h5>
                 <p><strong>Title: </strong> {{ $project->plist_title }}</p>
                 <p><strong>Description: </strong> {{ $project->plist_description }}</p>
-                <!-- <p><strong>Manager Name:</strong> {{ $project->manager->username }}</p>
-                <p><strong>Manager Email:</strong> {{ $project->manager->email }}</p> -->
                 <a href="{{  url('service-partner/session/find-project-details/' . $project->plist_id)  }}"
                   class="btn btn-sm btn-outline-primary" title="Track Progress">
                   <i class="fa fa-folder-open"></i> Open Project

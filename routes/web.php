@@ -136,7 +136,7 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     // Route::get('/customer/session/reset-password', [AuthController::class, 'showPasswordResetForm']);
     // Route::post('/customer/session/reset-password', [AuthController::class, 'resetPassword']);
 
-    Route::post('/customer/session/reset-password', [AuthController::class, 'resetPassword'])->name('customer.reset-password.post');
+    // Route::post('/customer/session/reset-password', [AuthController::class, 'resetPassword'])->name('customer.reset-password.post');
 
     // Route::get('/search_project', function () {
     //     return view('customer/search_project');
@@ -580,3 +580,5 @@ Route::get('/sp-chart-data', [ChartController::class, 'getSPData'])->name('chart
 Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm'])->name('customer.password.reset');
 Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+
+  Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('customer.reset-password.post');

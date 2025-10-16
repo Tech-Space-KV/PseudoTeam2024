@@ -392,6 +392,10 @@ class AuthController extends Controller
 
                     Auth::login($user);
 
+                    $overallProgress = $this->calculateOverallProjectProgress($projectOwner->pown_id);
+
+                    \Log::info($overallProgress);
+
                     if ($projectOwner->pown_profile_completion_flag) {
 
                         $token = bin2hex(random_bytes(16));
@@ -414,6 +418,7 @@ class AuthController extends Controller
                             'recentProjects' => Project::orderBy('plist_id', 'desc')->where('plist_customer_id', $projectOwner->pown_id)->take(5)->get(),
                             'cartCount' => Cart::where('cart_customer_id', $projectOwner->pown_id)->count(),
                             'addedToCart' => Cart::where('cart_customer_id', $projectOwner->pown_id)->get(),
+                            'overallProgress' => $overallProgress,
                         ];
 
                         session($dashboardData);
@@ -422,6 +427,7 @@ class AuthController extends Controller
                     } else {
                         session(['user_id' => $projectOwner->pown_id]);
                         session(['pown_name' => $projectOwner->pown_name]);
+                        session(['overallProgress' => $overallProgress]);
                         return redirect()->route('customer.complete_profile');
                     }
 
@@ -443,6 +449,39 @@ class AuthController extends Controller
         ]);
 
     }
+
+    private function calculateOverallProjectProgress($customerId)
+    {
+        $projects = Project::where('plist_customer_id', $customerId)->get();
+
+        // Same status-to-progress map as trackProjects()
+        $statusProgressMap = [
+            'delivered' => 100,
+            'in progress' => 50,
+            'no sp assigned' => 0,
+            // 'cancelled' is excluded
+        ];
+
+        $totalProgress = 0;
+        $validProjects = 0;
+
+        foreach ($projects as $project) {
+            // Normalize status just like in trackProjects()
+            $rawStatus = $project->plist_status;
+            $normalizedStatus = strtolower(trim(preg_replace('/\s+/', ' ', $rawStatus)));
+
+            if (!isset($statusProgressMap[$normalizedStatus])) {
+                continue; // Skip invalid/cancelled/unknown
+            }
+
+            $progress = $statusProgressMap[$normalizedStatus];
+            $totalProgress += $progress;
+            $validProjects++;
+        }
+
+        return $validProjects > 0 ? round($totalProgress / $validProjects) : 0;
+    }
+
 
     public function splogin(Request $request)
     {

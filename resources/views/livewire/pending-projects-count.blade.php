@@ -1,1 +1,1 @@
-<p wire:poll.30s class="card-title ms-3">No. of projects: {{ $projects }}</p>
+<p wire:poll.30s class="card-title ms-3">{{ $projects }}</p>

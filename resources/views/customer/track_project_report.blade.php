@@ -7,11 +7,107 @@
     <div class="mb-4">
       <h2 class="fw-bold">Track Your Project</h2>
     </div>
+
+    <style>
+      .battery-bar {
+        display: flex;
+        gap: 4px;
+        height: 25px;
+      }
+
+      .battery-cell {
+        flex: 1;
+        border-radius: 4px;
+        background-color: #e0e0e0;
+        /* Default empty */
+        transition: background-color 0.3s ease;
+      }
+
+      .battery-cell.filled-low {
+        background-color: #dc3545;
+        /* Red */
+      }
+
+      .battery-cell.filled-mid {
+        background-color: #ffc107;
+        /* Yellow */
+      }
+
+      .battery-cell.filled-high {
+        background-color: #0d6efd;
+        /* Blue */
+      }
+    </style>
+    <!-- 
+      <div class="card mb-3">
+        <div class="card-body">
+          <h4 class="fw-bold mb-2">Overall Project Completion</h4>
+          <p class="text-muted mb-1">
+            Across <strong>{{ $totalProjects }}</strong> project{{ $totalProjects == 1 ? '' : 's' }}:
+            <strong>{{ $overallAverage }}%</strong> complete
+          </p>
+
+          @php
+            $totalCells = 10;
+            $filledCells = round($overallAverage / 10);
+            $visualFilledCells = max($filledCells, 1);
+
+            if ($overallAverage <= 30) {
+              $fillLevel = 'filled-low';
+            } elseif ($overallAverage <= 60) {
+              $fillLevel = 'filled-mid';
+            } else {
+              $fillLevel = 'filled-high';
+            }
+          @endphp
+
+          <div class="battery-bar mt-2">
+            @for ($i = 1; $i <= $totalCells; $i++)
+              <div class="battery-cell {{ $i <= $visualFilledCells ? $fillLevel : '' }}"></div>
+            @endfor
+          </div>
+
+          <div class="small text-muted mt-1">
+            {{ $overallAverage }}% completed 
+          </div>
+        </div>
+      </div> -->
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>Overall Project Progress</h5>
+        <p class="text-muted">Based on project status: <strong>{{ $overallAverage }}%</strong></p>
+
+        @php
+          $totalCells = 10;
+          $filledCells = round($overallAverage / 10);
+          $visualFilledCells = max($filledCells, 1);
+
+          if ($overallAverage <= 30) {
+            $fillLevel = 'filled-low';
+          } elseif ($overallAverage <= 60) {
+            $fillLevel = 'filled-mid';
+          } else {
+            $fillLevel = 'filled-high';
+          }
+        @endphp
+
+        <div class="battery-bar mt-2">
+          @for ($i = 1; $i <= $totalCells; $i++)
+            <div class="battery-cell {{ $i <= $visualFilledCells ? $fillLevel : '' }}"></div>
+          @endfor
+        </div>
+
+        <div class="small text-muted mt-1">{{ $overallAverage }}% overall progress</div>
+      </div>
+    </div>
+
+
     <div class="d-flex justify-content-end">
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
           <!-- <button type="button" class="btn btn-sm btn-outline-primary">CSV</button>
-        <button type="button" class="btn btn-sm btn-outline-primary">PDF</button> -->
+                <button type="button" class="btn btn-sm btn-outline-primary">PDF</button> -->
           <div class="btn-group me-2">
             <a href="{{ route('projects.export.csv') }}" class="btn btn-sm btn-outline-primary">CSV</a>
             <a href="{{ route('projects.export.pdf') }}" class="btn btn-sm btn-outline-primary">PDF</a>
@@ -44,29 +140,29 @@
       </thead>
       <tbody>
         <!-- <tr>
-          <th scope="row">100134</th>
-          <td>Test Project 1</td>
-          <td>28/11/2023</td>
-          <td>28/11/2024</td>
-          <td>In Progress</td>
-          <td ><a href="{{ url('customer/session/track-project-report-location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-        </tr>
-        <tr>
-          <th scope="row">100135</th>
-          <td>Test Project 2</td>
-          <td>28/11/2023</td>
-          <td>28/11/2024</td>
-          <td>In Progress</td>
-          <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-        </tr>
-        <tr>
-          <th scope="row">100136</th>
-          <td>Test Project 3</td>
-          <td>28/11/2023</td>
-          <td>28/11/2024</td>
-          <td>In Progress</td>
-          <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-        </tr> -->
+                  <th scope="row">100134</th>
+                  <td>Test Project 1</td>
+                  <td>28/11/2023</td>
+                  <td>28/11/2024</td>
+                  <td>In Progress</td>
+                  <td ><a href="{{ url('customer/session/track-project-report-location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+                </tr>
+                <tr>
+                  <th scope="row">100135</th>
+                  <td>Test Project 2</td>
+                  <td>28/11/2023</td>
+                  <td>28/11/2024</td>
+                  <td>In Progress</td>
+                  <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+                </tr>
+                <tr>
+                  <th scope="row">100136</th>
+                  <td>Test Project 3</td>
+                  <td>28/11/2023</td>
+                  <td>28/11/2024</td>
+                  <td>In Progress</td>
+                  <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+                </tr> -->
 
         <!-- changes made by sanskar -->
         @if($projects->isNotEmpty())
@@ -78,8 +174,8 @@
               <td>{{ $project->plist_enddate }}</td>
               <td>{{ $project->plist_status }}</td>
               <!-- <td><a href="{{ url('customer/session/track-project-report-location/'.$project->plist_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa fa-location-arrow"></i></a></td> 
-                  <td><a href="{{ url('customer/session/project-details/'.$project->plist_id) }}"><i class="fa fa-folder-open btn btn-sm btn-outline-primary"></i></a></td> -->
-              <!-- Location tracking icon -->
+                   <td><a href="{{ url('customer/session/project-details/'.$project->plist_id) }}"><i class="fa fa-folder-open btn btn-sm btn-outline-primary"></i></a></td> -->
+            
               <td>
                 <a href="{{ url('customer/session/track-project-report-location/' . $project->plist_id) }}"
                   class="btn btn-sm btn-outline-primary" title="Track Progress">

@@ -130,6 +130,10 @@
     .card:hover {
       transform: translateY(-4px);
     }
+
+    a {
+      text-decoration: none;
+    }
   </style>
 
 
@@ -145,8 +149,9 @@
 
       <!-- PENDING CARD -->
       <div class="card-tile">
+        <a href="{{ url('customer/session/track-project-pending') }}">
         <section class="widget" aria-label="Pending projects">
-          <div class="title">PENDING</div>
+          <!-- <div class="title">PENDING</div> -->
           <div class="progress-wrapper" data-max="200" data-value="35">
             <svg class="ring" tabindex="-1" aria-hidden="true">
               <defs>
@@ -167,37 +172,41 @@
             </div>
           </div>
           <div class="count">@livewire('pending-projects-count')</div>
-          <div class="label">Projects</div>
+          <div class="label">Projects Pending</div>
         </section>
+        </a>
       </div>
 
       <!-- IN PROGRESS CARD -->
       <div class="card-tile">
-        <section class="widget" aria-label="In Progress projects">
-          <div class="title">IN PROGRESS</div>
-          <div class="progress-wrapper" data-max="200" data-value="82">
-            <svg class="ring" tabindex="-1" aria-hidden="true">
-              <circle class="track-inner" cx="70" cy="70" r="48" />
-              <circle class="track" cx="70" cy="70" r="58" />
-              <circle class="bar inprogress" cx="70" cy="70" r="58" />
-            </svg>
-            <div class="icon inprogress">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
-                <circle cx="12" cy="12" r="3" />
+        <a href="{{ url('customer/session/track-project-in-progress') }}">
+          <section class="widget" aria-label="In Progress projects">
+            <!-- <div class="title">IN PROGRESS</div> -->
+            <div class="progress-wrapper" data-max="200" data-value="82">
+              <svg class="ring" tabindex="-1" aria-hidden="true">
+                <circle class="track-inner" cx="70" cy="70" r="48" />
+                <circle class="track" cx="70" cy="70" r="58" />
+                <circle class="bar inprogress" cx="70" cy="70" r="58" />
               </svg>
+              <div class="icon inprogress">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </div>
             </div>
-          </div>
-          <div class="count">@livewire('in-progress-projects-count')</div>
-          <div class="label">Projects</div>
-        </section>
+            <div class="count">@livewire('in-progress-projects-count')</div>
+            <div class="label">Projects In Progress</div>
+          </section>
+        </a>
       </div>
 
       <!-- DELIVERED CARD -->
       <div class="card-tile">
+        <a href="{{ url('customer/session/track-project-delivered') }}">
         <section class="widget" aria-label="Delivered projects">
-          <div class="title">DELIVERED</div>
+          <!-- <div class="title">DELIVERED</div> -->
           <div class="progress-wrapper" data-max="200" data-value="147">
             <svg class="ring" tabindex="-1" aria-hidden="true">
               <circle class="track-inner" cx="70" cy="70" r="48" />
@@ -212,8 +221,9 @@
             </div>
           </div>
           <div class="count">@livewire('delivered-count')</div>
-          <div class="label">Projects</div>
+          <div class="label">Projects Delivered</div>
         </section>
+        </a>
       </div>
 
     </div>
@@ -223,7 +233,7 @@
     </br>
     <p><span class="fs-2 fw-bold mt-4">Latest Projects <p class="text-muted ms-2">
           (Overall Progress: {{ session('overallProgress') ?? 0 }}%)
-  </p> </span></p>
+        </p> </span></p>
 
     <table class="table table-hover">
       <thead>
@@ -237,26 +247,26 @@
         </tr>
       </thead>
       <!-- <tbody>
-                          @if(session('recentProjects') && session('recentProjects')->count() > 0)
-                          @foreach(session('recentProjects') as $project)
-                          <tr>
-                          <th scope="row">{{ $project->plist_projectid }}</th>
-                          <td>{{ $project->plist_title }}</td>
-                          <td>{{ $project->plist_startdate }}</td>
-                          <td>{{ $project->plist_enddate }}</td>
-                          <td>{{ $project->plist_status }}</td>
-                          <td>
-                          <a href="{{ url('customer/session/track-project-report-location/' . $project->plist_id) }}"
-                          class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a>
-                          </td>
-                          </tr>
-                        @endforeach
-                        @else
-                          <tr>
-                          <td colspan="6">No recent projects found.</td>
-                          </tr>
-                        @endif
-                        </tbody> -->
+                                  @if(session('recentProjects') && session('recentProjects')->count() > 0)
+                                  @foreach(session('recentProjects') as $project)
+                                  <tr>
+                                  <th scope="row">{{ $project->plist_projectid }}</th>
+                                  <td>{{ $project->plist_title }}</td>
+                                  <td>{{ $project->plist_startdate }}</td>
+                                  <td>{{ $project->plist_enddate }}</td>
+                                  <td>{{ $project->plist_status }}</td>
+                                  <td>
+                                  <a href="{{ url('customer/session/track-project-report-location/' . $project->plist_id) }}"
+                                  class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a>
+                                  </td>
+                                  </tr>
+                                @endforeach
+                                @else
+                                  <tr>
+                                  <td colspan="6">No recent projects found.</td>
+                                  </tr>
+                                @endif
+                                </tbody> -->
 
       @livewire('recent-projests')
 

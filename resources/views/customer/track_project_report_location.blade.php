@@ -14,6 +14,9 @@
         display: flex;
         gap: 4px;
         height: 25px;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        padding: 2px;
       }
 
       .battery-cell {
@@ -43,7 +46,7 @@
     <div class="card mb-3">
       <div class="card-body">
         <!-- <h5>Project Completion</h5>
-        <div class="text-muted">Completion: {{ $average }}%</div> -->
+              <div class="text-muted">Completion: {{ $average }}%</div> -->
         <h4 class="fw-bold mb-2">Overall Location Completion</h4>
         <p class="text-muted mb-1">
           Across all locations in this project: <strong>{{ $average }}%</strong> completed
@@ -99,49 +102,54 @@
       </thead>
       <tbody>
         <!-- <tr>
-          {{-- <th scope="row">100134</th>
-          <td>Test Project 1</td> --}}
-          <td>Location: city, state, country, pincode</td>
-          <td>28/11/2023</td>
-          <td>28/11/2024</td>
-          <td>In Progress</td>
-          <td ><a href="{{ url('customer/session/track-project-report-details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-        </tr>
-        <tr>
-          {{-- <th scope="row">100135</th>
-          <td>Test Project 2</td> --}}
-          <td>Location: city, state, country, pincode</td>
-          <td>28/11/2023</td>
-          <td>28/11/2024</td>
-          <td>In Progress</td>
-          <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-        </tr>
-        <tr>
-          {{-- <th scope="row">100136</th>
-          <td>Test Project 3</td> --}}
-          <td>Location: city, state, country, pincode</td>
-          <td>28/11/2023</td>
-          <td>28/11/2024</td>
-          <td>In Progress</td>
-          <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-        </tr> -->
+                {{-- <th scope="row">100134</th>
+                <td>Test Project 1</td> --}}
+                <td>Location: city, state, country, pincode</td>
+                <td>28/11/2023</td>
+                <td>28/11/2024</td>
+                <td>In Progress</td>
+                <td ><a href="{{ url('customer/session/track-project-report-details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+              </tr>
+              <tr>
+                {{-- <th scope="row">100135</th>
+                <td>Test Project 2</td> --}}
+                <td>Location: city, state, country, pincode</td>
+                <td>28/11/2023</td>
+                <td>28/11/2024</td>
+                <td>In Progress</td>
+                <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+              </tr>
+              <tr>
+                {{-- <th scope="row">100136</th>
+                <td>Test Project 3</td> --}}
+                <td>Location: city, state, country, pincode</td>
+                <td>28/11/2023</td>
+                <td>28/11/2024</td>
+                <td>In Progress</td>
+                <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+              </tr> -->
+        @if ($project_scope->isNotEmpty())
+          @foreach ($project_scope as $pscope)
 
-        @foreach ($project_scope as $pscope)
+            <tr>
+              <td>{{ $pscope->pscope_country ?: 'No country available' }}</td>
+              <td>{{ $pscope->pscope_state ?: 'No state available' }}</td>
+              <td>{{ $pscope->pscope_city ?: 'No city available' }}</td>
+              <td>{{ $pscope->pscope_status ?: 'No status available' }}</td>
+              <td>
+                <a href="{{ url('customer/session/track-project-report-details/' . $pscope->pscope_id)}}"
+                  class="btn btn-sm btn-outline-primary" title="Track Progress">
+                  <i class="fa fa fa-location-arrow"></i>
+                </a>
+              </td>
+            </tr>
 
+          @endforeach
+        @else
           <tr>
-            <td>{{ $pscope->pscope_country ?: 'No country available' }}</td>
-            <td>{{ $pscope->pscope_state ?: 'No state available' }}</td>
-            <td>{{ $pscope->pscope_city ?: 'No city available' }}</td>
-            <td>{{ $pscope->pscope_status ?: 'No status available' }}</td>
-            <td>
-              <a href="{{ url('customer/session/track-project-report-details/' . $pscope->pscope_id)}}"
-                class="btn btn-sm btn-outline-primary" title="Track Progress">
-                <i class="fa fa fa-location-arrow"></i>
-              </a>
-            </td>
+            <td colspan="6" class="text-center">No projects found!.</td>
           </tr>
-
-        @endforeach
+        @endif
 
       </tbody>
     </table>

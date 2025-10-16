@@ -25,7 +25,7 @@ class CommentController extends Controller
                 'pconv_comment' => $validated['pconv_comment'],
                 'pconv_comment_by_cust_id' => $validated['pconv_comment_by_cust_id'],
                 'pconv_scope_id' => $validated['pconv_scope_id'],
-                'pconv_comment_date_time' => DATE_FORMAT(NOW(), '%d-%m-%Y %H:%i:%s'),
+                'pconv_comment_date_time' => DATE_FORMAT(NOW(), 'd-m-Y H:i:s'),
             ]);
 
         return redirect()->back()->with('success', 'Comment posted successfully.');

@@ -13,6 +13,9 @@
         display: flex;
         gap: 4px;
         height: 25px;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        padding: 2px;
       }
 
       .battery-cell {

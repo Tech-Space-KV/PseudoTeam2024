@@ -46,7 +46,7 @@
     <div class="card mb-3">
       <div class="card-body">
         <!-- <h5>Project Completion</h5>
-              <div class="text-muted">Completion: {{ $average }}%</div> -->
+                    <div class="text-muted">Completion: {{ $average }}%</div> -->
         <h4 class="fw-bold mb-2">Overall Location Completion</h4>
         <p class="text-muted mb-1">
           Across all locations in this project: <strong>{{ $average }}%</strong> completed
@@ -81,9 +81,12 @@
     <div class="search-box-container w-100 mb-4">
       <div class="mx-auto">
         <Label>Search: </Label>
-        <input class="rounded-3" type="text" id="searchCol2" placeholder="Proj. ID.">
-        <input class="rounded-3" type="text" id="searchCol3" placeholder="Title">
-        <input class="rounded-3" type="text" id="searchCol4" placeholder="Status">
+        <!-- <input class="rounded-3" type="text" id="searchState" placeholder="State">
+          <input class="rounded-3" type="text" id="searchCity" placeholder="City">
+          <input class="rounded-3" type="text" id="searchStatus" placeholder="Status"> -->
+        <input class="rounded-3" type="text" id="searchState" placeholder="State">
+        <input class="rounded-3" type="text" id="searchCity" placeholder="City">
+        <input class="rounded-3" type="text" id="searchStatus" placeholder="Status">
       </div>
     </div>
     </br>
@@ -102,32 +105,32 @@
       </thead>
       <tbody>
         <!-- <tr>
-                {{-- <th scope="row">100134</th>
-                <td>Test Project 1</td> --}}
-                <td>Location: city, state, country, pincode</td>
-                <td>28/11/2023</td>
-                <td>28/11/2024</td>
-                <td>In Progress</td>
-                <td ><a href="{{ url('customer/session/track-project-report-details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-              </tr>
-              <tr>
-                {{-- <th scope="row">100135</th>
-                <td>Test Project 2</td> --}}
-                <td>Location: city, state, country, pincode</td>
-                <td>28/11/2023</td>
-                <td>28/11/2024</td>
-                <td>In Progress</td>
-                <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-              </tr>
-              <tr>
-                {{-- <th scope="row">100136</th>
-                <td>Test Project 3</td> --}}
-                <td>Location: city, state, country, pincode</td>
-                <td>28/11/2023</td>
-                <td>28/11/2024</td>
-                <td>In Progress</td>
-                <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-              </tr> -->
+                      {{-- <th scope="row">100134</th>
+                      <td>Test Project 1</td> --}}
+                      <td>Location: city, state, country, pincode</td>
+                      <td>28/11/2023</td>
+                      <td>28/11/2024</td>
+                      <td>In Progress</td>
+                      <td ><a href="{{ url('customer/session/track-project-report-details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+                    </tr>
+                    <tr>
+                      {{-- <th scope="row">100135</th>
+                      <td>Test Project 2</td> --}}
+                      <td>Location: city, state, country, pincode</td>
+                      <td>28/11/2023</td>
+                      <td>28/11/2024</td>
+                      <td>In Progress</td>
+                      <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+                    </tr>
+                    <tr>
+                      {{-- <th scope="row">100136</th>
+                      <td>Test Project 3</td> --}}
+                      <td>Location: city, state, country, pincode</td>
+                      <td>28/11/2023</td>
+                      <td>28/11/2024</td>
+                      <td>In Progress</td>
+                      <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+                    </tr> -->
         @if ($project_scope->isNotEmpty())
           @foreach ($project_scope as $pscope)
 
@@ -243,34 +246,63 @@
     }
 
     // Function to filter the table
+    // function filterTable() {
+    //   const searchCol2 = document.getElementById("searchCol2").value.toLowerCase();
+    //   const searchCol3 = document.getElementById("searchCol3").value.toLowerCase();
+    //   const searchCol4 = document.getElementById("searchCol4").value.toLowerCase();
+
+    //   filteredRows = allRows.filter(row => {
+    //     const col2 = row.cells[0].textContent.toLowerCase();
+    //     const col3 = row.cells[1].textContent.toLowerCase();
+    //     const col4 = row.cells[4].textContent.toLowerCase();
+    //     return (
+    //       col2.includes(searchCol2) &&
+    //       col3.includes(searchCol3) &&
+    //       col4.includes(searchCol4)
+    //     );
+    //   });
+
+    //   currentPage = 1; // Reset to the first page after filtering
+    //   renderTable();
+    // }
+
+    // // Event listeners for search boxes
+    // document.getElementById("searchCol2").addEventListener("input", filterTable);
+    // document.getElementById("searchCol3").addEventListener("input", filterTable);
+    // document.getElementById("searchCol4").addEventListener("input", filterTable);
+
+    // // Initial rendering
+    // renderTable();
+  </script>
+
+  <script>
     function filterTable() {
-      const searchCol2 = document.getElementById("searchCol2").value.toLowerCase();
-      const searchCol3 = document.getElementById("searchCol3").value.toLowerCase();
-      const searchCol4 = document.getElementById("searchCol4").value.toLowerCase();
+      const searchState = document.getElementById("searchState").value.toLowerCase();
+      const searchCity = document.getElementById("searchCity").value.toLowerCase();
+      const searchStatus = document.getElementById("searchStatus").value.toLowerCase();
 
       filteredRows = allRows.filter(row => {
-        const col2 = row.cells[0].textContent.toLowerCase();
-        const col3 = row.cells[1].textContent.toLowerCase();
-        const col4 = row.cells[4].textContent.toLowerCase();
+        const state = row.cells[1].textContent.toLowerCase();  // State
+        const city = row.cells[2].textContent.toLowerCase();   // City
+        const status = row.cells[3].textContent.toLowerCase(); // Status
+
         return (
-          col2.includes(searchCol2) &&
-          col3.includes(searchCol3) &&
-          col4.includes(searchCol4)
+          state.includes(searchState) &&
+          city.includes(searchCity) &&
+          status.includes(searchStatus)
         );
       });
 
-      currentPage = 1; // Reset to the first page after filtering
+      currentPage = 1;
       renderTable();
     }
 
-    // Event listeners for search boxes
-    document.getElementById("searchCol2").addEventListener("input", filterTable);
-    document.getElementById("searchCol3").addEventListener("input", filterTable);
-    document.getElementById("searchCol4").addEventListener("input", filterTable);
-
-    // Initial rendering
-    renderTable();
+    // Event listeners
+    document.getElementById("searchState").addEventListener("input", filterTable);
+    document.getElementById("searchCity").addEventListener("input", filterTable);
+    document.getElementById("searchStatus").addEventListener("input", filterTable);
   </script>
+
 
 
 @endsection

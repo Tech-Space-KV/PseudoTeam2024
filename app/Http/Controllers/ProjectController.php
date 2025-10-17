@@ -467,7 +467,7 @@ class ProjectController extends Controller
 
         if ($projects->isEmpty()) {
             // return redirect()->back()->with('error', 'No Projects Found!');
-             return view('customer.track_project_report', [
+            return view('customer.track_project_report', [
                 'projects' => collect(),              // Empty collection
                 'totalProjects' => 0,
                 'overallAverage' => 0
@@ -519,7 +519,7 @@ class ProjectController extends Controller
 
         if ($projects->isEmpty()) {
             // return redirect()->back()->with('error', 'No Projects Found!');
-             return view('customer.track_project_report', [
+            return view('customer.track_project_report', [
                 'projects' => collect(),              // Empty collection
                 'totalProjects' => 0,
                 'overallAverage' => 0
@@ -571,7 +571,7 @@ class ProjectController extends Controller
 
         if ($projects->isEmpty()) {
             // return redirect()->back()->with('error', 'No Projects Found!');
-             return view('customer.track_project_report', [
+            return view('customer.track_project_report', [
                 'projects' => collect(),              // Empty collection
                 'totalProjects' => 0,
                 'overallAverage' => 0
@@ -627,7 +627,49 @@ class ProjectController extends Controller
             ->where('plist_customer_id', $customerId)
             ->get();
 
-        return view('customer.track_project_report', compact('projects'));
+        if ($projects->isEmpty()) {
+            // return redirect()->back()->with('error', 'No Projects Found!');
+            return view('customer.track_project_report', [
+                'projects' => collect(),              // Empty collection
+                'totalProjects' => 0,
+                'overallAverage' => 0
+            ]);
+        }
+
+        // Define normalized status => progress
+        $statusProgressMap = [
+            'delivered' => 100,
+            'in progress' => 50,
+            'no sp assigned' => 0,
+            // 'cancelled' and any others are excluded
+        ];
+
+        $totalProgress = 0;
+        $validProjects = 0;
+
+        foreach ($projects as $project) {
+            // Normalize the status: lowercase, trimmed, single spaces
+            $rawStatus = $project->plist_status;
+            $normalizedStatus = strtolower(trim(preg_replace('/\s+/', ' ', $rawStatus)));
+
+            \Log::info("Project ID {$project->plist_id} - Raw Status: [$rawStatus], Normalized: [$normalizedStatus]");
+
+            if (!isset($statusProgressMap[$normalizedStatus])) {
+                \Log::warning("Project ID {$project->plist_id} skipped — Unknown status: [$normalizedStatus]");
+                continue;
+            }
+
+            $progress = $statusProgressMap[$normalizedStatus];
+            $totalProgress += $progress;
+            $validProjects++;
+        }
+
+        // Calculate average only if we have valid projects
+        $overallAverage = $validProjects > 0 ? ($totalProgress / $validProjects) : 0;
+
+        $totalProjects = $validProjects;
+
+        return view('customer.track_project_report', compact('projects', 'totalProjects', 'overallAverage'));
     }
 
     public function projectTimeline($pplnr_id)

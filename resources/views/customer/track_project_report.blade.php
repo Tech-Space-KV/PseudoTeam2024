@@ -40,44 +40,82 @@
         background-color: #0d6efd;
         /* Blue */
       }
+
+      .speedometer-wrapper {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        width: 100px;
+        height: 60px;
+      }
+
+      .speedometer-svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .needle {
+        stroke: red;
+        stroke-width: 3;
+        transform-origin: 100px 100px;
+        transform: rotate(-90deg);
+        transition: transform 0.3s ease-in-out;
+      }
     </style>
     <!-- 
-      <div class="card mb-3">
-        <div class="card-body">
-          <h4 class="fw-bold mb-2">Overall Project Completion</h4>
-          <p class="text-muted mb-1">
-            Across <strong>{{ $totalProjects }}</strong> project{{ $totalProjects == 1 ? '' : 's' }}:
-            <strong>{{ $overallAverage }}%</strong> complete
-          </p>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h4 class="fw-bold mb-2">Overall Project Completion</h4>
+                <p class="text-muted mb-1">
+                  Across <strong>{{ $totalProjects }}</strong> project{{ $totalProjects == 1 ? '' : 's' }}:
+                  <strong>{{ $overallAverage }}%</strong> complete
+                </p>
 
-          @php
-            $totalCells = 10;
-            $filledCells = round($overallAverage / 10);
-            $visualFilledCells = max($filledCells, 1);
+                @php
+                  $totalCells = 10;
+                  $filledCells = round($overallAverage / 10);
+                  $visualFilledCells = max($filledCells, 1);
 
-            if ($overallAverage <= 30) {
-              $fillLevel = 'filled-low';
-            } elseif ($overallAverage <= 60) {
-              $fillLevel = 'filled-mid';
-            } else {
-              $fillLevel = 'filled-high';
-            }
-          @endphp
+                  if ($overallAverage <= 30) {
+                    $fillLevel = 'filled-low';
+                  } elseif ($overallAverage <= 60) {
+                    $fillLevel = 'filled-mid';
+                  } else {
+                    $fillLevel = 'filled-high';
+                  }
+                @endphp
 
-          <div class="battery-bar mt-2">
-            @for ($i = 1; $i <= $totalCells; $i++)
-              <div class="battery-cell {{ $i <= $visualFilledCells ? $fillLevel : '' }}"></div>
-            @endfor
-          </div>
+                <div class="battery-bar mt-2">
+                  @for ($i = 1; $i <= $totalCells; $i++)
+                    <div class="battery-cell {{ $i <= $visualFilledCells ? $fillLevel : '' }}"></div>
+                  @endfor
+                </div>
 
-          <div class="small text-muted mt-1">
-            {{ $overallAverage }}% completed 
-          </div>
-        </div>
-      </div> -->
+                <div class="small text-muted mt-1">
+                  {{ $overallAverage }}% completed 
+                </div>
+              </div>
+            </div> -->
 
     <div class="card mb-3">
       <div class="card-body">
+        <div class="position-relative">
+          <!-- Speedometer Container -->
+          <div class="speedometer-wrapper">
+            <svg viewBox="0 0 200 100" class="speedometer-svg">
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="100%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="red" />
+                  <stop offset="50%" stop-color="orange" />
+                  <stop offset="100%" stop-color="green" />
+                </linearGradient>
+              </defs>
+              <path d="M10,100 A90,90 0 0,1 190,100" stroke="url(#gradient)" stroke-width="20" fill="none" />
+              <line id="needle" x1="100" y1="100" x2="100" y2="20" class="needle" />
+            </svg>
+          </div>
+        </div>
+
         <h5>Overall Project Progress</h5>
         <p class="text-muted">Based on project status: <strong>{{ $overallAverage }}%</strong></p>
 
@@ -110,7 +148,7 @@
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
           <!-- <button type="button" class="btn btn-sm btn-outline-primary">CSV</button>
-                <button type="button" class="btn btn-sm btn-outline-primary">PDF</button> -->
+                      <button type="button" class="btn btn-sm btn-outline-primary">PDF</button> -->
           <div class="btn-group me-2">
             <a href="{{ route('projects.export.csv') }}" class="btn btn-sm btn-outline-primary">CSV</a>
             <a href="{{ route('projects.export.pdf') }}" class="btn btn-sm btn-outline-primary">PDF</a>
@@ -143,29 +181,29 @@
       </thead>
       <tbody>
         <!-- <tr>
-                  <th scope="row">100134</th>
-                  <td>Test Project 1</td>
-                  <td>28/11/2023</td>
-                  <td>28/11/2024</td>
-                  <td>In Progress</td>
-                  <td ><a href="{{ url('customer/session/track-project-report-location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-                </tr>
-                <tr>
-                  <th scope="row">100135</th>
-                  <td>Test Project 2</td>
-                  <td>28/11/2023</td>
-                  <td>28/11/2024</td>
-                  <td>In Progress</td>
-                  <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-                </tr>
-                <tr>
-                  <th scope="row">100136</th>
-                  <td>Test Project 3</td>
-                  <td>28/11/2023</td>
-                  <td>28/11/2024</td>
-                  <td>In Progress</td>
-                  <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-                </tr> -->
+                        <th scope="row">100134</th>
+                        <td>Test Project 1</td>
+                        <td>28/11/2023</td>
+                        <td>28/11/2024</td>
+                        <td>In Progress</td>
+                        <td ><a href="{{ url('customer/session/track-project-report-location') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">100135</th>
+                        <td>Test Project 2</td>
+                        <td>28/11/2023</td>
+                        <td>28/11/2024</td>
+                        <td>In Progress</td>
+                        <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">100136</th>
+                        <td>Test Project 3</td>
+                        <td>28/11/2023</td>
+                        <td>28/11/2024</td>
+                        <td>In Progress</td>
+                        <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
+                      </tr> -->
 
         <!-- changes made by sanskar -->
         @if($projects->isNotEmpty())
@@ -177,8 +215,8 @@
               <td>{{ $project->plist_enddate }}</td>
               <td>{{ $project->plist_status }}</td>
               <!-- <td><a href="{{ url('customer/session/track-project-report-location/'.$project->plist_id) }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa fa-location-arrow"></i></a></td> 
-                   <td><a href="{{ url('customer/session/project-details/'.$project->plist_id) }}"><i class="fa fa-folder-open btn btn-sm btn-outline-primary"></i></a></td> -->
-            
+                                     <td><a href="{{ url('customer/session/project-details/'.$project->plist_id) }}"><i class="fa fa-folder-open btn btn-sm btn-outline-primary"></i></a></td> -->
+
               <td>
                 <a href="{{ url('customer/session/track-project-report-location/' . $project->plist_id) }}"
                   class="btn btn-sm btn-outline-primary" title="Track Progress">
@@ -319,6 +357,19 @@
 
     renderTable();
   </script>
+
+  <script>
+    function setProgress(percent) {
+      const needle = document.getElementById('needle');
+      const clamped = Math.max(0, Math.min(100, percent));
+      const angle = -90 + (clamped * 180 / 100);
+      needle.style.transform = `rotate(${angle}deg)`;
+    }
+
+    // Set based on actual progress
+    setProgress({{ $overallAverage ?? 0 }});
+  </script>
+
 
 
 @endsection

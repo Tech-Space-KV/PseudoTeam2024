@@ -10,6 +10,7 @@
     <meta name="generator" content="Hugo 0.122.0">
     <title>PseudoTeam</title>
 
+    <link rel="icon" type="image/svg+xml" href="{{ asset('https://pseudoteam.com/PseudoTeam2024/public/favicon/favicon.svg') }}">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
 
 
@@ -847,7 +848,7 @@
 
                             <p class="text-body-secondary"><img src="{{ asset('images/logopt.png') }}" class="rounded-3"
                                     style="width: 120px"></p>
-                            <p class="text-body-secondary">&copy; 2024 PseudoTeam</p>
+                            <p class="text-body-secondary">&copy; 2026 PseudoTeam</p>
                         </div>
 
                         <div class="col mb-3">

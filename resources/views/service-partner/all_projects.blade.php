@@ -19,48 +19,102 @@
 </div>
 </br>
 <table class="table table-hover" id="myTable">
-  
-<thead>
-      <tr class="text-pseudo">
-      <th scope="col">Proj. ID.</th>
-      <th scope="col">Location</th>
-      <th scope="col">Milestone</th>
-      <th scope="col">Task Title</th>
-      <th scope="col">SP Status</th>
-      <th scope="col">PT Status</th>
-      <th scope="col">Manager Email</th>
-      <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      
-      @if($projects->isNotEmpty())
-      @foreach($projects as $project)
-      <tr>
-      <th scope="row">{{ $project['plist_projectid'] ?? '-' }}</th>
-      <td>{{ $project['pscope_country'] ?? '-' }} , {{ $project['pscope_state'] ?? '-' }} , {{ $project['pscope_pincode'] ?? '-' }} </td>
-      <td>{{ $project['pplnr_milestone'] ?? '-' }}</td>
-      <td>{{ $project['pptasks_task_title' ?? '-'] }}</td>
-      <td>{{ $project['pptasks_sp_status'] ?? '-' }}</td>
-      <td>{{ $project['pptasks_pt_status'] ?? '-' }}</td>
-      <td>{{ $project['manager_email'] ?? '-' }}</td>
-      <td>
-      <a href="{{ url('service-partner/session/manage_project_view_tasks/' . ($project['pptasks_planner_id'] ?? 0)) }}"
-      class="btn btn-sm btn-outline-primary" title="Track Progress">
-      <i class="fa fa-location-arrow"></i>
-      </a>
-      </td>
-      </tr>
-    @endforeach
-    @else
-      <tr>
-        <td colspan="8" class="text-center">No projects found!</td>
-      </tr>
-    @endif
 
+    <thead>
+        <tr class="text-pseudo">
+            <th scope="col">Proj. ID.</th>
+            <th scope="col">Project Title</th>
+            <th scope="col">Location</th>
+            <th scope="col">Milestone</th>
+            <th scope="col">SP Status</th>
+            <th scope="col">PT Status</th>
+            <th scope="col">Manager Email</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @if($projects->isNotEmpty())
+
+            @foreach($projects as $project)
+
+                <tr>
+
+                    {{-- Project ID --}}
+                    <td>
+                        {{ $project['project_id'] ?? '-' }}
+                    </td>
+
+                    {{-- Project Title --}}
+                    <td>
+                        {{ $project['project_title'] ?? '-' }}
+                    </td>
+
+                    {{-- Location --}}
+                    <td>
+                        {{ $project['location'] ?? '-' }}
+                    </td>
+
+                    {{-- Milestone --}}
+                    <td>
+                        {{ $project['milestone'] ?? '-' }}
+                    </td>
+
+                    {{-- SP Status --}}
+                    <td>
+                        {{ $project['sp_status'] ?? '-' }}
+                    </td>
+
+                    {{-- PT Status --}}
+                    <td>
+                        {{ $project['pt_status'] ?? '-' }}
+                    </td>
+
+                    {{-- Manager Email --}}
+                    <td>
+                        {{ $project['manager_email'] ?? '-' }}
+                    </td>
+
+                    {{-- Action --}}
+                    <td>
+
+                        @if(!empty($project['pptasks_planner_id']))
+
+                            <a href="{{ url('service-partner/session/manage_project_view_tasks/' . $project['pptasks_planner_id']) }}"
+                               class="btn btn-sm btn-outline-primary"
+                               title="Track Progress">
+
+                                <i class="fa fa-location-arrow"></i>
+
+                            </a>
+
+                        @else
+
+                            <span class="text-muted">-</span>
+
+                        @endif
+
+                    </td>
+
+                </tr>
+
+            @endforeach
+
+        @else
+
+            <tr>
+                <td colspan="8" class="text-center">
+                    No projects found!
+                </td>
+            </tr>
+
+        @endif
 
     </tbody>
-  </table>
+
+</table>
+
 
   <div class="pagination" style="float:right;" id="pagination"></div>
  

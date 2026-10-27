@@ -45,7 +45,7 @@ class CommentController extends Controller
 
         SpComment::create([
             'tconv_comment' => $validated['tconv_comment'],
-            'tconv_sp_name' => $name,
+            //'tconv_sp_name' => $name,
             'tconv_comment_by_sp_id' => $validated['tconv_comment_by_sp_id'],
             'tconv_task_id' => $validated['tconv_task_id'],
             'tconv_comment_date_time' => $currentTime->format('d-m-Y H:i:s'),
@@ -54,4 +54,19 @@ class CommentController extends Controller
         return redirect()->back()->with('success', 'SP Comment stored successfully.');
         
     }
+
+    public function update(Request $request, $id)
+{
+    $comment = Comment::findOrFail($id);
+
+    if ($comment->pconv_comment_by_cust_id != session('user_id')) {
+        abort(403);
+    }
+
+    $comment->pconv_comment = $request->pconv_comment;
+    $comment->save();
+
+    return redirect()->back()
+        ->with('success', 'Comment updated successfully');
+}
 }

@@ -5,6 +5,8 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml"
+    href="{{ asset('https://pseudoteam.com/PseudoTeam2024/public/favicon/favicon.svg') }}">
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -43,16 +45,17 @@
           @csrf
 
           @if ($errors->any())
-        <div class="alert alert-danger">
-        <ul>
-          @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-        </ul>
-        </div>
-      @endif
-
-          <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;">
+            <div class="alert alert-danger">
+              <ul>
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+          <!-- 
+          <img src="/images/logo_pt.png" class="rounded-3" style="width: 180px;"> -->
+          <img src="{{asset('images/logo_pt.png')}}" class="rounded-3" style="width: 180px;">
           <h1 class="h5 mb-3 ms-1 text-muted">Forgot Password</h1>
           <hr>
           <div class="form-floating mb-3 mt-3">

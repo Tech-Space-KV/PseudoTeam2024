@@ -87,6 +87,10 @@ Route::prefix('authentication/service-partner')->group(function () {
     Route::get('/verify', [AuthController::class, 'spVerify'])->name('auth.sp.verify');
     Route::post('/verify', [AuthController::class, 'spSetPassword'])->name('sp.set-password');
 
+      Route::get('/forgot-password', function () {
+        return (new AuthController)->spDashboard('service-partner/forgot_password');
+    })->name('service_partner.forgot-password');
+      Route::post('/forgot-password', [AuthController::class, 'spForgotPassword'])->name('service-password.forgot-password.post');
 });
 
 // Customer Session Routes
@@ -215,8 +219,15 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
         return (new ProjectController)->trackProjectOverdue();
     });
 
-    Route::get('/track-project-pending', function () {
-        return (new ProjectController)->trackProjectPending();
+    // Route::get('/track-project-pending', function () {
+    //     return (new ProjectController)->trackProjectPending();
+    // });
+    Route::get('/track-project-on-hold', function () {
+        return (new ProjectController)->trackProjectOnHold();
+    });
+
+    Route::get('/track-project-not-started', function () {
+        return (new ProjectController)->trackProjectNotStarted();
     });
 
     Route::get('/track-project-in-progress', function () {
@@ -241,6 +252,11 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::get('/project-timeline/{pplnr_id}', function ($pplnr_id) {
         return (new ProjectController)->projectTimeline($pplnr_id);
     });
+
+    Route::get(
+        '/customer/task/{pptasks_id}/download-proof',
+        [ProjectController::class, 'downloadProofOfCompletion']
+    )->name('customer.task.download-proof');
 
     Route::get('/cart', function () {
         return (new CartController)->viewCart();
@@ -295,6 +311,12 @@ Route::middleware(['auth'])->prefix('customer/session')->group(function () {
     Route::delete('/notifications/{id}', [NotificationController::class, 'destroyNotification'])
         ->name('customer.notifications.destroy');
 
+    Route::put(
+        '/comment/update/{id}',
+        [CommentController::class, 'update']
+    )
+        ->name('comment.update');
+
 });
 
 Route::post('/customer/session/todo/add', [TodoController::class, 'add'])->name('todo.add');
@@ -312,6 +334,12 @@ Route::post('/login', [AuthController::class, 'spLogin'])->name('splogin.post');
 
 Route::get('/projects/export/csv', [ProjectController::class, 'exportCSV'])->name('projects.export.csv');
 Route::get('/projects/export/pdf', [ProjectController::class, 'exportPDF'])->name('projects.export.pdf');
+
+Route::get('/projects/export/comprehensive', [ProjectController::class, 'comprehensive'])
+    ->name('projects.export.comprehensive');
+
+Route::post('/projects/export/individual', [ProjectController::class, 'individual'])
+    ->name('projects.export.individual');
 
 Route::post('/save-address', [OrderAddressController::class, 'saveAddress'])->name('saveAddress');
 
@@ -577,8 +605,23 @@ Route::post('/change-password', [ProfileController::class, 'spChangePassword'])-
 
 Route::get('/sp-chart-data', [ChartController::class, 'getSPData'])->name('chart.data');
 
-Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm'])->name('customer.password.reset');
-Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm']);
-Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+// --------------------------------------------------
+// CUSTOMER / PROJECT OWNER PASSWORD RESET
+// --------------------------------------------------
 
-  Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('customer.reset-password.post');
+Route::get('/reset-password', [AuthController::class, 'showPasswordResetForm'])
+    ->name('customer.password.reset');
+
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])
+    ->name('customer.reset-password.post');
+
+
+// --------------------------------------------------
+// SERVICE PARTNER PASSWORD RESET
+// --------------------------------------------------
+
+Route::get('/sp-reset-password', [AuthController::class, 'spShowPasswordResetForm'])
+    ->name('sp.password.reset');
+
+Route::post('/sp-reset-password', [AuthController::class, 'spResetPassword'])
+    ->name('sp.reset-password.post');

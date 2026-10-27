@@ -4,8 +4,20 @@
 
   </br>
   <div class="container">
-    <div class="mb-4">
-      <h2 class="fw-bold">Track Your Project - Locations</h2>
+    <!-- <div class="mb-4">
+
+        <a href="{{ url('customer/session/track-project-report') }}" class="btn btn-outline-primary btn-sm me-2">
+          <i class="fa fa-arrow-left"></i>
+        </a>
+
+        <h2 class="fw-bold">Track Your Project - Locations/Phases</h2>
+      </div> -->
+    <div class="mb-4 d-flex align-items-center">
+      <a href="{{ url('customer/session/track-project-report') }}" class="btn btn-outline-primary btn-sm me-2">
+        <i class="fa fa-arrow-left"></i>
+      </a>
+
+      <h2 class="fw-bold mb-0">Track Your Project - Locations/Phases</h2>
     </div>
     </br>
 
@@ -28,51 +40,128 @@
       }
 
       .battery-cell.filled-low {
-        background-color: #dc3545;
+        background-color: #28a745;
         /* Red */
       }
 
       .battery-cell.filled-mid {
-        background-color: #ffc107;
+        background-color: #28a745;
         /* Yellow */
       }
 
       .battery-cell.filled-high {
-        background-color: #0d6efd;
+        background-color: #28a745;
         /* Blue */
+      }
+
+      .battery-cell {
+        flex: 1;
+        border-radius: 4px;
+        background-color: #e0e0e0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .battery-fill {
+        height: 100%;
+        transition: width 0.3s ease;
+      }
+
+      .filled-low {
+        background-color: #28a745;
+      }
+
+      .filled-mid {
+        background-color: #28a745;
+      }
+
+      .filled-high {
+        background-color: #28a745;
       }
     </style>
 
+    <style>
+      .circular-ring {
+        --size: 42px;
+        --thickness: 5px;
+        --progress: 0;
+
+        width: var(--size);
+        height: var(--size);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: conic-gradient(#ff8c00 calc(var(--progress) * 1%),
+            #e6e6e6 0);
+        position: relative;
+      }
+
+      .circular-ring .inner {
+        width: calc(var(--size) - (var(--thickness) * 2));
+        height: calc(var(--size) - (var(--thickness) * 2));
+        border-radius: 50%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .circular-ring .value {
+        font-size: 10px;
+        font-weight: 600;
+        color: #ff8c00;
+      }
+    </style>
+
+
     <div class="card mb-3">
       <div class="card-body">
-        <!-- <h5>Project Completion</h5>
-                    <div class="text-muted">Completion: {{ $average }}%</div> -->
-        <h4 class="fw-bold mb-2">Overall Location Completion</h4>
+
+        <h4 class="fw-bold mb-2">Overall Project Status</h4>
         <p class="text-muted mb-1">
-          Across all locations in this project: <strong>{{ $average }}%</strong> completed
+          Across all locations/phases in this project: <strong>{{ $average }}%</strong> completed
         </p>
 
         @php
           $totalCells = 10;
-          $filledCells = round($average / 10);
-          $visualFilledCells = max($filledCells, 1);
+          $progress = $average;
 
-          if ($average <= 30) {
+          if ($progress <= 30) {
             $fillLevel = 'filled-low';
-          } elseif ($average <= 60) {
+          } elseif ($progress <= 60) {
             $fillLevel = 'filled-mid';
           } else {
             $fillLevel = 'filled-high';
           }
         @endphp
 
+
+
         <div class="battery-bar mt-2">
           @for ($i = 1; $i <= $totalCells; $i++)
-            <div class="battery-cell {{ $i <= $visualFilledCells ? $fillLevel : '' }}"></div>
+
+            @php
+              $cellStart = ($i - 1) * 10;
+              $cellEnd = $i * 10;
+
+              if ($progress >= $cellEnd) {
+                $width = 100;
+              } elseif ($progress > $cellStart) {
+                $width = ($progress - $cellStart) * 10;
+              } else {
+                $width = 0;
+              }
+            @endphp
+
+            <div class="battery-cell">
+              <div class="battery-fill {{ $fillLevel }}" style="width: {{ $width }}%"></div>
+            </div>
+
           @endfor
         </div>
 
-        <div class="small text-muted mt-1">{{ $average }}% completed (across all locations)</div>
+        <div class="small text-muted mt-1">{{ $average }}% completed (across all locations/phases)</div>
       </div>
     </div>
 
@@ -81,9 +170,6 @@
     <div class="search-box-container w-100 mb-4">
       <div class="mx-auto">
         <Label>Search: </Label>
-        <!-- <input class="rounded-3" type="text" id="searchState" placeholder="State">
-          <input class="rounded-3" type="text" id="searchCity" placeholder="City">
-          <input class="rounded-3" type="text" id="searchStatus" placeholder="Status"> -->
         <input class="rounded-3" type="text" id="searchState" placeholder="State">
         <input class="rounded-3" type="text" id="searchCity" placeholder="City">
         <input class="rounded-3" type="text" id="searchStatus" placeholder="Status">
@@ -93,44 +179,16 @@
     <table class="table table-hover" id="myTable">
       <thead>
         <tr class="text-pseudo">
-          {{-- <th scope="col">Proj. ID.</th>
-          <th scope="col">Title</th> --}}
           <th scope="col">Country</th>
           <!-- <th scope="col">End Date</th> -->
           <th scope="col">State</th>
           <th scope="col">City</th>
           <th scope="col">Status</th>
+          <th scope="col">Progress</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <!-- <tr>
-                      {{-- <th scope="row">100134</th>
-                      <td>Test Project 1</td> --}}
-                      <td>Location: city, state, country, pincode</td>
-                      <td>28/11/2023</td>
-                      <td>28/11/2024</td>
-                      <td>In Progress</td>
-                      <td ><a href="{{ url('customer/session/track-project-report-details') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-                    </tr>
-                    <tr>
-                      {{-- <th scope="row">100135</th>
-                      <td>Test Project 2</td> --}}
-                      <td>Location: city, state, country, pincode</td>
-                      <td>28/11/2023</td>
-                      <td>28/11/2024</td>
-                      <td>In Progress</td>
-                      <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-                    </tr>
-                    <tr>
-                      {{-- <th scope="row">100136</th>
-                      <td>Test Project 3</td> --}}
-                      <td>Location: city, state, country, pincode</td>
-                      <td>28/11/2023</td>
-                      <td>28/11/2024</td>
-                      <td>In Progress</td>
-                      <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-                    </tr> -->
         @if ($project_scope->isNotEmpty())
           @foreach ($project_scope as $pscope)
 
@@ -139,10 +197,25 @@
               <td>{{ $pscope->pscope_state ?: 'No state available' }}</td>
               <td>{{ $pscope->pscope_city ?: 'No city available' }}</td>
               <td>{{ $pscope->pscope_status ?: 'No status available' }}</td>
+
+              <td>
+                @php
+                  // $progress = (float) ($pscope->completion_percentage ?? 0);
+                  $progress = (float) ($pscope->progress ?? 0);
+                  $progress = max(0, min(100, $progress));
+                @endphp
+
+                <div class="circular-ring" style="--progress: {{ $progress }};">
+                  <div class="inner">
+                    <div class="value">{{ $progress }}%</div>
+                  </div>
+                </div>
+              </td>
+
               <td>
                 <a href="{{ url('customer/session/track-project-report-details/' . $pscope->pscope_id)}}"
                   class="btn btn-sm btn-outline-primary" title="Track Progress">
-                  <i class="fa fa fa-location-arrow"></i>
+                  <i class="fa fa-location-arrow"></i>
                 </a>
               </td>
             </tr>
@@ -150,7 +223,7 @@
           @endforeach
         @else
           <tr>
-            <td colspan="6" class="text-center">No projects found!.</td>
+            <td colspan="6" class="text-center">No locations/phases found!.</td>
           </tr>
         @endif
 
@@ -244,35 +317,6 @@
       });
       pagination.appendChild(lastButton);
     }
-
-    // Function to filter the table
-    // function filterTable() {
-    //   const searchCol2 = document.getElementById("searchCol2").value.toLowerCase();
-    //   const searchCol3 = document.getElementById("searchCol3").value.toLowerCase();
-    //   const searchCol4 = document.getElementById("searchCol4").value.toLowerCase();
-
-    //   filteredRows = allRows.filter(row => {
-    //     const col2 = row.cells[0].textContent.toLowerCase();
-    //     const col3 = row.cells[1].textContent.toLowerCase();
-    //     const col4 = row.cells[4].textContent.toLowerCase();
-    //     return (
-    //       col2.includes(searchCol2) &&
-    //       col3.includes(searchCol3) &&
-    //       col4.includes(searchCol4)
-    //     );
-    //   });
-
-    //   currentPage = 1; // Reset to the first page after filtering
-    //   renderTable();
-    // }
-
-    // // Event listeners for search boxes
-    // document.getElementById("searchCol2").addEventListener("input", filterTable);
-    // document.getElementById("searchCol3").addEventListener("input", filterTable);
-    // document.getElementById("searchCol4").addEventListener("input", filterTable);
-
-    // // Initial rendering
-    // renderTable();
   </script>
 
   <script>
@@ -302,7 +346,5 @@
     document.getElementById("searchCity").addEventListener("input", filterTable);
     document.getElementById("searchStatus").addEventListener("input", filterTable);
   </script>
-
-
 
 @endsection

@@ -29,10 +29,9 @@ class OrderController extends Controller
 
             $ordplcd_addressId = $request->input('selected_address_id');
 
-            if($ordplcd_addressId)
-            {
+            if ($ordplcd_addressId) {
 
-                $deliveryAddress = OrderAddress::where('ordradrs_id' , $ordplcd_addressId)->first();
+                $deliveryAddress = OrderAddress::where('ordradrs_id', $ordplcd_addressId)->first();
 
             }
 
@@ -54,7 +53,7 @@ class OrderController extends Controller
                     $order->ordplcd_qty_placed = $cartItem->cart_qty;
                     $order->ordplcd_no_of_items = $cartItems->count();
                     $order->ordplcd_hw_id = $cartItem->cart_hw_id;
-                    $order->ordplcd_sp_id = $hardware->hrdws_sp_id; 
+                    $order->ordplcd_sp_id = $hardware->hrdws_sp_id;
                     $order->ordplcd_amt = $hardware->hrdws_price * $cartItem->cart_qty;
                     $order->ordplcd_status = 'Pending';
                     $order->ordplcd_order_date = $orderDate;
@@ -103,16 +102,41 @@ class OrderController extends Controller
         }
     }
 
+    // public function fetchOrderHistory()
+    // {
+    //     $customerId = session('user_id');
+
+    //     $orderHistory = OrderPlaced::where('ordplcd_customer_id', $customerId)
+    //         ->select('ordplcd_order_no', DB::raw('ordplcd_no_of_items as total_qty'), 'ordplcd_order_date')
+    //         ->groupBy('ordplcd_order_no', 'ordplcd_order_date' , 'ordplcd_no_of_items')->orderBy('ordplcd_id', 'desc') 
+    //         ->get();
+
+    //     return view('customer.marketplace_hardwares_orders', compact('orderHistory'));
+    // }
+
     public function fetchOrderHistory()
     {
         $customerId = session('user_id');
 
         $orderHistory = OrderPlaced::where('ordplcd_customer_id', $customerId)
-            ->select('ordplcd_order_no', DB::raw('ordplcd_no_of_items as total_qty'), 'ordplcd_order_date')
-            ->groupBy('ordplcd_order_no', 'ordplcd_order_date' , 'ordplcd_no_of_items')->orderBy('ordplcd_id', 'desc') 
+            ->select(
+                'ordplcd_order_no',
+                DB::raw('ordplcd_no_of_items as total_qty'),
+                'ordplcd_order_date',
+                DB::raw('MAX(ordplcd_id) as latest_id')
+            )
+            ->groupBy(
+                'ordplcd_order_no',
+                'ordplcd_order_date',
+                'ordplcd_no_of_items'
+            )
+            ->orderByDesc('latest_id')
             ->get();
 
-        return view('customer.marketplace_hardwares_orders', compact('orderHistory'));
+        return view(
+            'customer.marketplace_hardwares_orders',
+            compact('orderHistory')
+        );
     }
 
     public function fetchOrderHistoryDetails($ordplcd_order_no)
@@ -139,7 +163,8 @@ class OrderController extends Controller
         return view('customer.marketplace_hardwares_order_details', compact('hardwareDetails', 'ordplcd_order_no'));
     }
 
-    public function spFetchHardwareOrders(){
+    public function spFetchHardwareOrders()
+    {
 
         \Log::info('SP Hardware Orders function called ' . session('sp_user_id'));
 

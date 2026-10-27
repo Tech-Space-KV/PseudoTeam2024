@@ -9,7 +9,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
     <title>PseudoTeam</title>
-
+    <link rel="icon" type="image/svg+xml" href="{{ asset('https://pseudoteam.com/PseudoTeam2024/public/favicon/favicon.svg') }}">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
 
 

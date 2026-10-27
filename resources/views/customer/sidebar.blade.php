@@ -1,3 +1,15 @@
+<style>
+    .iconix {
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .iconix:hover {
+        transform: scale(1.18);
+        box-shadow: 0 0 12px rgba(255,255,255,0.5);
+        cursor: pointer;
+    }
+</style>
+
 <div class="sidebar" id="sidebar">
     <a class="navbar-brand mx-auto" href="#">
         <img src="{{ asset('images/logopt.png') }}" id="set-img-logo" class="rounded-3 mx-auto"

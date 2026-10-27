@@ -3,6 +3,8 @@
 
 <head>
   <title>Customer - PseudoTeam</title>
+  <link rel="icon" type="image/svg+xml"
+    href="{{ asset('https://pseudoteam.com/PseudoTeam2024/public/favicon/favicon.svg') }}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -75,7 +77,7 @@
             <div class="btn-group  w-25 mx-auto">
               <button class="btn btn-primary fw-bold me-2" type="button" onclick="nextStep()">Next</button>
               <!-- <button class="btn btn-primary fw-bold" type="button">Skip</button> -->
-               <a href="{{ route('customer.dashboard') }}" class="btn btn-primary fw-bold">Skip</a>
+              <a href="{{ route('customer.dashboard') }}" class="btn btn-primary fw-bold">Skip</a>
             </div>
           </fieldset>
         </div>

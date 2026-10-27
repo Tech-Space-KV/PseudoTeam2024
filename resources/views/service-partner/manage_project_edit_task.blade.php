@@ -2,9 +2,19 @@
 
 @section('content')
     <div class="container">
-        <div class="mb-4">
+        <!-- <div class="mb-4">
             <h2 class="fw-bold">Project Timeline: {{ $projectPlannerTasks->plist_projectid }}</h2>
-        </div>
+        </div> -->
+   <div class="mb-4 d-flex align-items-center">
+    <a href="{{ url('service-partner/session/manage_project_view_tasks/' . $task->pptasks_planner_id) }}"
+       class="btn btn-outline-primary btn-sm me-2">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+
+    <h2 class="fw-bold mb-0">
+        Project Timeline: {{ $projectPlannerTasks->plist_projectid }}
+    </h2>
+</div>
         </br>
 
         <div class="container mt-5">
@@ -129,7 +139,7 @@
 
             @foreach ($SpComments as $comment)
                 <div class="card p-2 mb-2">
-                    <p class="fw-bold">{{ $comment->tconv_sp_name }} :</p>
+                    <p class="fw-bold">{{ $comment->sp_name }} :</p>
                     <p class="fw-bold">{{ $comment->tconv_comment_date_time }}</p>
                     <p>{{ $comment->tconv_comment }}</p>
                 </div>

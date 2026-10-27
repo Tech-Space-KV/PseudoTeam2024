@@ -7,13 +7,21 @@
     /* Import a font similar to the one in the image */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
+    /* .widget {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  text-align: center;
+                  flex-grow: 1;
+                  min-width: 200px;
+                } */
     .widget {
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      flex-grow: 1;
-      min-width: 200px;
+      /* center everything inside widget */
+      justify-content: center;
+      width: 100%;
     }
 
     .title {
@@ -25,10 +33,18 @@
       margin-bottom: 20px;
     }
 
+    /* .progress-wrapper {
+                  position: relative;
+                  width: 140px;
+                  height: 140px;
+                  margin-bottom: 20px;
+                } */
     .progress-wrapper {
-      position: relative;
-      width: 140px;
-      height: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      /* allow auto centering */
       margin-bottom: 20px;
     }
 
@@ -110,6 +126,7 @@
       color: #000000ff;
       line-height: 1;
       margin-bottom: 5px;
+      text-align: center;
     }
 
     .label {
@@ -117,10 +134,12 @@
       font-size: 14px;
       font-weight: 400;
       letter-spacing: 0.1em;
+      text-align: center;
     }
 
     .card-tile {
       background-color: #fff;
+      border: 2px solid #000000ff;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
       padding: 24px 20px;
@@ -134,10 +153,182 @@
     a {
       text-decoration: none;
     }
+
+    /* Control the area that replaces the SVG */
+    /* .bg-image-section {
+                    height: 140px; 
+                    background-image: url('{{ asset('images/redlight.jpeg') }}');
+                    background-size: cover;
+                    background-position: center;
+                    border-radius: 10px; 
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  } */
+
+    .bg-image-section0 {
+      height: 140px;
+      width: 140px;
+      background-image: url('{{ asset('images/nolight.png') }}');
+      background-repeat: no-repeat;
+      background-size: contain;
+      /* <— shows the full image */
+      background-position: center;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bg-image-section1 {
+      height: 140px;
+      width: 140px;
+      background-image: url('{{ asset('images/redlight.jpeg') }}');
+      background-repeat: no-repeat;
+      background-size: contain;
+      /* <— shows the full image */
+      background-position: center;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bg-image-section2 {
+      height: 140px;
+      width: 140px;
+      background-image: url('{{ asset('images/yellowlight.jpeg') }}');
+      background-repeat: no-repeat;
+      background-size: contain;
+      /* <— shows the full image */
+      background-position: center;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bg-image-section3 {
+      height: 140px;
+      width: 140px;
+      background-image: url('{{ asset('images/greenlight.jpeg') }}');
+      background-repeat: no-repeat;
+      background-size: contain;
+      /* <— shows the full image */
+      background-position: center;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* .bg-image-section1,
+                .bg-image-section2,
+                .bg-image-section3 {
+                  width: 100%;
+                  max-width: 120px;
+                  aspect-ratio: 1/1;
+                  background-repeat: no-repeat;
+                  background-size: contain;
+                  background-position: center;
+                  margin: 0 auto;
+                } */
+
+    .bg-image-section0,
+    .bg-image-section1,
+    .bg-image-section2,
+    .bg-image-section3 {
+      width: 100%;
+      max-width: 120px;
+      aspect-ratio: 1/1;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      margin: 0 auto;
+      /* ensure image is centered */
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      width: 100%;
+    }
+
+    .card-tile {
+      width: 100%;
+      /* Make each card auto-fit its grid column */
+    }
+
+    /* .gradient-title {
+      font-weight: bold;
+      font-size: inherit;
+  
+      background: linear-gradient(90deg, #19327d, #006EC4, #155de2, #659bff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+     
+      text-shadow: 0 0 3px rgba(25, 50, 125, 0.4),
+        0 0 6px rgba(0, 110, 196, 0.3);
+      transition: text-shadow 0.3s ease-in-out;
+    }
+
+    .gradient-title:hover {
+     
+      text-shadow: 0 0 5px rgba(25, 50, 125, 0.5),
+        0 0 10px rgba(0, 110, 196, 0.35);
+    } */
   </style>
 
+  <style>
+.circular-ring {
+  --size: 42px;          /* diameter */
+  --thickness: 5px;      /* ring thickness */
+  --progress: 0;         /* dynamic value (0–100) */
 
-  <p><span class="fs-1 fw-bold">Hi, </span><span class="fs-3">{{ session('pown_name') }}</span></p>
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* ORANGE RING */
+  background: conic-gradient(#ff8c00 calc(var(--progress) * 1%), #e6e6e6 0);
+  position: relative;
+  transition: background 0.45s cubic-bezier(.2,.8,.2,1);
+}
+
+/* inner circle */
+.circular-ring .inner {
+  width: calc(var(--size) - (var(--thickness) * 2));
+  height: calc(var(--size) - (var(--thickness) * 2));
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* percentage text */
+.circular-ring .value {
+  font-size: 10px;
+  font-weight: 600;
+  color: #ff8c00;      /* ORANGE TEXT */
+  user-select: none;
+}
+
+/* small responsive tweak so the cell doesn't shrink too much */
+.table td.progress-cell {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+</style>
+
+
+  <p><span class="fs-1 fw-bold gradient-title">Hi, </span><span
+      class="fs-3 gradient-title">{{ session('pown_name') }}</span></p>
   <div class="alert alert-primary" role="alert">
     Your questions matter to us? <a href="{{ route('inquire.now') }}"
       class="btn btn-sm btn-outline-primary rounded-pill">Inquire Now</a>
@@ -145,84 +336,58 @@
 
   <div class="container px-4">
 
-    <div class="panel d-flex flex-wrap justify-content-center gap-4">
+    <div class="panel cards-grid">
 
-      <!-- PENDING CARD -->
-      <div class="card-tile">
-        <a href="{{ url('customer/session/track-project-pending') }}">
-        <section class="widget" aria-label="Pending projects">
-          <!-- <div class="title">PENDING</div> -->
-          <div class="progress-wrapper" data-max="200" data-value="35">
-            <svg class="ring" tabindex="-1" aria-hidden="true">
-              <defs>
-                <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#C0D0E1" />
-                  <stop offset="100%" stop-color="#A8B9CB" />
-                </linearGradient>
-              </defs>
-              <circle class="track-inner" cx="70" cy="70" r="48" />
-              <circle class="track" cx="70" cy="70" r="58" />
-              <circle class="bar pending" cx="70" cy="70" r="58" />
-            </svg>
-            <div class="icon pending">
-              <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M12 7v5l3 1.5" />
-              </svg>
-            </div>
-          </div>
-          <div class="count">@livewire('pending-projects-count')</div>
-          <div class="label">Projects Pending</div>
-        </section>
-        </a>
-      </div>
 
-      <!-- IN PROGRESS CARD -->
       <div class="card-tile">
-        <a href="{{ url('customer/session/track-project-in-progress') }}">
-          <section class="widget" aria-label="In Progress projects">
-            <!-- <div class="title">IN PROGRESS</div> -->
-            <div class="progress-wrapper" data-max="200" data-value="82">
-              <svg class="ring" tabindex="-1" aria-hidden="true">
-                <circle class="track-inner" cx="70" cy="70" r="48" />
-                <circle class="track" cx="70" cy="70" r="58" />
-                <circle class="bar inprogress" cx="70" cy="70" r="58" />
-              </svg>
-              <div class="icon inprogress">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-              </div>
-            </div>
-            <div class="count">@livewire('in-progress-projects-count')</div>
-            <div class="label">Projects In Progress</div>
+        <a href="{{ url('customer/session/track-project-not-started') }}">
+          <section class="widget" aria-label="Not started projects">
+
+            <div class="progress-wrapper bg-image-section0"></div>
+
+            <div class="count">@livewire('projects-not-started-count')</div>
+            <div class="label">Projects Not Started</div>
+
           </section>
         </a>
       </div>
 
-      <!-- DELIVERED CARD -->
+       <div class="card-tile">
+        <a href="{{ url('customer/session/track-project-in-progress') }}">
+          <section class="widget" aria-label="In progress projects">
+
+            <div class="progress-wrapper bg-image-section2"></div>
+
+            <div class="count">@livewire('in-progress-projects-count')</div>
+            <div class="label">Projects In Progress</div>
+
+          </section>
+        </a>
+      </div>
+
+      <div class="card-tile">
+        <a href="{{ url('customer/session/track-project-on-hold') }}">
+          <section class="widget" aria-label="On Hold projects">
+
+            <div class="progress-wrapper bg-image-section1"></div>
+
+            <div class="count">@livewire('projects-on-hold-count')</div>
+            <div class="label">Projects At risk/On hold</div>
+
+          </section>
+        </a>
+      </div>
+
       <div class="card-tile">
         <a href="{{ url('customer/session/track-project-delivered') }}">
-        <section class="widget" aria-label="Delivered projects">
-          <!-- <div class="title">DELIVERED</div> -->
-          <div class="progress-wrapper" data-max="200" data-value="147">
-            <svg class="ring" tabindex="-1" aria-hidden="true">
-              <circle class="track-inner" cx="70" cy="70" r="48" />
-              <circle class="track" cx="70" cy="70" r="58" />
-              <circle class="bar delivered" cx="70" cy="70" r="58" />
-            </svg>
-            <div class="icon delivered">
-              <svg viewBox="0 0 24 24">
-                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                <polyline points="22 4 12 14.01 9 11.01" />
-              </svg>
-            </div>
-          </div>
-          <div class="count">@livewire('delivered-count')</div>
-          <div class="label">Projects Delivered</div>
-        </section>
+          <section class="widget" aria-label="Delivered projects">
+
+            <div class="progress-wrapper bg-image-section3"></div>
+
+            <div class="count">@livewire('delivered-count')</div>
+            <div class="label">Projects delivered</div>
+
+          </section>
         </a>
       </div>
 
@@ -231,8 +396,8 @@
 
     </br>
     </br>
-    <p><span class="fs-2 fw-bold mt-4">Latest Projects <p class="text-muted ms-2">
-          (Overall Progress: {{ session('overallProgress') ?? 0 }}%)
+    <p><span class="fs-2 fw-bold mt-4 gradient-title">Latest Projects <p class="text-muted ms-2">
+          <!-- (Overall Progress: {{ session('overallProgress') ?? 0 }}%) -->
         </p> </span></p>
 
     <table class="table table-hover">
@@ -242,31 +407,10 @@
           <th class="text-pseudo" scope="col">Title</th>
           <th class="text-pseudo" scope="col">Start Date</th>
           <th class="text-pseudo" scope="col">End Date</th>
-          <th class="text-pseudo" scope="col">Status</th>
+          <th class="text-pseudo" scope="col">Completed Progress</th>
           <th scope="col"></th>
         </tr>
       </thead>
-      <!-- <tbody>
-                                  @if(session('recentProjects') && session('recentProjects')->count() > 0)
-                                  @foreach(session('recentProjects') as $project)
-                                  <tr>
-                                  <th scope="row">{{ $project->plist_projectid }}</th>
-                                  <td>{{ $project->plist_title }}</td>
-                                  <td>{{ $project->plist_startdate }}</td>
-                                  <td>{{ $project->plist_enddate }}</td>
-                                  <td>{{ $project->plist_status }}</td>
-                                  <td>
-                                  <a href="{{ url('customer/session/track-project-report-location/' . $project->plist_id) }}"
-                                  class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a>
-                                  </td>
-                                  </tr>
-                                @endforeach
-                                @else
-                                  <tr>
-                                  <td colspan="6">No recent projects found.</td>
-                                  </tr>
-                                @endif
-                                </tbody> -->
 
       @livewire('recent-projests')
 

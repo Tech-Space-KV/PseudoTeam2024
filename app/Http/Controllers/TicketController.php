@@ -155,4 +155,79 @@ class TicketController extends Controller
         return redirect()->back()->with('success', 'Cancellation email has been sent successfully.');
     }
 
+        public function appOpenTicket(Request $request)
+    {
+        $user = auth()->user();
+
+        $custId = ProjectOwner::where('pown_email', $user->email)->first();
+
+        \Log::info('Cust', [$custId]);
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized access'
+            ], 401);
+        }
+
+        $validated = $request->validate([
+            'tckt_title' => 'required|string|max:255',
+            'tckt_description' => 'required|string',
+            // 'tckt_attachment' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,odf,csv,txt|max:5120'
+        ]);
+
+        $filePath = null;
+
+        if ($request->hasFile('tckt_attachment')) {
+            $filePath = $request->file('tckt_attachment')
+                ->store('ticket_attachments', 'public');
+        }
+
+        $ticket = Ticket::create([
+            'tckt_title' => $validated['tckt_title'],
+            'tckt_description' => $validated['tckt_description'],
+            'tckt_customer_id' => $custId->pown_id,
+            'tckt_attachment' => $filePath,
+            'tckt_date_time' => now(),
+            'tckt_status' => 'Open'
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Ticket created successfully!',
+            'data' => $ticket
+        ], 201);
+    }
+
+    public function appFetchTicket()
+    {
+        $user = auth()->user();
+
+        $cust = ProjectOwner::where('pown_email' , $user->email)->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized access'
+            ], 401);
+        }
+
+        $tickets = Ticket::where('tckt_customer_id', $cust->pown_id)
+            ->select(
+                'tckt_id',
+                'tckt_title',
+                'tckt_description',
+                'tckt_status',
+                'tckt_attachment',
+                'tckt_date_time'
+            )
+            ->latest('tckt_date_time')
+            ->paginate(10);
+
+        return response()->json([
+            'status' => true,
+            'data' => $tickets
+        ]);
+    }
+
 }

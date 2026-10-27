@@ -226,4 +226,16 @@ class HardwareController extends Controller
         return response()->json(['message' => 'Hardware deleted successfully.']);
     }
 
+        public function appCriticalSpare()
+    {
+        $data = Hardware::latest()->take(4)->get();
+
+        $totalCriticalSparesCount = Hardware::count();
+
+        return response()->json([
+            'totalCriticalSparesCount' => $totalCriticalSparesCount,
+            'recent_hardware' => $data
+        ]);
+    }
+
 }

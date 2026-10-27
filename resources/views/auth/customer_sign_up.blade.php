@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+      <link rel="icon" type="image/svg+xml" href="{{ asset('https://pseudoteam.com/PseudoTeam2024/public/favicon/favicon.svg') }}">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -39,7 +40,11 @@
       <main class="form-signin w-100 m-auto">
         <form action="{{ route('auth.customer.sign_up.post') }}" method="POST">
           @csrf
-          <img src="{{asset('images/logo_pt.png')}}" class="rounded-3" style="width: 180px;">
+         <center>
+          <!-- <img src="{{asset('images/beltron.jpeg')}}" class="me-2 rounded-2" style="width: 70px; height: 55px;" />
+          <br> -->
+          <img src="{{asset('images/logo_pt.png')}}" class="rounded-3" style="width: 180px;"> 
+        </center>
           <h1 class="h5 mb-3 ms-1 text-muted">Customer Sign Up</h1>
           <hr>
 

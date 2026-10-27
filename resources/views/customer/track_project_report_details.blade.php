@@ -5,8 +5,23 @@
   </br>
   <div class="container">
 
-    <div class="mb-4">
-      <h2 class="fw-bold">Track Your Project - Milestones</h2>
+    <!-- <div class="mb-4">
+            <h2 class="fw-bold">Track Your Project - Milestones</h2>
+          </div> -->
+
+    <div class="mb-4 d-flex align-items-center">
+      @if(isset($projectScope))
+        <a href="{{ url('customer/session/track-project-report-location/' . $projectScope->pscope_project_id) }}"
+          class="btn btn-outline-primary btn-sm me-2">
+          <i class="fa fa-arrow-left"></i>
+        </a>
+      @else
+        <a href="{{ url('customer/session/track-project-report') }}" class="btn btn-outline-primary btn-sm me-2">
+          <i class="fa fa-arrow-left"></i>
+        </a>
+      @endif
+
+      <h2 class="fw-bold mb-0">Track Your Project - Milestones</h2>
     </div>
 
     <style>
@@ -43,38 +58,42 @@
       }
     </style>
 
-    <div class="card mb-3">
-      <div class="card-body">
-        <!-- <h5>Project Completion</h5>
-              <div class="text-muted">Completion: {{ $average }}%</div> -->
-        <h4 class="fw-bold mb-2">Overall Milestone Completion</h4>
-        <p class="text-muted mb-1">
-          Across all milestones in this project: <strong>{{ $average }}%</strong> completed
-        </p>
+    <style>
+      .circular-ring {
+        --size: 42px;
+        --thickness: 5px;
+        --progress: 0;
 
-        @php
-          $totalCells = 10;
-          $filledCells = round($average / 10);
-          $visualFilledCells = max($filledCells, 1);
+        width: var(--size);
+        height: var(--size);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
 
-          if ($average <= 30) {
-            $fillLevel = 'filled-low';
-          } elseif ($average <= 60) {
-            $fillLevel = 'filled-mid';
-          } else {
-            $fillLevel = 'filled-high';
-          }
-        @endphp
+        background: conic-gradient(#ff8c00 calc(var(--progress) * 1%),
+            #e6e6e6 0);
 
-        <div class="battery-bar mt-2">
-          @for ($i = 1; $i <= $totalCells; $i++)
-            <div class="battery-cell {{ $i <= $visualFilledCells ? $fillLevel : '' }}"></div>
-          @endfor
-        </div>
+        position: relative;
+      }
 
-        <div class="small text-muted mt-1">{{ $average }}% completed (across all milestones)</div>
-      </div>
-    </div>
+      .circular-ring .inner {
+        width: calc(var(--size) - (var(--thickness) * 2));
+        height: calc(var(--size) - (var(--thickness) * 2));
+        border-radius: 50%;
+        background: #fff;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .circular-ring .value {
+        font-size: 10px;
+        font-weight: 600;
+        color: #ff8c00;
+      }
+    </style>
 
     </br>
     </br>
@@ -98,40 +117,11 @@
             <th scope="col">Start Date</th>
             <th scope="col">End Date</th>
             <th scope="col">Status</th>
+            <th scope="col">Progress</th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <!-- <tr>
-                {{-- <th scope="row">100134</th>
-                <td>Test Project 1</td> --}}
-                <td>Milestone 1</td>
-                <td>Desription</td>
-                <td>28/11/2023</td>
-                <td>28/11/2024</td>
-                <td>In Progress</td>
-                <td ><a href="{{ url('customer/session/project-timeline') }}" class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-                </tr>
-                <tr>
-                {{-- <th scope="row">100135</th>
-                <td>Test Project 2</td> --}}
-                <td>Milestone 1</td>
-                <td>Desription</td>
-                <td>28/11/2023</td>
-                <td>28/11/2024</td>
-                <td>In Progress</td>
-                <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-                </tr>
-                <tr>
-                {{-- <th scope="row">100136</th>
-                <td>Test Project 3</td> --}}
-                <td>Milestone 1</td>
-                <td>Desription</td>
-                <td>28/11/2023</td>
-                <td>28/11/2024</td>
-                <td>In Progress</td>
-                <td ><a class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa-eye"></i></a></td>
-                </tr> -->
           @if($project_planner->isNotEmpty())
             @foreach ($project_planner as $pp)
 
@@ -142,15 +132,32 @@
                 <td>{{ $pp->pplnr_start_date }}</td>
                 <td>{{ $pp->pplnr_end_date }}</td>
                 <td>{{ $pp->pplnr_status }}</td>
-                <td><a href="{{ url('customer/session/project-timeline/' . $pp->pplnr_id) }}"
-                    class="btn btn-sm btn-outline-primary" title="Track Progress"><i class="fa fa fa-location-arrow"></i></a>
+
+                <td>
+                  @php
+                    $progress = (float) ($pp->progress ?? 0);
+                    $progress = max(0, min(100, $progress));
+                  @endphp
+
+                  <div class="circular-ring" style="--progress: {{ $progress }};">
+                    <div class="inner">
+                      <div class="value">{{ $progress }}%</div>
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <a href="{{ url('customer/session/project-timeline/' . $pp->pplnr_id) }}"
+                    class="btn btn-sm btn-outline-primary" title="Track Progress">
+                    <i class="fa fa-location-arrow"></i>
+                  </a>
                 </td>
               </tr>
 
             @endforeach
           @else
             <tr>
-              <td colspan="6" class="text-center">No projects found!.</td>
+              <td colspan="6" class="text-center">No milestones found!.</td>
             </tr>
           @endif
 
@@ -166,84 +173,94 @@
 
     @if($project_planner->isNotEmpty())
       <p class="text-pseudo fw-bold">Comments :</p>
+
       <div class="w-100 p-2" style="height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
 
-        <!-- old code -->
-        <!-- <div class="card p-2 mb-2">
-                  <textarea class="p-2" placeholder="Write a comment"></textarea>
-                  <button class="btn btn-sm btn-outline-primary mt-1 w-25">Post</button>
-                </div> -->
-
+        {{-- Add Comment --}}
         <div class="card p-2 mb-2">
           <form action="{{ route('comment.store') }}" method="POST">
             @csrf
+
             <input type="hidden" name="pconv_comment_by_cust_id" value="{{ session('user_id') }}">
+
             <input type="hidden" name="pconv_scope_id" value="{{ $project_planner->first()->pplnr_scope_id }}">
-            <textarea class="p-2 w-100" placeholder="Write a comment" name="pconv_comment"></textarea>
+
+            <textarea class="p-2 w-100" placeholder="Write a comment" name="pconv_comment" required></textarea>
+
             <input type="submit" class="btn btn-sm btn-outline-primary mt-1 w-25" value="Post">
           </form>
         </div>
 
+        {{-- Comments List --}}
         @if($comments->isEmpty())
+
           <p>No comments yet.</p>
+
         @else
+
           @foreach ($comments as $comment)
+
             <div class="card p-2 mb-2">
-              <p class="fw-bold">{{ $comment->pconv_comment_by_cust_id }} :</p>
+
+              <div class="d-flex justify-content-between align-items-center">
+
+                <p class="fw-bold mb-1">
+                  {{ $comment->pconv_comment_by_cust_id }}
+                </p>
+
+                @if($comment->pconv_comment_by_cust_id == session('user_id'))
+
+                  <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#editComment{{ $comment->pconv_id }}">
+                    Edit
+                  </button>
+
+                @endif
+
+              </div>
+
               <p>{{ $comment->pconv_comment }}</p>
-              <p class="text-muted">{{ $comment->pconv_comment_date_time }}</p>
-              <!-- <form action="#" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger mt-1 w-25">Delete</button>
-                                        </form> -->
+
+              <p class="text-muted mb-1">
+                {{ $comment->pconv_comment_date_time }}
+              </p>
+
+              {{-- Edit Form --}}
+              @if($comment->pconv_comment_by_cust_id == session('user_id'))
+
+                <div class="collapse mt-2" id="editComment{{ $comment->pconv_id }}">
+
+                  <form action="{{ route('comment.update', $comment->pconv_id) }}" method="POST">
+
+                    @csrf
+                    @method('PUT')
+
+                    <textarea name="pconv_comment" class="form-control mb-2" rows="3"
+                      required>{{ $comment->pconv_comment }}</textarea>
+
+                    <button type="submit" class="btn btn-success btn-sm">
+                      Update Comment
+                    </button>
+
+                  </form>
+
+                </div>
+
+              @endif
+
             </div>
+
           @endforeach
+
         @endif
+
       </div>
     @endif
-
-    <!-- <div class="card p-2 mb-2">
-                <p class="fw-bold">username :</p>
-                <p>Dummy content line 1</p>
-              </div>
-              <div class="card p-2 mb-2">
-                <p class="fw-bold">username :</p>
-                <p>Dummy content line 1</p>
-              </div>
-              <div class="card p-2 mb-2">
-                <p class="fw-bold">username :</p>
-                <p>Dummy content line 1</p>
-              </div>
-              <div class="card p-2 mb-2">
-                <p class="fw-bold">username :</p>
-                <p>Dummy content line 1</p>
-              </div>
-              <div class="card p-2 mb-2">
-                <p class="fw-bold">username :</p>
-                <p>Dummy content line 1</p>
-              </div>
-              <div class="card p-2 mb-2">
-                <p class="fw-bold">username :</p>
-                <p>Dummy content line 1</p>
-              </div>
-              <div class="card p-2 mb-2">
-                <p class="fw-bold">username :</p>
-                <p>Dummy content line 1</p>
-              </div>
-              <div class="card p-2 mb-2">
-                <p class="fw-bold">username :</p>
-                <p>Dummy content line 1</p>
-              </div> -->
 
   </div>
   </br></br>
 
   </div>
-
-
-
-
 
   <script>
     const rowsPerPage = 10; // Number of rows per page

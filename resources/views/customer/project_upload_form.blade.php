@@ -2,6 +2,89 @@
 
 @section('content')
 
+<style>
+    /* =========================================================
+       REQUIRED FIELD ERROR STYLE
+       ========================================================= */
+
+    #projectForm .required-error {
+        border: 2px solid #dc3545 !important;
+        box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.20) !important;
+        background-color: #fff8f8 !important;
+    }
+
+    #projectForm .required-error:focus {
+        border: 2px solid #dc3545 !important;
+        box-shadow: 0 0 0 5px rgba(220, 53, 69, 0.25) !important;
+        outline: none !important;
+        background-color: #fff8f8 !important;
+    }
+
+    /* SELECT */
+    #projectForm select.required-error {
+        border: 2px solid #dc3545 !important;
+        box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.20) !important;
+    }
+
+    /* FILE INPUT */
+    #projectForm input[type="file"].required-error {
+        border: 2px dashed #dc3545 !important;
+        box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.20) !important;
+    }
+
+    /* ERROR MESSAGE */
+    #projectForm .field-error-message {
+        display: block;
+        color: #dc3545;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 6px;
+    }
+
+    /* RED STAR */
+    #projectForm .required-star {
+        color: #dc3545;
+        font-weight: 700;
+    }
+
+    /* SECTION WITH ERROR */
+    #projectForm .has-required-error {
+        animation: requiredFieldShake 0.25s ease-in-out;
+    }
+
+    @keyframes requiredFieldShake {
+        0% {
+            transform: translateX(0);
+        }
+
+        25% {
+            transform: translateX(-3px);
+        }
+
+        50% {
+            transform: translateX(3px);
+        }
+
+        75% {
+            transform: translateX(-2px);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    /* SUBMIT BUTTON */
+    #submitProjectBtn {
+        transition: all 0.2s ease;
+    }
+
+    #submitProjectBtn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+</style>
+
     </br>
     <div class="container">
         <div class="">
@@ -29,7 +112,7 @@
 
         </div>
 
-        <form action="{{ route('project.store') }}" method="POST" enctype="multipart/form-data" @if($readonly) disabled @endif>
+        <!-- <form action="{{ route('project.store') }}" method="POST" enctype="multipart/form-data" @if($readonly) disabled @endif>
             @csrf
             <h5 class="mt-4 mb-4 text-pseudo">
                 <span class="fa fa-bars"></span> First details of the project
@@ -38,7 +121,7 @@
             <input type="hidden" name="plist_id" value="{{ $readonly ? ($project->plist_id ?? '') : old('plist_id', $project->plist_id ?? '') }}"
             {{ $readonly ? 'readonly' : '' }} >
 
-            <!-- Project Title -->
+    
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" id="title" name="plist_title" placeholder="Project title"
@@ -46,7 +129,7 @@
                     {{ $readonly ? 'readonly' : '' }} required>
             </div>
 
-            <!-- Project Description -->
+       
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea id="description" class="form-control" name="plist_description"
@@ -54,7 +137,7 @@
                     required>{{ $readonly ? ($project->plist_description ?? '') : old('plist_description', $project->plist_description ?? '') }}</textarea>
             </div>
 
-            <!-- Scope of Work -->
+          
         
 
             <div class="mb-3">
@@ -82,7 +165,7 @@
 </div>
 
 
-            <!-- Project Type -->
+          
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label for="projectIs" class="form-label">Project is</label>
@@ -121,19 +204,33 @@
                 </div>
             </div>
 
-            <!-- Budget Information -->
+     
             <div class="mb-3">
                 <label for="budget" class="form-label">Budget</label>
                 <div class="d-flex">
-                    <div class="me-2" style="flex: 0.3;">
+                  
                         <select class="form-select" id="budget" name="plist_currency" required {{ $readonly ? 'disabled' : '' }}>
                             <option selected disabled>Currency</option>
                             <option value="INR" {{ old('plist_currency', $project->plist_currency ?? '') == 'INR' ? 'selected' : '' }}>INR</option>
                             <option value="USD" {{ old('plist_currency', $project->plist_currency ?? '') == 'USD' ? 'selected' : '' }}>USD</option>
                             <option value="JPY" {{ old('plist_currency', $project->plist_currency ?? '') == 'JPY' ? 'selected' : '' }}>JPY</option>
                         </select>
-                    </div>
+                
+                    <div class="me-2" style="flex: 0.3;">
+    <select class="form-select" id="budget" name="plist_currency" required {{ $readonly ? 'disabled' : '' }}>
+        <option value="" selected hidden>-- Select Currency --</option>
 
+        <option value="INR" {{ old('plist_currency', $project->plist_currency ?? '') == 'INR' ? 'selected' : '' }}>
+            INR
+        </option>
+        <option value="USD" {{ old('plist_currency', $project->plist_currency ?? '') == 'USD' ? 'selected' : '' }}>
+            USD
+        </option>
+        <option value="JPY" {{ old('plist_currency', $project->plist_currency ?? '') == 'JPY' ? 'selected' : '' }}>
+            JPY
+        </option>
+    </select>
+</div>
                     <div style="width: 465px;">
                         <input type="number" class="form-control" id="budgetAmount" name="plist_budget"
                             placeholder="Enter amount"
@@ -143,7 +240,7 @@
                 </div>
             </div>
 
-            <!-- Start Date and End Date -->
+    
             <h5 class="mt-4 mb-4 text-pseudo">
                 <span class="fa fa-bars"></span> Define interval
             </h5>
@@ -173,7 +270,7 @@
                 </div>
             </div>
 
-            <!-- Contact Details -->
+            
             <h5 class="mt-4 mb-4 text-pseudo">
                 <span class="fa fa-bars"></span> Details of the person to be contacted by PseudoTeam
             </h5>
@@ -232,13 +329,656 @@
             @endif
 
             <button type="submit" class="btn btn-primary">{{ $readonly ? 'Save' : 'Upload' }}</button>
-        </form>
+        </form> -->
+
+
+        <form
+    action="{{ route('project.store') }}"
+    method="POST"
+    enctype="multipart/form-data"
+    id="projectForm"
+>
+
+    @csrf
+
+
+    <!-- =====================================================
+         PROJECT DETAILS
+    ====================================================== -->
+
+    <h5 class="mt-4 mb-4 text-pseudo">
+        <span class="fa fa-bars"></span>
+        First details of the project
+    </h5>
+
+
+    <!-- =====================================================
+         TITLE
+    ====================================================== -->
+
+    <div class="mb-3 form-group validation-group">
+
+        <label for="projectTitle" class="form-label">
+            Title
+            <span class="required-star">*</span>
+        </label>
+
+        <input
+            type="text"
+            class="form-control mandatory-field"
+            id="projectTitle"
+            name="plist_title"
+            placeholder="Project title"
+            value="{{ $readonly ? ($project->plist_title ?? '') : old('plist_title', $project->plist_title ?? '') }}"
+            {{ $readonly ? 'readonly' : '' }}
+            data-error="Project title is required."
+        >
+
+    </div>
+
+
+    <!-- =====================================================
+         DESCRIPTION
+    ====================================================== -->
+
+    <div class="mb-3 form-group validation-group">
+
+        <label for="projectDescription" class="form-label">
+            Description
+            <span class="required-star">*</span>
+        </label>
+
+        <textarea
+            id="projectDescription"
+            class="form-control mandatory-field"
+            name="plist_description"
+            placeholder="Enter your description here"
+            {{ $readonly ? 'readonly' : '' }}
+            data-error="Project description is required."
+        >{{ $readonly ? ($project->plist_description ?? '') : old('plist_description', $project->plist_description ?? '') }}</textarea>
+
+    </div>
+
+
+    <!-- =====================================================
+         SCOPE OF WORK
+    ====================================================== -->
+
+  <div class="mb-3 form-group validation-group">
+
+    <label for="projectSow" class="form-label">
+        Scope of Work
+    </label>
+
+    <input
+        type="file"
+        class="form-control"
+        id="projectSow"
+        name="plist_sow"
+        accept=""
+        {{ $readonly ? 'disabled' : '' }}
+    >
+
+    @if(!empty($project->plist_sow))
+
+        <div class="mt-2">
+            <a
+                href="{{ route('project.download.sow', $project->plist_id) }}"
+                class="btn btn-outline-success btn-sm"
+                target="_blank"
+            >
+                <i class="fa fa-download"></i>
+                Download Scope of Work
+            </a>
+        </div>
+
+    @endif
+
+</div>
+
+
+    <!-- =====================================================
+         PROJECT TYPE / CATEGORY
+    ====================================================== -->
+
+    <div class="row">
+
+
+        <!-- PROJECT IS -->
+
+        <div class="col-md-4 mb-3 form-group validation-group">
+
+            <label for="projectIs" class="form-label">
+                Project is
+                <span class="required-star">*</span>
+            </label>
+
+            <select
+                class="form-select mandatory-field"
+                id="projectIs"
+                name="plist_ongnew"
+                {{ $readonly ? 'disabled' : '' }}
+                data-error="Please select whether the project is New or On Going."
+            >
+
+                <option value="">
+                    -- Select type --
+                </option>
+
+                <option
+                    value="New"
+                    {{ old('plist_ongnew', $project->plist_ongnew ?? '') == 'New' ? 'selected' : '' }}
+                >
+                    New
+                </option>
+
+                <option
+                    value="On Going"
+                    {{ old('plist_ongnew', $project->plist_ongnew ?? '') == 'On Going' ? 'selected' : '' }}
+                >
+                    On Going
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- PROJECT TYPE -->
+
+        <div class="col-md-4 mb-3 form-group validation-group">
+
+            <label for="projectType" class="form-label">
+                Project type
+                <span class="required-star">*</span>
+            </label>
+
+            <select
+                class="form-select mandatory-field"
+                id="projectType"
+                name="plist_type"
+                {{ $readonly ? 'disabled' : '' }}
+                data-error="Please select the project type."
+            >
+
+                <option value="">
+                    -- Select type --
+                </option>
+
+                <option
+                    value="On Site"
+                    {{ old('plist_type', $project->plist_type ?? '') == 'On Site' ? 'selected' : '' }}
+                >
+                    On Site
+                </option>
+
+                <option
+                    value="On Remote"
+                    {{ old('plist_type', $project->plist_type ?? '') == 'On Remote' ? 'selected' : '' }}
+                >
+                    On Remote
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- PROJECT CATEGORY -->
+
+        <div class="col-md-4 mb-3 form-group validation-group">
+
+            <label for="projectCategory" class="form-label">
+                Project Category
+                <span class="required-star">*</span>
+            </label>
+
+            <select
+                class="form-select mandatory-field"
+                id="projectCategory"
+                name="plist_category"
+                {{ $readonly ? 'disabled' : '' }}
+                data-error="Please select a project category."
+            >
+
+                <option value="">
+                    -- Select category --
+                </option>
+
+                <option
+                    value="Pre Sales Support"
+                    {{ old('plist_category', $project->plist_category ?? '') == 'Pre Sales Support' ? 'selected' : '' }}
+                >
+                    Pre Sales Support
+                </option>
+
+                <option
+                    value="Implementation"
+                    {{ old('plist_category', $project->plist_category ?? '') == 'Implementation' ? 'selected' : '' }}
+                >
+                    Implementation
+                </option>
+
+                <option
+                    value="Post Sales Support"
+                    {{ old('plist_category', $project->plist_category ?? '') == 'Post Sales Support' ? 'selected' : '' }}
+                >
+                    Post Sales Support
+                </option>
+
+                <option
+                    value="Software/Web Development"
+                    {{ old('plist_category', $project->plist_category ?? '') == 'Software/Web Development' ? 'selected' : '' }}
+                >
+                    Software/Web Development
+                </option>
+
+                <option
+                    value="Resource"
+                    {{ old('plist_category', $project->plist_category ?? '') == 'Resource' ? 'selected' : '' }}
+                >
+                    Resource
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         BUDGET
+    ====================================================== -->
+
+    <div class="mb-3 form-group validation-group">
+
+        <label class="form-label">
+            Budget
+            <span class="required-star">*</span>
+        </label>
+
+
+        <div class="d-flex gap-2">
+
+
+            <!-- CURRENCY -->
+
+            <div style="width: 30%;">
+
+                <select
+                    class="form-select mandatory-field"
+                    id="projectCurrency"
+                    name="plist_currency"
+                    {{ $readonly ? 'disabled' : '' }}
+                    data-error="Please select a currency."
+                >
+
+                    <option value="">
+                        -- Select Currency --
+                    </option>
+
+                    <option
+                        value="INR"
+                        {{ old('plist_currency', $project->plist_currency ?? '') == 'INR' ? 'selected' : '' }}
+                    >
+                        INR
+                    </option>
+
+                    <option
+                        value="USD"
+                        {{ old('plist_currency', $project->plist_currency ?? '') == 'USD' ? 'selected' : '' }}
+                    >
+                        USD
+                    </option>
+
+                    <option
+                        value="JPY"
+                        {{ old('plist_currency', $project->plist_currency ?? '') == 'JPY' ? 'selected' : '' }}
+                    >
+                        JPY
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- AMOUNT -->
+
+            <div style="width: 70%;">
+
+                <input
+                    type="number"
+                    class="form-control mandatory-field"
+                    id="budgetAmount"
+                    name="plist_budget"
+                    placeholder="Enter amount"
+                    value="{{ $readonly ? ($project->plist_budget ?? '') : old('plist_budget', $project->plist_budget ?? '') }}"
+                    {{ $readonly ? 'readonly' : '' }}
+                    min="1"
+                    data-error="Budget amount is required."
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         DATE
+    ====================================================== -->
+
+    <h5 class="mt-4 mb-4 text-pseudo">
+
+        <span class="fa fa-bars"></span>
+
+        Define interval
+
+    </h5>
+
+
+    <div class="row">
+
+
+        <!-- START DATE -->
+
+        <div class="col-md-6 mb-3 form-group validation-group">
+
+            <label for="startDate" class="form-label">
+
+                Start date
+
+                <span class="required-star">*</span>
+
+            </label>
+
+            <input
+                type="date"
+                class="form-control mandatory-field"
+                id="startDate"
+                name="plist_startdate"
+                value="{{ 
+                    $readonly
+                    ? ($project && $project->plist_startdate
+                        ? \Carbon\Carbon::parse($project->plist_startdate)->format('Y-m-d')
+                        : '')
+                    : old(
+                        'plist_startdate',
+                        $project && $project->plist_startdate
+                            ? \Carbon\Carbon::parse($project->plist_startdate)->format('Y-m-d')
+                            : ''
+                    )
+                }}"
+                {{ $readonly ? 'readonly' : '' }}
+                data-error="Start date is required."
+            >
+
+        </div>
+
+
+        <!-- END DATE -->
+
+        <div class="col-md-6 mb-3 form-group validation-group">
+
+            <label for="endDate" class="form-label">
+
+                End date
+
+                <span class="required-star">*</span>
+
+            </label>
+
+            <input
+                type="date"
+                class="form-control mandatory-field"
+                id="endDate"
+                name="plist_enddate"
+                value="{{ 
+                    $readonly
+                    ? ($project && $project->plist_enddate
+                        ? \Carbon\Carbon::parse($project->plist_enddate)->format('Y-m-d')
+                        : '')
+                    : old(
+                        'plist_enddate',
+                        $project && $project->plist_enddate
+                            ? \Carbon\Carbon::parse($project->plist_enddate)->format('Y-m-d')
+                            : ''
+                    )
+                }}"
+                {{ $readonly ? 'readonly' : '' }}
+                data-error="End date is required."
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CONTACT DETAILS
+    ====================================================== -->
+
+    <h5 class="mt-4 mb-4 text-pseudo">
+
+        <span class="fa fa-bars"></span>
+
+        Details of the person to be contacted by PseudoTeam
+
+    </h5>
+
+
+    <!-- NAME -->
+
+    <div class="mb-3 form-group validation-group">
+
+        <label for="contactName" class="form-label">
+
+            Name
+
+            <span class="required-star">*</span>
+
+        </label>
+
+        <input
+            type="text"
+            class="form-control mandatory-field"
+            id="contactName"
+            name="plist_name"
+            placeholder="Name of the authorised person"
+            value="{{ $readonly ? ($project->plist_name ?? '') : old('plist_name', $project->plist_name ?? '') }}"
+            {{ $readonly ? 'readonly' : '' }}
+            data-error="Name is required."
+        >
+
+    </div>
+
+
+    <!-- EMAIL -->
+
+    <div class="mb-3 form-group validation-group">
+
+        <label for="contactEmail" class="form-label">
+
+            Email
+
+            <span class="required-star">*</span>
+
+        </label>
+
+        <input
+            type="email"
+            class="form-control mandatory-field"
+            id="contactEmail"
+            name="plist_email"
+            placeholder="Email of the authorised person"
+            value="{{ $readonly ? ($project->plist_email ?? '') : old('plist_email', $project->plist_email ?? '') }}"
+            {{ $readonly ? 'readonly' : '' }}
+            data-error="Email is required."
+        >
+
+    </div>
+
+
+    <!-- CONTACT -->
+
+    <div class="mb-3 form-group validation-group">
+
+        <label for="contactNumber" class="form-label">
+
+            Contact
+
+            <span class="required-star">*</span>
+
+        </label>
+
+        <input
+            type="text"
+            class="form-control mandatory-field"
+            id="contactNumber"
+            name="plist_contact"
+            placeholder="Contact no. of authorised person"
+            value="{{ $readonly ? ($project->plist_contact ?? '') : old('plist_contact', $project->plist_contact ?? '') }}"
+            {{ $readonly ? 'readonly' : '' }}
+            data-error="Contact number is required."
+        >
+
+    </div>
+
+
+    <!-- =====================================================
+         OPTIONAL FIELDS
+    ====================================================== -->
+
+    @if (!$readonly)
+
+        <h5 class="mt-4 mb-4 text-pseudo">
+
+            <span class="fa fa-bars"></span>
+
+            Updates on additional/customer email id
+
+            <sup>(Optional)</sup>
+
+        </h5>
+
+
+        <!-- RECEIVE NOTIFICATION EMAILS -->
+
+        <div class="mb-3">
+
+            <div class="custom-switch">
+
+                <label
+                    class="slider-label"
+                    for="customSwitch"
+                >
+                    Receive notification emails
+                </label>
+
+                <input
+                    type="checkbox"
+                    id="customSwitch"
+                    name="plist_checkrcv"
+                >
+
+                <label
+                    class="slider"
+                    for="customSwitch"
+                ></label>
+
+            </div>
+
+        </div>
+
+
+        <!-- ADDITIONAL EMAIL -->
+
+        <div class="mb-3">
+
+            <label
+                for="emailInput"
+                class="form-label"
+            >
+                Additional Email (Optional)
+            </label>
+
+            <input
+                type="email"
+                class="form-control"
+                id="emailInput"
+                name="plist_customeremail"
+                placeholder="Additional email"
+                value="{{ old('plist_customeremail', $project->plist_customeremail ?? '') }}"
+                readonly
+            >
+
+        </div>
+
+
+        <!-- =================================================
+             COUPON
+        ================================================== -->
+
+        <h5 class="mt-4 mb-4 text-pseudo">
+
+            <span class="fa fa-bars"></span>
+
+            Apply coupons/promo code
+
+            <sup>(Optional)</sup>
+
+        </h5>
+
+
+        <div class="mb-3">
+
+            <label
+                for="coupon"
+                class="form-label"
+            >
+                Coupon/Promo Code
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="coupon"
+                name="plist_coupon"
+                value="{{ old('plist_coupon', $project->plist_coupon ?? '') }}"
+                placeholder="Add your coupon or promocode here"
+            >
+
+        </div>
+
+    @endif
+
+
+    <!-- =====================================================
+         SUBMIT
+    ====================================================== -->
+
+    <div class="mt-4">
+
+        <button
+            type="submit"
+            class="btn btn-primary"
+            id="submitProjectBtn"
+        >
+            {{ $readonly ? 'Save' : 'Upload' }}
+        </button>
+
+    </div>
+
+</form>
 
 
 
     </div>
 
-    <script>
+    <!-- <script>
 
         const emailInput = document.getElementById('emailInput');
         const checkbox = document.getElementById('customSwitch');
@@ -253,6 +993,464 @@
                 emailInput.setAttribute('readonly', true);
             }
         });
-    </script>
+    </script> -->
+
+<script>
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        const form =
+            document.getElementById(
+                'projectForm'
+            );
+
+        const submitButton =
+            document.getElementById(
+                'submitProjectBtn'
+            );
+
+        const mandatoryFields =
+            form.querySelectorAll(
+                '.mandatory-field'
+            );
+
+
+
+        // =====================================================
+        // OPTIONAL EMAIL
+        // =====================================================
+
+        const emailInput =
+            document.getElementById(
+                'emailInput'
+            );
+
+        const notificationCheckbox =
+            document.getElementById(
+                'customSwitch'
+            );
+
+
+        if (
+            emailInput &&
+            notificationCheckbox
+        ) {
+
+            emailInput.setAttribute(
+                'readonly',
+                'readonly'
+            );
+
+
+            notificationCheckbox.addEventListener(
+                'change',
+                function () {
+
+                    if (this.checked) {
+
+                        emailInput.removeAttribute(
+                            'readonly'
+                        );
+
+                    } else {
+
+                        emailInput.value = '';
+
+                        emailInput.setAttribute(
+                            'readonly',
+                            'readonly'
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        // =====================================================
+        // CHECK WHETHER FIELD IS EMPTY
+        // =====================================================
+
+        function isFieldEmpty(field) {
+
+            /*
+             * SELECT
+             */
+
+            if (
+                field.tagName.toLowerCase() ===
+                'select'
+            ) {
+
+                return (
+                    !field.value ||
+                    field.value.trim() === ''
+                );
+
+            }
+
+
+            /*
+             * NORMAL INPUT / TEXTAREA
+             */
+
+            return (
+                !field.value ||
+                field.value.trim() === ''
+            );
+
+        }
+
+
+
+        // =====================================================
+        // SHOW ERROR
+        // =====================================================
+
+        function showError(field) {
+
+            field.classList.add(
+                'required-error'
+            );
+
+
+            const group =
+                field.closest(
+                    '.validation-group'
+                );
+
+
+            if (!group) {
+                return;
+            }
+
+
+            group.classList.add(
+                'has-required-error'
+            );
+
+
+            /*
+             * Don't create duplicate
+             * error messages.
+             */
+
+            let errorMessage =
+                group.querySelector(
+                    '.field-error-message'
+                );
+
+
+            if (!errorMessage) {
+
+                errorMessage =
+                    document.createElement(
+                        'div'
+                    );
+
+                errorMessage.className =
+                    'field-error-message';
+
+                group.appendChild(
+                    errorMessage
+                );
+
+            }
+
+
+            errorMessage.textContent =
+                field.dataset.error ||
+                'This field is required.';
+
+        }
+
+
+
+        // =====================================================
+        // REMOVE ERROR
+        // =====================================================
+
+        function removeError(field) {
+
+            field.classList.remove(
+                'required-error'
+            );
+
+
+            const group =
+                field.closest(
+                    '.validation-group'
+                );
+
+
+            if (!group) {
+                return;
+            }
+
+
+            group.classList.remove(
+                'has-required-error'
+            );
+
+
+            const errorMessage =
+                group.querySelector(
+                    '.field-error-message'
+                );
+
+
+            if (errorMessage) {
+
+                errorMessage.remove();
+
+            }
+
+        }
+
+
+
+        // =====================================================
+        // VALIDATE FIELD
+        // =====================================================
+
+        function validateField(field) {
+
+            if (
+                isFieldEmpty(field)
+            ) {
+
+                showError(field);
+
+                return false;
+
+            }
+
+
+            removeError(field);
+
+            return true;
+
+        }
+
+
+
+        // =====================================================
+        // LIVE VALIDATION
+        // =====================================================
+
+        mandatoryFields.forEach(
+            function (field) {
+
+
+                /*
+                 * TEXT / NUMBER / EMAIL / DATE
+                 */
+
+                field.addEventListener(
+                    'input',
+                    function () {
+
+                        if (
+                            !isFieldEmpty(this)
+                        ) {
+
+                            removeError(this);
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                 * SELECT / FILE
+                 */
+
+                field.addEventListener(
+                    'change',
+                    function () {
+
+                        if (
+                            !isFieldEmpty(this)
+                        ) {
+
+                            removeError(this);
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        // =====================================================
+        // FORM SUBMIT
+        // =====================================================
+
+        form.addEventListener(
+            'submit',
+            function (event) {
+
+                let formIsValid =
+                    true;
+
+                let firstInvalidField =
+                    null;
+
+
+                /*
+                 * Validate EVERY mandatory field.
+                 *
+                 * We do not stop after the first one.
+                 */
+
+                mandatoryFields.forEach(
+                    function (field) {
+
+                        const valid =
+                            validateField(
+                                field
+                            );
+
+
+                        if (!valid) {
+
+                            formIsValid =
+                                false;
+
+
+                            if (
+                                !firstInvalidField
+                            ) {
+
+                                firstInvalidField =
+                                    field;
+
+                            }
+
+                        }
+
+                    }
+                );
+
+
+
+                // =================================================
+                // INVALID
+                // =================================================
+
+                if (!formIsValid) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+
+                    /*
+                     * Scroll to FIRST missing field.
+                     */
+
+                    if (
+                        firstInvalidField
+                    ) {
+
+                        setTimeout(
+                            function () {
+
+                                const fieldPosition =
+                                    firstInvalidField.getBoundingClientRect();
+
+
+                                const absolutePosition =
+                                    fieldPosition.top +
+                                    window.pageYOffset;
+
+
+                                /*
+                                 * Put field approximately
+                                 * 150px below top.
+                                 */
+
+                                window.scrollTo({
+
+                                    top:
+                                        absolutePosition -
+                                        150,
+
+                                    behavior:
+                                        'smooth'
+
+                                });
+
+
+                                /*
+                                 * Focus after scrolling.
+                                 */
+
+                                setTimeout(
+                                    function () {
+
+                                        try {
+
+                                            firstInvalidField.focus({
+                                                preventScroll: true
+                                            });
+
+                                        } catch (e) {
+
+                                            firstInvalidField.focus();
+
+                                        }
+
+                                    },
+                                    500
+                                );
+
+                            },
+                            50
+                        );
+
+                    }
+
+
+                    /*
+                     * Scroll to first invalid
+                     * field only.
+                     */
+
+                    return false;
+
+                }
+
+
+
+                // =================================================
+                // VALID
+                // =================================================
+
+                /*
+                 * Allow Laravel form submission.
+                 */
+
+                submitButton.disabled =
+                    true;
+
+                submitButton.innerHTML =
+                    'Uploading...';
+
+            }
+        );
+
+    }
+);
+
+</script>
 
 @endsection

@@ -23,7 +23,7 @@
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
                        height: 120px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
                        background-color: #FFA94D;">
-                    <a href="{{ url('customer/session/track-project-pending') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <a href="{{ url('customer/session/track-project-not-started') }}" style="text-decoration: none; color: inherit; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                         <h5 style="margin-bottom: 8px; font-size: 1rem; font-weight: normal;">No SP Assigned</h5>
                         <h4 id="pendingCount" style="font-size: 1.5rem; font-weight: normal;">{{ $statuses['pending'] ?? 0 }}</h4>
                     </a>

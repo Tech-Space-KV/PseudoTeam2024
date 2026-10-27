@@ -46,6 +46,10 @@ class TodoController extends Controller
 
     public function delete(Request $request)
     {
+
+    \Log::info('Delete method called!' , ['request' => $request->all()]);
+    $customerId = session('user_id');
+
         try {
             $user = Auth::user();
             if (!$user) {
@@ -57,7 +61,9 @@ class TodoController extends Controller
                 'task' => 'required|string|max:255',
             ]);
 
-            $todo = Todo::where('td_user_id', $user->id)
+            \Log::info('Fetching todo to delete', ['user_id' => $user->id, 'date' => $request->date, 'task' => $request->task]);
+
+            $todo = Todo::where('td_user_id', $customerId)
                 ->where('td_date', $request->date)
                 ->where('td_event', $request->task)
                 ->first();

@@ -79,4 +79,47 @@ class ReferAndEarnController extends Controller
         return redirect()->back()->with('success', 'Invitation sent successfully!');
 
     }
+
+     public function appReferFriend(Request $request)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
+        }
+
+        $validated = $request->validate([
+            'friends_email' => 'required|email'
+        ]);
+
+        $projectOwner = ProjectOwners::where('pown_email', $user->email)->first();
+        if (!$projectOwner) {
+            return response()->json([
+                'message' => 'Project owner not found'
+            ], 404);
+        }
+        $email = $validated['friends_email'];
+        $userName = $projectOwner->pown_name;
+        // link
+        $link = 'https://pseudoteam.com';
+        // promo code
+        $promocode = Carbon::now()->format('YmdHis');
+
+        ReferralTable::create([
+            'rfrls_user_id' => $projectOwner->pown_id,
+            'rfrls_email_id' => $email,
+            'rfrls_promo_code' => $promocode,
+            'rfrls_user_type' => 'customer',
+        ]);
+        \Log::info('Referral created: ' . $promocode);
+
+        Mail::to($email)
+            ->send(new ReferAndEarnMail($link, $userName, $promocode));
+
+        return response()->json([
+            'message' => 'Invitation sent successfully!',
+            'promo_code' => $promocode
+        ]);
+    }
 }

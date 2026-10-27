@@ -164,13 +164,31 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function updateLocation(Request $request)
-    {
-        $pown_id = session('user_id');
+    // public function updateLocation(Request $request)
+    // {
+    //     $pown_id = session('user_id');
 
-        if (!$pown_id) {
-            return response()->json(['error' => 'User not authenticated'], 401);
-        }
+    //     if (!$pown_id) {
+    //         return response()->json(['error' => 'User not authenticated'], 401);
+    //     }
+
+    public function updateLocation(Request $request)
+{
+    $user = $request->user();
+
+    if (!$user) {
+        return response()->json(['error' => 'User not authenticated'], 401);
+    }
+
+    $projectOwner = DB::table('project_owners')
+        ->where('pown_email', $user->email)
+        ->first();
+
+    if (!$projectOwner) {
+        return response()->json(['error' => 'Project owner not found'], 404);
+    }
+
+    $pown_id = $projectOwner->pown_id;
 
         $validated = $request->validate([
             'country' => 'required|string|max:100',
@@ -219,13 +237,31 @@ class ProfileController extends Controller
     }
 
 
-    public function updateCinId(Request $request)
-    {
-        $pown_id = session('user_id');
+    // public function updateCinId(Request $request)
+    // {
+    //     $pown_id = session('user_id');
 
-        if (!$pown_id) {
-            return response()->json(['error' => 'User not authenticated'], 401);
-        }
+    //     if (!$pown_id) {
+    //         return response()->json(['error' => 'User not authenticated'], 401);
+    //     }
+
+    public function updateCinId(Request $request)
+{
+    $user = $request->user();
+
+    if (!$user) {
+        return response()->json(['error' => 'User not authenticated'], 401);
+    }
+
+    $projectOwner = DB::table('project_owners')
+        ->where('pown_email', $user->email)
+        ->first();
+
+    if (!$projectOwner) {
+        return response()->json(['error' => 'Project owner not found'], 404);
+    }
+
+    $pown_id = $projectOwner->pown_id;
 
         $validated = $request->validate([
             'about' => 'required|string|max:5000',

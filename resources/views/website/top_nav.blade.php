@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark px-2 sticky-top px-4"
   style="background-color: rgba(21, 21, 21, 0.812); backdrop-filter: blur(30px);">
   <div class="container-fluid">
+	<!-- <a href="{{ route('home') }}"><img src="{{asset('images/beltron.jpeg')}}" class="me-2 rounded-2" style="width: 70px; height: 55px;" /></a> -->
     <a href="{{ route('home') }}"><img src="{{asset('images/logo_pt3.png')}}" class="me-2" style="width: 160px;" /></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

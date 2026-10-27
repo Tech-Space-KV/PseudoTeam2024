@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
+use App\Models\ProjectOwners;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -80,5 +81,64 @@ class NotificationController extends Controller
         return response()->json(['success' => true]);
     }
 
+     public function appFetchNotification()
+    {
+        $userId = auth()->user();
+
+        $customerId = ProjectOwners::where('pown_email', $userId->email)->first();
+
+        if (!$customerId) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized'
+            ], 401);
+        }
+
+        $notifications = Notification::orderBy('ntfn_id', 'desc')->where('ntfn_forUserId', $customerId->pown_id)
+            ->where('ntfn_type', 'cust')->get();
+
+        if ($notifications) {
+            return response()->json([
+                'status' => true,
+                'notifications' => $notifications
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'No Notification found!'
+        ], 401);
+    }
+
+    public function appFetchNotificationDetails($notificationId)
+    {
+
+        \Log::info('Working!');
+
+        $notification = Notification::where('ntfn_id', $notificationId)->first();
+
+        if (!$notification) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Notification not found'
+            ], 404);
+        }
+
+        // mark as read
+        if (!$notification->ntfn_readflag) {
+            $notification->ntfn_readflag = 1;
+            $notification->save();
+        }
+
+        return response()->json([
+            'success' => true,
+            'notification' => [
+                'id' => $notification->ntfn_id,
+                'message' => $notification->ntfn_notification,
+                'time' => $notification->ntfn_date_time,
+                'read' => $notification->ntfn_readflag
+            ]
+        ]);
+    }
 
 }

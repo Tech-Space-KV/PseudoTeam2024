@@ -3,6 +3,7 @@
 
 <head>
   <title>Service-Partner - PseudoTeam</title>
+  <link rel="icon" type="image/svg+xml" href="{{ asset('https://pseudoteam.com/PseudoTeam2024/public/favicon/favicon.svg') }}">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap JS -->
